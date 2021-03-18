@@ -2,16 +2,19 @@
   "name": "webshop",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "app": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
     "express": "^4.17.1",
-    "mongoose": "^5.12.0",
+    "mongoose": "^5.11.15",
     "validation": "0.0.1"
   },
   "devDependencies": {
