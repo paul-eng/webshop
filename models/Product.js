@@ -20,7 +20,8 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
   },
   quantity: {
-    type: Number,
+    type: Map,
+    of: Number
   },
   updated_date: {
     type: Date,
