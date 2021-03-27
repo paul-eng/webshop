@@ -20,6 +20,7 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
   },
   quantity: {
+    // subdocument w/ fields to keep count for different variations of a product ie. sizes XS-XL, special models etc
     type: Map,
     of: Number
   },
