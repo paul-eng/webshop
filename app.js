@@ -6,6 +6,8 @@ const products = require('./routes/api/products');
 const app = express();
 connectDB();
 
+app.use(express.json());
+
 app.get('/', (req, res) => res.send('Hello world!'));
 app.use('/api/products', products);
 

@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
   Product.create(req.body)
     .then((product) => res.json({ msg: "Product added successfully" }))
     .catch((err) =>
-      res.status(400).json({ error: "Unable to add this product" })
+      res.status(400).json({ error: "Unable to add this product", err })
     );
 });
 
