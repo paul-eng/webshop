@@ -4,12 +4,12 @@ const router = express.Router();
 // Load Product model
 const Product = require("../../models/Product");
 
-// @route GET api/products/test
+// @route api/products/test
 // @description tests products route
 // @access Public
 router.get("/test", (req, res) => res.send("product route testing!"));
 
-// @route GET api/products
+// @route api/products
 // @description Get all products
 // @access Public
 router.get("/", (req, res) => {
@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
     );
 });
 
-// @route GET api/products/:id
+// @route api/products/:id
 // @description Get single product by id
 // @access Public
 router.get("/:id", (req, res) => {
@@ -31,7 +31,7 @@ router.get("/:id", (req, res) => {
     );
 });
 
-// @route GET api/products
+// @route api/products
 // @description add/save product
 // @access Public
 router.post("/", (req, res) => {
@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
     );
 });
 
-// @route GET api/products/:id
+// @route api/products/:id
 // @description Update product
 // @access Public
 router.put("/:id", (req, res) => {
@@ -53,12 +53,12 @@ router.put("/:id", (req, res) => {
     );
 });
 
-// @route GET api/products/:id
+// @route api/products/:id
 // @description Delete product by id
 // @access Public
 router.delete("/:id", (req, res) => {
   Product.findByIdAndRemove(req.params.id, req.body)
-    .then((product) => res.json({ mgs: "Product entry deleted successfully" }))
+    .then((product) => res.json({ msg: "Product entry deleted successfully" }))
     .catch((err) => res.status(404).json({ error: "No such a product" }));
 });
 
