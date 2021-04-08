@@ -20,9 +20,9 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
   },
   quantity: {
-    // subdocument w/ fields to keep count for different variations of a product ie. sizes XS-XL, special models etc
+    // subdocument w/ fields to keep count for different variations of a product ie. databack, special edition, used etc
     type: Map,
-    of: Number
+    of: Number,
   },
   updated_date: {
     type: Date,

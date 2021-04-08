@@ -5,35 +5,10 @@ const router = express.Router();
 const Product = require("../../models/Product");
 
 // @route api/products/test
-// @description tests products route
-// @access Public
 router.get("/test", (req, res) => res.send("product route testing!"));
 
 // @route api/products
-// @description Get all products
-// @access Public
-router.get("/", (req, res) => {
-  Product.find()
-    .then((products) => res.json(products))
-    .catch((err) =>
-      res.status(404).json({ noproductsfound: "No Products found" })
-    );
-});
-
-// @route api/products/:id
-// @description Get single product by id
-// @access Public
-router.get("/:id", (req, res) => {
-  Product.findById(req.params.id)
-    .then((product) => res.json(product))
-    .catch((err) =>
-      res.status(404).json({ noproductfound: "No Product found" })
-    );
-});
-
-// @route api/products
 // @description add/save product
-// @access Public
 router.post("/", (req, res) => {
   Product.create(req.body)
     .then((product) => res.json({ msg: "Product added successfully" }))
@@ -42,9 +17,28 @@ router.post("/", (req, res) => {
     );
 });
 
+// @route api/products
+// @description Get all products
+router.get("/", (req, res) => {
+  Product.find()
+    .then((products) => res.json(products))
+    .catch((err) =>
+      res.status(404).json({ noproductsfound: "No products found" })
+    );
+});
+
+// @route api/products/:id
+// @description Get single product by id
+router.get("/:id", (req, res) => {
+  Product.findById(req.params.id)
+    .then((product) => res.json(product))
+    .catch((err) =>
+      res.status(404).json({ noproductfound: "No such product" })
+    );
+});
+
 // @route api/products/:id
 // @description Update product
-// @access Public
 router.put("/:id", (req, res) => {
   Product.findByIdAndUpdate(req.params.id, req.body)
     .then((product) => res.json({ msg: "Updated successfully" }))
@@ -55,11 +49,10 @@ router.put("/:id", (req, res) => {
 
 // @route api/products/:id
 // @description Delete product by id
-// @access Public
 router.delete("/:id", (req, res) => {
   Product.findByIdAndRemove(req.params.id, req.body)
     .then((product) => res.json({ msg: "Product entry deleted successfully" }))
-    .catch((err) => res.status(404).json({ error: "No such a product" }));
+    .catch((err) => res.status(404).json({ error: "No such product" }));
 });
 
 module.exports = router;
