@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-class ProductDetails extends Component {
+class ProductInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class ProductDetails extends Component {
 
   render() {
     return (
-      <div className="productDetails">
+      <div className="ProductInfo">
         <Link to="/">Back to All</Link>
         <ul>
           <li>Brand: {this.state.product.brand}</li>
@@ -38,4 +38,4 @@ class ProductDetails extends Component {
   }
 }
 
-export default ProductDetails;
+export default ProductInfo;

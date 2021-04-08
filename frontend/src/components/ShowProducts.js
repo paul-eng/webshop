@@ -25,27 +25,26 @@ class ShowProducts extends Component {
   }
 
   render() {
-      const products = this.state.products;
-      let productList;
+    const products = this.state.products;
+    let productList;
 
-      if (!products) {
-          productList = "No products found"
-      } else {
-          productList = products.map(product=>
-              <Product product={product} key={product._id} />
-          );
-      }
+    if (!products) {
+      productList = "No products found";
+    } else {
+      productList = products.map((product) => (
+        <Product product={product} key={product._id} />
+      ));
+    }
 
-      return (
-          <div className="showProducts">
-              <h1>All Products</h1>
-              {productList}
-              <br></br>
-              <Link to="/add-product">Add A Camera</Link>
-          </div>
-      )
+    return (
+      <div className="ShowProducts">
+        <h1>All Products</h1>
+        {productList}
+        <br></br>
+        <Link to="/add-product">Add A Camera</Link>
+      </div>
+    );
   }
-  
 }
 
 export default ShowProducts;

@@ -4,7 +4,7 @@ import "./App.css";
 
 import AddProduct from "./components/AddProduct";
 import ShowProducts from "./components/ShowProducts";
-import ProductDetails from "./components/ProductDetails";
+import ProductInfo from "./components/ProductInfo";
 
 class App extends Component {
   render() {
@@ -13,7 +13,7 @@ class App extends Component {
         <div>
           <Route exact path="/" component={ShowProducts} />
           <Route path="/add-product" component={AddProduct} />
-          <Route path="/product-info/:id" component={ProductDetails} />
+          <Route path="/product-info/:id" component={ProductInfo} />
         </div>
       </Router>
     );

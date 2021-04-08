@@ -18,9 +18,9 @@ router.post("/", (req, res) => {
 });
 
 // @route api/products
-// @description Get all products
+// @description Get all products in alphabetical order
 router.get("/", (req, res) => {
-  Product.find()
+  Product.find().sort({brand: 1, name: 1})
     .then((products) => res.json(products))
     .catch((err) =>
       res.status(404).json({ noproductsfound: "No products found" })
