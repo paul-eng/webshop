@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import cartReducer from "./reducers/CartReducer";
+import rootReducer from "./reducers/RootReducer";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
-const store = createStore(cartReducer);
+const store = createStore(rootReducer);
 window.store = store;
 
 ReactDOM.render(

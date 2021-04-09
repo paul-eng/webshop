@@ -1,11 +1,10 @@
 const initState = {
-    items: [],
-    addedItems:[],
-    total: 0
-
-}
-const cartReducer= (state = initState,action)=>{
-    return state;
-}
+  items: ["test item"],
+  addedItems: [],
+  total: 0,
+};
+const cartReducer = (state = initState, action) => {
+  return state;
+};
 
 export default cartReducer;

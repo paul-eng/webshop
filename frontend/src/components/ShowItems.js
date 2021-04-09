@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import axios from "axios";
 import Item from "./Item";
 import "../styles/ShowItems.css";
@@ -27,13 +28,10 @@ class ShowItems extends Component {
   render() {
     const items = this.state.items;
     let itemList;
-
     if (!items) {
       itemList = "No items found";
     } else {
-      itemList = items.map((item) => (
-        <Item item={item} key={item._id} />
-      ));
+      itemList = items.map((item) => <Item item={item} key={item._id} />);
     }
 
     return (
@@ -47,4 +45,18 @@ class ShowItems extends Component {
   }
 }
 
-export default ShowItems;
+const mapStateToProps = (state) => {
+  return {
+    itemList: state.products.itemList,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllItems: () => {
+      dispatch(fetchAllItems());
+    },
+  };
+};
+
+export default connect(mapStateToProps)(ShowItems);
