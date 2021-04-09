@@ -5,6 +5,7 @@
     grid-template-areas:
         "header header header"
         "prod prod prod";
+    column-gap: .5rem;
 }
 
 .ShowItems h2 {

@@ -1,18 +1,14 @@
-.Item {
-    padding: .5rem .5rem 0;
-}
-
 .Item img {
     width: 100%;
 }
 
-.ItemCap {
+.Item section {
     display: grid;
     grid-template-rows: auto auto;
     justify-content: start;
 }
 
-.ItemCap a {
+.Item a {
     background-color: pink;
 }
 

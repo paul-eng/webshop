@@ -1,3 +1,16 @@
 .NavBar {
     background-color: pink;
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 
+        "logo . nav";
+}
+
+.NavBar a {
+    grid-area: logo;
+}
+
+.NavBar nav {
+    grid-area: nav;
 }

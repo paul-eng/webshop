@@ -15,7 +15,7 @@ class App extends Component {
         <div>
           <Route exact path="/" component={ShowItems} />
           <Route path="/add-item" component={AddItem} />
-          <Route path="/item" component={ItemInfo} />
+          <Route path="/" component={ItemInfo} />
         </div>
       </Router>
     );
