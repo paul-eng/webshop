@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 import Item from "./Item";
+import { fetchAllItems } from "../actions/ItemActions";
 import "../styles/ShowItems.css";
 
 class ShowItems extends Component {
@@ -14,6 +15,7 @@ class ShowItems extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchAllItems();
     axios
       .get("http://localhost:8080/api/items")
       .then((res) => {
@@ -23,6 +25,8 @@ class ShowItems extends Component {
         alert(err);
         console.log(err);
       });
+
+    console.log(this.props);
   }
 
   render() {
@@ -59,4 +63,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps)(ShowItems);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowItems);
