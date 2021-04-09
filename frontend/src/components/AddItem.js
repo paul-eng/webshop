@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-class AddProduct extends Component {
+class AddItem extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +33,7 @@ class AddProduct extends Component {
     };
 
     axios
-      .post("http://localhost:8080/api/products", data)
+      .post("http://localhost:8080/api/items", data)
       .then((res) => {
         alert("Success");
         this.setState({
@@ -54,7 +54,7 @@ class AddProduct extends Component {
 
   render() {
     return (
-      <div className="AddProduct">
+      <div className="AddItem">
         <Link to="/">Back Home</Link>
         <form noValidate onSubmit={this.onSubmit}>
           <input
@@ -113,4 +113,4 @@ class AddProduct extends Component {
   }
 }
 
-export default AddProduct;
+export default AddItem;

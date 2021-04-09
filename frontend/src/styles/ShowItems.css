@@ -1,0 +1,12 @@
+.ShowItems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header header"
+        "prod prod prod";
+}
+
+.ShowItems h1 {
+    grid-area: header;
+}

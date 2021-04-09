@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ProductSchema = new mongoose.Schema({
+const ItemSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
   },
   quantity: {
-    // subdocument w/ fields to keep count for different variations of a product ie. databack, special edition, used etc
+    // subdocument w/ fields to keep count for different variations of an item ie. databack, special edition, used, color etc
     type: Map,
     of: Number,
   },
@@ -30,4 +30,4 @@ const ProductSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Product = mongoose.model("Product", ProductSchema);
+module.exports = Item = mongoose.model("Item", ItemSchema);
