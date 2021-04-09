@@ -38,7 +38,7 @@ class ShowItems extends Component {
 
     return (
       <div className="ShowItems">
-        <h1>All Cameras</h1>
+        <h2>All Cameras</h2>
         {itemList}
         <br></br>
         <Link to="/add-item">Add A Camera</Link>

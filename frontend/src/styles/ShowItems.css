@@ -7,6 +7,6 @@
         "prod prod prod";
 }
 
-.ShowItems h1 {
+.ShowItems h2 {
     grid-area: header;
 }

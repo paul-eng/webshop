@@ -4,7 +4,7 @@ import "../styles/NavBar.css";
 const NavBar = (props) => {
   return (
     <div className="NavBar">
-        I'm a nav
+        <h1>Restful Goods</h1>
     </div>
   );
 };
