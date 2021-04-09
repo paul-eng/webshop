@@ -11,8 +11,11 @@ class ItemInfo extends Component {
   }
 
   componentDidMount() {
+   
+    const { id } = this.props.location.state;
+    
     axios
-      .get("http://localhost:8080/api/items/" + this.props.match.params.id)
+      .get("http://localhost:8080/api/items/" + id)
       .then((res) => {
         this.setState({
           item: res.data,
