@@ -11,8 +11,8 @@ class ItemInfo extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    this.props.fetchItem(id);
+    const path = this.props.match.params.item;
+    this.props.fetchItem(path);
   }
 
   componentWillUnmount() {
@@ -48,8 +48,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchItem: (id) => {
-      dispatch(fetchItem(id));
+    fetchItem: (path) => {
+      dispatch(fetchItem(path));
     },
     clearItem: () => {
       dispatch(clearItem());

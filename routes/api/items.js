@@ -21,17 +21,17 @@ router.post("/", (req, res) => {
 // @read
 router.get("/", (req, res) => {
   //projection only returns necessary fields for faster loading
-  Item.find({}, "name brand price gallery.0")
+  Item.find({}, "name brand price gallery.0 pathname")
     //sort by requested field, then alphabetically within field
     .sort(`${req.query.sort} brand name`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
 
-// @route api/items/:id
+// @route api/items/:item
 // @read one
-router.get("/:id", (req, res) => {
-  Item.findById(req.params.id)
+router.get("/:item", (req, res) => {
+  Item.findOne({pathname: req.params.item})
     .then((item) => res.json(item))
     .catch((err) => res.status(404).json({ noitemfound: "No such item" }));
 });

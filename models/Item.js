@@ -28,6 +28,9 @@ const ItemSchema = new mongoose.Schema({
     type: Map,
     of: Number,
   },
+  pathname: {
+
+  },
   updated_date: {
     type: Date,
     default: Date.now,

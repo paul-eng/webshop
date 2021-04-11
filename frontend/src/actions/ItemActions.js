@@ -32,8 +32,8 @@ export const fetchAllItems = (sort = "") => (dispatch) => {
     });
 };
 
-export const fetchItem = (id) => (dispatch) => {
-  axios.get("http://localhost:8080/api/items/" + id).then((res) => {
+export const fetchItem = (path) => (dispatch) => {
+  axios.get("http://localhost:8080/api/items/" + path).then((res) => {
     dispatch(setItem(res.data));
   });
 };
