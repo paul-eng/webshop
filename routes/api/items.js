@@ -20,11 +20,12 @@ router.post("/", (req, res) => {
 // @route api/items
 // @read
 router.get("/", (req, res) => {
-  Item.find().sort({brand: 1, name: 1})
+  //projection only returns necessary fields for faster loading
+  Item.find({}, "name brand price")
+    //sort by requested field, then alphabetically within that field
+    .sort(`${req.query.sort} brand name`)
     .then((items) => res.json(items))
-    .catch((err) =>
-      res.status(404).json({ noitemsfound: "No items found" })
-    );
+    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
 
 // @route api/items/:id
@@ -32,9 +33,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   Item.findById(req.params.id)
     .then((item) => res.json(item))
-    .catch((err) =>
-      res.status(404).json({ noitemfound: "No such item" })
-    );
+    .catch((err) => res.status(404).json({ noitemfound: "No such item" }));
 });
 
 // @route api/items/:id

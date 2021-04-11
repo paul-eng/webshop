@@ -12,7 +12,7 @@ class ItemInfo extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id;
-
+    console.log(id);
     axios
       .get("http://localhost:8080/api/items/" + id)
       .then((res) => {
