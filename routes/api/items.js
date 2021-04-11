@@ -8,7 +8,7 @@ const Item = require("../../models/Item");
 router.get("/test", (req, res) => res.send("item route testing!"));
 
 // @route api/items
-// @description add/save item
+// @create
 router.post("/", (req, res) => {
   Item.create(req.body)
     .then((item) => res.json({ msg: "Item added successfully" }))
@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
 });
 
 // @route api/items
-// @description Get all items in alphabetical order
+// @read
 router.get("/", (req, res) => {
   Item.find().sort({brand: 1, name: 1})
     .then((items) => res.json(items))
@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 });
 
 // @route api/items/:id
-// @description Get single item by id
+// @read one
 router.get("/:id", (req, res) => {
   Item.findById(req.params.id)
     .then((item) => res.json(item))
@@ -38,7 +38,7 @@ router.get("/:id", (req, res) => {
 });
 
 // @route api/items/:id
-// @description Update item
+// @update
 router.put("/:id", (req, res) => {
   Item.findByIdAndUpdate(req.params.id, req.body)
     .then((item) => res.json({ msg: "Updated successfully" }))
@@ -48,7 +48,7 @@ router.put("/:id", (req, res) => {
 });
 
 // @route api/items/:id
-// @description Delete item by id
+// @delete
 router.delete("/:id", (req, res) => {
   Item.findByIdAndRemove(req.params.id, req.body)
     .then((item) => res.json({ msg: "Item entry deleted successfully" }))

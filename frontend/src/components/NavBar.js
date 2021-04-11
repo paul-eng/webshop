@@ -10,7 +10,7 @@ const NavBar = (props) => {
       </Link>
 
       <nav>
-        <Link>Cart</Link>
+        <Link to="/cart">Cart</Link>
       </nav>
     </div>
   );

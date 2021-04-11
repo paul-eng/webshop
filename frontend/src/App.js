@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import AddItem from "./components/AddItem";
 import ShowItems from "./components/ShowItems";
 import ItemInfo from "./components/ItemInfo";
+import Cart from "./components/Cart";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
         <div>
           <Route exact path="/" component={ShowItems} />
           <Route path="/add-item" component={AddItem} />
+          <Route path="/cart" component={Cart} />
           <Route path="/:item/:id" component={ItemInfo} />
         </div>
       </Router>

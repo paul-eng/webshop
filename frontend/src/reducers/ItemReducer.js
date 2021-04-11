@@ -1,14 +1,14 @@
-import { FETCH_ALL_ITEMS } from "../actions/ItemActions";
+import { SET_ITEMS } from "../actions/ItemActions";
 
 const initState = {
-  itemList: [{ name: "testCamera" }],
+  itemList: [],
   itemInfo: "",
 };
 const itemReducer = (state = initState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case FETCH_ALL_ITEMS:
-      return Object.assign({}, state, { itemInfo: "DONE BEEN REDUCED" });
+    case SET_ITEMS:
+      return Object.assign({}, state, { itemList: action.payload });
     default:
         return state;
   }
