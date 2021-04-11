@@ -2,21 +2,21 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./styles/App.css";
 
-import NavBar from "./components/NavBar";
+import Header from "./components/Header";
 import AddItem from "./components/AddItem";
-import ShowItems from "./components/ShowItems";
 import ItemInfo from "./components/ItemInfo";
 import Cart from "./components/Cart";
+import Shop from "./components/Shop";
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <NavBar />
+        <Header />
         <Switch>
-          <Route exact path="/" component={ShowItems} />
-          <Route path="/brand/:brand" component={ShowItems} />
-          <Route path="/category/:cat" component={ShowItems} />
+          <Route exact path="/" component={Shop} />
+          <Route path="/brand/:brand" component={Shop} />
+          <Route path="/category/:cat" component={Shop} />
           <Route path="/add-item" component={AddItem} />
           <Route path="/cart" component={Cart} />
           <Route path="/:item" component={ItemInfo} />

@@ -1,22 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/NavBar.css";
+import "../styles/Header.css";
 
-const NavBar = (props) => {
+const Header = (props) => {
   return (
-    <div className="NavBar">
+    <div className="Header">
       <Link to="/">
         <h1>Restful Goods</h1>
       </Link>
 
-      <nav>
-      <Link to="/brand/yashica">
-        Yashis only
-      </Link>
+      <section>
         <Link to="/cart">Cart</Link>
-      </nav>
+      </section>
     </div>
   );
 };
 
-export default NavBar;
+export default Header;

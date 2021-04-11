@@ -1,16 +1,16 @@
-.NavBar {
+.Header {
     background-color: pink;
     display: grid;
     align-items: center;
     grid-template-columns: auto 1fr auto;
     grid-template-areas: 
-        "logo . nav";
+        "logo . acct";
 }
 
-.NavBar a {
+.Header a {
     grid-area: logo;
 }
 
-.NavBar nav {
-    grid-area: nav;
+.Header section {
+    grid-area: acct;
 }

@@ -1,0 +1,5 @@
+.Shop {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    grid-template-areas: "sidebar items";
+}
