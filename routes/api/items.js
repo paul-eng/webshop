@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
 });
 
 // @route api/items
-// @read
+// @read all
 router.get("/", (req, res) => {
   //projection only returns necessary fields for faster loading
   Item.find({}, "name brand price gallery.0 pathname")
@@ -28,8 +28,8 @@ router.get("/", (req, res) => {
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
 
-// @route api/items/brand
-// @read
+// @route api/items/brand/:brand
+// @read by brand
 router.get("/brand/:brand", (req, res) => {
   //projection only returns necessary fields for faster loading
   Item.find({brand: { $regex: `${req.params.brand}`, $options: `i`}}, "name brand price gallery.0 pathname")
@@ -38,6 +38,18 @@ router.get("/brand/:brand", (req, res) => {
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
+
+// @route api/items/category/:cat
+// @read by category
+router.get("/category/:cat", (req, res) => {
+  //projection only returns necessary fields for faster loading
+  Item.find({category: { $regex: `${req.params.cat}`, $options: `i`}}, "name brand price gallery.0 pathname")
+    //sort by requested field, then alphabetically within field
+    .sort(`${req.query.sort} brand name`)
+    .then((items) => res.json(items))
+    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
+});
+
 
 // @route api/items/:item
 // @read one
