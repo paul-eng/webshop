@@ -10,6 +10,9 @@ const NavBar = (props) => {
       </Link>
 
       <nav>
+      <Link to="/brand/yashica">
+        Yashis only
+      </Link>
         <Link to="/cart">Cart</Link>
       </nav>
     </div>

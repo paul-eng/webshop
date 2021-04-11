@@ -32,6 +32,16 @@ export const fetchAllItems = (sort = "") => (dispatch) => {
     });
 };
 
+export const fetchBrand = (brand, sort = "") => (dispatch) => {
+  axios
+    .get("http://localhost:8080/api/items/brand/" + brand, {
+      params: { sort },
+    })
+    .then((res) => {
+      dispatch(setItems(res.data));
+    });
+};
+
 export const fetchItem = (path) => (dispatch) => {
   axios.get("http://localhost:8080/api/items/" + path).then((res) => {
     dispatch(setItem(res.data));
