@@ -12,6 +12,7 @@ const Item = (props) => {
   let history = useHistory();
 
   function onClick() {
+    // onClick instead of <Link> so whitespace around h3 text is not clickable
     history.push(pathName);
   }
 

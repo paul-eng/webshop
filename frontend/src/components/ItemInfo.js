@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchItem } from "../actions/ItemActions";
+import { fetchItem, clearItem } from "../actions/ItemActions";
 
 class ItemInfo extends Component {
-
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.fetchItem(id);
+  }
+
+  componentWillUnmount() {
+    this.props.clearItem();
   }
 
   render() {
@@ -36,6 +39,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchItem: (id) => {
       dispatch(fetchItem(id));
+    },
+    clearItem: () => {
+      dispatch(clearItem());
     },
   };
 };
