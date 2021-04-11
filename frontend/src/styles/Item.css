@@ -1,15 +1,9 @@
 .Item img {
     width: 100%;
+    cursor: pointer;
 }
 
 .Item section {
-    display: grid;
-    grid-template-rows: auto auto;
-    justify-content: start;
+    width: max-content;
+    cursor: pointer;
 }
-
-.Item a {
-    background-color: pink;
-}
-
-

@@ -4,9 +4,6 @@ import { connect } from "react-redux";
 import { fetchItem } from "../actions/ItemActions";
 
 class ItemInfo extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
 
   componentDidMount() {
     const id = this.props.match.params.id;

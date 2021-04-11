@@ -2,7 +2,7 @@ import { SET_ITEMS, SET_ITEM } from "../actions/ItemActions";
 
 const initState = {
   itemList: [],
-  itemInfo: "",
+  itemInfo: {},
 };
 const itemReducer = (state = initState, action) => {
   Object.freeze(state);

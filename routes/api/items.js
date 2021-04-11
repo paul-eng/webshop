@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
 // @read
 router.get("/", (req, res) => {
   //projection only returns necessary fields for faster loading
-  Item.find({}, "name brand price gallery")
+  Item.find({}, "name brand price gallery.0")
     //sort by requested field, then alphabetically within field
     .sort(`${req.query.sort} brand name`)
     .then((items) => res.json(items))

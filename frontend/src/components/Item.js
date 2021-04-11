@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../styles/Item.css";
 
 const Item = (props) => {
@@ -9,20 +9,22 @@ const Item = (props) => {
     .join("-")
     .toLowerCase();
 
+  let history = useHistory();
+
+  function onClick() {
+    history.push(pathName);
+  }
+
   return (
     <div className="Item">
-      <Link to={pathName}>
-        <img alt="temp" src={`${item.gallery[0]}`} />
-      </Link>
+      <img onClick={onClick} alt="temp" src={`${item.gallery[0]}`} />
 
       <section>
-        <Link to={pathName}>
-          <h3>
-            {item.brand} {item.name}
-          </h3>
-        </Link>
-        <h3>${item.price}</h3>
+        <h3 onClick={onClick}>
+          {item.brand} {item.name}
+        </h3>
       </section>
+      <h3>${item.price}</h3>
     </div>
   );
 };
