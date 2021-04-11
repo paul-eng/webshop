@@ -8,7 +8,8 @@ const Cart = (props) => {
   if (cartItems.length < 1) {
     return "No Items";
   } else {
-    cartItems = cartItems.map((item) => <CartItem item={item} key={item._id} />);
+    // reverse so recently added items are at top of cart
+    cartItems = [...cartItems].reverse().map((item) => <CartItem item={item} key={item._id} />);
   }
 
   return (
