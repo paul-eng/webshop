@@ -21,8 +21,8 @@ router.post("/", (req, res) => {
 // @read
 router.get("/", (req, res) => {
   //projection only returns necessary fields for faster loading
-  Item.find({}, "name brand price")
-    //sort by requested field, then alphabetically within that field
+  Item.find({}, "name brand price gallery")
+    //sort by requested field, then alphabetically within field
     .sort(`${req.query.sort} brand name`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
