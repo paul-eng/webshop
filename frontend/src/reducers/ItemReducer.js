@@ -1,4 +1,4 @@
-import { SET_ITEMS } from "../actions/ItemActions";
+import { SET_ITEMS, SET_ITEM } from "../actions/ItemActions";
 
 const initState = {
   itemList: [],
@@ -9,8 +9,10 @@ const itemReducer = (state = initState, action) => {
   switch (action.type) {
     case SET_ITEMS:
       return Object.assign({}, state, { itemList: action.payload });
+    case SET_ITEM:
+      return Object.assign({}, state, { itemInfo: action.payload });
     default:
-        return state;
+      return state;
   }
 };
 

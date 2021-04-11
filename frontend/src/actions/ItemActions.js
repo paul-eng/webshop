@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const SET_ITEMS = "SET_ITEMS";
+export const SET_ITEM = "SET_ITEM";
 
 export function setItems(items) {
   return {
@@ -8,6 +9,13 @@ export function setItems(items) {
     payload: items,
   };
 }
+
+export const setItem = (item) => {
+  return {
+    type: SET_ITEM,
+    payload: item,
+  };
+};
 
 export function fetchAllItems(sort = "") {
   return function (dispatch) {
@@ -18,3 +26,9 @@ export function fetchAllItems(sort = "") {
       });
   };
 }
+
+export const fetchItem = (id) => (dispatch) => {
+  axios.get("http://localhost:8080/api/items/" + id).then((res) => {
+    dispatch(setItem(res.data));
+  });
+};

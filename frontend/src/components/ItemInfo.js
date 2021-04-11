@@ -1,43 +1,46 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
+import { fetchItem } from "../actions/ItemActions";
 
 class ItemInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      item: {},
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    console.log(id);
-    axios
-      .get("http://localhost:8080/api/items/" + id)
-      .then((res) => {
-        this.setState({
-          item: res.data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.props.fetchItem(id);
   }
 
   render() {
+    const itemInfo = this.props.itemInfo;
     return (
       <div className="ItemInfo">
         <Link to="/">Back to All</Link>
         <ul>
-          <li>Brand: {this.state.item.brand}</li>
-          <li>Name: {this.state.item.name}</li>
-          <li>Class: {this.state.item.category}</li>
-          <li>Price: {this.state.item.price}</li>
+          <li>Brand: {itemInfo.brand}</li>
+          <li>Name: {itemInfo.name}</li>
+          <li>Class: {itemInfo.category}</li>
+          <li>Price: {itemInfo.price}</li>
         </ul>
       </div>
     );
   }
 }
 
-export default ItemInfo;
+const mapStateToProps = (state) => {
+  return {
+    itemInfo: state.products.itemInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchItem: (id) => {
+      dispatch(fetchItem(id));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemInfo);
