@@ -1,5 +1,11 @@
 .Shop {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 25% 1fr;
     grid-template-areas: "sidebar items";
+    /* prevents resizing when scrollbar appears/disappears */
+    /* when vertical scrollbar appears, it creates horizontall scrollbar for
+    area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */
+    width: 100vw;
+    padding-right: 1vw;
 }
