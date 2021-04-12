@@ -21,11 +21,21 @@ const Item = require("./models/Item");
 //   }
 // );
 
-Item.find({})
+// Item.find({})
+//   .then((items) => {
+//     items.forEach((item) => {
+//       item.pathname = item.pathname.substring(1);
+//       item.save();
+//     });
+//   })
+//   .catch((err) => console.log(err));
+
+Item.aggregate([{$group: {_id: "$category"}}])
   .then((items) => {
-    items.forEach((item) => {
-      item.pathname = item.pathname.substring(1);
-      item.save();
-    });
+    console.log(items);
+    mongoose.connection.close();
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log(err);
+    mongoose.connection.close();
+  });

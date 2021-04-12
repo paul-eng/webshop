@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Item from "./Item";
 import "../styles/ShowItems.css";
@@ -17,8 +16,6 @@ const ShowItems = (props) => {
     <div className="ShowItems">
       <h2>All Cameras</h2>
       {itemList}
-      <br></br>
-      <Link to="/add-item">Add A Camera</Link>
     </div>
   );
 };

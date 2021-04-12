@@ -27,20 +27,22 @@ class Shop extends Component {
   }
 
   parseURL(url) {
+    // "/brand/yashica" becomes ["brand","yashica"]
     let parsed = url.match(/(?<=\/)[^/]+/g);
     return parsed ? parsed : ["/"];
   }
 
   fetchItems(url) {
+    // "zone-focus" becomes "zone focus"
+    let param = url[1] || "";
+    let parsedParam = param.split("-").join(" ");
+
     switch (url[0]) {
       case "brand":
-        let brand = url[1];
-        this.props.fetchBrand(brand);
+        this.props.fetchBrand(parsedParam);
         break;
       case "category":
-        let cat = url[1];
-        console.log(cat);
-        this.props.fetchCategory(cat);
+        this.props.fetchCategory(parsedParam);
         break;
       default:
         this.props.fetchAllItems();
