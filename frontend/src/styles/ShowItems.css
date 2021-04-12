@@ -8,6 +8,6 @@
     column-gap: .5rem;
 }
 
-.ShowItems h2 {
+.ShowItems .Title {
     grid-area: header;
 }

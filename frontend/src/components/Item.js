@@ -1,8 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchItem } from "../actions/ItemActions";
-
 import "../styles/Item.css";
 
 const Item = (props) => {
@@ -29,12 +26,4 @@ const Item = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchItem: (path) => {
-      dispatch(fetchItem(path));
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Item);
+export default Item;

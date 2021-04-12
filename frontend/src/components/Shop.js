@@ -41,22 +41,21 @@ class Shop extends Component {
     // "zone-focus" becomes "zone focus"
     let param = url[1] || "";
     let parsedParam = param.split("-").join(" ");
+    this.props.clearItem();
     switch (url[0]) {
       case "/":
         this.props.fetchAllItems();
-        this.props.clearItem();
         break;
       case "new-arrivals":
         this.props.fetchAllItems("-updated_date");
-        this.props.clearItem();
         break;
       case "brand":
         this.props.fetchBrand(parsedParam);
-        this.props.clearItem();
         break;
       case "category":
         this.props.fetchCategory(parsedParam);
-        this.props.clearItem();
+        break;
+      case "cart":
         break;
       default:
         this.props.fetchItem(url);
