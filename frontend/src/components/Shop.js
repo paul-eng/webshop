@@ -37,7 +37,7 @@ class Shop extends Component {
     return parsed ? parsed : ["/"];
   }
 
-  fetchItems(url) {
+  async fetchItems(url) {
     // "zone-focus" becomes "zone focus"
     let param = url[1] || "";
     let parsedParam = param.split("-").join(" ");
@@ -65,17 +65,17 @@ class Shop extends Component {
   }
 
   render() {
-    let focus;
+    let itemOpen = Object.entries(this.props.itemInfo).length > 1;
 
-    if (Object.entries(this.props.itemInfo).length > 1) {
-      focus = <ItemInfo />;
+    if (itemOpen) {
+      itemOpen = <ItemInfo />;
     } else {
-      focus = <ShowItems />;
+      itemOpen = <ShowItems />;
     }
     return (
       <div className="Shop">
         <Nav />
-        {focus}
+        {itemOpen}
       </div>
     );
   }

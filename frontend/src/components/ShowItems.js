@@ -6,12 +6,7 @@ import "../styles/ShowItems.css";
 
 const ShowItems = (props) => {
   let itemList = props.itemList;
-  if (itemList.length < 1) {
-    itemList = "No items found";
-  } else {
-    itemList = itemList.map((item) => <Item item={item} key={item._id} />);
-  }
-
+  itemList = itemList.map((item) => <Item item={item} key={item._id} />);
   return (
     <div className="ShowItems">
       <Title />

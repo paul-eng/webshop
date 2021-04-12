@@ -3,19 +3,20 @@ import { useHistory } from "react-router-dom";
 
 const Title = (props) => {
   let history = useHistory();
-  let path = history.location.pathname;
-  let parsedPath = path.match(/(?<=\/)[^/]+/g);
-  parsedPath
-    ? parsedPath[1]
-      ? (parsedPath = parsedPath[1])
-      : (parsedPath = parsedPath[0])
-    : (parsedPath = "all");
+  let params = history.location.pathname.match(/(?<=\/)[^/]+/g) || "no params";
 
-    parsedPath = parsedPath.split('-').join(' ').toUpperCase();
+  let title =
+    params.length === 2
+      ? params[1]
+      : params[0] === "new-arrivals"
+      ? "new arrivals"
+      : params.length === 1
+      ? ""
+      : "all";
 
   return (
     <div className="Title">
-      <h2>{parsedPath}</h2>
+      <h2>{title.toUpperCase()}</h2>
     </div>
   );
 };
