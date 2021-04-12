@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import Item from "./Item";
+import Product from "./Product";
 import Title from "./Title";
 import "../styles/ShowItems.css";
 
 const ShowItems = (props) => {
   let itemList = props.itemList;
-  itemList = itemList.map((item) => <Item item={item} key={item._id} />);
+  itemList = itemList.map((item) => <Product item={item} key={item._id} />);
   return (
     <div className="ShowItems">
       <Title />

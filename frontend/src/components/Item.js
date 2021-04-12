@@ -1,29 +1,27 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import "../styles/Item.css";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchItem } from "../actions/ItemActions";
+import ItemInfo from "./ItemInfo";
 
-const Item = (props) => {
-  const item = props.item;
-  let history = useHistory();
-
-  function onClick(e) {
-    e.preventDefault();
-    history.push("/" + item.pathname);
+class Item extends Component {
+  componentDidMount() {
+    let item = this.props.match.params.item;
+    this.props.fetchItem(item);
   }
 
-  return (
-    <div className="Item">
-      <img onClick={onClick} alt="temp" src={`${item.gallery[0]}`} />
+  render() {
+    return (
+      <div className="Item">
+        <ItemInfo />
+      </div>
+    );
+  }
+}
 
-      <section>
-        {/* onClick instead of <Link> so whitespace created by line-height around h3 text is not clickable */}
-        <h3 onClick={onClick}>
-          {item.brand} {item.name}
-        </h3>
-      </section>
-      <h3>${item.price}</h3>
-    </div>
-  );
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchItem: (item) => dispatch(fetchItem(item)),
+  };
 };
 
-export default Item;
+export default connect(null, mapDispatchToProps)(Item);

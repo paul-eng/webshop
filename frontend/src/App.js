@@ -6,6 +6,10 @@ import Header from "./components/Header";
 import AddItem from "./components/AddItem";
 import Cart from "./components/Cart";
 import Shop from "./components/Shop";
+import Brand from "./components/Brand";
+import New from "./components/New";
+import Category from "./components/Category";
+import Item from "./components/Item";
 
 class App extends Component {
   render() {
@@ -14,12 +18,12 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Shop} />
-          <Route exact path="/new-arrivals" component={Shop} />
+          <Route exact path="/new-arrivals" component={New} />
           <Route exact path="/add-item" component={AddItem} />
           <Route exact path="/cart" component={Cart} />
-          <Route path="/brand/:brand" component={Shop} />
-          <Route path="/category/:cat" component={Shop} />
-          <Route path="/:item" component={Shop} />
+          <Route path="/brand/:brand" component={Brand} />
+          <Route path="/category/:cat" component={Category} />
+          <Route path="/:item" component={Item} />
         </Switch>
       </Router>
     );

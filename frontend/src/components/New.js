@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { fetchAllItems } from "../actions/ItemActions";
 import ShowItems from "./ShowItems";
 
-class Shop extends Component {
+class New extends Component {
   componentDidMount() {
-    this.props.fetchAll();
+    this.props.fetchNew();
   }
 
   render() {
     return (
-      <div className="Shop">
+      <div className="New">
         <ShowItems />
       </div>
     );
@@ -19,8 +19,8 @@ class Shop extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAll: () => dispatch(fetchAllItems()),
+    fetchNew: ()=>dispatch(fetchAllItems("-updated_date")),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Shop);
+export default connect(null, mapDispatchToProps)(New);

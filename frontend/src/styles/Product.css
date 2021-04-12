@@ -1,9 +1,9 @@
-.Item img {
+.Product img {
     width: 100%;
     cursor: pointer;
 }
 
-.Item section {
+.Product section {
     width: max-content;
     cursor: pointer;
 }
