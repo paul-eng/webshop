@@ -2,12 +2,5 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
-    grid-template-areas:
-        "header header header"
-        "prod prod prod";
     column-gap: .5rem;
-}
-
-.ShowItems .Title {
-    grid-area: header;
 }

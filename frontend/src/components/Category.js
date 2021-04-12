@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCategory } from "../actions/ItemActions";
-import ShowItems from "./ShowItems";
+import ContentArea from "./ContentArea";
 
 class Category extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class Category extends Component {
   render() {
     return (
       <div className="Category">
-        <ShowItems />
+        <ContentArea />
       </div>
     );
   }

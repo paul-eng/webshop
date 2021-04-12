@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBrand } from "../actions/ItemActions";
-import ShowItems from "./ShowItems";
+import ContentArea from "./ContentArea";
 
 class Brand extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class Brand extends Component {
   render() {
     return (
       <div className="Brand">
-        <ShowItems />
+        <ContentArea />
       </div>
     );
   }

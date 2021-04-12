@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchItem } from "../actions/ItemActions";
+import { fetchItem, clearItem } from "../actions/ItemActions";
 import ItemInfo from "./ItemInfo";
+import Nav from "./Nav";
+import "../styles/Item.css";
 
 class Item extends Component {
   componentDidMount() {
@@ -9,9 +11,14 @@ class Item extends Component {
     this.props.fetchItem(item);
   }
 
+  componentWillUnmount() {
+    this.props.clearItem();
+  }
+
   render() {
     return (
       <div className="Item">
+        <Nav />
         <ItemInfo />
       </div>
     );
@@ -21,6 +28,7 @@ class Item extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchItem: (item) => dispatch(fetchItem(item)),
+    clearItem: () => dispatch(clearItem()),
   };
 };
 
