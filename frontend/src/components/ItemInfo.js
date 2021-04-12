@@ -10,15 +10,6 @@ class ItemInfo extends Component {
     this.addToCart = this.addToCart.bind(this);
   }
 
-  componentDidMount() {
-    const path = this.props.match.params.item;
-    this.props.fetchItem(path);
-  }
-
-  componentWillUnmount() {
-    this.props.clearItem();
-  }
-
   addToCart() {
     this.props.addToCart(this.props.itemInfo);
   }

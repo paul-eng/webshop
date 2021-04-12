@@ -1,4 +1,9 @@
-import { SET_ITEMS, SET_ITEM, CLEAR_ITEM } from "../actions/ItemActions";
+import {
+  SET_ITEMS,
+  SET_ITEM,
+  CLEAR_ITEM,
+  CLEAR_ALL_ITEMS,
+} from "../actions/ItemActions";
 
 const initState = {
   itemList: [],
@@ -13,6 +18,8 @@ const itemReducer = (state = initState, action) => {
       return Object.assign({}, state, { itemInfo: action.payload });
     case CLEAR_ITEM:
       return Object.assign({}, state, { itemInfo: {} });
+    case CLEAR_ALL_ITEMS:
+      return Object.assign({}, state, { itemList: [] });
     default:
       return state;
   }

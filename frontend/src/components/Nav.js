@@ -9,12 +9,14 @@ class Nav extends Component {
     this.props.fetchCategories();
   }
 
-  pathMaker = (param) => param.toLowerCase().split(" ").join("-");
+  makeURL = (param) => param.toLowerCase().split(" ").join("-");
 
   linkMaker = (params, type) =>
     params.map((param) => (
-      <li>
-        <Link to={type + this.pathMaker(param)}>{param}</Link>
+      <li key={param}>
+        <Link to={type + this.makeURL(param)}>
+          {param}
+        </Link>
       </li>
     ));
 
@@ -27,6 +29,7 @@ class Nav extends Component {
 
     return (
       <div className="Nav">
+        <Link to="/new-arrivals">New Arrivals</Link>
         <ul>
           Brands
           {brands}

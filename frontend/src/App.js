@@ -4,7 +4,6 @@ import "./styles/App.css";
 
 import Header from "./components/Header";
 import AddItem from "./components/AddItem";
-import ItemInfo from "./components/ItemInfo";
 import Cart from "./components/Cart";
 import Shop from "./components/Shop";
 
@@ -15,11 +14,12 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Shop} />
+          <Route exact path="/new-arrivals" component={Shop} />
+          <Route exact path="/add-item" component={AddItem} />
+          <Route exact path="/cart" component={Cart} />
           <Route path="/brand/:brand" component={Shop} />
           <Route path="/category/:cat" component={Shop} />
-          <Route path="/add-item" component={AddItem} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/:item" component={ItemInfo} />
+          <Route path="/:item" component={Shop} />
         </Switch>
       </Router>
     );
