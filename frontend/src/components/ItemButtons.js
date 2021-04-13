@@ -1,22 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/CartActions";
-import "../styles/ItemButtons.css"
+import "../styles/ItemButtons.css";
 
 const ItemButtons = (props) => {
-  let selected = "";
   let inventory = props.inventory;
 
-  function getValue(e) {
-    selected = e.target.value;
-  }
-
-  function addToCart() {
+  function addToCart(form) {
+    form.preventDefault();
+    let selected = form.target[0].value;
     props.addToCart(props.item, selected);
   }
 
   if (inventory) {
-    selected = inventory[0][0];
     inventory = inventory.map((option) => (
       <option key={option[0]} value={option[0]}>
         {option[0]}
@@ -26,8 +22,10 @@ const ItemButtons = (props) => {
 
   return (
     <div className="ItemButtons">
-      <select onChange={getValue}>{inventory}</select>
-      <button onClick={addToCart}>Add To Cart</button>
+      <form onSubmit={addToCart}>
+        <select>{inventory}</select>
+        <input type="submit" value="Add To Cart" />
+      </form>
     </div>
   );
 };
