@@ -1,13 +1,12 @@
-.ItemButtons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
+.ItemButtons form {
+    display: flex;
 }
 
 .ItemButtons select {
-    width: 90%;
+    width: 50%;
+    margin-right: 5%;
 }
 
-.ItemButtons button {
-    width: 70%;
+.ItemButtons input {
+    flex-shrink: 0;
 }

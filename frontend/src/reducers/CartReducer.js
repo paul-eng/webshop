@@ -10,15 +10,11 @@ const cartReducer = (state = initState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       let inCart = state.items.find((item) => item._id === action.item._id);
-
       if (inCart) {
-        // If specific version already in cart, increment count, otherwise push new version onto array
         let quantity = inCart.quantity;
-
         quantity.flat().includes(action.version)
           ? quantity.find((version) => version[0] === action.version)[1]++
           : quantity.push([action.version, 1]);
-
         return Object.assign({}, state, { total: state.total + inCart.price });
       } else {
         let newItem = Object.assign({}, action.item, {

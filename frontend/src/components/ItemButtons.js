@@ -5,6 +5,7 @@ import "../styles/ItemButtons.css";
 
 const ItemButtons = (props) => {
   let inventory = props.inventory;
+  let hidden;
 
   function addToCart(form) {
     form.preventDefault();
@@ -13,17 +14,23 @@ const ItemButtons = (props) => {
   }
 
   if (inventory) {
-    inventory = inventory.map((option) => (
-      <option key={option[0]} value={option[0]}>
-        {option[0]}
-      </option>
-    ));
+    inventory = inventory.map((option) => {
+      let soldout = option[1] === 0 ? [true, " (Out Of Stock)"] : [false, ""];
+      return (
+        <option disabled={soldout[0]} key={option[0]} value={option[0]}>
+          {option[0] + soldout[1]}
+        </option>
+      );
+    });
+
+    // still want the value even if only one option so render but hide
+    hidden = inventory.length < 2;
   }
 
   return (
     <div className="ItemButtons">
       <form onSubmit={addToCart}>
-        <select>{inventory}</select>
+        <select hidden={hidden}>{inventory}</select>
         <input type="submit" value="Add To Cart" />
       </form>
     </div>
