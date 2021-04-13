@@ -5,7 +5,6 @@ import "../styles/ItemButtons.css";
 
 const ItemButtons = (props) => {
   let inventory = props.inventory;
-  let hidden;
 
   function addToCart(form) {
     form.preventDefault();
@@ -13,28 +12,52 @@ const ItemButtons = (props) => {
     props.addToCart(props.item, selected);
   }
 
-  if (inventory) {
-    inventory = inventory.map((option) => {
-      let soldout = option[1] === 0 ? [true, " (Out Of Stock)"] : [false, ""];
+  function stock(qty) {
+    if (qty === 0) {
+      return "(Out Of Stock)";
+    } else if (qty === 1) {
+      return "(Last One)";
+    } else if (qty <= 3) {
+      return "(Low Stock)";
+    }
+    return "";
+  }
+
+  function soldOut(inventory) {
+    let sold = inventory.filter((option) => option[1] === 0);
+    return sold.length === inventory.length;
+  }
+
+  function optionList(inventory) {
+    return inventory.map((option) => {
+      let version = option[0];
+      let quantity = option[1];
+      let outOfStock = quantity === 0;
+      let msg = stock(quantity);
+
       return (
-        <option disabled={soldout[0]} key={option[0]} value={option[0]}>
-          {option[0] + soldout[1]}
+        <option disabled={outOfStock} key={version} value={version}>
+          {`${version} ${msg}`}
         </option>
       );
     });
-
-    // still want the value even if only one option so render but hide
-    hidden = inventory.length < 2;
   }
 
-  return (
-    <div className="ItemButtons">
+  let render = (<p>OUT OF STOCK</p>);
+
+  if (inventory && !soldOut(inventory)) {
+    // still want value even if only one option, so render but hide in that case
+    let onlyOne = inventory.length === 1;
+    let options = optionList(inventory);
+    render = (
       <form onSubmit={addToCart}>
-        <select hidden={hidden}>{inventory}</select>
+        <select hidden={onlyOne}>{options}</select>
         <input type="submit" value="Add To Cart" />
       </form>
-    </div>
-  );
+    );
+  }
+
+  return <div className="ItemButtons">{render}</div>;
 };
 
 const mapStateToProps = (state) => {
