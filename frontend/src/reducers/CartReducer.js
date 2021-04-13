@@ -9,13 +9,20 @@ const cartReducer = (state = initState, action) => {
 
   switch (action.type) {
     case ADD_TO_CART:
-      let inCart = state.items.find((item) => item._id === action.payload._id);
+      let inCart = state.items.find((item) => item._id === action.item._id);
 
       if (inCart) {
-        inCart.quantity += 1;
+        if (inCart.quantity.flat().includes(action.version)) {
+          inCart.quantity.find((version) => version[0] === action.version)[1]++;
+        } else {
+          inCart.quantity.push([action.version, 1]);
+        }
+        console.log(inCart.quantity);
         return Object.assign({}, state, { total: state.total + inCart.price });
       } else {
-        let newItem = Object.assign({}, action.payload, { quantity: 1 });
+        let newItem = Object.assign({}, action.item, {
+          quantity: [[action.version, 1]],
+        });
         return Object.assign({}, state, {
           items: [...state.items, newItem],
           total: state.total + newItem.price,

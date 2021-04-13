@@ -11,8 +11,7 @@ const ItemButtons = (props) => {
   }
 
   function addToCart() {
-    // props.addToCart(props.itemInfo);
-    console.log(selected);
+    props.addToCart(props.itemInfo, selected);
   }
 
   if (inventory) {
@@ -35,13 +34,14 @@ const ItemButtons = (props) => {
 const mapStateToProps = (state) => {
   return {
     inventory: state.products.itemInfo.quantity,
+    itemInfo: state.products.itemInfo,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: (item) => {
-      dispatch(addToCart(item));
+    addToCart: (item, version) => {
+      dispatch(addToCart(item, version));
     },
   };
 };
