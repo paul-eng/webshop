@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/CartActions";
+import "../styles/ItemButtons.css"
 
 const ItemButtons = (props) => {
   let selected = "";
@@ -11,7 +12,7 @@ const ItemButtons = (props) => {
   }
 
   function addToCart() {
-    props.addToCart(props.itemInfo, selected);
+    props.addToCart(props.item, selected);
   }
 
   if (inventory) {
@@ -34,7 +35,7 @@ const ItemButtons = (props) => {
 const mapStateToProps = (state) => {
   return {
     inventory: state.products.itemInfo.quantity,
-    itemInfo: state.products.itemInfo,
+    item: state.products.itemInfo,
   };
 };
 

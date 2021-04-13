@@ -13,9 +13,9 @@ const itemReducer = (state = initState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case SET_ITEMS:
-      return Object.assign({}, state, { itemList: action.payload });
+      return Object.assign({}, state, { itemList: action.items });
     case SET_ITEM:
-      return Object.assign({}, state, { itemInfo: action.payload });
+      return Object.assign({}, state, { itemInfo: action.item });
     case CLEAR_ITEM:
       return Object.assign({}, state, { itemInfo: {} });
     case CLEAR_ALL_ITEMS:

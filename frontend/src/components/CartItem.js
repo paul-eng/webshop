@@ -6,6 +6,8 @@ const CartItem = (props) => {
   return (
     <div className="cartItem">
       {item.brand} {item.name} - ${item.price}
+      <br></br>
+      {item.quantity[0]} Qty: {item.quantity[1]}
     </div>
   );
 };

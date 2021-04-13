@@ -13,10 +13,10 @@ const navReducer = (state = initState, action) => {
 
   switch (action.type) {
     case SET_BRANDS:
-      let brands = stringify(action.payload);
+      let brands = stringify(action.brands);
       return Object.assign({}, state, { brands: brands });
     case SET_CATEGORIES:
-      let cats = stringify(action.payload);
+      let cats = stringify(action.cats);
       return Object.assign({}, state, { categories: cats });
     default:
       return state;

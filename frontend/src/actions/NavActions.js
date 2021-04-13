@@ -6,14 +6,14 @@ export const SET_CATEGORIES = "SET_CATEGORIES";
 export const setBrands = (brands) => {
   return {
     type: SET_BRANDS,
-    payload: brands,
+    brands,
   };
 };
 
 export const setCategories = (cats) => {
   return {
     type: SET_CATEGORIES,
-    payload: cats,
+    cats,
   };
 };
 

@@ -8,14 +8,14 @@ export const CLEAR_ALL_ITEMS = "CLEAR_ALL_ITEMS";
 export const setItems = (items) => {
   return {
     type: SET_ITEMS,
-    payload: items,
+    items,
   };
 };
 
 export const setItem = (item) => {
   return {
     type: SET_ITEM,
-    payload: item,
+    item,
   };
 };
 
@@ -28,8 +28,8 @@ export const clearItem = () => {
 export const clearAllItems = () => {
   return {
     type: CLEAR_ALL_ITEMS,
-  }
-}
+  };
+};
 
 export const fetchAllItems = (sort = "") => (dispatch) => {
   axios

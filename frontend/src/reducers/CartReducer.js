@@ -12,12 +12,13 @@ const cartReducer = (state = initState, action) => {
       let inCart = state.items.find((item) => item._id === action.item._id);
 
       if (inCart) {
-        if (inCart.quantity.flat().includes(action.version)) {
-          inCart.quantity.find((version) => version[0] === action.version)[1]++;
+        // If specific version already in cart, increment count, otherwise push one onto array
+        let versions = inCart.quantity;
+        if (versions.flat().includes(action.version)) {
+          versions.find((version) => version[0] === action.version)[1]++;
         } else {
-          inCart.quantity.push([action.version, 1]);
+          versions.push([action.version, 1]);
         }
-        console.log(inCart.quantity);
         return Object.assign({}, state, { total: state.total + inCart.price });
       } else {
         let newItem = Object.assign({}, action.item, {

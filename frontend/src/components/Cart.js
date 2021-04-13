@@ -5,11 +5,29 @@ import CartItem from "./CartItem";
 const Cart = (props) => {
   let cartItems = props.items;
 
+  function versionSplitter(item) {
+    let versions = [];
+
+    item.quantity.forEach((version) => {
+      let separate = Object.assign({}, item, { quantity: version });
+      versions.push(separate);
+    });
+
+    return versions;
+  }
+
   if (cartItems.length < 1) {
     return "Your cart is empty";
   } else {
+    let separateItems = [...cartItems]
+      .map((item) => versionSplitter(item))
+      .flat();
     // reverse so recently added items are at top of cart
-    cartItems = [...cartItems].reverse().map((item) => <CartItem item={item} key={item._id} />);
+    cartItems = separateItems
+      .reverse()
+      .map((item) => (
+        <CartItem item={item} key={item.name + item.quantity[0]} />
+      ));
   }
 
   return (
@@ -23,7 +41,7 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
   return {
     items: state.cart.items,
-    total: state.cart.total
+    total: state.cart.total,
   };
 };
 

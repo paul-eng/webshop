@@ -1,0 +1,13 @@
+.ItemButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
+.ItemButtons select {
+    width: 90%;
+}
+
+.ItemButtons button {
+    width: 70%;
+}
