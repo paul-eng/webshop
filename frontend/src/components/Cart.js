@@ -7,12 +7,10 @@ const Cart = (props) => {
 
   function versionSplitter(item) {
     let versions = [];
-
     item.quantity.forEach((version) => {
       let separate = Object.assign({}, item, { quantity: version });
       versions.push(separate);
     });
-
     return versions;
   }
 
@@ -33,7 +31,9 @@ const Cart = (props) => {
   return (
     <div className="cart">
       <ul>{cartItems}</ul>
-      {props.total}
+      Subtotal: ${props.total}
+      Tax: ${props.total * .08875}
+      Total: ${props.total + props.total * .08875}
     </div>
   );
 };
