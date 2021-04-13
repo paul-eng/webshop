@@ -30,9 +30,11 @@ class AddItem extends Component {
       description: this.state.description,
       price: this.state.price,
       quantity: this.state.quantity,
-      gallery: {
-        0: "https://is5-ssl.mzstatic.com/image/thumb/Purple123/v4/3d/44/92/3d449290-a215-6d60-457a-ad3ff3481f22/source/256x256bb.jpg",
-      },
+      gallery: [
+        "https://tres-bien.com/media/catalog/product/cache/d4ce4a7fabbf7ab1ab848745969eb952/f/o/footwear_210319_041.jpg",
+        "https://tres-bien.com/media/catalog/product/cache/d4ce4a7fabbf7ab1ab848745969eb952/f/o/footwear_210319_042.jpg",
+        "https://tres-bien.com/media/catalog/product/cache/d4ce4a7fabbf7ab1ab848745969eb952/f/o/footwear_210319_043.jpg",
+      ],
       pathname: `${this.state.brand}-${this.state.name}`
         .split(" ")
         .join("-")

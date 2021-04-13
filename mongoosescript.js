@@ -4,16 +4,17 @@ const mongoose = require("mongoose");
 connectDB();
 const Item = require("./models/Item");
 
-const img = [
-  "https://tres-bien.com/media/catalog/product/cache/d4ce4a7fabbf7ab1ab848745969eb952/f/o/footwear_210319_041.jpg",
-  "https://tres-bien.com/media/catalog/product/cache/d4ce4a7fabbf7ab1ab848745969eb952/f/o/footwear_210319_042.jpg",
-  "https://tres-bien.com/media/catalog/product/cache/d4ce4a7fabbf7ab1ab848745969eb952/f/o/footwear_210319_043.jpg",
+
+const qty = [
+  ["Standard",5],
+  ["Dateback",3],
+  ["Limited Edition",1]
 ];
 Item.updateMany(
-  {},
+  {category:"Compact"},
 
   {
-    gallery: img,
+    quantity: qty,
   },
 
   { multi: true },

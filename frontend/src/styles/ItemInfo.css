@@ -1,6 +1,6 @@
 .ItemInfo {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 50% 1fr;
 }
 
 .ItemInfo img {
