@@ -17,20 +17,16 @@ const ItemSchema = new mongoose.Schema({
     type: String,
   },
   gallery: {
-    type: Map,
-    of: String,
+    type: [String],
   },
   price: {
     type: Number,
   },
   quantity: {
     // subdocument w/ fields to keep count for different variations of an item ie. databack, special edition, used, color etc
-    type: Map,
-    of: Number,
+    type: [[mongoose.Mixed]],
   },
-  pathname: {
-
-  },
+  pathname: {},
   updated_date: {
     type: Date,
     default: Date.now,

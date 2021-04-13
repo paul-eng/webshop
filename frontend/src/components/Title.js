@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const Title = (props) => {
@@ -14,7 +15,7 @@ const Title = (props) => {
       ? ""
       : "all";
 
-  title = title.toUpperCase().split("-").join(" ")
+  title = title.toUpperCase().split("-").join(" ");
 
   return (
     <div className="Title">
@@ -23,4 +24,12 @@ const Title = (props) => {
   );
 };
 
-export default Title;
+// connect to trigger rerender if items update without unmounting component ex. going from brand/:a to brand/:b
+
+const mapStateToProps = (state) => {
+  return {
+    itemList: state.products.itemList,
+  };
+};
+
+export default connect(mapStateToProps)(Title);

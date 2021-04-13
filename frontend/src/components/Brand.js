@@ -9,6 +9,12 @@ class Brand extends Component {
     this.props.fetchBrand(parsedParam);
   }
 
+  componentDidUpdate() {
+    // trigger update if path changes without unmounting component ex. from /brand/:a to /brand/:b
+    let parsedParam = this.props.match.params.brand.split("-").join(" ");
+    this.props.fetchBrand(parsedParam);
+  }
+
   render() {
     return (
       <div className="Brand">

@@ -1,0 +1,9 @@
+.ItemInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: red;
+}
+
+.ItemInfo img {
+    width: 100%;
+}

@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
 // @read all items
 router.get("/", (req, res) => {
   //projection only returns necessary fields for faster loading
-  Item.find({}, "name brand price gallery.0 pathname")
+  Item.find({}, "name brand price gallery pathname")
     //sort by requested field, then alphabetically within field
     .sort(`${req.query.sort} brand name`)
     .then((items) => res.json(items))
@@ -42,10 +42,10 @@ router.get("/brand/:brand", (req, res) => {
   //projection only returns necessary fields for faster loading
   Item.find(
     { brand: { $regex: `${req.params.brand}`, $options: `i` } },
-    "name brand price gallery.0 pathname"
+    "name brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
-    .sort(`${req.query.sort} brand name`)
+    .sort(`${req.query.sort} name`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -66,7 +66,7 @@ router.get("/category/:cat", (req, res) => {
   //projection only returns necessary fields for faster loading
   Item.find(
     { category: { $regex: `${req.params.cat}`, $options: `i` } },
-    "name brand price gallery.0 pathname"
+    "name brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
     .sort(`${req.query.sort} brand name`)

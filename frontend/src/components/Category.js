@@ -9,6 +9,12 @@ class Category extends Component {
     this.props.fetchCat(parsedParam);
   }
 
+  componentDidUpdate() {
+    // trigger update if path changes without unmounting component ex. from /category/:a to /category/:b
+    let parsedParam = this.props.match.params.cat.split("-").join(" ");
+    this.props.fetchCat(parsedParam);
+  }
+
   render() {
     return (
       <div className="Category">

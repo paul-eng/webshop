@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import Product from "./Product";
-import "../styles/ShowItems.css";
+import "../styles/ShowProducts.css";
 
-const ShowItems = (props) => {
+const ShowProducts = (props) => {
   let itemList = props.itemList;
   itemList = itemList.map((item) => <Product item={item} key={item._id} />);
   return (
-    <div className="ShowItems">
+    <div className="ShowProducts">
       {itemList}
     </div>
   );
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ShowItems);
+export default connect(mapStateToProps)(ShowProducts);

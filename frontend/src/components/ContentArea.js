@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { clearAllItems } from "../actions/ItemActions";
-import ShowItems from "./ShowItems";
+import ShowProducts from "./ShowProducts";
 import Nav from "./Nav";
 import Title from "./Title";
 import "../styles/ContentArea.css";
@@ -16,7 +16,7 @@ class ContentArea extends Component {
       <div className="ContentArea">
         <Nav />
         <Title />
-        <ShowItems />
+        <ShowProducts />
       </div>
     );
   }

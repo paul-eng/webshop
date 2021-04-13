@@ -15,6 +15,7 @@ const Cart = (props) => {
   return (
     <div className="cart">
       <ul>{cartItems}</ul>
+      {props.total}
     </div>
   );
 };
@@ -22,6 +23,7 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
   return {
     items: state.cart.items,
+    total: state.cart.total
   };
 };
 

@@ -1,24 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { addToCart } from "../actions/CartActions";
+import "../styles/ItemInfo.css";
+import ItemButtons from "./ItemButtons";
 
 const ItemInfo = (props) => {
-  function addToCart() {
-    props.addToCart(props.itemInfo);
-  }
-
   const itemInfo = props.itemInfo;
+
+  let tempimg = itemInfo.gallery || "";
+
   return (
     <div className="ItemInfo">
-      <Link to="/">Back to All</Link>
-      <ul>
-        <li>Brand: {itemInfo.brand}</li>
-        <li>Name: {itemInfo.name}</li>
-        <li>Class: {itemInfo.category}</li>
-        <li>Price: {itemInfo.price}</li>
-      </ul>
-      <button onClick={addToCart}>Add To Cart</button>
+      <img alt="temp" src={tempimg[0]}></img>
+      <section>
+        <h2>{itemInfo.brand + " " + itemInfo.name}</h2>
+        <h3>${itemInfo.price}</h3>
+        <h4>{itemInfo.description}</h4>
+        <ItemButtons />
+      </section>
     </div>
   );
 };
@@ -29,12 +27,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCart: (item) => {
-      dispatch(addToCart(item));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ItemInfo);
+export default connect(mapStateToProps)(ItemInfo);
