@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/CartActions";
-import "../styles/ItemButtons.css";
+import "../styles/ItemControls.css";
 
-const ItemButtons = (props) => {
+const ItemControls = (props) => {
   let inventory = props.inventory;
 
   function addToCart(form) {
@@ -54,10 +54,9 @@ const ItemButtons = (props) => {
         <input type="submit" value="Add To Cart" />
       </form>
     );
-    console.log(inventory);
   }
 
-  return <div className="ItemButtons">{render}</div>;
+  return <div className="ItemControls">{render}</div>;
 };
 
 const mapStateToProps = (state) => {
@@ -75,4 +74,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemControls);

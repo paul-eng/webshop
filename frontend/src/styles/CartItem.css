@@ -18,8 +18,6 @@
 
 .CartItem article {
     grid-area: info;
-    display: flex;
-    flex-direction: column;
 }
 .CartItem button {
     grid-area: trash;

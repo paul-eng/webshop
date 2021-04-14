@@ -11,10 +11,10 @@ const cartReducer = (state = initState, action) => {
     case ADD_TO_CART:
       let inCart = state.items.find((item) => item._id === action.item._id);
       if (inCart) {
-        let quantity = inCart.quantity;
-        quantity.flat().includes(action.version)
-          ? quantity.find((version) => version[0] === action.version)[1]++
-          : quantity.push([action.version, 1]);
+        let qty = inCart.quantity;
+        qty.flat().includes(action.version)
+          ? qty.find((version) => version[0] === action.version)[1]++
+          : qty.push([action.version, 1]);
         return Object.assign({}, state, { total: state.total + inCart.price });
       } else {
         let newItem = Object.assign({}, action.item, {

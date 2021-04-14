@@ -33,9 +33,9 @@ const Cart = (props) => {
     <div className="Cart">
       <ul>{cartItems}</ul>
       <section>
-        Subtotal: ${props.total}
-        Tax: ${props.total * 0.08875}
-        Total: ${props.total + props.total * 0.08875}
+        <div>Subtotal: ${props.total}</div>
+        <div>Tax: ${props.total * 0.08875}</div>
+        <div>Total: ${props.total + props.total * 0.08875}</div>
       </section>
     </div>
   );

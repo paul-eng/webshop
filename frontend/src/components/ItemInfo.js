@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../styles/ItemInfo.css";
-import ItemButtons from "./ItemButtons";
+import ItemControls from "./ItemControls";
 
 const ItemInfo = (props) => {
   const itemInfo = props.itemInfo;
@@ -15,7 +15,7 @@ const ItemInfo = (props) => {
         <h2>{itemInfo.brand + " " + itemInfo.name}</h2>
         <h3>${itemInfo.price}</h3>
         <h4>{itemInfo.description}</h4>
-        <ItemButtons />
+        <ItemControls />
       </section>
     </div>
   );

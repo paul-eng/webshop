@@ -1,12 +1,12 @@
-.ItemButtons form {
+.ItemControls form {
     display: flex;
 }
 
-.ItemButtons select {
+.ItemControls select {
     width: 50%;
     margin-right: 5%;
 }
 
-.ItemButtons input {
+.ItemControls input {
     flex-shrink: 0;
 }
