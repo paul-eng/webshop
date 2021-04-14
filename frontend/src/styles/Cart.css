@@ -1,0 +1,8 @@
+.Cart {
+    display: grid;
+    grid-template-columns: 64% 36%;
+}
+
+.Cart section {
+    background-color: blue;
+}

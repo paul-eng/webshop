@@ -1,0 +1,28 @@
+.CartItem {
+    display: grid;
+    grid-template-columns: 160px max-content;
+    grid-template-rows: max-content 1fr;
+    grid-template-areas: 
+        "img info"
+        "img trash";
+    margin-bottom: 2%;
+}
+
+.CartItem a {
+    grid-area: img;
+}
+
+.CartItem img {
+    width: 100%;
+}
+
+.CartItem article {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+}
+.CartItem button {
+    grid-area: trash;
+    height: max-content;
+    width: max-content;
+}

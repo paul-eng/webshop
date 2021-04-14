@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../actions/CartActions";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/CartActions";
 
 const initState = {
   items: [],
@@ -24,6 +24,20 @@ const cartReducer = (state = initState, action) => {
           items: [...state.items, newItem],
           total: state.total + newItem.price,
         });
+      }
+    case REMOVE_FROM_CART:
+      let cartItem = state.items.find((item) => item._id === action.item._id);
+      let cost = action.item.price * action.item.quantity[1];
+      let newTotal = state.total - cost;
+      let remaining = cartItem.quantity.filter(
+        (version) => version !== action.item.quantity
+      );
+      if (remaining.length === 0) {
+        let newCart = state.items.filter((item) => item !== cartItem);
+        return { items: newCart, total: newTotal };
+      } else {
+        cartItem.quantity = remaining;
+        return { items: state.items, total: newTotal };
       }
     default:
       return state;

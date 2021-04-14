@@ -43,18 +43,18 @@ const ItemButtons = (props) => {
     });
   }
 
-  let render = (<p>OUT OF STOCK</p>);
+  let render = <p>SOLD OUT</p>;
 
   if (inventory && !soldOut(inventory)) {
-    // still want value even if only one option, so render but hide in that case
-    let onlyOne = inventory.length === 1;
+    let noOptions = inventory.length === 1;
     let options = optionList(inventory);
     render = (
       <form onSubmit={addToCart}>
-        <select hidden={onlyOne}>{options}</select>
+        <select hidden={noOptions}>{options}</select>
         <input type="submit" value="Add To Cart" />
       </form>
     );
+    console.log(inventory);
   }
 
   return <div className="ItemButtons">{render}</div>;

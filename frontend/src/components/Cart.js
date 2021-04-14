@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import CartItem from "./CartItem";
+import "../styles/Cart.css";
 
 const Cart = (props) => {
   let cartItems = props.items;
@@ -29,11 +30,13 @@ const Cart = (props) => {
   }
 
   return (
-    <div className="cart">
+    <div className="Cart">
       <ul>{cartItems}</ul>
-      Subtotal: ${props.total}
-      Tax: ${props.total * .08875}
-      Total: ${props.total + props.total * .08875}
+      <section>
+        Subtotal: ${props.total}
+        Tax: ${props.total * 0.08875}
+        Total: ${props.total + props.total * 0.08875}
+      </section>
     </div>
   );
 };
