@@ -11,8 +11,8 @@ const ItemInfo = (props) => {
   return (
     <div className="ItemInfo">
       <img alt="temp" src={tempimg[0]}></img>
-      <section>
-        <h2>{itemInfo.brand + " " + itemInfo.name}</h2>
+      <section> 
+        <h2>{`${itemInfo.brand} ${itemInfo.name}`.toUpperCase()}</h2>
         <h3>${itemInfo.price}</h3>
         <h4>{itemInfo.description}</h4>
         <ItemControls />

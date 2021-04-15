@@ -10,3 +10,7 @@
 .ItemControls input {
     flex-shrink: 0;
 }
+
+.ItemControls p {
+    color: red;
+}
