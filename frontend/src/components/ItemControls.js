@@ -6,23 +6,25 @@ import "../styles/ItemControls.css";
 class ItemControls extends Component {
   constructor(props) {
     super(props);
-    this.state = { inventory: "", active: "", warning: "" };
+    this.state = { inventory: undefined, selected: undefined, warning: "" };
     this.addToCart = this.addToCart.bind(this);
     this.changeActive = this.changeActive.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
     let inv = this.state.inventory;
-    let active = this.state.active;
+    let selected = this.state.selected;
 
     if (!inv) {
       this.makeInventory();
     }
 
-    if (prevState.active !== active) {
-      let warning = inv[active] <= 5 ? `Only ${inv[active]} remaining` : "";
+    if (prevState.selected !== selected) {
+      let warning = inv[selected] <= 5 ? `Only ${inv[selected]} remaining` : "";
       this.setState({ warning: warning });
     }
+
+    console.log(this.state);
   }
 
   makeInventory() {
@@ -31,8 +33,8 @@ class ItemControls extends Component {
       let [name, qty] = option;
       obj.inventory[name] = qty;
 
-      if (obj.active === undefined && qty !== 0) {
-        obj.active = name;
+      if (obj.selected === undefined && qty !== 0) {
+        obj.selected = name;
       }
     });
     this.setState(obj);
@@ -42,23 +44,23 @@ class ItemControls extends Component {
     form.preventDefault();
 
     if (this.inStock()) {
-      this.props.addToCart(this.props.item, this.state.active);
+      this.props.addToCart(this.props.item, this.state.selected);
     }
   }
 
   inStock() {
     let item = this.props.item;
-    let option = this.state.active;
-    let cart = this.props.cart;
+    let selected = this.state.selected;
 
-    let inCart = cart.find((prod) => prod.name === item.name);
-    if (inCart && inCart.quantity.flat().includes(option)) {
-      let qt = [inCart.quantity, item.quantity].map((qt) => {
-        return qt.find((version) => version[0] === option)[1];
-      });
+    let inCart = this.props.cart.find((prod) => prod.name === item.name);
+
+    if (inCart && inCart.quantity.flat().includes(selected)) {
+      let qt = [inCart.quantity, item.quantity].map(
+        (qt) => qt.find((version) => version[0] === selected)[1]
+      );
       return qt[0] >= qt[1]
         ? alert(
-            `${this.props.item.name} - ${this.state.active} only has ${qt[0]} in stock`
+            `${this.props.item.name} - ${this.state.selected} only has ${qt[0]} in stock`
           )
         : true;
     }
@@ -89,7 +91,7 @@ class ItemControls extends Component {
     });
 
   changeActive(e) {
-    this.setState({ active: e.target.value });
+    this.setState({ selected: e.target.value });
   }
 
   render() {
