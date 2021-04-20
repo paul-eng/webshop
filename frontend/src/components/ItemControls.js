@@ -23,8 +23,6 @@ class ItemControls extends Component {
       let warning = inv[selected] <= 5 ? `Only ${inv[selected]} remaining` : "";
       this.setState({ warning: warning });
     }
-
-    console.log(this.state);
   }
 
   makeInventory() {
@@ -34,6 +32,7 @@ class ItemControls extends Component {
       obj.inventory[name] = qty;
 
       if (obj.selected === undefined && qty !== 0) {
+        // trigger warning message for first instock item (which is what the form defaults to displaying when first created)
         obj.selected = name;
       }
     });
@@ -42,7 +41,6 @@ class ItemControls extends Component {
 
   addToCart(form) {
     form.preventDefault();
-
     if (this.inStock()) {
       this.props.addToCart(this.props.item, this.state.selected);
     }

@@ -14,7 +14,7 @@ const ItemInfo = (props) => {
       <section> 
         <h2>{`${itemInfo.brand} ${itemInfo.name}`.toUpperCase()}</h2>
         <h3>${itemInfo.price}</h3>
-        <h4>{itemInfo.description}</h4>
+        <h3>{itemInfo.description}</h3>
         <ItemControls />
       </section>
     </div>

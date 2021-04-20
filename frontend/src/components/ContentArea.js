@@ -14,9 +14,9 @@ class ContentArea extends Component {
   render() {
     return (
       <div className="ContentArea">
-        <Nav />
         <Title />
         <ShowProducts />
+        <Nav />
       </div>
     );
   }

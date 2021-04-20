@@ -19,7 +19,7 @@ const Title = (props) => {
 
   return (
     <div className="Title">
-      <h2>{title}</h2>
+      <h3>{title}</h3>
     </div>
   );
 };

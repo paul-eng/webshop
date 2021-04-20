@@ -1,7 +1,7 @@
 .ContentArea {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 25% 1fr;
+    grid-template-columns: 22% 1fr;
     /* prevents resizing when scrollbar appears/disappears */
     /* when vertical scrollbar appears, it creates horizontal scrollbar due to
     area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */

@@ -1,13 +1,19 @@
-html {
-  height: 100%;
-}
-
-#root {
-  height: 100%;
-}
+/* Where .index.css is generic normalize, App.css is for resets as necessary */
 
 body {
   overflow-x:hidden;
-  height: 100%;
 }
 
+html,
+#root,
+body,
+.Nav,
+.Brand, 
+.Category, 
+.New, 
+.Shop, 
+.Item,
+.NavList {
+  height: 100%;
+  margin: 0;
+}
