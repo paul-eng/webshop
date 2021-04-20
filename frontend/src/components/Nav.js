@@ -1,10 +1,9 @@
-import React, { Component, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NavList from "./NavList";
 
 const Nav = () => {
   function show(path) {
-    console.log(path);
     setPath(path);
     setActive(true);
   }
@@ -18,7 +17,7 @@ const Nav = () => {
 
   return (
     <nav className="Nav">
-      <div class="NavWrapper" onMouseLeave={hide}>
+      <div className="NavWrapper" onMouseLeave={hide}>
         <button>
           <Link to="/new-arrivals">
             <h3>New Arrivals</h3>

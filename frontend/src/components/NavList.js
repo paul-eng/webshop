@@ -5,35 +5,51 @@ import { fetchBrands, fetchCategories } from "../actions/NavActions";
 import "../styles/NavList.css";
 
 class NavList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { links: [] };
+  }
+
   componentDidMount() {
     this.props.fetchBrands();
     this.props.fetchCategories();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.path !== this.props.path) {
+      switch (this.props.path) {
+        case "/brand/":
+          this.setState({ links: this.props.brands });
+          break;
+        case "/category/":
+          this.setState({ links: this.props.categories });
+          break;
+        default:
+          break;
+      }
+      console.log(this.state.links);
+    }
+  }
+
   makeParam = (link) => link.toLowerCase().split(" ").join("-");
 
-  links = (type, link) =>
-    link.map((link) => (
+  links = (path, links) =>
+    links.map((link) => (
       <li key={link}>
-        <Link to={type + this.makeParam(link)}>{link}</Link>
+        <Link to={path + this.makeParam(link)}>{link}</Link>
       </li>
     ));
 
   render() {
     let active = this.props.active ? "block" : "none";
-    
-    switch (this.props.active) {
-      case "Brands":
-         active = this.links("/brand/", this.props.brands);
-         break
-      case "Categories":
-         active = this.links("/category/", this.props.categories);
-         break
-      default:
-        break;
-    }
+    let path = this.props.path;
+    let links = this.state.links;
 
-    return <ul style={{display: active}} className={"NavList"}>{"wggtasdfads"}</ul>;
+    return (
+      <ul style={{ display: active }} className={"NavList"}>
+        {this.links(path, links)}
+      </ul>
+    );
   }
 }
 
