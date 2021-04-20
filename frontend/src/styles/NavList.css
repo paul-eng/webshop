@@ -1,0 +1,23 @@
+.Nav {
+    position: relative;
+}
+
+.NavWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+.Nav button {
+    width: max-content;
+}
+
+.Nav h3 {
+    margin: 0;
+}
+
+.NavList {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: grey;
+}

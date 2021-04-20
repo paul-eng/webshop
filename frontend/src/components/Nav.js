@@ -1,60 +1,42 @@
-import React, { Component } from "react";
+import React, { Component, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import NavSection from "./NavSection";
-import { fetchBrands, fetchCategories } from "../actions/NavActions";
+import NavList from "./NavList";
 
-class Nav extends Component {
-  componentDidMount() {
-    this.props.fetchBrands();
-    this.props.fetchCategories();
+const Nav = () => {
+  function show(path) {
+    console.log(path);
+    setPath(path);
+    setActive(true);
   }
 
-  makeURL = (param) => param.toLowerCase().split(" ").join("-");
+  function hide() {
+    setActive(false);
+  }
 
-  links = (params, type) =>
-    params.map((param) => (
-      <li key={param}>
-        <Link to={type + this.makeURL(param)}>{param}</Link>
-      </li>
-    ));
+  const [activePath, setPath] = useState(null);
+  const [active, setActive] = useState(false);
 
-  render() {
-    let brands = this.links(this.props.brands, "/brand/");
-    let cats = this.links(this.props.categories, "/category/");
-
-    return (
-      <nav className="Nav">
-        <Link to="/new-arrivals">
-          <button>
+  return (
+    <nav className="Nav">
+      <div class="NavWrapper" onMouseLeave={hide}>
+        <button>
+          <Link to="/new-arrivals">
             <h3>New Arrivals</h3>
-          </button>
-        </Link>
-        <NavSection title={"Brands"} links={brands} />
-        <NavSection title={"Categories"} links={cats} />
-
-        <Link to="/add-item">Add A Camera</Link>
-      </nav>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    brands: state.nav.brands,
-    categories: state.nav.categories,
-  };
+          </Link>
+        </button>
+        <button onMouseEnter={() => show("/brand/")}>
+          <h3>Brands</h3>
+        </button>
+        <button onMouseEnter={() => show("/category/")}>
+          <h3>Categories</h3>
+        </button>
+        <button>
+          <Link to="/add-item">Add A Camera</Link>
+        </button>
+        <NavList active={active} path={activePath} />
+      </div>
+    </nav>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchBrands: () => {
-      dispatch(fetchBrands());
-    },
-    fetchCategories: () => {
-      dispatch(fetchCategories());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default Nav;
