@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import CartItem from "./CartItem";
+import { updateCart } from "../actions/CartActions";
 import "../styles/Cart.css";
 
 const Cart = (props) => {
@@ -9,7 +10,9 @@ const Cart = (props) => {
   function versionSplitter(item) {
     let versions = [];
     item.stock.forEach((version) => {
-      let separate = Object.assign({}, item, { stock: {type:version.type, qty: version.qty} });
+      let separate = Object.assign({}, item, {
+        stock: { type: version.type, qty: version.qty },
+      });
       versions.push(separate);
     });
     return versions;
@@ -31,7 +34,14 @@ const Cart = (props) => {
 
   function updateQty(form) {
     form.preventDefault();
-    console.log(form.target);
+    // don't need the last form value (submit button)
+    let updates = Object.values(form.target.elements).slice(0, -1);
+
+    updates.forEach((update) => {
+      props.updateCart(update.id, update.name, update.value);
+    });
+
+    window.values = Object.values(form.target.elements);
   }
 
   return (
@@ -49,6 +59,12 @@ const Cart = (props) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCart: (id, version, qty) => dispatch(updateCart(id, version, qty)),
+  };
+};
+
 const mapStateToProps = (state) => {
   return {
     items: state.cart.items,
@@ -56,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -1,4 +1,8 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/CartActions";
+import {
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  UPDATE_CART,
+} from "../actions/CartActions";
 
 const initState = {
   items: [],
@@ -32,6 +36,10 @@ const cartReducer = (state = initState, action) => {
           count: state.count + 1,
         });
       }
+
+    case UPDATE_CART:
+      console.log(`I'm here for ${action.id}, ${action.version}, ${action.qty}`);
+      return state;
     case REMOVE_FROM_CART:
       let cartItem = state.items.find((item) => item._id === action.item._id);
       let stock = action.item.stock;
