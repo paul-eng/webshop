@@ -13,13 +13,12 @@ class ItemControls extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     let selected = this.state.selected;
-
-    if (!selected) {
+    if (selected === undefined && !this.allSold()) {
       this.firstInStock();
     }
 
     if (prevState.selected !== selected) {
-      let available = this.props.options.find((opt) => opt.type === selected);
+      let available = this.props.stock.find((opt) => opt.type === selected);
       let warning = available.qty <= 5 ? `Only ${available.qty} remaining` : "";
       this.setState({ warning: warning });
     }
@@ -27,12 +26,12 @@ class ItemControls extends Component {
 
   firstInStock() {
     let i = 0;
-    let options = this.props.options;
+    let stock = this.props.stock;
     let selected;
 
-    while (!selected) {
-      if (options[i].qty !== 0) {
-        selected = options[i].type;
+    while (selected === undefined) {
+      if (stock[i].qty !== 0) {
+        selected = stock[i].type;
       }
       i++;
     }
@@ -50,9 +49,7 @@ class ItemControls extends Component {
   inStock() {
     let item = this.props.item;
     let selected = this.state.selected;
-
-    let inCart = this.props.cart.find((prod) => prod.name === item.name);
-
+    let inCart = this.props.cart.find((prod) => prod._id === item._id);
     if (inCart) {
       let cartTypes = inCart.stock.map((opt) => opt.type);
       if (cartTypes.includes(selected)) {
@@ -70,7 +67,7 @@ class ItemControls extends Component {
   }
 
   allSold = () =>
-    this.props.options.map((opt) => opt.qty).every((count) => count === 0);
+    this.props.stock.map((opt) => opt.qty).every((count) => count === 0);
 
   msg = (qty) =>
     qty === 0
@@ -96,13 +93,13 @@ class ItemControls extends Component {
   }
 
   render() {
-    let options = this.props.options;
+    let stock = this.props.stock;
     let warning = <p>{this.state.warning}</p>;
     let content =
-      options && !this.allSold() ? (
+      stock && !this.allSold() ? (
         <form onSubmit={this.addToCart}>
-          <select onChange={this.changeActive} hidden={options.length === 1}>
-            {this.optionList(options)}
+          <select onChange={this.changeActive} hidden={stock.length === 1}>
+            {this.optionList(stock)}
           </select>
           <input type="submit" value="Add To Cart" />
         </form>
@@ -121,7 +118,7 @@ class ItemControls extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    options: state.products.itemInfo.stock,
+    stock: state.products.itemInfo.stock,
     item: state.products.itemInfo,
     cart: state.cart.items,
   };

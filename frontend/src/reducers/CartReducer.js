@@ -34,17 +34,18 @@ const cartReducer = (state = initState, action) => {
       }
     case REMOVE_FROM_CART:
       let cartItem = state.items.find((item) => item._id === action.item._id);
-      let cost = action.item.price * action.item.quantity[1];
+      let stock = action.item.stock;
+      let cost = action.item.price * stock.qty;
       let newTotal = state.total - cost;
-      let newCount = state.count - action.item.quantity[1];
-      let remaining = cartItem.quantity.filter(
-        (version) => version !== action.item.quantity
+      let newCount = state.count - stock.qty;
+      let remaining = cartItem.stock.filter(
+        (version) => version.type !== stock.type
       );
       if (remaining.length === 0) {
         let newCart = state.items.filter((item) => item !== cartItem);
         return { items: newCart, total: newTotal, count: newCount };
       } else {
-        cartItem.quantity = remaining;
+        cartItem.stock = remaining;
         return { items: state.items, total: newTotal, count: newCount };
       }
     default:

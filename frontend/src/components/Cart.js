@@ -8,8 +8,8 @@ const Cart = (props) => {
 
   function versionSplitter(item) {
     let versions = [];
-    item.quantity.forEach((version) => {
-      let separate = Object.assign({}, item, { quantity: version });
+    item.stock.forEach((version) => {
+      let separate = Object.assign({}, item, { stock: {type:version.type, qty: version.qty} });
       versions.push(separate);
     });
     return versions;
@@ -25,7 +25,7 @@ const Cart = (props) => {
     cartItems = separateItems
       .reverse()
       .map((item) => (
-        <CartItem item={item} key={item.name + item.quantity[0]} />
+        <CartItem item={item} key={item.name + item.stock.type} />
       ));
   }
 

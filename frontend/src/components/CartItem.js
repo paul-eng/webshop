@@ -6,16 +6,16 @@ import { removeFromCart } from "../actions/CartActions";
 
 const CartItem = (props) => {
   const item = props.item;
-  const [version, quantity] = item.quantity;
+  const {type, qty} = item.stock;
 
   function removeItem() {
     props.removeFromCart(item);
   }
 
-  const [qty, setQty] = useState(quantity);
+  const [amt, setAmt] = useState(qty);
 
-  function getQty(e) {
-    setQty(e.target.value);
+  function getAmt(e) {
+    setAmt(e.target.value);
   }
 
   return (
@@ -26,9 +26,9 @@ const CartItem = (props) => {
 
       <article>
         <div>{`${item.brand} ${item.name}`}</div>
-        <div>{version}</div>
+        <div>{type}</div>
         <div>{"$" + item.price}</div>
-        <input type="number" min="0" value={qty} onChange={getQty} />
+        <input type="number" min="0" value={amt} onChange={getAmt} />
       </article>
       <aside onClick={removeItem}>Remove</aside>
     </li>
