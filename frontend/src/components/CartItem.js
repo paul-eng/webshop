@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/CartItem.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -6,11 +6,16 @@ import { removeFromCart } from "../actions/CartActions";
 
 const CartItem = (props) => {
   const item = props.item;
-  const version = item.quantity[0];
-  const quantity = item.quantity[1];
+  const [version, quantity] = item.quantity;
 
   function removeItem() {
     props.removeFromCart(item);
+  }
+
+  const [qty, setQty] = useState(quantity);
+
+  function getQty(e) {
+    setQty(e.target.value);
   }
 
   return (
@@ -23,9 +28,9 @@ const CartItem = (props) => {
         <div>{`${item.brand} ${item.name}`}</div>
         <div>{version}</div>
         <div>{"$" + item.price}</div>
-        <div>{"x " + quantity}</div>
+        <input type="number" min="0" value={qty} onChange={getQty} />
       </article>
-      <button onClick={removeItem}>Remove</button>
+      <aside onClick={removeItem}>Remove</aside>
     </li>
   );
 };

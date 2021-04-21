@@ -4,13 +4,16 @@ const mongoose = require("mongoose");
 connectDB();
 const Item = require("./models/Item");
 
-const qty = [ ["Standard", 4]
+const qty = [
+  { type: "New", qty: 0 },
+  { type: "Refurbished", qty: 3 },
+  { type: "Used", qty: 6 },
 ];
 Item.updateMany(
-  {category:"Rangefinder"},
+  { category: "Zone Focus" },
 
   {
-    quantity: qty,
+    stock: qty,
   },
 
   { multi: true },

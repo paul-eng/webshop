@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NavList from "./NavList";
+import "../styles/Nav.css"
 
 const Nav = () => {
   function show(path) {
@@ -18,7 +19,7 @@ const Nav = () => {
   return (
     <nav className="Nav">
       <div className="NavWrapper" onMouseLeave={hide}>
-        <button>
+        <button onMouseEnter={hide}>
           <Link to="/new-arrivals">
             <h3>New Arrivals</h3>
           </Link>
@@ -29,9 +30,9 @@ const Nav = () => {
         <button onMouseEnter={() => show("/category/")}>
           <h3>Categories</h3>
         </button>
-        <button>
-          <Link to="/add-item">Add A Camera</Link>
-        </button>
+      <button onMouseEnter={hide}>
+        <Link to="/add-item">Add A Camera</Link>
+      </button>
         <NavList active={active} path={activePath} />
       </div>
     </nav>

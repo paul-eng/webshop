@@ -22,9 +22,9 @@ const ItemSchema = new mongoose.Schema({
   price: {
     type: Number,
   },
-  quantity: {
+  stock: {
     // subdocument w/ fields to keep count for different variations of an item ie. databack, special edition, used, color etc
-    type: [[mongoose.Mixed]],
+    type: [{ type: { type: String }, qty: Number }],
   },
   pathname: {},
   updated_date: {

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchBrands, fetchCategories } from "../actions/NavActions";
-import "../styles/NavList.css";
 
 class NavList extends Component {
   constructor(props) {
@@ -17,23 +16,24 @@ class NavList extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.path !== this.props.path) {
+      let links;
       switch (this.props.path) {
         case "/brand/":
-          this.setState({ links: this.props.brands });
+          links = this.props.brands;
           break;
         case "/category/":
-          this.setState({ links: this.props.categories });
+          links = this.props.categories;
           break;
         default:
           break;
       }
-      console.log(this.state.links);
+      this.setState({ links: links });
     }
   }
 
   makeParam = (link) => link.toLowerCase().split(" ").join("-");
 
-  links = (path, links) =>
+  list = (path, links) =>
     links.map((link) => (
       <li key={link}>
         <Link to={path + this.makeParam(link)}>{link}</Link>
@@ -47,7 +47,7 @@ class NavList extends Component {
 
     return (
       <ul style={{ display: active }} className={"NavList"}>
-        {this.links(path, links)}
+        {this.list(path, links)}
       </ul>
     );
   }

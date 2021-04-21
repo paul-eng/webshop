@@ -6,37 +6,38 @@ import "../styles/ItemControls.css";
 class ItemControls extends Component {
   constructor(props) {
     super(props);
-    this.state = { inventory: undefined, selected: undefined, warning: "" };
+    this.state = { selected: undefined, warning: "" };
     this.addToCart = this.addToCart.bind(this);
     this.changeActive = this.changeActive.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let inv = this.state.inventory;
     let selected = this.state.selected;
 
-    if (!inv) {
-      this.makeInventory();
+    if (!selected) {
+      this.firstInStock();
     }
 
     if (prevState.selected !== selected) {
-      let warning = inv[selected] <= 5 ? `Only ${inv[selected]} remaining` : "";
+      let available = this.props.options.find((opt) => opt.type === selected);
+      let warning = available.qty <= 5 ? `Only ${available.qty} remaining` : "";
       this.setState({ warning: warning });
     }
   }
 
-  makeInventory() {
-    let obj = { inventory: {} };
-    this.props.options.forEach((option) => {
-      let [name, qty] = option;
-      obj.inventory[name] = qty;
+  firstInStock() {
+    let i = 0;
+    let options = this.props.options;
+    let selected;
 
-      if (obj.selected === undefined && qty !== 0) {
-        // trigger warning message for first instock item (which is what the form defaults to displaying when first created)
-        obj.selected = name;
+    while (!selected) {
+      if (options[i].qty !== 0) {
+        selected = options[i].type;
       }
-    });
-    this.setState(obj);
+      i++;
+    }
+
+    this.setState({ selected: selected });
   }
 
   addToCart(form) {
@@ -52,22 +53,24 @@ class ItemControls extends Component {
 
     let inCart = this.props.cart.find((prod) => prod.name === item.name);
 
-    if (inCart && inCart.quantity.flat().includes(selected)) {
-      let qt = [inCart.quantity, item.quantity].map(
-        (qt) => qt.find((version) => version[0] === selected)[1]
-      );
-      return qt[0] >= qt[1]
-        ? alert(
-            `${this.props.item.name} - ${this.state.selected} only has ${qt[0]} in stock`
-          )
-        : true;
+    if (inCart) {
+      let cartTypes = inCart.stock.map((opt) => opt.type);
+      if (cartTypes.includes(selected)) {
+        let [cartQty, stockQty] = [inCart.stock, item.stock].map(
+          (stock) => stock.find((version) => version.type === selected).qty
+        );
+        return cartQty >= stockQty
+          ? alert(
+              `${this.props.item.name} - ${this.state.selected} only has ${stockQty} in stock`
+            )
+          : true;
+      }
     }
-
     return true;
   }
 
   allSold = () =>
-    Object.values(this.state.inventory).every((count) => count === 0);
+    this.props.options.map((opt) => opt.qty).every((count) => count === 0);
 
   msg = (qty) =>
     qty === 0
@@ -80,10 +83,10 @@ class ItemControls extends Component {
 
   optionList = (options) =>
     options.map((option) => {
-      let [name, qty] = option;
+      let { type, qty } = option;
       return (
-        <option key={name} value={name} disabled={qty === 0}>
-          {name + this.msg(qty)}
+        <option key={type} value={type} disabled={qty === 0}>
+          {type + this.msg(qty)}
         </option>
       );
     });
@@ -96,7 +99,7 @@ class ItemControls extends Component {
     let options = this.props.options;
     let warning = <p>{this.state.warning}</p>;
     let content =
-      this.state.inventory && !this.allSold() ? (
+      options && !this.allSold() ? (
         <form onSubmit={this.addToCart}>
           <select onChange={this.changeActive} hidden={options.length === 1}>
             {this.optionList(options)}
@@ -118,7 +121,7 @@ class ItemControls extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    options: state.products.itemInfo.quantity,
+    options: state.products.itemInfo.stock,
     item: state.products.itemInfo,
     cart: state.cart.items,
   };

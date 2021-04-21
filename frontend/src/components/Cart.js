@@ -29,9 +29,17 @@ const Cart = (props) => {
       ));
   }
 
+  function updateQty(form) {
+    form.preventDefault();
+    console.log(form.target);
+  }
+
   return (
     <div className="Cart">
-      <ul>{cartItems}</ul>
+      <form onSubmit={updateQty}>
+        <ul>{cartItems}</ul>
+        <input type="submit" value="UPDATE CART" />
+      </form>
       <section>
         <div>Subtotal: ${props.total}</div>
         <div>Tax: ${props.total * 0.08875}</div>

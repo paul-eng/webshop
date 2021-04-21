@@ -19,6 +19,11 @@
 .CartItem article {
     grid-area: info;
 }
+
+.CartItem input {
+    width: 4ch;
+}
+
 .CartItem button {
     grid-area: trash;
     height: max-content;
