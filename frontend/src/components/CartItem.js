@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/CartItem.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -6,7 +6,7 @@ import { removeFromCart } from "../actions/CartActions";
 
 const CartItem = (props) => {
   const item = props.item;
-  const {type, qty} = item.stock;
+  const { type, qty } = item.stock;
 
   function removeItem() {
     props.removeFromCart(item);
@@ -18,6 +18,10 @@ const CartItem = (props) => {
     setAmt(e.target.value);
   }
 
+  useEffect(() => {
+      setAmt(qty);
+  }, [qty, props.error]);
+
   return (
     <li className="CartItem">
       <Link to={"/" + item.pathname}>
@@ -28,11 +32,24 @@ const CartItem = (props) => {
         <div>{`${item.brand} ${item.name}`}</div>
         <div>{type}</div>
         <div>{"$" + item.price}</div>
-        <input type="number" min="1" value={amt} name={type} id={item.pathname} onChange={getAmt} />
+        <input
+          type="number"
+          min="1"
+          value={amt}
+          name={type}
+          id={item.pathname}
+          onChange={getAmt}
+        />
       </article>
       <aside onClick={removeItem}>Remove</aside>
     </li>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    error: state.cart.error,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -41,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(CartItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

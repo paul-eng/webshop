@@ -35,15 +35,9 @@ const Cart = (props) => {
   function updateQty(form) {
     form.preventDefault();
     // don't need the last form value (submit button)
-    let items = Object.values(form.target.elements).slice(0, -1);
-    // let updates = [];
+    let updates = Object.values(form.target.elements).slice(0, -1);
 
-    items.forEach((item) => {
-      props.updateCart(item.id, item.name, item.value)
-      // updates.push();
-    });
-
-    // Promise.all(updates).then((res)=>console.log(props.error))
+    props.updateCart(updates);
   }
 
   return (
@@ -63,8 +57,8 @@ const Cart = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: (path, version, qty) =>
-      dispatch(updateCart(path, version, qty)),
+    updateCart: (updates) =>
+      dispatch(updateCart(updates)),
   };
 };
 

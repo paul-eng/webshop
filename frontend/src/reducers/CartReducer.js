@@ -2,6 +2,8 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   SET_CART,
+  SET_ERROR,
+  CLEAR_ERROR,
 } from "../actions/CartActions";
 
 const initState = {
@@ -37,18 +39,18 @@ const cartReducer = (state = initState, action) => {
           count: state.count + 1,
         });
       }
-
-    case SET_CART:
-      // let storeQty = action.item.stock.find(
-      //   (version) => version.type === action.version
-      // ).qty;
-
-      // if (action.qty > storeQty) {
-      // }
-      // return state;
+    case SET_ERROR:
       return Object.assign({}, state, {
-        error: "I fail",
+        error: "The requested qty is not available",
       });
+    case CLEAR_ERROR:
+      alert(state.error);
+      return Object.assign({}, state, { error: null });
+    case SET_CART:
+      let cartStock = state.items.find((item) => item.pathname === action.path).stock;
+      let stockType = cartStock.find((v) => (v.type === action.version));
+      stockType.qty = action.qty;
+      return state;
     case REMOVE_FROM_CART:
       let cartItem = state.items.find((item) => item._id === action.item._id);
       let stock = action.item.stock;
