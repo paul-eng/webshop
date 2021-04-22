@@ -15,18 +15,20 @@ const initState = {
 const cartReducer = (state = initState, action) => {
   Object.freeze(state);
 
+  let cartItem, stock, newCount, newTotal;
+
   switch (action.type) {
     case ADD_TO_CART:
-      let inCart = state.items.find((item) => item._id === action.item._id);
-      if (inCart) {
-        let cartTypes = inCart.stock.map((opt) => opt.type);
+      cartItem = state.items.find((item) => item._id === action.item._id);
+      if (cartItem) {
+        let cartTypes = cartItem.stock.map((opt) => opt.type);
 
         cartTypes.includes(action.version)
-          ? inCart.stock.find((version) => version.type === action.version)
+          ? cartItem.stock.find((version) => version.type === action.version)
               .qty++
-          : inCart.stock.push({ type: action.version, qty: 1 });
+          : cartItem.stock.push({ type: action.version, qty: 1 });
         return Object.assign({}, state, {
-          total: state.total + inCart.price,
+          total: state.total + cartItem.price,
           count: state.count + 1,
         });
       } else {
@@ -47,20 +49,19 @@ const cartReducer = (state = initState, action) => {
       alert(state.error);
       return Object.assign({}, state, { error: null });
     case SET_CART:
-      let item = state.items.find((item) => item.pathname === action.path);
-      let stockType = item.stock.find((v) => (v.type === action.version));
-      let qtyChange = action.qty - stockType.qty;
-      stockType.qty = action.qty;
-      let newQty = state.count + qtyChange;
-      let newSum = state.total + (qtyChange * item.price);
+      cartItem = state.items.find((item) => item.pathname === action.path);
+      stock = cartItem.stock.find((v) => v.type === action.version);
+      let diff = action.qty - stock.qty;
+      stock.qty = action.qty;
+      newTotal = state.total + diff * cartItem.price;
+      newCount = state.count + diff;
 
-      return Object.assign({},state,{count: newQty, total: newSum});
+      return Object.assign({}, state, { count: newCount, total: newTotal });
     case REMOVE_FROM_CART:
-      let cartItem = state.items.find((item) => item._id === action.item._id);
-      let stock = action.item.stock;
-      let cost = action.item.price * stock.qty;
-      let newTotal = state.total - cost;
-      let newCount = state.count - stock.qty;
+      cartItem = state.items.find((item) => item._id === action.item._id);
+      stock = action.item.stock;
+      newTotal = state.total - cartItem.price * stock.qty;
+      newCount = state.count - stock.qty;
       let remaining = cartItem.stock.filter(
         (version) => version.type !== stock.type
       );

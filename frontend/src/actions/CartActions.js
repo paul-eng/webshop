@@ -44,31 +44,27 @@ export const clearError = () => {
 
 export const updateCart = (updates) => (dispatch, getState) => {
   let proms = [];
+
   updates.forEach((update) => {
     let [path, type, qty] = [update.id, update.name, update.value];
 
     let prom = axios
       .get("http://localhost:8080/api/items/" + path)
       .then((res) => {
-        let item = res.data;
-        let storeQty = item.stock.find((v) => v.type === type).qty;
-
+        let storeQty = res.data.stock.find((v) => v.type === type).qty;
         if (qty > storeQty) {
           return dispatch(setError());
-        } 
+        }
       });
-
     proms.push(prom);
   });
 
   Promise.all(proms).then(() => {
-    if (getState().cart.error) {
-      return dispatch(clearError());
-    } else {
-      updates.forEach((update)=>{
-        let [path, type, qty] = [update.id, update.name, update.value];
-        return dispatch(setCart(path, type, qty));
-      })
-    }
+    getState().cart.error
+      ? dispatch(clearError())
+      : updates.forEach((update) => {
+          let [path, type, qty] = [update.id, update.name, update.value];
+          return dispatch(setCart(path, type, qty));
+        });
   });
 };

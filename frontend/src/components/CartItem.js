@@ -14,13 +14,13 @@ const CartItem = (props) => {
 
   const [amt, setAmt] = useState(qty);
 
+  useEffect(() => {
+    setAmt(qty);
+  }, [qty, props.error]);
+
   function getAmt(e) {
     setAmt(e.target.value);
   }
-
-  useEffect(() => {
-      setAmt(qty);
-  }, [qty, props.error]);
 
   return (
     <li className="CartItem">
