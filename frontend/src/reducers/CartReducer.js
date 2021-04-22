@@ -47,10 +47,14 @@ const cartReducer = (state = initState, action) => {
       alert(state.error);
       return Object.assign({}, state, { error: null });
     case SET_CART:
-      let cartStock = state.items.find((item) => item.pathname === action.path).stock;
-      let stockType = cartStock.find((v) => (v.type === action.version));
+      let item = state.items.find((item) => item.pathname === action.path);
+      let stockType = item.stock.find((v) => (v.type === action.version));
+      let qtyChange = action.qty - stockType.qty;
       stockType.qty = action.qty;
-      return state;
+      let newQty = state.count + qtyChange;
+      let newSum = state.total + (qtyChange * item.price);
+
+      return Object.assign({},state,{count: newQty, total: newSum});
     case REMOVE_FROM_CART:
       let cartItem = state.items.find((item) => item._id === action.item._id);
       let stock = action.item.stock;
