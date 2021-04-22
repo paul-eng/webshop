@@ -35,13 +35,15 @@ const Cart = (props) => {
   function updateQty(form) {
     form.preventDefault();
     // don't need the last form value (submit button)
-    let updates = Object.values(form.target.elements).slice(0, -1);
+    let items = Object.values(form.target.elements).slice(0, -1);
+    // let updates = [];
 
-    updates.forEach((update) => {
-      props.updateCart(update.id, update.name, update.value);
+    items.forEach((item) => {
+      props.updateCart(item.id, item.name, item.value)
+      // updates.push();
     });
 
-    window.values = Object.values(form.target.elements);
+    // Promise.all(updates).then((res)=>console.log(props.error))
   }
 
   return (
@@ -61,7 +63,8 @@ const Cart = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: (id, version, qty) => dispatch(updateCart(id, version, qty)),
+    updateCart: (path, version, qty) =>
+      dispatch(updateCart(path, version, qty)),
   };
 };
 
@@ -69,6 +72,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.cart.items,
     total: state.cart.total,
+    error: state.cart.error,
   };
 };
 

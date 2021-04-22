@@ -28,7 +28,7 @@ const CartItem = (props) => {
         <div>{`${item.brand} ${item.name}`}</div>
         <div>{type}</div>
         <div>{"$" + item.price}</div>
-        <input type="number" min="1" value={amt} name={type} id={item._id} onChange={getAmt} />
+        <input type="number" min="1" value={amt} name={type} id={item.pathname} onChange={getAmt} />
       </article>
       <aside onClick={removeItem}>Remove</aside>
     </li>

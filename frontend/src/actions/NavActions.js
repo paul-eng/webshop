@@ -18,13 +18,13 @@ export const setCategories = (cats) => {
 };
 
 export const fetchBrands = () => (dispatch) => {
-  axios.get("http://localhost:8080/api/items/brands").then((res) => {
-    dispatch(setBrands(res.data));
-  });
+  return axios
+    .get("http://localhost:8080/api/items/brands")
+    .then((res) => dispatch(setBrands(res.data)));
 };
 
 export const fetchCategories = () => (dispatch) => {
-  axios.get("http://localhost:8080/api/items/categories").then((res) => {
-    dispatch(setCategories(res.data));
-  });
+  return axios
+    .get("http://localhost:8080/api/items/categories")
+    .then((res) => dispatch(setCategories(res.data)));
 };

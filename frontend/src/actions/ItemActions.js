@@ -32,35 +32,29 @@ export const clearAllItems = () => {
 };
 
 export const fetchAllItems = (sort = "") => (dispatch) => {
-  axios
+  return axios
     .get("http://localhost:8080/api/items", { params: { sort } })
-    .then((res) => {
-      dispatch(setItems(res.data));
-    });
+    .then((res) => dispatch(setItems(res.data)));
 };
 
 export const fetchBrand = (brand, sort = "") => (dispatch) => {
-  axios
+  return axios
     .get("http://localhost:8080/api/items/brand/" + brand, {
       params: { sort },
     })
-    .then((res) => {
-      dispatch(setItems(res.data));
-    });
+    .then((res) => dispatch(setItems(res.data)));
 };
 
 export const fetchCategory = (cat, sort = "") => (dispatch) => {
-  axios
+  return axios
     .get("http://localhost:8080/api/items/category/" + cat, {
       params: { sort },
     })
-    .then((res) => {
-      dispatch(setItems(res.data));
-    });
+    .then((res) => dispatch(setItems(res.data)));
 };
 
 export const fetchItem = (path) => (dispatch) => {
-  axios.get("http://localhost:8080/api/items/" + path).then((res) => {
-    dispatch(setItem(res.data));
-  });
+  return axios
+    .get("http://localhost:8080/api/items/" + path)
+    .then((res) => dispatch(setItem(res.data)));
 };

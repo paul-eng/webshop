@@ -1,13 +1,14 @@
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
-  UPDATE_CART,
+  SET_CART,
 } from "../actions/CartActions";
 
 const initState = {
   items: [],
   total: 0,
   count: 0,
+  error: null,
 };
 const cartReducer = (state = initState, action) => {
   Object.freeze(state);
@@ -37,9 +38,17 @@ const cartReducer = (state = initState, action) => {
         });
       }
 
-    case UPDATE_CART:
-      console.log(`I'm here for ${action.id}, ${action.version}, ${action.qty}`);
-      return state;
+    case SET_CART:
+      // let storeQty = action.item.stock.find(
+      //   (version) => version.type === action.version
+      // ).qty;
+
+      // if (action.qty > storeQty) {
+      // }
+      // return state;
+      return Object.assign({}, state, {
+        error: "I fail",
+      });
     case REMOVE_FROM_CART:
       let cartItem = state.items.find((item) => item._id === action.item._id);
       let stock = action.item.stock;
