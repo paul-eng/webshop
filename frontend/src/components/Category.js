@@ -6,15 +6,18 @@ import queryString from "query-string";
 
 class Category extends Component {
   componentDidMount() {
-    let parsedParam = this.props.match.params.cat.split("-").join(" ");
-    this.props.fetchCat(parsedParam);
+    this.fetchCat();
   }
 
   componentDidUpdate() {
     // trigger update if path changes without unmounting component ex. from /category/:a to /category/:b
+    this.fetchCat();
+  }
+
+  fetchCat() {
     let parsedParam = this.props.match.params.cat.split("-").join(" ");
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchCat(parsedParam, query.sort);
+    this.props.fetchCat(parsedParam, query);
   }
 
   render() {
@@ -28,7 +31,7 @@ class Category extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCat: (cat, field) => dispatch(fetchCategory(cat, field)),
+    fetchCat: (cat, query) => dispatch(fetchCategory(cat, query)),
   };
 };
 

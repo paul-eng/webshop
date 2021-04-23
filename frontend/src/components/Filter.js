@@ -34,7 +34,7 @@ class Filter extends Component {
     let icon = this.state.active ? "-" : "+";
     return (
       <div className="Filter">
-        <h3 onClick={this.setActive}>{icon} SORT BY</h3>
+        <h3 onClick={this.setActive}>{icon} FILTER</h3>
         <ul style={{ display: active }}>
           <li id="-updated_date" onClick={(e) => this.getFilter(e, "sort")}>
             NEWEST

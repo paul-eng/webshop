@@ -6,12 +6,16 @@ import queryString from "query-string";
 
 class New extends Component {
   componentDidMount() {
-    this.props.fetchNew();
+    this.fetchNew();
   }
 
   componentDidUpdate() {
+    this.fetchNew();
+  }
+
+  fetchNew() {
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchNew(query.sort, query.brand);
+    this.props.fetchNew(query);
   }
 
   render() {
@@ -25,7 +29,7 @@ class New extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchNew: (sort, brand)=>dispatch(fetchNew(sort, brand)),
+    fetchNew: (query) => dispatch(fetchNew(query)),
   };
 };
 

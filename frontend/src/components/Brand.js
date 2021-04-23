@@ -7,14 +7,15 @@ import queryString from "query-string";
 class Brand extends Component {
   componentDidMount() {
     let parsedParam = this.props.match.params.brand.split("-").join(" ");
-    this.props.fetchBrand(parsedParam);
+    let query = queryString.parse(this.props.location.search);
+    this.props.fetchBrand(parsedParam,query);
   }
 
   componentDidUpdate() {
     // trigger update if path changes without unmounting component ex. from /brand/:a to /brand/:b
     let parsedParam = this.props.match.params.brand.split("-").join(" ");
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchBrand(parsedParam, query.sort);
+    this.props.fetchBrand(parsedParam, query);
   }
 
   render() {
@@ -28,7 +29,7 @@ class Brand extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchBrand: (brand, field) => dispatch(fetchBrand(brand, field)),
+    fetchBrand: (brandURI, query) => dispatch(fetchBrand(brandURI, query)),
   };
 };
 

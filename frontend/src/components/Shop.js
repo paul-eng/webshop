@@ -6,10 +6,14 @@ import queryString from "query-string";
 
 class Shop extends Component {
   componentDidMount() {
-    this.props.fetchAll();
+    this.fetchAll();
   }
 
   componentDidUpdate() {
+    this.fetchAll();
+  }
+
+  fetchAll() {
     let query = queryString.parse(this.props.location.search);
     this.props.fetchAll(query);
   }
