@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCategory } from "../actions/ItemActions";
 import ContentArea from "./ContentArea";
+import queryString from "query-string";
 
 class Category extends Component {
   componentDidMount() {
@@ -12,7 +13,8 @@ class Category extends Component {
   componentDidUpdate() {
     // trigger update if path changes without unmounting component ex. from /category/:a to /category/:b
     let parsedParam = this.props.match.params.cat.split("-").join(" ");
-    this.props.fetchCat(parsedParam);
+    let query = queryString.parse(this.props.location.search);
+    this.props.fetchCat(parsedParam, query.filter);
   }
 
   render() {
@@ -26,7 +28,7 @@ class Category extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCat: (cat) => dispatch(fetchCategory(cat)),
+    fetchCat: (cat, field) => dispatch(fetchCategory(cat, field)),
   };
 };
 

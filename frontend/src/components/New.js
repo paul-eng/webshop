@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchAllItems } from "../actions/ItemActions";
+import { fetchNew } from "../actions/ItemActions";
 import ContentArea from "./ContentArea";
+import queryString from "query-string";
 
 class New extends Component {
   componentDidMount() {
     this.props.fetchNew();
+  }
+
+  componentDidUpdate() {
+    let query = queryString.parse(this.props.location.search);
+    this.props.fetchNew(query.filter);
   }
 
   render() {
@@ -19,7 +25,7 @@ class New extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchNew: ()=>dispatch(fetchAllItems("-updated_date")),
+    fetchNew: (field)=>dispatch(fetchNew(field)),
   };
 };
 

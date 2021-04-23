@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBrand } from "../actions/ItemActions";
 import ContentArea from "./ContentArea";
+import queryString from "query-string";
 
 class Brand extends Component {
   componentDidMount() {
@@ -12,7 +13,8 @@ class Brand extends Component {
   componentDidUpdate() {
     // trigger update if path changes without unmounting component ex. from /brand/:a to /brand/:b
     let parsedParam = this.props.match.params.brand.split("-").join(" ");
-    this.props.fetchBrand(parsedParam);
+    let query = queryString.parse(this.props.location.search);
+    this.props.fetchBrand(parsedParam, query.filter);
   }
 
   render() {
@@ -26,7 +28,7 @@ class Brand extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchBrand: (brand) => dispatch(fetchBrand(brand)),
+    fetchBrand: (brand, field) => dispatch(fetchBrand(brand, field)),
   };
 };
 

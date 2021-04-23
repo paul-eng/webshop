@@ -11,7 +11,6 @@ class Shop extends Component {
 
   componentDidUpdate() {
     let query = queryString.parse(this.props.location.search);
-    console.log(query.filter)
     this.props.fetchAll(query.filter);
   }
 

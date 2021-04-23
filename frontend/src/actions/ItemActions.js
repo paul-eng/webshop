@@ -58,3 +58,9 @@ export const fetchItem = (path) => (dispatch) => {
     .get("http://localhost:8080/api/items/" + path)
     .then((res) => dispatch(setItem(res.data)));
 };
+
+export const fetchNew = (sort = "") => (dispatch) => {
+  return axios
+    .get("http://localhost:8080/api/items/new", { params: { sort } })
+    .then((res) => dispatch(setItems(res.data)));
+};
