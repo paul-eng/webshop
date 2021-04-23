@@ -7,7 +7,7 @@ const Header = (props) => {
   return (
     <div className="Header">
       <Link to="/">
-        <h1>Restful Goods</h1>
+        <h1>RESTFUL GOODS</h1>
       </Link>
 
       <section>

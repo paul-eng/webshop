@@ -43,13 +43,12 @@ const Cart = (props) => {
   return (
     <div className="Cart">
       <form onSubmit={updateQty}>
+      <h3>CART</h3>
         <ul>{cartItems}</ul>
         <input type="submit" value="UPDATE CART" />
       </form>
       <section>
-        <div>Subtotal: ${props.total}</div>
-        <div>Tax: ${props.total * 0.08875}</div>
-        <div>Total: ${props.total + props.total * 0.08875}</div>
+        <div>Subtotal: ${props.total.toFixed(2)}</div>
       </section>
     </div>
   );

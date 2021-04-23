@@ -17,3 +17,7 @@
     grid-area: nav;
 }
 
+.Title {
+    display: flex;
+    justify-content: space-between;
+}

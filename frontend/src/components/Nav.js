@@ -21,14 +21,14 @@ const Nav = () => {
       <div className="NavWrapper" onMouseLeave={hide}>
         <button onMouseEnter={hide}>
           <Link to="/new-arrivals">
-            <h3>New Arrivals</h3>
+            <h3>NEW ARRIVALS</h3>
           </Link>
         </button>
         <button onMouseEnter={() => show("/brand/")}>
-          <h3>Brands</h3>
+          <h3>BRANDS</h3>
         </button>
         <button onMouseEnter={() => show("/category/")}>
-          <h3>Categories</h3>
+          <h3>CATEGORIES</h3>
         </button>
       <button onMouseEnter={hide}>
         <Link to="/add-item">Add A Camera</Link>

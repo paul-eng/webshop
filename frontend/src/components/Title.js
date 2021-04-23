@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Filter from "./Filter"
 
 const Title = (props) => {
   let history = useHistory();
@@ -20,6 +21,7 @@ const Title = (props) => {
   return (
     <div className="Title">
       <h3>{title}</h3>
+      <Filter />
     </div>
   );
 };
