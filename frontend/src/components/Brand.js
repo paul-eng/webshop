@@ -14,7 +14,7 @@ class Brand extends Component {
     // trigger update if path changes without unmounting component ex. from /brand/:a to /brand/:b
     let parsedParam = this.props.match.params.brand.split("-").join(" ");
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchBrand(parsedParam, query.filter);
+    this.props.fetchBrand(parsedParam, query.sort);
   }
 
   render() {

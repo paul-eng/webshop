@@ -11,7 +11,7 @@ class New extends Component {
 
   componentDidUpdate() {
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchNew(query.filter);
+    this.props.fetchNew(query.sort);
   }
 
   render() {

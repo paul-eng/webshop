@@ -9,6 +9,7 @@
 
 .Nav button {
     width: max-content;
+    max-width: 100%;
 }
 
 .Nav h3 {

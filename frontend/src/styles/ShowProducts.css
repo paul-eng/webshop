@@ -1,6 +1,7 @@
 .ShowProducts {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33%);
     grid-template-rows: auto;
     column-gap: .5rem;
+
 }

@@ -14,7 +14,7 @@ class Category extends Component {
     // trigger update if path changes without unmounting component ex. from /category/:a to /category/:b
     let parsedParam = this.props.match.params.cat.split("-").join(" ");
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchCat(parsedParam, query.filter);
+    this.props.fetchCat(parsedParam, query.sort);
   }
 
   render() {

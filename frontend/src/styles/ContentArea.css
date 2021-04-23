@@ -2,9 +2,9 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 22% 1fr;
-    /* prevents resizing when scrollbar appears/disappears */
-    /* when vertical scrollbar appears, it creates horizontal scrollbar due to
-    area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */
+    /* prevents resizing due to scrollbar appear/disappear */
+    /* at 100vw, when vertical scrollbar appears, it also causes a horizontal scrollbar due to creation of
+    area that is now hidden behind vertical scrollbar, so overflow-x:hidden added to body */
     width: 100vw;
     padding-right: 1vw;
 
