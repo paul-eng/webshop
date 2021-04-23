@@ -11,7 +11,7 @@ class Shop extends Component {
 
   componentDidUpdate() {
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchAll(query.sort);
+    this.props.fetchAll(query);
   }
 
   render() {
@@ -25,7 +25,7 @@ class Shop extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAll: (field) => dispatch(fetchAllItems(field)),
+    fetchAll: (query) => dispatch(fetchAllItems(query)),
   };
 };
 

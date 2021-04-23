@@ -31,13 +31,13 @@ export const clearAllItems = () => {
   };
 };
 
-export const fetchAllItems = (sort = "") => (dispatch) => {
+export const fetchAllItems = (query = {}) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items", { params: { sort } })
+    .get("http://localhost:8080/api/items", { params: { sort: query.sort, brand: query.brand } })
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchBrand = (brand, sort = "") => (dispatch) => {
+export const fetchBrand = (brand, sort) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/brand/" + brand, {
       params: { sort },
@@ -45,7 +45,7 @@ export const fetchBrand = (brand, sort = "") => (dispatch) => {
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchCategory = (cat, sort = "") => (dispatch) => {
+export const fetchCategory = (cat, sort) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/category/" + cat, {
       params: { sort },
@@ -59,8 +59,8 @@ export const fetchItem = (path) => (dispatch) => {
     .then((res) => dispatch(setItem(res.data)));
 };
 
-export const fetchNew = (sort = "") => (dispatch) => {
+export const fetchNew = (sort, brand) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/new", { params: { sort } })
+    .get("http://localhost:8080/api/items/new", { params: { sort, brand } })
     .then((res) => dispatch(setItems(res.data)));
 };

@@ -14,8 +14,7 @@ class Filter extends Component {
 
   getFilter(e, type) {
     let query = queryString.parse(this.props.location.search);
-
-    // if the query is already active (included in the current query), clicking again deactivates it as long as it's not a sort option
+    // if the query is already active (included in the current query), clicking again deactivates it unless it's a sort option
     if (type !== "sort" && query[type] === e.target.id) {
       delete query[type];
     } else {

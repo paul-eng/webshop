@@ -11,7 +11,7 @@ class New extends Component {
 
   componentDidUpdate() {
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchNew(query.sort);
+    this.props.fetchNew(query.sort, query.brand);
   }
 
   render() {
@@ -25,7 +25,7 @@ class New extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchNew: (field)=>dispatch(fetchNew(field)),
+    fetchNew: (sort, brand)=>dispatch(fetchNew(sort, brand)),
   };
 };
 
