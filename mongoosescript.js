@@ -10,10 +10,10 @@ const qty = [
   { type: "Used", qty: 6 },
 ];
 Item.updateMany(
-  { category: "Zone Focus" },
+  {},
 
   {
-    stock: qty,
+    $unset: { quantity: 1 },
   },
 
   { multi: true },

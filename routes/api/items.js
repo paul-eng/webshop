@@ -28,6 +28,18 @@ router.get("/", (req, res) => {
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
 
+// @route api/items/new
+// @read recent items
+router.get("/new", (req, res) => {
+  Item.aggregate([
+    {$match:{}},
+    {$sort:{updated_date: -1}},
+    {$limit: 5},
+  ]).sort(`${req.query.sort} -updated_date`)
+    .then((brands) => res.json(brands))
+    .catch((err) => res.status(404).json({ norecentfound: "No recent items found" }));
+});
+
 // @route api/items/brands
 // @read all brand names
 router.get("/brands", (req, res) => {
@@ -41,7 +53,7 @@ router.get("/brands", (req, res) => {
 router.get("/brand/:brand", (req, res) => {
   //projection only returns necessary fields for faster loading
   Item.find(
-    { brand: { $regex: `${req.params.brand}`, $options: `i` } },
+    { brand: { $regex: `${req.params.brand}`, $options: `i` }},
     "name brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
