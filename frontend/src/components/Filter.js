@@ -22,17 +22,23 @@ class Filter extends Component {
     let icon = this.state.active ? "-" : "+";
 
     let filters = { ...this.props.filters };
-    for (let filter in filters) {
-      filters[filter] = filters[filter].map((option) => {
-        return (
-          <FilterOption
-            key={filter + option}
-            text={option.toUpperCase()}
-            filter={filter}
-            value={option}
-          />
-        );
-      });
+    for (let type in filters) {
+      filters[type] = filters[type].map((option) => (
+        <FilterOption
+          key={type + option}
+          text={option.toUpperCase()}
+          filter={type}
+          value={option}
+        />
+      ));
+    }
+
+    let filterList = [];
+    for (let type in filters) {
+      filterList.push(<ul>
+        <h3>{type.toUpperCase()}</h3>
+        {filters[type]}
+      </ul>)
     }
 
     return (
@@ -45,7 +51,7 @@ class Filter extends Component {
             <FilterOption text="PRICE LOW" filter="sort" value="price" />
             <FilterOption text="A-Z" filter="sort" value="brand name" />
           </ul>
-          <ul>{/* {filters.brand} */}</ul>
+          {filterList}
         </section>
       </div>
     );
