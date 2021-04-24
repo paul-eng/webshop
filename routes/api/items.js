@@ -20,10 +20,12 @@ router.post("/", (req, res) => {
 // @route api/items
 // @read all items
 router.get("/", (req, res) => {
-  //projection only returns necessary fields for faster loading
-  Item.find({}, "name brand price gallery pathname")
+  let sort = req.query.sort;
+  delete req.query.sort;
+  //projection only returns necessary fields for faster frontside loading
+  Item.find({ ...req.query }, "name brand price gallery pathname")
     //sort by requested field, then alphabetically within field
-    .sort(`${req.query.sort} brand name`)
+    .sort(`${sort} brand name`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -31,13 +33,18 @@ router.get("/", (req, res) => {
 // @route api/items/new
 // @read recent items
 router.get("/new", (req, res) => {
+  let sort = req.query.sort;
+  delete req.query.sort;
   Item.aggregate([
-    {$match:{}},
-    {$sort:{updated_date: -1}},
-    {$limit: 5},
-  ]).sort(`${req.query.sort} -updated_date`)
+    { $sort: { updated_date: -1 } },
+    { $limit: 5 },
+    { $match: { ...req.query } },
+  ])
+    .sort(`${sort} -updated_date`)
     .then((brands) => res.json(brands))
-    .catch((err) => res.status(404).json({ norecentfound: "No recent items found" }));
+    .catch((err) =>
+      res.status(404).json({ norecentfound: "No recent items found" })
+    );
 });
 
 // @route api/items/brands
@@ -51,13 +58,18 @@ router.get("/brands", (req, res) => {
 // @route api/items/brand/:brand
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
-  //projection only returns necessary fields for faster loading
+  let sort = req.query.sort;
+  delete req.query.sort;
   Item.find(
-    { brand: { $regex: `${req.params.brand}`, $options: `i` }},
+    {
+      brand: { $regex: `${req.params.brand}`, $options: `i` },
+      ...req.query,
+    },
+    //projection only returns necessary fields for faster loading
     "name brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
-    .sort(`${req.query.sort} name`)
+    .sort(`${sort} name`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -66,22 +78,24 @@ router.get("/brand/:brand", (req, res) => {
 // @read all category types
 router.get("/categories", (req, res) => {
   Item.aggregate([{ $group: { _id: "$category" } }])
-    .then((cats) => res.json(cats))
-    .catch((err) =>
-      res.status(404).json({ nocatsfound: "No categories found" })
-    );
+  .then((cats) => res.json(cats))
+  .catch((err) =>
+  res.status(404).json({ nocatsfound: "No categories found" })
+  );
 });
 
 // @route api/items/category/:cat
 // @read items by category
 router.get("/category/:cat", (req, res) => {
-  //projection only returns necessary fields for faster loading
+  let sort = req.query.sort;
+  delete req.query.sort;
   Item.find(
-    { category: { $regex: `${req.params.cat}`, $options: `i` } },
+    { category: { $regex: `${req.params.cat}`, $options: `i` }, ...req.query },
+    //projection only returns necessary fields for faster loading
     "name brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
-    .sort(`${req.query.sort} brand name`)
+    .sort(`${sort} brand name`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
