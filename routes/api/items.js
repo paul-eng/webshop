@@ -4,6 +4,14 @@ const router = express.Router();
 // Load Item model
 const Item = require("../../models/Item");
 
+const caseInsensitiveQ = (query) => {
+  delete query.sort;
+  for (let q in query) {
+    query[q] = { $regex: query[q], $options: `i`}
+  }
+  return query
+}
+
 // @route api/items/test
 router.get("/test", (req, res) => res.send("item route testing!"));
 
@@ -21,9 +29,9 @@ router.post("/", (req, res) => {
 // @read all items
 router.get("/", (req, res) => {
   let sort = req.query.sort;
-  delete req.query.sort;
+  let query = caseInsensitiveQ(req.query);
   //projection only returns necessary fields for faster frontside loading
-  Item.find({ ...req.query }, "name brand price gallery pathname")
+  Item.find({ ...query }, "name category brand price gallery pathname")
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)
     .then((items) => res.json(items))
@@ -34,11 +42,21 @@ router.get("/", (req, res) => {
 // @read recent items
 router.get("/new", (req, res) => {
   let sort = req.query.sort;
-  delete req.query.sort;
+  let query = caseInsensitiveQ(req.query);
   Item.aggregate([
     { $sort: { updated_date: -1 } },
     { $limit: 5 },
-    { $match: { ...req.query } },
+    { $match: { ...query } },
+    {
+      $project: {
+        name: 1,
+        category: 1,
+        brand: 1,
+        price: 1,
+        gallery: 1,
+        pathname: 1,
+      },
+    },
   ])
     .sort(`${sort} -updated_date`)
     .then((brands) => res.json(brands))
@@ -59,14 +77,14 @@ router.get("/brands", (req, res) => {
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
   let sort = req.query.sort;
-  delete req.query.sort;
+  let query = caseInsensitiveQ(req.query);
   Item.find(
     {
       brand: { $regex: `${req.params.brand}`, $options: `i` },
-      ...req.query,
+      ...query,
     },
     //projection only returns necessary fields for faster loading
-    "name brand price gallery pathname"
+    "name category brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
     .sort(`${sort} name`)
@@ -78,21 +96,21 @@ router.get("/brand/:brand", (req, res) => {
 // @read all category types
 router.get("/categories", (req, res) => {
   Item.aggregate([{ $group: { _id: "$category" } }])
-  .then((cats) => res.json(cats))
-  .catch((err) =>
-  res.status(404).json({ nocatsfound: "No categories found" })
-  );
+    .then((cats) => res.json(cats))
+    .catch((err) =>
+      res.status(404).json({ nocatsfound: "No categories found" })
+    );
 });
 
 // @route api/items/category/:cat
 // @read items by category
 router.get("/category/:cat", (req, res) => {
   let sort = req.query.sort;
-  delete req.query.sort;
+  let query = caseInsensitiveQ(req.query);
   Item.find(
-    { category: { $regex: `${req.params.cat}`, $options: `i` }, ...req.query },
+    { category: { $regex: `${req.params.cat}`, $options: `i` }, ...query },
     //projection only returns necessary fields for faster loading
-    "name brand price gallery category pathname"
+    "name category brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)

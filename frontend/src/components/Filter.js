@@ -28,14 +28,14 @@ class Filter extends Component {
           key={type + option}
           text={option.toUpperCase()}
           filter={type}
-          value={option}
+          value={option.toLowerCase()}
         />
       ));
     }
 
     let filterList = [];
     for (let type in filters) {
-      filterList.push(<ul>
+      filterList.push(<ul key={type}>
         <h3>{type.toUpperCase()}</h3>
         {filters[type]}
       </ul>)
@@ -47,8 +47,8 @@ class Filter extends Component {
         <section style={{ display: visible }}>
           <ul>
             <FilterOption text="NEWEST" filter="sort" value="-updated_date" />
-            <FilterOption text="PRICE HIGH" filter="sort" value="-price" />
             <FilterOption text="PRICE LOW" filter="sort" value="price" />
+            <FilterOption text="PRICE HIGH" filter="sort" value="-price" />
             <FilterOption text="A-Z" filter="sort" value="brand name" />
           </ul>
           {filterList}

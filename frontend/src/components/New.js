@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchNew } from "../actions/ItemActions";
+import { getFilters } from "../actions/FilterActions";
 import ContentArea from "./ContentArea";
 import queryString from "query-string";
 
 class New extends Component {
   componentDidMount() {
-    this.fetchNew();
+    this.fetchNew().then(this.props.getFilters);
   }
 
-  componentDidUpdate() {
-    this.fetchNew();
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.url !== this.props.match.url) {
+      this.fetchNew().then(this.props.getFilters);
+    } else {
+      this.fetchNew();
+    }
   }
 
   fetchNew() {
@@ -30,6 +35,7 @@ class New extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchNew: (query) => dispatch(fetchNew(query)),
+    getFilters: () => dispatch(getFilters()),
   };
 };
 
