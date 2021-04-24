@@ -92,7 +92,7 @@ router.get("/category/:cat", (req, res) => {
   Item.find(
     { category: { $regex: `${req.params.cat}`, $options: `i` }, ...req.query },
     //projection only returns necessary fields for faster loading
-    "name brand price gallery pathname"
+    "name brand price gallery category pathname"
   )
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)

@@ -6,16 +6,18 @@ import queryString from "query-string";
 
 class Brand extends Component {
   componentDidMount() {
-    let parsedParam = this.props.match.params.brand.split("-").join(" ");
-    let query = queryString.parse(this.props.location.search);
-    this.props.fetchBrand(parsedParam,query);
+    this.fetchBrand();
   }
 
   componentDidUpdate() {
     // trigger update if path changes without unmounting component ex. from /brand/:a to /brand/:b
+    this.fetchBrand();
+  }
+
+  fetchBrand() {
     let parsedParam = this.props.match.params.brand.split("-").join(" ");
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchBrand(parsedParam, query);
+    return this.props.fetchBrand(parsedParam, query);
   }
 
   render() {

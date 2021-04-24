@@ -15,7 +15,7 @@ class New extends Component {
 
   fetchNew() {
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchNew(query);
+    return this.props.fetchNew(query);
   }
 
   render() {

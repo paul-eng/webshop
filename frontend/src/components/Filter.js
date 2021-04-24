@@ -21,6 +21,20 @@ class Filter extends Component {
     let visible = this.state.visible ? "flex" : "none";
     let icon = this.state.active ? "-" : "+";
 
+    let filters = { ...this.props.filters };
+    for (let filter in filters) {
+      filters[filter] = filters[filter].map((option) => {
+        return (
+          <FilterOption
+            key={filter + option}
+            text={option.toUpperCase()}
+            filter={filter}
+            value={option}
+          />
+        );
+      });
+    }
+
     return (
       <div className="Filter">
         <h3 onClick={this.visible}>{icon} FILTER</h3>
@@ -31,10 +45,7 @@ class Filter extends Component {
             <FilterOption text="PRICE LOW" filter="sort" value="price" />
             <FilterOption text="A-Z" filter="sort" value="brand name" />
           </ul>
-          <ul>
-            <FilterOption text="OLYMPUS" filter="brand" value="Olympus" />
-            <FilterOption text="NIKON" filter="brand" value="Nikon" />
-          </ul>
+          <ul>{/* {filters.brand} */}</ul>
         </section>
       </div>
     );
@@ -43,6 +54,8 @@ class Filter extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    filters: state.filters,
+    // connect to itemlist to rerender whenever new items shown
     items: state.products.itemList,
   };
 };

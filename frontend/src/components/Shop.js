@@ -8,14 +8,14 @@ class Shop extends Component {
   componentDidMount() {
     this.fetchAll();
   }
-
+  
   componentDidUpdate() {
     this.fetchAll();
   }
 
   fetchAll() {
     let query = queryString.parse(this.props.location.search);
-    this.props.fetchAll(query);
+    return this.props.fetchAll(query);
   }
 
   render() {
