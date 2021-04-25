@@ -5,9 +5,8 @@
     /* prevents resizing due to scrollbar appear/disappear */
     /* at 100vw, when vertical scrollbar appears, it also causes a horizontal scrollbar due to creation of
     area that is now hidden behind vertical scrollbar, so overflow-x:hidden added to body */
-    width: 100vw;
-    padding-right: 1vw;
-
+    /* width: 100%;
+    padding-right: 1vw; */
     grid-template-areas: 
         "nav title"
         "nav items";

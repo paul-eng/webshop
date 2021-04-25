@@ -19,19 +19,19 @@ const Nav = () => {
   return (
     <nav className="Nav">
       <div className="NavWrapper" onMouseLeave={hide}>
+      
           <Link to="/new-arrivals">
-        <button onMouseEnter={hide}>
-            <h3>NEW ARRIVALS</h3>
-        </button>
+            <h3 onMouseEnter={hide}>NEW ARRIVALS</h3>
           </Link>
-        <button onMouseEnter={() => show("/brand/")}>
-          <h3>BRANDS</h3>
-        </button>
-        <button onMouseEnter={() => show("/category/")}>
-          <h3>CATEGORIES</h3>
-        </button>
-      <button onMouseEnter={hide}>
-        <Link to="/add-item">Add A Camera</Link>
+   
+
+          <h3 onMouseEnter={() => show("/brand/")}>BRANDS</h3>
+
+   
+          <h3 onMouseEnter={() => show("/category/")}>CATEGORIES</h3>
+
+      <button >
+        <Link to="/add-item" onMouseEnter={hide}>Add A Camera</Link>
       </button>
         <NavList active={active} path={activePath} />
       </div>

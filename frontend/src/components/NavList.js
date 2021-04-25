@@ -36,7 +36,9 @@ class NavList extends Component {
   list = (path, links) =>
     links.map((link) => (
       <li key={link}>
-        <Link to={path + this.makeParam(link)}>{link}</Link>
+        <Link to={path + this.makeParam(link)}>
+          <h3>{link}</h3>
+        </Link>
       </li>
     ));
 

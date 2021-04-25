@@ -2,15 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 100%;
 }
 
 
 .Filter section {
     flex-direction: row-reverse;
-    text-align: right;
 }
 
 .Filter ul {
-    padding-left: 15%;
+  padding-left: 5vw;
+}
+
+.Filter li {
+    width: max-content;
 }

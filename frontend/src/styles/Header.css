@@ -1,14 +1,35 @@
 .Header {
-    background-color: pink;
+    /* background-color: pink; */
     display: grid;
     align-items: center;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: max-content 1fr min-content;
     grid-template-areas: 
-        "logo . acct";
+        "logo search acct";
+    grid-gap: 1rem;
+    margin-bottom: 2.5rem;
 }
 
-.Header a {
+.Header .Logo {
     grid-area: logo;
+}
+
+.Search {
+    grid-area: search;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Header form {
+    width: 0;
+    transition: .2s;
+    text-align: right;
+}
+
+.Header input {
+    padding: 0;
+    border: 0;
+    width: calc(100% - .5rem);
 }
 
 .Header section {

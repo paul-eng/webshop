@@ -12,13 +12,10 @@
     max-width: 100%;
 }
 
-.Nav h3 {
-    margin: 0;
-}
-
 .NavList {
     position: absolute;
     left: 100%;
     top: 0;
-    background-color: grey;
+    width: 100%;
+    background-color: white;
 }

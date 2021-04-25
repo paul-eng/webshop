@@ -18,9 +18,6 @@ class Filter extends Component {
   }
 
   render() {
-    let visible = this.state.visible ? "flex" : "none";
-    let icon = this.state.active ? "-" : "+";
-
     let filters = { ...this.props.filters };
     for (let type in filters) {
       filters[type] = filters[type].map((option) => (
@@ -35,17 +32,20 @@ class Filter extends Component {
 
     let filterList = [];
     for (let type in filters) {
-      filterList.push(<ul key={type}>
-        <h3>{type.toUpperCase()}</h3>
-        {filters[type]}
-      </ul>)
+      filterList.push(
+        <ul key={type}>
+          <h3>{type.toUpperCase()}</h3>
+          {filters[type]}
+        </ul>
+      );
     }
 
     return (
       <div className="Filter">
-        <h3 onClick={this.visible}>{icon} FILTER</h3>
-        <section style={{ display: visible }}>
+        <h3 onClick={this.visible}>{this.state.visible ? "-" : "+"} FILTER</h3>
+        <section style={{ display: this.state.visible ? "flex" : "none" }}>
           <ul>
+            <h3>SORT BY</h3>
             <FilterOption text="NEWEST" filter="sort" value="-updated_date" />
             <FilterOption text="PRICE LOW" filter="sort" value="price" />
             <FilterOption text="PRICE HIGH" filter="sort" value="-price" />

@@ -5,6 +5,6 @@
     /* prevents resizing when scrollbar appears/disappears */
     /* when vertical scrollbar appears, it creates horizontal scrollbar due to
     area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */
-    width: 100vw;
-    padding-right: 1vw;
+    /* width: 100vw;
+    padding-right: 1vw; */
 }
