@@ -6,11 +6,19 @@ const Item = require("../../models/Item");
 
 const caseInsensitiveQ = (query) => {
   delete query.sort;
-  for (let q in query) {
-    query[q] = { $regex: query[q], $options: `i`}
+  if (Object.keys(query).length === 0) {
+    return {}
   }
-  return query
-}
+  let and = [];
+  for (let field in query) {
+    let or = {$or: []}
+    query[field].forEach((val) => {
+      or["$or"].push({ [field]:  { $regex: val, $options: `i`} });
+    });
+    and.push(or)
+  }
+  return { $and: and };
+};
 
 // @route api/items/test
 router.get("/test", (req, res) => res.send("item route testing!"));
@@ -28,10 +36,14 @@ router.post("/", (req, res) => {
 // @route api/items
 // @read all items
 router.get("/", (req, res) => {
-  let sort = req.query.sort;
+  let sort = req.query.sort[0];
   let query = caseInsensitiveQ(req.query);
+  console.log(query)
   //projection only returns necessary fields for faster frontside loading
-  Item.find({ ...query }, "name category brand price gallery pathname")
+  Item.find(
+    {...query},
+    "name category brand price gallery pathname"
+  )
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)
     .then((items) => res.json(items))
@@ -76,7 +88,7 @@ router.get("/brands", (req, res) => {
 // @route api/items/brand/:brand
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
-  let sort = req.query.sort;
+  let sort = req.query.sort[0];
   let query = caseInsensitiveQ(req.query);
   Item.find(
     {

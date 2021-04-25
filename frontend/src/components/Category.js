@@ -7,7 +7,7 @@ import queryString from "query-string";
 
 class Category extends Component {
   componentDidMount() {
-    let query = queryString.parse(this.props.location.search);
+    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
     this.fetchCat()
       .then(this.props.getFilters)
       .then(() => this.fetchCat(query));
@@ -16,7 +16,7 @@ class Category extends Component {
   componentDidUpdate(prevProps) {
     // trigger update if path changes without unmounting component ex. from /category/:a?somequery to /category/:a?diffquery
     // update filters if component has changed "pages" without unmounting ex. from /category/:a to /category/:b
-    let query = queryString.parse(this.props.location.search);
+    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
     if (prevProps.match.url !== this.props.match.url) {
       this.fetchCat(query).then(this.props.getFilters);
     } else {

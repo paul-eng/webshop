@@ -7,7 +7,7 @@ import queryString from "query-string";
 
 class New extends Component {
   componentDidMount() {
-    let query = queryString.parse(this.props.location.search);
+    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
     this.props
       .fetchNew()
       .then(this.props.getFilters)
@@ -15,7 +15,7 @@ class New extends Component {
   }
 
   componentDidUpdate() {
-    let query = queryString.parse(this.props.location.search);
+    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
     this.props.fetchNew(query);
   }
 

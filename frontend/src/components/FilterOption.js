@@ -3,13 +3,13 @@ import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 
 const FilterOption = (props) => {
-  let query = queryString.parse(props.location.search);
+  let query = queryString.parse(props.location.search, {
+    arrayFormat: "bracket",
+  });
   let weight = useRef("normal");
 
-  window.query = queryString.parse
-
   useEffect(() => {
-    let queries = Object.values(query);
+    let queries = Object.values(query).flat();
     if (queries.includes(props.value)) {
       weight.current = "bold";
     } else {
@@ -20,14 +20,17 @@ const FilterOption = (props) => {
   function setFilter() {
     let { filter, value } = props;
 
-    if (query[filter] === value) {
-      delete query[filter];
+    if (!query[filter] || filter === "sort") {
+      query[filter] = [value];
+    } else if (query[filter].includes(value)) {
+      query[filter] = query[filter].filter((val) => val !== value);
     } else {
-      let add = {};
-      add[filter] = value;
-      query = { ...query, ...add };
+      query[filter].push(value);
     }
-    props.history.push({ search: queryString.stringify(query) });
+
+    props.history.push({
+      search: queryString.stringify(query, { arrayFormat: "bracket" }),
+    });
   }
 
   return (
