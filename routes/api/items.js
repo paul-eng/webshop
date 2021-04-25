@@ -1,21 +1,22 @@
 const express = require("express");
 const router = express.Router();
-
-// Load Item model
 const Item = require("../../models/Item");
 
 const caseInsensitiveQ = (query) => {
+  // break each separate query field into its' own $or statement (brand can be "leica" OR "sony" OR "nikon etc"),
+  // join the fields with an $and statement (brand "leica" or brand "sony" AND category "compact" or category "rangefinder"),
+  // make match for individual vals case insensitive ("NiKoN" will match "Nikon")
   delete query.sort;
   if (Object.keys(query).length === 0) {
-    return {}
+    return {};
   }
   let and = [];
   for (let field in query) {
-    let or = {$or: []}
+    let or = { $or: [] };
     query[field].forEach((val) => {
-      or["$or"].push({ [field]:  { $regex: val, $options: `i`} });
+      or["$or"].push({ [field]: { $regex: val, $options: `i` } });
     });
-    and.push(or)
+    and.push(or);
   }
   return { $and: and };
 };
@@ -38,12 +39,8 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   let sort = req.query.sort[0];
   let query = caseInsensitiveQ(req.query);
-  console.log(query)
   //projection only returns necessary fields for faster frontside loading
-  Item.find(
-    {...query},
-    "name category brand price gallery pathname"
-  )
+  Item.find({ ...query }, "name category brand price gallery pathname")
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)
     .then((items) => res.json(items))

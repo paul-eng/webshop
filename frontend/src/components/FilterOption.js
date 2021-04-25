@@ -20,10 +20,10 @@ const FilterOption = (props) => {
   function setFilter() {
     let { filter, value } = props;
 
-    if (!query[filter] || filter === "sort") {
-      query[filter] = [value];
-    } else if (query[filter].includes(value)) {
+    if (query[filter] && query[filter].includes(value)) {
       query[filter] = query[filter].filter((val) => val !== value);
+    } else if (!query[filter] || filter === "sort") {
+      query[filter] = [value];
     } else {
       query[filter].push(value);
     }

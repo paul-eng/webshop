@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { fetchBrand } from "../actions/ItemActions";
 import { getFilters } from "../actions/FilterActions";
 import ContentArea from "./ContentArea";
-import queryString from "query-string";
+import { queryStr,paramStr } from "./Util";
 
 class Brand extends Component {
   componentDidMount() {
-    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
+    let query = queryStr(this);
     this.fetchBrand()
       .then(this.props.getFilters)
       .then(() => this.fetchBrand(query));
@@ -16,7 +16,7 @@ class Brand extends Component {
   componentDidUpdate(prevProps) {
     // trigger update if path changes without unmounting component ex. from /category/:a?somequery to /category/:a?diffquery
     // update filters if component has changed "pages" without unmounting ex. from /category/:a to /category/:b
-    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
+    let query = queryStr(this);
     if (prevProps.match.url !== this.props.match.url) {
       this.fetchBrand(query).then(this.props.getFilters);
     } else {
@@ -25,7 +25,7 @@ class Brand extends Component {
   }
 
   fetchBrand(query) {
-    let parsedParam = this.props.match.params.brand.split("-").join(" ");
+    let parsedParam = paramStr(this).brand
     return this.props.fetchBrand(parsedParam, query);
   }
 

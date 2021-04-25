@@ -3,11 +3,11 @@ import { connect } from "react-redux";
 import { fetchNew } from "../actions/ItemActions";
 import { getFilters } from "../actions/FilterActions";
 import ContentArea from "./ContentArea";
-import queryString from "query-string";
+import { queryStr } from "./Util";
 
 class New extends Component {
   componentDidMount() {
-    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
+    let query = queryStr(this);
     this.props
       .fetchNew()
       .then(this.props.getFilters)
@@ -15,7 +15,7 @@ class New extends Component {
   }
 
   componentDidUpdate() {
-    let query = queryString.parse(this.props.location.search, {arrayFormat: "bracket"});
+    let query = queryStr(this);
     this.props.fetchNew(query);
   }
 
