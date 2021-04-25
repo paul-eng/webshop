@@ -7,21 +7,25 @@ import queryString from "query-string";
 
 class Category extends Component {
   componentDidMount() {
-    this.fetchCat().then(this.props.getFilters);
+    let query = queryString.parse(this.props.location.search);
+    this.fetchCat()
+      .then(this.props.getFilters)
+      .then(() => this.fetchCat(query));
   }
 
   componentDidUpdate(prevProps) {
-    // trigger update if path changes without unmounting component ex. from /category/:a to /category/:b
+    // trigger update if path changes without unmounting component ex. from /category/:a?somequery to /category/:a?diffquery
+    // update filters if component has changed "pages" without unmounting ex. from /category/:a to /category/:b
+    let query = queryString.parse(this.props.location.search);
     if (prevProps.match.url !== this.props.match.url) {
-      this.fetchCat().then(this.props.getFilters);
+      this.fetchCat(query).then(this.props.getFilters);
     } else {
-      this.fetchCat();
+      this.fetchCat(query);
     }
   }
 
-  fetchCat() {
+  fetchCat(query) {
     let parsedParam = this.props.match.params.cat.split("-").join(" ");
-    let query = queryString.parse(this.props.location.search);
     return this.props.fetchCat(parsedParam, query);
   }
 

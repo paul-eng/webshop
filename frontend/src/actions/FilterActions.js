@@ -23,5 +23,5 @@ export const getFilters = () => (dispatch, getState) => {
     cats = getUnique("category", cats, item);
   });
 //   sort to alphabetize
-  dispatch(setFilters(brands.sort(), cats.sort()));
+  return dispatch(setFilters(brands.sort(), cats.sort()));
 };

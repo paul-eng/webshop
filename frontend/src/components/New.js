@@ -7,20 +7,16 @@ import queryString from "query-string";
 
 class New extends Component {
   componentDidMount() {
-    this.fetchNew().then(this.props.getFilters);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.url !== this.props.match.url) {
-      this.fetchNew().then(this.props.getFilters);
-    } else {
-      this.fetchNew();
-    }
-  }
-
-  fetchNew() {
     let query = queryString.parse(this.props.location.search);
-    return this.props.fetchNew(query);
+    this.props
+      .fetchNew()
+      .then(this.props.getFilters)
+      .then(() => this.props.fetchNew(query));
+  }
+
+  componentDidUpdate() {
+    let query = queryString.parse(this.props.location.search);
+    this.props.fetchNew(query);
   }
 
   render() {

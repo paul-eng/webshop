@@ -7,20 +7,16 @@ import queryString from "query-string";
 
 class Shop extends Component {
   componentDidMount() {
-    this.fetchAll().then(this.props.getFilters);
-  }
-  
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.url !== this.props.match.url) {
-      this.fetchAll().then(this.props.getFilters);
-    } else {
-      this.fetchAll();
-    }
+    let query = queryString.parse(this.props.location.search);
+    this.props
+      .fetchAll()
+      .then(this.props.getFilters)
+      .then(() => this.props.fetchAll(query));
   }
 
-  fetchAll() {
+  componentDidUpdate() {
     let query = queryString.parse(this.props.location.search);
-    return this.props.fetchAll(query);
+    this.props.fetchAll(query);
   }
 
   render() {

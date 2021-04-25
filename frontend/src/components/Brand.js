@@ -7,21 +7,25 @@ import queryString from "query-string";
 
 class Brand extends Component {
   componentDidMount() {
-    this.fetchBrand().then(this.props.getFilters);
+    let query = queryString.parse(this.props.location.search);
+    this.fetchBrand()
+      .then(this.props.getFilters)
+      .then(() => this.fetchBrand(query));
   }
 
   componentDidUpdate(prevProps) {
-    // trigger update if path changes without unmounting component ex. from /brand/:a to /brand/:b
+    // trigger update if path changes without unmounting component ex. from /category/:a?somequery to /category/:a?diffquery
+    // update filters if component has changed "pages" without unmounting ex. from /category/:a to /category/:b
+    let query = queryString.parse(this.props.location.search);
     if (prevProps.match.url !== this.props.match.url) {
-      this.fetchBrand().then(this.props.getFilters);
+      this.fetchBrand(query).then(this.props.getFilters);
     } else {
-      this.fetchBrand();
+      this.fetchBrand(query);
     }
   }
 
-  fetchBrand() {
+  fetchBrand(query) {
     let parsedParam = this.props.match.params.brand.split("-").join(" ");
-    let query = queryString.parse(this.props.location.search);
     return this.props.fetchBrand(parsedParam, query);
   }
 

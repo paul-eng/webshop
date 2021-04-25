@@ -6,6 +6,8 @@ const FilterOption = (props) => {
   let query = queryString.parse(props.location.search);
   let weight = useRef("normal");
 
+  window.query = queryString.parse
+
   useEffect(() => {
     let queries = Object.values(query);
     if (queries.includes(props.value)) {
