@@ -1,4 +1,5 @@
 import axios from "axios";
+import { matchStock } from "../util/Util";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
@@ -51,7 +52,7 @@ export const updateCart = (updates) => (dispatch, getState) => {
     let prom = axios
       .get("http://localhost:8080/api/items/" + path)
       .then((res) => {
-        let storeQty = res.data.stock.find((v) => v.type === type).qty;
+        let storeQty = matchStock(res.data.stock, type).qty;
         if (qty > storeQty) {
           return dispatch(setError());
         }

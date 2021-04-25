@@ -6,6 +6,8 @@ import {
   CLEAR_ERROR,
 } from "../actions/CartActions";
 
+import { stockType, matchItem, matchStock } from "../util/Util";
+
 const initState = {
   items: [],
   total: 0,
@@ -19,13 +21,10 @@ const cartReducer = (state = initState, action) => {
 
   switch (action.type) {
     case ADD_TO_CART:
-      cartItem = state.items.find((item) => item._id === action.item._id);
+      cartItem = matchItem(state.items, action.item._id);
       if (cartItem) {
-        let cartTypes = cartItem.stock.map((opt) => opt.type);
-
-        cartTypes.includes(action.version)
-          ? cartItem.stock.find((version) => version.type === action.version)
-              .qty++
+        stockType(cartItem.stock).includes(action.version)
+          ? matchStock(cartItem.stock, action.version).qty++
           : cartItem.stock.push({ type: action.version, qty: 1 });
         return Object.assign({}, state, {
           total: state.total + cartItem.price,
@@ -50,7 +49,7 @@ const cartReducer = (state = initState, action) => {
       return Object.assign({}, state, { error: null });
     case SET_CART:
       cartItem = state.items.find((item) => item.pathname === action.path);
-      stock = cartItem.stock.find((v) => v.type === action.version);
+      stock = matchStock(cartItem.stock, action.version);
       let diff = action.qty - stock.qty;
       stock.qty = action.qty;
       newTotal = state.total + diff * cartItem.price;
@@ -58,7 +57,7 @@ const cartReducer = (state = initState, action) => {
 
       return Object.assign({}, state, { count: newCount, total: newTotal });
     case REMOVE_FROM_CART:
-      cartItem = state.items.find((item) => item._id === action.item._id);
+      cartItem = matchItem(state.items, action.item._id);
       stock = action.item.stock;
       newTotal = state.total - cartItem.price * stock.qty;
       newCount = state.count - stock.qty;

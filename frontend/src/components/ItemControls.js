@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../actions/CartActions";
+import { stockType, stockQty, matchStock, matchItem } from "../util/Util";
 import "../styles/ItemControls.css";
 
 class ItemControls extends Component {
@@ -18,7 +19,7 @@ class ItemControls extends Component {
     }
 
     if (prevState.selected !== selected) {
-      let available = this.props.stock.find((opt) => opt.type === selected);
+      let available = matchStock(this.props.stock, selected);
       let warning = available.qty <= 5 ? `Only ${available.qty} remaining` : "";
       this.setState({ warning: warning });
     }
@@ -49,13 +50,15 @@ class ItemControls extends Component {
   inStock() {
     let item = this.props.item;
     let selected = this.state.selected;
-    let inCart = this.props.cart.find((prod) => prod._id === item._id);
+    let inCart = matchItem(this.props.cart, item._id);
     if (inCart) {
-      let cartTypes = inCart.stock.map((opt) => opt.type);
-      if (cartTypes.includes(selected)) {
-        let [cartQty, stockQty] = [inCart.stock, item.stock].map(
-          (stock) => stock.find((version) => version.type === selected).qty
-        );
+      if (stockType(inCart.stock).includes(selected)) {
+
+        let [cartQty, stockQty] = [
+          matchStock(inCart.stock, selected).qty,
+          matchStock(item.stock, selected).qty,
+        ];
+
         return cartQty >= stockQty
           ? alert(
               `${this.props.item.name} - ${this.state.selected} only has ${stockQty} in stock`
@@ -66,8 +69,7 @@ class ItemControls extends Component {
     return true;
   }
 
-  allSold = () =>
-    this.props.stock.map((opt) => opt.qty).every((count) => count === 0);
+  allSold = () => stockQty(this.props.stock).every((count) => count === 0);
 
   msg = (qty) =>
     qty === 0

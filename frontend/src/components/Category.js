@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchCategory } from "../actions/ItemActions";
 import { getFilters } from "../actions/FilterActions";
 import ContentArea from "./ContentArea";
-import { queryStr, paramStr } from "./Util";
+import { queryStr, paramStr } from "../util/Util";
 
 class Category extends Component {
   componentDidMount() {

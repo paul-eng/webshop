@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchBrand } from "../actions/ItemActions";
 import { getFilters } from "../actions/FilterActions";
 import ContentArea from "./ContentArea";
-import { queryStr,paramStr } from "./Util";
+import { queryStr, paramStr } from "../util/Util";
 
 class Brand extends Component {
   componentDidMount() {
@@ -25,7 +25,7 @@ class Brand extends Component {
   }
 
   fetchBrand(query) {
-    let parsedParam = paramStr(this).brand
+    let parsedParam = paramStr(this).brand;
     return this.props.fetchBrand(parsedParam, query);
   }
 

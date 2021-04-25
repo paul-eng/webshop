@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchNew } from "../actions/ItemActions";
 import { getFilters } from "../actions/FilterActions";
 import ContentArea from "./ContentArea";
-import { queryStr } from "./Util";
+import { queryStr } from "../util/Util";
 
 class New extends Component {
   componentDidMount() {

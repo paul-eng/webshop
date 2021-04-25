@@ -15,3 +15,19 @@ export const paramStr = (component) => {
 
   return params;
 };
+
+export const stockType = (stock) => {
+  return stock.map((opt) => opt.type);
+};
+
+export const stockQty = (stock) => {
+  return stock.map((opt) => opt.qty);
+};
+
+export const matchStock = (stock, type) => {
+  return stock.find((v) => v.type === type);
+};
+
+export const matchItem = (items, id) => {
+  return items.find((item) => item._id === id);
+};
