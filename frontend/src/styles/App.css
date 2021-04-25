@@ -1,7 +1,43 @@
 /* Where .index.css is generic normalize, App.css is for resets as necessary */
 
+@font-face {
+  font-family: 'authentic_light';
+  src: url('../font/authenticsans-60-webfont.woff2') format('woff2'),
+       url('../font/authenticsans-60-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'authentic';
+  src: url('../font/authenticsans-90-webfont.woff2') format('woff2'),
+       url('../font/authenticsans-90-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'authentic_bold';
+  src: url('../font/authenticsans-130-webfont.woff2') format('woff2'),
+       url('../font/authenticsans-130-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'authentic_bolder';
+  src: url('../font/authenticsans-150-webfont.woff2') format('woff2'),
+       url('../font/authenticsans-150-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 body {
   overflow-x:hidden;
+  font-family: "authentic";
+  font-size: 1.1rem;
 }
 
 html,
