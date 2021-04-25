@@ -8,11 +8,20 @@ import { queryStr } from "../util/Util";
 class Search extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
-    this.props.fetchSearch(query).then(this.props.getFilters);
+    this.props
+      .fetchSearch(query.q)
+      .then(this.props.getFilters)
+      .then(() => this.props.fetchSearch(query.q, query));
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     let query = queryStr(this.props);
-    this.props.fetchSearch(query);
+    let oldSearch = queryStr(prevProps).q.join(" ");
+    let newSearch = query.q.join(" ");
+    if (oldSearch !== newSearch) {
+      this.props.fetchSearch(query.q).then(this.props.getFilters);
+    } else {
+      this.props.fetchSearch(query.q, query);
+    }
   }
 
   render() {
@@ -26,7 +35,8 @@ class Search extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSearch: (query) => dispatch(fetchSearch(query)),
+    fetchSearch: (searchTerms, query) =>
+      dispatch(fetchSearch(searchTerms, query)),
     getFilters: () => dispatch(getFilters()),
   };
 };
