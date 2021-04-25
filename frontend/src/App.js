@@ -10,7 +10,7 @@ import Brand from "./components/Brand";
 import New from "./components/New";
 import Category from "./components/Category";
 import Item from "./components/Item";
-import Search from "./components/SearchBar";
+import Search from "./components/Search";
 
 class App extends Component {
   render() {

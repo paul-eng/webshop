@@ -37,15 +37,27 @@ export const fetchItem = (path) => (dispatch) => {
     .then((res) => dispatch(setItem(res.data)));
 };
 
-export const fetchAllItems = ({sort = "", brand, category} = {}) => (dispatch) => {
+export const fetchSearch = ({ q }) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items", {
-      params: { sort, brand, category},
+    .get("http://localhost:8080/api/items/search", {
+      params: {q},
     })
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchBrand = (brandURI, {sort = "", brand, category} = {}) => (dispatch) => {
+export const fetchAllItems = ({ sort = "", brand, category } = {}) => (
+  dispatch
+) => {
+  return axios
+    .get("http://localhost:8080/api/items", {
+      params: { sort, brand, category },
+    })
+    .then((res) => dispatch(setItems(res.data)));
+};
+
+export const fetchBrand = (brandURI, { sort = "", brand, category } = {}) => (
+  dispatch
+) => {
   return axios
     .get("http://localhost:8080/api/items/brand/" + brandURI, {
       params: { sort, brand, category },
@@ -53,15 +65,17 @@ export const fetchBrand = (brandURI, {sort = "", brand, category} = {}) => (disp
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchCategory = (cat, {sort = "", brand, category} = {}) => (dispatch) => {
+export const fetchCategory = (cat, { sort = "", brand, category } = {}) => (
+  dispatch
+) => {
   return axios
     .get("http://localhost:8080/api/items/category/" + cat, {
-      params: { sort, brand, category},
+      params: { sort, brand, category },
     })
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchNew = ({sort = "", brand, category} = {}) => (dispatch) => {
+export const fetchNew = ({ sort = "", brand, category } = {}) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/new", {
       params: { sort, brand, category },

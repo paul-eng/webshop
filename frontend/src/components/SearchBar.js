@@ -24,10 +24,11 @@ class SearchBar extends Component {
   onSubmit(form) {
     form.preventDefault();
     this.setState({ search: "", visible: false });
-    let query = {q: [form.target[0].value]}
+    let terms = form.target[0].value.split(" ");
+    let query = { q: terms };
     this.props.history.push({
       pathname: "/search/",
-      search: queryString.stringify(query, { arrayFormat: "bracket" }),
+      search: queryString.stringify(query, {arrayFormat: "bracket"}),
     });
   }
 
