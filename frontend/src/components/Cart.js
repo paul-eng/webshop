@@ -42,8 +42,8 @@ const Cart = (props) => {
 
   return (
     <div className="Cart">
-      <form onSubmit={updateQty}>
       <h3>CART</h3>
+      <form onSubmit={updateQty}>
         <ul>{cartItems}</ul>
         <input type="submit" value="UPDATE CART" />
       </form>

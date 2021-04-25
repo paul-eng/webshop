@@ -7,7 +7,7 @@ import { queryStr } from "../util/Util";
 
 class New extends Component {
   componentDidMount() {
-    let query = queryStr(this);
+    let query = queryStr(this.props);
     this.props
       .fetchNew()
       .then(this.props.getFilters)
@@ -15,7 +15,7 @@ class New extends Component {
   }
 
   componentDidUpdate() {
-    let query = queryStr(this);
+    let query = queryStr(this.props);
     this.props.fetchNew(query);
   }
 

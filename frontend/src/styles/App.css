@@ -60,12 +60,22 @@ ul {
   list-style-type: none;
 }
 
-
 h3 {
-  margin: 0;
-  padding: .5rem 0;
+  margin: .5rem 0;
 }
 
 #root {
-  padding: 2rem;
+  margin: 2rem;
+}
+
+input[type=text] {
+  padding: 0;
+  border: 0;
+  outline: none;
+  background-color: lightgray;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

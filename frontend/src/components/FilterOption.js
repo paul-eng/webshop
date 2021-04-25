@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import queryString from "query-string";
+import { queryStr } from "../util/Util";
 import { withRouter } from "react-router-dom";
 
 const FilterOption = (props) => {
-  let query = queryString.parse(props.location.search, {
-    arrayFormat: "bracket",
-  });
+  let query = queryStr(props);
   let weight = useRef("normal");
 
   useEffect(() => {

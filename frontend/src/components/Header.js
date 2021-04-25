@@ -1,5 +1,5 @@
 import React from "react";
-import Search from "./Search"
+import SearchBar from "./SearchBar";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
@@ -10,8 +10,7 @@ const Header = (props) => {
       <Link className="Logo" to="/">
         <h1>RESTFUL GOODS</h1>
       </Link>
-
-      <Search />
+      <SearchBar />
       <section>
         {props.count}
         <Link to="/cart">Cart</Link>

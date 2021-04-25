@@ -1,5 +1,4 @@
 .Header {
-    /* background-color: pink; */
     display: grid;
     align-items: center;
     grid-template-columns: max-content 1fr min-content;
@@ -7,31 +6,31 @@
         "logo search acct";
     grid-gap: 1rem;
     margin-bottom: 2.5rem;
+    position: relative;
+    border-bottom: .2rem solid #aaa;
 }
 
-.Header .Logo {
-    grid-area: logo;
+h1 {
+    margin: 0 0 1rem 0;
+    font-family: "authentic_bolder";
 }
 
-.Search {
-    grid-area: search;
+.SearchBar .wrapper {
+    margin-left: auto;
+    width: max-content;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    
 }
 
-.Header form {
+.SearchBar form {
     width: 0;
-    transition: .2s;
+    transition: .1s;
     text-align: right;
 }
 
-.Header input {
-    padding: 0;
-    border: 0;
+.SearchBar input {
     width: calc(100% - .5rem);
 }
 
-.Header section {
-    grid-area: acct;
-}

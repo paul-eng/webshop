@@ -1,7 +1,7 @@
 import queryString from "query-string";
 
-export const queryStr = (component) => {
-  return queryString.parse(component.props.location.search, {
+export const queryStr = (props) => {
+  return queryString.parse(props.location.search, {
     arrayFormat: "bracket",
   });
 };

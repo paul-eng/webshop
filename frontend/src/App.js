@@ -10,6 +10,7 @@ import Brand from "./components/Brand";
 import New from "./components/New";
 import Category from "./components/Category";
 import Item from "./components/Item";
+import Search from "./components/SearchBar";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path="/cart" component={Cart} />
           <Route path="/brand/:brand" component={Brand} />
           <Route path="/category/:cat" component={Category} />
+          <Route path="/search" component={Search} />
           <Route path="/:item" component={Item} />
         </Switch>
       </Router>

@@ -1,4 +1,21 @@
 .Cart {
     display: grid;
     grid-template-columns: 64% 36%;
+    grid-template-rows: min-content 1fr;
+    grid-template-areas: 
+    "title tile"
+    "items total";
+}
+
+.Cart h3 {
+    grid-area: title;
+    margin-bottom: 2rem;
+}
+
+.Cart form {
+    grid-area: items;
+}
+
+.Cart section {
+    grid-area: total;
 }
