@@ -33,25 +33,27 @@ class Filter extends Component {
     let filterList = [];
     for (let type in filters) {
       filterList.push(
-        <ul key={type}>
-          <h3>{type.toUpperCase()}</h3>
-          {filters[type]}
-        </ul>
+        <article key={type}>
+          <p>{type.toUpperCase()}</p>
+          <ul>{filters[type]}</ul>
+        </article>
       );
     }
 
     return (
       <div className="Filter">
         <h3 onClick={this.visible}>{this.state.visible ? "-" : "+"} FILTER</h3>
-        <section style={{ display: this.state.visible ? "flex" : "none" }}>
-          <ul>
-            <h3>SORT BY</h3>
-            <FilterOption text="NEWEST" filter="sort" value="-updated_date" />
-            <FilterOption text="PRICE LOW" filter="sort" value="price" />
-            <FilterOption text="PRICE HIGH" filter="sort" value="-price" />
-            <FilterOption text="A-Z" filter="sort" value="brand name" />
-          </ul>
+        <section style={{ display: this.state.visible ? "grid" : "none" }}>
           {filterList}
+          <article id="Sort">
+            <p>SORT BY</p>
+            <ul>
+              <FilterOption text="NEWEST" filter="sort" value="-updated_date" />
+              <FilterOption text="PRICE LOW" filter="sort" value="price" />
+              <FilterOption text="PRICE HIGH" filter="sort" value="-price" />
+              <FilterOption text="A-Z" filter="sort" value="brand name" />
+            </ul>
+          </article>
         </section>
       </div>
     );

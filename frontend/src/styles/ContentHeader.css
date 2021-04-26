@@ -1,0 +1,9 @@
+.ContentHeader {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.ContentHeader h3:last-child {
+    position: absolute;
+    top: 0;
+}

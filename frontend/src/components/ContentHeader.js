@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Filter from "./Filter"
+import Filter from "./Filter";
+import { queryStr } from "../util/Util";
+import "../styles/ContentHeader.css"
 
-const Title = (props) => {
+const ContentHeader = (props) => {
   let history = useHistory();
   let params = history.location.pathname.match(/(?<=\/)[^/]+/g) || "no params";
 
@@ -12,6 +14,10 @@ const Title = (props) => {
       ? params[1]
       : params[0] === "new-arrivals"
       ? params[0]
+      : params[0] === "search"
+      ? `search results for: '${queryStr(history).q.join(" ")}' (${
+          props.itemList.length
+        } found)`
       : params.length === 1
       ? ""
       : "all";
@@ -19,9 +25,9 @@ const Title = (props) => {
   title = title.toUpperCase().split("-").join(" ");
 
   return (
-    <div className="Title">
-      <h3>{title}</h3>
+    <div className="ContentHeader">
       <Filter />
+      <h3>{title}</h3>
     </div>
   );
 };
@@ -34,4 +40,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Title);
+export default connect(mapStateToProps)(ContentHeader);

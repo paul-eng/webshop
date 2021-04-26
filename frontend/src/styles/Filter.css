@@ -1,18 +1,39 @@
-.Filter{ 
+.Filter {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-
 .Filter section {
-    flex-direction: row-reverse;
+    /* gets the value of "display:" from Filter.js visibility toggle */
+    grid-template-columns: 1fr 1fr auto;
+    width: 100%;
+    font-family: "authentic_bold";
 }
 
 .Filter ul {
-  margin-left: 5vw;
+    color: #828282;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    height: 10em;
 }
 
+#Sort {
+    justify-self: end;
+    text-align: right;
+}
+
+#Sort ul {
+    align-items: flex-end;
+}
+
+
 .Filter li {
-    width: max-content;
+    cursor: pointer;
+}
+
+.active {
+    color: #0c0;
 }

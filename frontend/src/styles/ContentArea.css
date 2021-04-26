@@ -15,9 +15,3 @@
 .ContentArea .Nav {
     grid-area: nav;
 }
-
-.Title {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-}

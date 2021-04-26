@@ -5,14 +5,16 @@ import { withRouter } from "react-router-dom";
 
 const FilterOption = (props) => {
   let query = queryStr(props);
-  let weight = useRef("normal");
+  let active = useRef("");
 
   useEffect(() => {
-    let queries = Object.values(query).flat();
+    let removeSearch = {...query};
+    delete removeSearch.q;
+    let queries = Object.values(removeSearch).flat();
     if (queries.includes(props.value)) {
-      weight.current = "bold";
+      active.current = "active";
     } else {
-      weight.current = "normal";
+      active.current = "";
     }
   }, [query, props.value]);
 
@@ -34,7 +36,7 @@ const FilterOption = (props) => {
 
   return (
     <li className="FilterOption" onClick={setFilter}>
-      <div style={{ fontWeight: weight.current }}>{props.text}</div>
+      <div className={active.current}>{props.text}</div>
     </li>
   );
 };

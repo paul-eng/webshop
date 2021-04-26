@@ -48,7 +48,7 @@ class NavList extends Component {
     let links = this.state.links;
 
     return (
-      <ul style={{ display: active }} className={"NavList"}>
+      <ul style={{ display: active }} className="NavList">
         {this.list(path, links)}
       </ul>
     );

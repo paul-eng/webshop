@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { clearAllItems } from "../actions/ItemActions";
 import ShowProducts from "./ShowProducts";
 import Nav from "./Nav";
-import Title from "./Title";
+import ContentHeader from "./ContentHeader";
 import "../styles/ContentArea.css";
 
 class ContentArea extends Component {
@@ -14,7 +14,7 @@ class ContentArea extends Component {
   render() {
     return (
       <div className="ContentArea">
-        <Title />
+        <ContentHeader />
         <ShowProducts />
         <Nav />
       </div>
