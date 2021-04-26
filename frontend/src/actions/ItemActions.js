@@ -48,7 +48,7 @@ export const fetchSearch = (searchTerms, { sort, brand, category } = {}) => (
 };
 
 export const fetchAllItems = (
-  { sort, brand, category, p = 0 } = {},
+  { sort, brand, category, p = 1 } = {},
   paginate = true
 ) => (dispatch) => {
   return axios

@@ -15,7 +15,7 @@ const Page = (props) => {
     if (query.p) {
       query.p = parseInt(query.p) + i;
     } else {
-      query.p = i;
+      query.p = 1 + i;
     }
     props.history.push({
       search: queryString.stringify(query, { arrayFormat: "bracket" }),
@@ -25,7 +25,7 @@ const Page = (props) => {
   let disable;
   let func;
 
-  if (!page || page === "0") {
+  if (!page || page === "1") {
     disable = "red";
     func = () => setPage(0);
   } else {
