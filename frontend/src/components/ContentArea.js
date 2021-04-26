@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { clearAllItems } from "../actions/ItemActions";
+import ContentHeader from "./ContentHeader";
 import ShowProducts from "./ShowProducts";
 import Nav from "./Nav";
-import ContentHeader from "./ContentHeader";
+import Page from "./Page";
 import "../styles/ContentArea.css";
 
 class ContentArea extends Component {
@@ -17,6 +18,7 @@ class ContentArea extends Component {
         <ContentHeader />
         <ShowProducts />
         <Nav />
+        <Page />
       </div>
     );
   }

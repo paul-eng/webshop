@@ -9,7 +9,7 @@ class Shop extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
     this.props
-      .fetchAll()
+      .fetchAll(undefined, false)
       .then(this.props.getFilters)
       .then(() => this.props.fetchAll(query));
   }
@@ -30,9 +30,10 @@ class Shop extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAll: (query) => dispatch(fetchAllItems(query)),
+    fetchAll: (query, paginate) => dispatch(fetchAllItems(query, paginate)),
     getFilters: () => dispatch(getFilters()),
   };
 };
 
 export default connect(null, mapDispatchToProps)(Shop);
+

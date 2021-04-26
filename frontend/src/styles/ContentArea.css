@@ -9,9 +9,27 @@
     padding-right: 1vw; */
     grid-template-areas: 
         "nav title"
-        "nav items";
+        "nav items"
+        "nav page";
 }
 
 .ContentArea .Nav {
     grid-area: nav;
+}
+
+.ContentArea .Page {
+    grid-area: page;
+    width: max-content;
+    margin: 2rem 0;
+    background-color: pink;
+    user-select: none;
+}
+
+.Page ul {
+    display: flex;
+}
+
+.Page li {
+    cursor: pointer;
+    margin-right: 3rem;
 }

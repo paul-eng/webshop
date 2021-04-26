@@ -20,6 +20,7 @@
 }
 
 .CartItem input {
+    margin-top: .75rem;
     width: 4ch;
 }
 
