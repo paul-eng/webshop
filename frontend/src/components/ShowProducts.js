@@ -7,7 +7,7 @@ const ShowProducts = (props) => {
   let itemList = props.itemList;
   itemList =
     itemList.length === 0
-      ? "No products found"
+      ? ""
       : itemList.map((item) => <Product item={item} key={item._id} />);
   return <div className="ShowProducts">{itemList}</div>;
 };

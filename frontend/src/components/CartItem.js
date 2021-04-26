@@ -41,7 +41,7 @@ const CartItem = (props) => {
           onChange={getAmt}
         />
       </article>
-      <aside onClick={removeItem}>Remove</aside>
+      <aside onClick={removeItem}>X Remove</aside>
     </li>
   );
 };

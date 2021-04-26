@@ -48,7 +48,22 @@ const Cart = (props) => {
         <input type="submit" value="UPDATE CART" />
       </form>
       <section>
-        <div>Subtotal: ${props.total.toFixed(2)}</div>
+        <aside>
+          <ul>
+            <li>Subtotal:</li>
+            <li>Tax:</li>
+            <li>Total:</li>
+          </ul>
+          <ul>
+            <li>${props.total.toFixed(2)}</li>
+            <li>${(props.total * 0.08875).toFixed(2)}</li>
+            <li>${(props.total * 1.08875).toFixed(2)}</li>
+          </ul>
+        </aside>
+        <p>
+          Shipping will be calculated at checkout where vouchers also can be
+          applied.
+        </p>
       </section>
     </div>
   );
@@ -56,8 +71,7 @@ const Cart = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: (updates) =>
-      dispatch(updateCart(updates)),
+    updateCart: (updates) => dispatch(updateCart(updates)),
   };
 };
 

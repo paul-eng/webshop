@@ -1,21 +1,37 @@
 .Cart {
     display: grid;
-    grid-template-columns: 64% 36%;
+    grid-template-columns: 60% 1fr;
     grid-template-rows: min-content 1fr;
     grid-template-areas: 
-    "title tile"
+    "title title"
     "items total";
 }
 
 .Cart h3 {
-    grid-area: title;
     margin-bottom: 2rem;
 }
 
 .Cart form {
     grid-area: items;
+    margin-right: 2rem;
+}
+
+.Cart input[type=submit] {
+   float: right;
 }
 
 .Cart section {
+    margin-left: 2rem;
     grid-area: total;
+    font-size: 1.17em;
+}
+
+.Cart aside {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Cart section ul:last-of-type {
+    text-align: right;
 }

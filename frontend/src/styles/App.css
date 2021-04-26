@@ -78,6 +78,22 @@ input[type=text] {
   padding: 0;
 }
 
+input[type=number] {
+  text-align: center;
+  /* box-sizing: border-box; */
+  padding: .5rem .25rem ;
+}
+
+input[type=submit] {
+  font-family: "authentic_bold";
+  flex-shrink: 0;
+  background-color: black;
+  border-radius: 2rem;
+  color: white;
+  cursor: pointer;
+  padding: 1rem 1.75rem;
+}
+
 select {
   padding: .75rem 1.5rem .75rem .75rem;
   appearance: none;
@@ -93,4 +109,11 @@ select {
 a {
   text-decoration: none;
   color: black;
+}
+
+/* hack to hide alt text when image is loading */
+img {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }

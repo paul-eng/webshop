@@ -1,11 +1,14 @@
 .CartItem {
+    font-size: 1.17em;
+    font-weight: bold;
     display: grid;
     grid-template-columns: 160px max-content;
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: auto auto;
     grid-template-areas: 
         "img info"
-        "img trash";
-    margin-bottom: 1.4rem;
+        "img remove";
+    margin-bottom: 1.2rem;
+    column-gap: 1.2rem;
 }
 
 .CartItem a {
@@ -16,16 +19,10 @@
     width: 100%;
 }
 
-.CartItem article {
-    grid-area: info;
-}
-
 .CartItem input {
     width: 4ch;
 }
 
-.CartItem button {
-    grid-area: trash;
-    height: max-content;
-    width: max-content;
+.CartItem aside {
+    cursor: pointer;
 }
