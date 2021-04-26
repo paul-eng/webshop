@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import cartSVG from "../icons/cart.svg";
 import "../styles/Header.css";
 
 const Header = (props) => {
@@ -12,8 +13,11 @@ const Header = (props) => {
       </Link>
       <SearchBar />
       <section>
-        {props.count}
-        <Link to="/cart">Cart</Link>
+        <Link to="/cart">
+          {" "}
+          <div>{props.count > 0 ? props.count : ""}</div>
+          <img src={cartSVG} alt="cart" />
+        </Link>
       </section>
     </div>
   );

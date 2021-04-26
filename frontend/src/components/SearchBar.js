@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import queryString from "query-string";
 import { withRouter } from "react-router-dom";
+import searchSVG from "../icons/search.svg";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class SearchBar extends Component {
     return (
       <div className="SearchBar">
         <div className="wrapper" ref={this.searchBar}>
-          <h3 onClick={this.visible}>SEARCH</h3>
+          <img onClick={this.visible} style={{cursor: this.state.visible ? "default" : "pointer"}} alt="search" src={searchSVG} />
           <form
             style={{ width: this.state.visible ? "20vw" : 0 }}
             onSubmit={this.onSubmit}

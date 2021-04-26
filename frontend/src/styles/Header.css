@@ -4,10 +4,14 @@
     grid-template-columns: max-content 1fr min-content;
     grid-template-areas: 
         "logo search acct";
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     margin-bottom: 2.5rem;
     position: relative;
     border-bottom: .2rem solid #aaa;
+}
+
+.Header img {
+    width: 1.75rem;
 }
 
 h1 {
@@ -21,7 +25,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    
 }
 
 .SearchBar form {
@@ -34,3 +37,22 @@ h1 {
     width: calc(100% - .5rem);
 }
 
+.Header section{
+    position: relative;
+    z-index: 1;
+    color: red;
+}
+
+.Header section div{
+    position: absolute;
+    background-color: #0c0;
+    font-size: .8rem;
+    line-height: 1.25rem;
+    min-width: 1.25rem;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    top: 50%;
+    right: 50%;
+    font-family: "authentic_bold";
+}
