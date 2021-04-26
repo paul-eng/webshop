@@ -19,3 +19,12 @@
     width: 100%;
     background-color: white;
 }
+
+.Nav h3 {
+    cursor: pointer;
+    width: max-content;
+}
+
+.Nav a:hover, .Nav h3:hover {
+    color: #0c0;
+}

@@ -11,10 +11,12 @@ const ItemInfo = (props) => {
   return (
     <div className="ItemInfo">
       <img alt="temp" src={tempimg[0]}></img>
-      <section> 
+      <section>
         <h2>{`${itemInfo.brand} ${itemInfo.name}`.toUpperCase()}</h2>
         <h3>${itemInfo.price}</h3>
-        <h3>{itemInfo.description}</h3>
+        <h3>
+          <p>{itemInfo.description}</p>
+        </h3>
         <ItemControls />
       </section>
     </div>

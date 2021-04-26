@@ -20,9 +20,9 @@ const Nav = () => {
     <nav className="Nav">
       <div className="NavWrapper" onMouseLeave={hide}>
       
-          <Link to="/new-arrivals">
-            <h3 onMouseEnter={hide}>NEW ARRIVALS</h3>
-          </Link>
+          
+            <h3 onMouseEnter={hide}><Link to="/new-arrivals">NEW ARRIVALS</Link></h3>
+          
    
 
           <h3 onMouseEnter={() => show("/brand/")}>BRANDS</h3>

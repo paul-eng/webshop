@@ -8,8 +8,8 @@ const FilterOption = (props) => {
   let active = useRef("");
 
   useEffect(() => {
-    let removeSearch = {...query};
-    delete removeSearch.q;
+    // if user searches for a brand/category, query.q needs to be erased for this check or it will always trigger active
+    let removeSearch = Object.assign({}, query, { q: "" });
     let queries = Object.values(removeSearch).flat();
     if (queries.includes(props.value)) {
       active.current = "active";

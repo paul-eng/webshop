@@ -60,7 +60,7 @@ ul {
   list-style-type: none;
 }
 
-h3 {
+h2, h3 {
   margin: .5rem 0;
 }
 
@@ -68,11 +68,26 @@ h3 {
   margin: 2rem;
 }
 
-input[type=text] {
-  padding: 0;
+input, select {
+  background-color: #ddd;
   border: 0;
+}
+
+input[type=text] {
   outline: none;
-  background-color: lightgray;
+  padding: 0;
+}
+
+select {
+  padding: .75rem 1.5rem .75rem .75rem;
+  appearance: none;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position-x: right 5%;
+  background-position-y: 50%;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='30' viewBox='0 0 24 24' width='30' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
 }
 
 a {

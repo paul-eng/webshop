@@ -20,7 +20,7 @@ class ItemControls extends Component {
 
     if (prevState.selected !== selected) {
       let available = matchStock(this.props.stock, selected);
-      let warning = available.qty <= 5 ? `Only ${available.qty} remaining` : "";
+      let warning = available.qty <= 5 ? `ONLY ${available.qty} REMAINING` : "";
       this.setState({ warning: warning });
     }
   }
@@ -96,14 +96,14 @@ class ItemControls extends Component {
 
   render() {
     let stock = this.props.stock;
-    let warning = <p>{this.state.warning}</p>;
+    let warning = <aside>{this.state.warning}</aside>;
     let content =
       stock && !this.allSold() ? (
         <form onSubmit={this.addToCart}>
           <select onChange={this.changeActive} hidden={stock.length === 1}>
             {this.optionList(stock)}
           </select>
-          <input type="submit" value="Add To Cart" />
+          <input type="submit" value="ADD TO CART" />
         </form>
       ) : (
         <aside>SOLD OUT</aside>

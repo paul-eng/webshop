@@ -4,6 +4,10 @@
     align-items: flex-end;
 }
 
+.Filter h3 {
+    cursor: pointer;
+}
+
 .Filter section {
     /* gets the value of "display:" from Filter.js visibility toggle */
     grid-template-columns: 1fr 1fr auto;

@@ -1,8 +1,17 @@
 .ItemInfo {
     display: grid;
     grid-template-columns: minmax(350px, 50%) 1fr;
+    column-gap: 2rem;
 }
 
 .ItemInfo img {
     width: 100%;
+}
+
+.ItemInfo h2 {
+    margin-top: 0;
+}
+
+.ItemInfo p {
+    margin: 4rem 0;
 }

@@ -1,5 +1,6 @@
 .ItemControls form {
     display: flex;
+    margin-bottom: 2rem;
 }
 
 .ItemControls select {
@@ -8,9 +9,17 @@
 }
 
 .ItemControls input {
+    font-family: "authentic_bold";
     flex-shrink: 0;
+    background-color: black;
+    border-radius: 2rem;
+    color: white;
+    cursor: pointer;
+    padding: 1rem 1.75rem;
 }
 
-.ItemControls p {
-    color: red;
+.ItemControls aside {
+    font-family: "authentic_bold";
+    color: firebrick;
+    font-size: 1rem;
 }
