@@ -28,7 +28,7 @@ class SearchBar extends Component {
     let query = { q: terms };
     this.props.history.push({
       pathname: "/search/",
-      search: queryString.stringify(query, {arrayFormat: "bracket"}),
+      search: queryString.stringify(query, { arrayFormat: "bracket" }),
     });
   }
 

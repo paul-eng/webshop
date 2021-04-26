@@ -37,12 +37,25 @@ router.post("/", (req, res) => {
 // @route api/items
 // @read all items
 router.get("/", (req, res) => {
-  let sort = req.query.sort[0];
+  let sort = req.query.sort;
   let query = caseInsensitiveQ(req.query);
   //projection only returns necessary fields for faster frontside loading
   Item.find({ ...query }, "name category brand price gallery pathname")
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)
+    .then((items) => res.json(items))
+    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
+});
+
+// @route api/items/search
+// @read based on text match
+router.get("/search", (req, res) => {
+  let sort = req.query.sort;
+  let terms = req.query.searchTerms.map((term) => `"${term}"`).join(" ");
+  delete req.query.searchTerms;
+  let query = caseInsensitiveQ(req.query);
+  Item.find({ $text: { $search: terms }, ...query })
+    .sort(`${sort}`)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -85,7 +98,7 @@ router.get("/brands", (req, res) => {
 // @route api/items/brand/:brand
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
-  let sort = req.query.sort[0];
+  let sort = req.query.sort;
   let query = caseInsensitiveQ(req.query);
   Item.find(
     {

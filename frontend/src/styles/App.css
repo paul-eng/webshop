@@ -117,3 +117,7 @@ img {
   white-space: nowrap;
   overflow: hidden;
 }
+
+svg {
+  font-size: 1rem;
+}
