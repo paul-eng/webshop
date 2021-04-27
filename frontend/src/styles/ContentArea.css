@@ -20,7 +20,7 @@
 .ContentArea .Page {
     grid-area: page;
     width: max-content;
-    margin: 2rem 0;
+    margin-top: 4rem;
     background-color: pink;
     user-select: none;
 }

@@ -11,17 +11,16 @@ const Page = (props) => {
   let didMount = useRef(false);
 
   useEffect(() => {
-    updatePage(query.p);
-  }, [query.p]);
-
-  useEffect(() => {
+    // basically creating prevProps
     prevQuery.current = query;
   }, [query]);
-
-  let { p, ...prevFilters } = prevQuery.current;
-  let { p:p2, ...filters } = query;
   
-  useEffect(()=>{
+  let { p, ...prevFilters } = prevQuery.current;
+  let { p: p2, ...filters } = query;
+  
+
+  useEffect(() => {
+    // basically creating componenetDidUpdate
     if (didMount.current) {
       if (JSON.stringify(prevFilters) !== JSON.stringify(filters)) {
         query.p = 1;
@@ -32,7 +31,11 @@ const Page = (props) => {
     } else {
       didMount.current = true;
     }
-  })
+  });
+
+  useEffect(() => {
+    updatePage(query.p);
+  }, [query.p]);
 
   function setPage(i) {
     if (query.p) {

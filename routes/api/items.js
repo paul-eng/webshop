@@ -9,21 +9,21 @@ const pagesize = 6;
 router.get("/test", (req, res) => {
   let { sort, paginate, p, query } = util.getValues(req);
   Item.find({ ...query }, "name category brand price gallery pathname")
-  //sort by requested field, then alphabetically within field
-  .sort(`${sort} brand name`)
-  .skip(p * pagesize)
-  .limit(paginate && pagesize)
-  .then((items) => res.json(items))
-  .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
+    //sort by requested field, then alphabetically within field
+    .sort(`${sort} brand name`)
+    .skip(p * pagesize)
+    .limit(paginate && pagesize)
+    .then((items) => res.json(items))
+    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
 // @route api/items
 // @create
 router.post("/", (req, res) => {
   Item.create(req.body)
-  .then((item) => res.json({ msg: "Item added successfully" }))
-  .catch((err) =>
-  res.status(400).json({ error: "Unable to add this item", err })
-  );
+    .then((item) => res.json({ msg: "Item added successfully" }))
+    .catch((err) =>
+      res.status(400).json({ error: "Unable to add this item", err })
+    );
 });
 
 // @route api/items
@@ -32,17 +32,17 @@ router.get("/", (req, res) => {
   let { sort, paginate, p, query } = util.getValues(req);
   let operators = util.getOperators(sort, paginate, p, pagesize);
   Item.aggregate([
-    { $match: {...query} },
-    {$sort: {brand: 1, name: 1}},
+    { $match: { ...query } },
+    { $sort: { brand: 1, name: 1 } },
     {
       $facet: {
         results: [{ $count: "count" }],
-        items: [
-          ...operators,
-     ],
+        items: [...operators],
       },
     },
-  ]).then((data) => res.json(data[0]));
+  ])
+    .then((data) => res.json(data[0]))
+    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
 });
 
 // @route api/items/search
@@ -63,28 +63,21 @@ router.get("/search", (req, res) => {
 // @read recent items
 router.get("/new", (req, res) => {
   let { sort, paginate, p, query } = util.getValues(req);
-  // unlike cursor.limit(), aggregate $limit only takes a positive number, so helper function uses value of paginate to decide if a $limit operator should be pushed onto the pipeline array
   let operators = util.getOperators(sort, paginate, p, pagesize);
   let pipeline = [
     { $sort: { updated_date: -1 } },
-    { $limit: 13 },
+    { $limit: 15 },
     { $match: { ...query } },
     {
-      $project: {
-        name: 1,
-        category: 1,
-        brand: 1,
-        price: 1,
-        gallery: 1,
-        pathname: 1,
+      $facet: {
+        results: [{ $count: "count" }],
+        items: [...operators],
       },
     },
-    ...operators,
   ];
-
   Item.aggregate(pipeline)
-    .then((brands) => res.json(brands))
-    .catch(res.status(404).json({ norecentfound: "No recent items found" }));
+    .then((data) => res.json(data[0]))
+    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
 });
 
 // @route api/items/brands

@@ -12,12 +12,11 @@ const initState = {
 };
 const itemReducer = (state = initState, action) => {
   Object.freeze(state);
+  let count = action.results ? action.results.count : 0;
+
   switch (action.type) {
     case SET_ITEMS:
-      return Object.assign({}, state, {
-        itemList: action.items,
-        count: action.results ? action.results.count : 0,
-      });
+      return Object.assign({}, state, { itemList: action.items, count: count });
     case SET_ITEM:
       return Object.assign({}, state, { itemInfo: action.item });
     case CLEAR_ITEM:

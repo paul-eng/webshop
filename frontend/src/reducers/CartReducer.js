@@ -16,7 +16,6 @@ const initState = {
 };
 const cartReducer = (state = initState, action) => {
   Object.freeze(state);
-
   let cartItem, stock, newCount, newTotal;
 
   switch (action.type) {
