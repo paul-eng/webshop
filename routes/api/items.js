@@ -3,21 +3,17 @@ const router = express.Router();
 const Item = require("../../models/Item");
 const util = require("./route_util");
 
-const pagesize = 6;
+const pagesize = 3;
 
-// @route api/items/test
-router.get("/test", (req, res) => {
-  let terms = req.query.searchTerms.map((term) => `"${term}"`).join(" ");
-  delete req.query.searchTerms;
-  let { operators, query } = util.getValues(req, pagesize);
-  Item.aggregate([
-    {
-      $match: {
-        $text: { $search: terms },
-        ...query,
-      },
-    },
-    { $sort: { brand: 1, name: 1 } },
+let mongooseQuery = (req, res, pipeline) => {
+  let { operators, filters } = util.getValues(req, pagesize);
+  let match = pipeline.find((field) =>
+    Object.keys(field).includes("$match")
+  );
+  match["$match"] = { ...match["$match"], ...filters };
+
+  return Item.aggregate([
+    ...pipeline,
     {
       $facet: {
         results: [{ $count: "count" }],
@@ -25,6 +21,13 @@ router.get("/test", (req, res) => {
       },
     },
   ])
+    .then((data) => res.json(data[0]))
+    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+};
+
+// @route api/items/test
+router.get("/test", (req, res) => {
+  Item.aggregate([])
     .then((data) => res.json(data[0]))
     .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
 });
@@ -32,19 +35,8 @@ router.get("/test", (req, res) => {
 // @route api/items
 // @read all items
 router.get("/", (req, res) => {
-  let { operators, query } = util.getValues(req, pagesize);
-  Item.aggregate([
-    { $match: { ...query } },
-    { $sort: { brand: 1, name: 1 } },
-    {
-      $facet: {
-        results: [{ $count: "count" }],
-        items: [...operators],
-      },
-    },
-  ])
-    .then((data) => res.json(data[0]))
-    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+  let pipeline = [{ $match: {} }, { $sort: { brand: 1, name: 1 } }];
+  mongooseQuery(req, res, pipeline);
 });
 
 // @route api/items/search
@@ -52,90 +44,43 @@ router.get("/", (req, res) => {
 router.get("/search", (req, res) => {
   let terms = req.query.searchTerms.map((term) => `"${term}"`).join(" ");
   delete req.query.searchTerms;
-  let { operators, query } = util.getValues(req, pagesize);
-  Item.aggregate([
-    {
-      $match: {
-        $text: { $search: terms },
-        ...query,
-      },
-    },
+
+  let pipeline = [
+    { $match: { $text: { $search: terms } } },
     { $sort: { brand: 1, name: 1 } },
-    {
-      $facet: {
-        results: [{ $count: "count" }],
-        items: [...operators],
-      },
-    },
-  ])
-    .then((data) => res.json(data[0]))
-    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+  ];
+  mongooseQuery(req, res, pipeline);
 });
 
 // @route api/items/new
 // @read recent items
 router.get("/new", (req, res) => {
-  let { operators, query } = util.getValues(req, pagesize);
   let pipeline = [
     { $sort: { updated_date: -1 } },
     { $limit: 15 },
-    { $match: { ...query } },
-    {
-      $facet: {
-        results: [{ $count: "count" }],
-        items: [...operators],
-      },
-    },
+    { $match: {} },
   ];
-  Item.aggregate(pipeline)
-    .then((data) => res.json(data[0]))
-    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+  mongooseQuery(req, res, pipeline);
 });
 
 // @route api/items/brand/:brand
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
-  let { operators, query } = util.getValues(req, pagesize);
-  Item.aggregate([
-    {
-      $match: {
-        brand: { $regex: `${req.params.brand}`, $options: `i` },
-        ...query,
-      },
-    },
+  let pipeline = [
+    { $match: { brand: { $regex: `${req.params.brand}`, $options: `i` } } },
     { $sort: { brand: 1, name: 1 } },
-    {
-      $facet: {
-        results: [{ $count: "count" }],
-        items: [...operators],
-      },
-    },
-  ])
-    .then((data) => res.json(data[0]))
-    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+  ];
+  mongooseQuery(req, res, pipeline);
 });
 
 // @route api/items/category/:cat
 // @read items by category
 router.get("/category/:cat", (req, res) => {
-  let { operators, query } = util.getValues(req, pagesize);
-  Item.aggregate([
-    {
-      $match: {
-        category: { $regex: `${req.params.cat}`, $options: `i` },
-        ...query,
-      },
-    },
+  let pipeline = [
+    { $match: { category: { $regex: `${req.params.cat}`, $options: `i` } } },
     { $sort: { brand: 1, name: 1 } },
-    {
-      $facet: {
-        results: [{ $count: "count" }],
-        items: [...operators],
-      },
-    },
-  ])
-    .then((data) => res.json(data[0]))
-    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+  ];
+  mongooseQuery(req, res, pipeline);
 });
 
 // @route api/items/brands
