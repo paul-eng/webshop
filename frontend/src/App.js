@@ -22,9 +22,9 @@ class App extends Component {
           <Route exact path="/new-arrivals" component={New} />
           <Route exact path="/add-item" component={AddItem} />
           <Route exact path="/cart" component={Cart} />
+          <Route path="/search" component={Search} />
           <Route path="/brand/:brand" component={Brand} />
           <Route path="/category/:cat" component={Category} />
-          <Route path="/search" component={Search} />
           <Route path="/:item" component={Item} />
         </Switch>
       </Router>

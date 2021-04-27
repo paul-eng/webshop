@@ -3,8 +3,26 @@ const router = express.Router();
 const Item = require("../../models/Item");
 const util = require("./route_util");
 
+const pagesize = 6;
+
 // @route api/items/test
-router.get("/test", (req, res) => res.send("item route testing!"));
+router.get("/test", (req, res) => {
+  //  let buill= Item.find({}, "name")
+  //   return res.json({someguys: await buill.countDocuments(), somecounts: await buill})
+  Item.aggregate([
+    { $match: {} },
+    {
+      $facet: {
+        count: [{ $count: "count" }],
+        sample: [
+          {$match: {}},
+          {$sort: { brand: 1, name: 1}},
+          {$skip: 1},
+          { $limit: 2 }],
+      },
+    },
+  ]).then((stuff) => res.json(stuff));
+});
 
 // @route api/items
 // @create
@@ -15,8 +33,6 @@ router.post("/", (req, res) => {
       res.status(400).json({ error: "Unable to add this item", err })
     );
 });
-
-const pagesize = 6;
 
 // @route api/items
 // @read all items
@@ -31,33 +47,16 @@ router.get("/", (req, res) => {
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
 
-router.get("/pages", (req, res) => {
-  Item.find({}, "name category brand price gallery pathname")
-    //sort by requested field, then alphabetically within field
-    .skip(0 * pagesize)
-    .limit(false && pagesize)
-    .sort(`brand name`)
-    .then((items) => res.json(items))
-    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
-});
-
-router.get("/count", (req, res) => {
-  Item.find({}, "name category brand price gallery pathname")
-    //sort by requested field, then alphabetically within field
-    .countDocuments()
-    .then((items) => res.json(items))
-    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
-});
-
 // @route api/items/search
 // @read based on text match
 router.get("/search", (req, res) => {
-  let sort = req.query.sort;
   let terms = req.query.searchTerms.map((term) => `"${term}"`).join(" ");
   delete req.query.searchTerms;
-  let query = caseInsensitiveQ(req.query);
+  let { sort, paginate, p, query } = util.getValues(req);
   Item.find({ $text: { $search: terms }, ...query })
     .sort(`${sort}`)
+    .skip(p * pagesize)
+    .limit(paginate && pagesize)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -66,6 +65,7 @@ router.get("/search", (req, res) => {
 // @read recent items
 router.get("/new", (req, res) => {
   let { sort, paginate, p, query } = util.getValues(req);
+  // unlike cursor.limit(), aggregate $limit only takes a positive number, so helper function uses value of paginate to decide if a $limit operator should be pushed onto the pipeline array
   let operators = util.getOperators(sort, paginate, p, pagesize);
   let pipeline = [
     { $sort: { updated_date: -1 } },
@@ -86,9 +86,7 @@ router.get("/new", (req, res) => {
 
   Item.aggregate(pipeline)
     .then((brands) => res.json(brands))
-    .catch(
-      res.status(404).json({ norecentfound: "No recent items found" })
-    );
+    .catch(res.status(404).json({ norecentfound: "No recent items found" }));
 });
 
 // @route api/items/brands
@@ -102,14 +100,9 @@ router.get("/brands", (req, res) => {
 // @route api/items/brand/:brand
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
-
   let { sort, paginate, p, query } = util.getValues(req);
-
   Item.find(
-    {
-      brand: { $regex: `${req.params.brand}`, $options: `i` },
-      ...query,
-    },
+    { brand: { $regex: `${req.params.brand}`, $options: `i` }, ...query },
     "name category brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
@@ -134,7 +127,6 @@ router.get("/categories", (req, res) => {
 // @read items by category
 router.get("/category/:cat", (req, res) => {
   let { sort, paginate, p, query } = util.getValues(req);
-  console.log(sort,paginate,p,query)
   Item.find(
     { category: { $regex: `${req.params.cat}`, $options: `i` }, ...query },
     "name category brand price gallery pathname"

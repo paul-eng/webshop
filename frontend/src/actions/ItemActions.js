@@ -37,12 +37,14 @@ export const fetchItem = (path) => (dispatch) => {
     .then((res) => dispatch(setItem(res.data)));
 };
 
-export const fetchSearch = (searchTerms, { sort, brand, category } = {}) => (
-  dispatch
-) => {
+export const fetchSearch = (
+  searchTerms,
+  { sort, brand, category, p = 1 } = {},
+  paginate = true
+) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/search", {
-      params: { searchTerms, sort, brand, category },
+      params: { searchTerms, sort, brand, category,p,paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
 };

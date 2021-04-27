@@ -9,7 +9,7 @@ class Search extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
     this.props
-      .fetchSearch(query.q)
+      .fetchSearch(query.q, undefined, false)
       .then(this.props.getFilters)
       .then(() => this.props.fetchSearch(query.q, query));
   }
@@ -35,8 +35,8 @@ class Search extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSearch: (searchTerms, query) =>
-      dispatch(fetchSearch(searchTerms, query)),
+    fetchSearch: (searchTerms, query, paginate) =>
+      dispatch(fetchSearch(searchTerms, query, paginate)),
     getFilters: () => dispatch(getFilters()),
   };
 };
