@@ -9,9 +9,9 @@ class New extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
     this.props
-      .fetchNew()
+      .fetchNew(undefined,false)
       .then(this.props.getFilters)
-      .then(() => this.props.fetchNew(query));
+      .then(() => this.props.fetchNew(query))
   }
 
   componentDidUpdate() {
@@ -30,7 +30,7 @@ class New extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchNew: (query) => dispatch(fetchNew(query)),
+    fetchNew: (query, paginate) => dispatch(fetchNew(query, paginate)),
     getFilters: () => dispatch(getFilters()),
   };
 };

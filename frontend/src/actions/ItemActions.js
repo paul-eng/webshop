@@ -78,10 +78,13 @@ export const fetchCategory = (cat, { sort, brand, category } = {}) => (
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchNew = ({ sort, brand, category } = {}) => (dispatch) => {
+export const fetchNew = (
+  { sort, brand, category, p = 1 } = {},
+  paginate = true
+) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/new", {
-      params: { sort, brand, category },
+      params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
 };
