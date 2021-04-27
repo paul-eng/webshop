@@ -16,7 +16,7 @@ const ContentHeader = (props) => {
       ? params[0]
       : params[0] === "search"
       ? `search results for: '${queryStr(history).q.join(" ")}' (${
-          props.itemList.length
+          props.count
         } found)`
       : params.length === 1
       ? ""
@@ -32,10 +32,11 @@ const ContentHeader = (props) => {
   );
 };
 
-// connect to trigger rerender if items update without unmounting component ex. going from brand/:a to brand/:b
 
 const mapStateToProps = (state) => {
   return {
+    count: state.products.count,
+    // connect to trigger rerender if items update without unmounting component ex. going from brand/:a to brand/:b
     itemList: state.products.itemList,
   };
 };

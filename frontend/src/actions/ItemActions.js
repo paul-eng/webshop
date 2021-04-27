@@ -70,7 +70,7 @@ export const fetchBrand = (
     .get("http://localhost:8080/api/items/brand/" + brandURI, {
       params: { sort, brand, category, p, paginate },
     })
-    .then((res) => dispatch(setItems(res.data)));
+    .then((res) => dispatch(setItems(res.data)))
 };
 
 export const fetchCategory = (

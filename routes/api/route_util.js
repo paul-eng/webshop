@@ -1,3 +1,13 @@
+exports.getValues = (req, pagesize) => {
+  let sort = req.query.sort;
+  let paginate = req.query.paginate === "true";
+  let p = req.query.p - 1;
+  let query = caseInsensitiveQ(req.query);
+  let operators = getOperators(sort,paginate,p,pagesize)
+
+  return { operators, query };
+};
+
 const caseInsensitiveQ = (query) => {
   // break each separate query field into its' own $or statement (brand can be "leica" OR "sony" OR "nikon etc"),
   // join the fields with an $and statement (brand "leica" or brand "sony" AND category "compact" or category "rangefinder"),
@@ -19,16 +29,7 @@ const caseInsensitiveQ = (query) => {
   return { $and: and };
 };
 
-exports.getValues = (req) => {
-  let sort = req.query.sort;
-  let paginate = req.query.paginate === "true";
-  let p = req.query.p - 1;
-  let query = caseInsensitiveQ(req.query);
-
-  return { sort, paginate, p, query };
-};
-
-exports.getOperators = (sort, paginate, p, pagesize) => {
+const getOperators = (sort, paginate, p, pagesize) => {
   let operators = [];
   if (sort) {
     let sortObj = {};
