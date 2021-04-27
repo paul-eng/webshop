@@ -5,10 +5,11 @@ export const SET_ITEM = "SET_ITEM";
 export const CLEAR_ITEM = "CLEAR_ITEM";
 export const CLEAR_ALL_ITEMS = "CLEAR_ALL_ITEMS";
 
-export const setItems = (items) => {
+export const setItems = ({ items, results }) => {
   return {
     type: SET_ITEMS,
     items,
+    results: results[0],
   };
 };
 
@@ -44,7 +45,7 @@ export const fetchSearch = (
 ) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/search", {
-      params: { searchTerms, sort, brand, category,p,paginate },
+      params: { searchTerms, sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
 };

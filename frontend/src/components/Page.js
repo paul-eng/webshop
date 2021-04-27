@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { connect } from "react-redux";
 import queryString from "query-string";
 import { queryStr } from "../util/Util";
 import { withRouter } from "react-router-dom";
@@ -6,10 +7,32 @@ import { withRouter } from "react-router-dom";
 const Page = (props) => {
   let query = queryStr(props);
   const [page, updatePage] = useState(query.p);
+  let prevQuery = useRef({});
+  let didMount = useRef(false);
 
   useEffect(() => {
     updatePage(query.p);
   }, [query.p]);
+
+  useEffect(() => {
+    prevQuery.current = query;
+  }, [query]);
+
+  let { p, ...prevFilters } = prevQuery.current;
+  let { p:p2, ...filters } = query;
+  
+  useEffect(()=>{
+    if (didMount.current) {
+      if (JSON.stringify(prevFilters) !== JSON.stringify(filters)) {
+        query.p = 1;
+        props.history.push({
+          search: queryString.stringify(query, { arrayFormat: "bracket" }),
+        });
+      }
+    } else {
+      didMount.current = true;
+    }
+  })
 
   function setPage(i) {
     if (query.p) {
@@ -25,7 +48,7 @@ const Page = (props) => {
   let disable;
   let func;
 
-  if (!page || page === "1") {
+  if (!page || page <= "1") {
     disable = "red";
     func = () => setPage(0);
   } else {
@@ -40,10 +63,16 @@ const Page = (props) => {
           PREV
         </li>
         <li onClick={() => setPage(1)}>NEXT</li>
-        <li>{page}</li>
+        <li>{props.count}</li>
       </ul>
     </div>
   );
 };
 
-export default withRouter(Page);
+const mapStateToProps = (state) => {
+  return {
+    count: state.products.count,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Page));

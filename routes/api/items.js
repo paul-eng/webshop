@@ -7,44 +7,42 @@ const pagesize = 6;
 
 // @route api/items/test
 router.get("/test", (req, res) => {
-  //  let buill= Item.find({}, "name")
-  //   return res.json({someguys: await buill.countDocuments(), somecounts: await buill})
-  Item.aggregate([
-    { $match: {} },
-    {
-      $facet: {
-        count: [{ $count: "count" }],
-        sample: [
-          {$match: {}},
-          {$sort: { brand: 1, name: 1}},
-          {$skip: 1},
-          { $limit: 2 }],
-      },
-    },
-  ]).then((stuff) => res.json(stuff));
+  let { sort, paginate, p, query } = util.getValues(req);
+  Item.find({ ...query }, "name category brand price gallery pathname")
+  //sort by requested field, then alphabetically within field
+  .sort(`${sort} brand name`)
+  .skip(p * pagesize)
+  .limit(paginate && pagesize)
+  .then((items) => res.json(items))
+  .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
-
 // @route api/items
 // @create
 router.post("/", (req, res) => {
   Item.create(req.body)
-    .then((item) => res.json({ msg: "Item added successfully" }))
-    .catch((err) =>
-      res.status(400).json({ error: "Unable to add this item", err })
-    );
+  .then((item) => res.json({ msg: "Item added successfully" }))
+  .catch((err) =>
+  res.status(400).json({ error: "Unable to add this item", err })
+  );
 });
 
 // @route api/items
 // @read all items
 router.get("/", (req, res) => {
   let { sort, paginate, p, query } = util.getValues(req);
-  Item.find({ ...query }, "name category brand price gallery pathname")
-    //sort by requested field, then alphabetically within field
-    .sort(`${sort} brand name`)
-    .skip(p * pagesize)
-    .limit(paginate && pagesize)
-    .then((items) => res.json(items))
-    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
+  let operators = util.getOperators(sort, paginate, p, pagesize);
+  Item.aggregate([
+    { $match: {...query} },
+    {$sort: {brand: 1, name: 1}},
+    {
+      $facet: {
+        results: [{ $count: "count" }],
+        items: [
+          ...operators,
+     ],
+      },
+    },
+  ]).then((data) => res.json(data[0]));
 });
 
 // @route api/items/search
