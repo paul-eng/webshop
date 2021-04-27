@@ -8,7 +8,7 @@ import { queryStr, paramStr } from "../util/Util";
 class Brand extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
-    this.fetchBrand()
+    this.fetchBrand(undefined, false)
       .then(this.props.getFilters)
       .then(() => this.fetchBrand(query));
   }
@@ -24,9 +24,9 @@ class Brand extends Component {
     }
   }
 
-  fetchBrand(query) {
+  fetchBrand(query, paginate) {
     let parsedParam = paramStr(this).brand;
-    return this.props.fetchBrand(parsedParam, query);
+    return this.props.fetchBrand(parsedParam, query, paginate);
   }
 
   render() {
@@ -40,7 +40,8 @@ class Brand extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchBrand: (brandURI, query) => dispatch(fetchBrand(brandURI, query)),
+    fetchBrand: (brandURI, query, paginate) =>
+      dispatch(fetchBrand(brandURI, query, paginate)),
     getFilters: () => dispatch(getFilters()),
   };
 };

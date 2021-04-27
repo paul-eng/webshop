@@ -8,7 +8,7 @@ import { queryStr, paramStr } from "../util/Util";
 class Category extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
-    this.fetchCat()
+    this.fetchCat(undefined, false)
       .then(this.props.getFilters)
       .then(() => this.fetchCat(query));
   }
@@ -24,9 +24,9 @@ class Category extends Component {
     }
   }
 
-  fetchCat(query) {
+  fetchCat(query, paginate) {
     let parsedParam = paramStr(this).cat;
-    return this.props.fetchCat(parsedParam, query);
+    return this.props.fetchCat(parsedParam, query, paginate);
   }
 
   render() {
@@ -40,7 +40,8 @@ class Category extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCat: (cat, query) => dispatch(fetchCategory(cat, query)),
+    fetchCat: (cat, query, paginate) =>
+      dispatch(fetchCategory(cat, query, paginate)),
     getFilters: () => dispatch(getFilters()),
   };
 };

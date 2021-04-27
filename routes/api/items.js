@@ -1,25 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Item = require("../../models/Item");
-
-const caseInsensitiveQ = (query) => {
-  // break each separate query field into its' own $or statement (brand can be "leica" OR "sony" OR "nikon etc"),
-  // join the fields with an $and statement (brand "leica" or brand "sony" AND category "compact" or category "rangefinder"),
-  // make match for individual vals case insensitive ("NiKoN" will match "Nikon")
-  delete query.sort;
-  if (Object.keys(query).length === 0) {
-    return {};
-  }
-  let and = [];
-  for (let field in query) {
-    let or = { $or: [] };
-    query[field].forEach((val) => {
-      or["$or"].push({ [field]: { $regex: val, $options: `i` } });
-    });
-    and.push(or);
-  }
-  return { $and: and };
-};
+const util = require("./route_util");
 
 // @route api/items/test
 router.get("/test", (req, res) => res.send("item route testing!"));
@@ -34,15 +16,35 @@ router.post("/", (req, res) => {
     );
 });
 
+const pagesize = 6;
+
 // @route api/items
 // @read all items
 router.get("/", (req, res) => {
-  let sort = req.query.sort;
-  let query = caseInsensitiveQ(req.query);
-  //projection only returns necessary fields for faster frontside loading
+  let { sort, paginate, p, query } = util.getValues(req);
   Item.find({ ...query }, "name category brand price gallery pathname")
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)
+    .skip(p * pagesize)
+    .limit(paginate && pagesize)
+    .then((items) => res.json(items))
+    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
+});
+
+router.get("/pages", (req, res) => {
+  Item.find({}, "name category brand price gallery pathname")
+    //sort by requested field, then alphabetically within field
+    .skip(0 * pagesize)
+    .limit(false && pagesize)
+    .sort(`brand name`)
+    .then((items) => res.json(items))
+    .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
+});
+
+router.get("/count", (req, res) => {
+  Item.find({}, "name category brand price gallery pathname")
+    //sort by requested field, then alphabetically within field
+    .countDocuments()
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -63,11 +65,11 @@ router.get("/search", (req, res) => {
 // @route api/items/new
 // @read recent items
 router.get("/new", (req, res) => {
-  let sort = req.query.sort;
-  let query = caseInsensitiveQ(req.query);
-  Item.aggregate([
+  let { sort, paginate, p, query } = util.getValues(req);
+  let operators = util.getOperators(sort, paginate, p, pagesize);
+  let pipeline = [
     { $sort: { updated_date: -1 } },
-    { $limit: 5 },
+    { $limit: 13 },
     { $match: { ...query } },
     {
       $project: {
@@ -79,10 +81,12 @@ router.get("/new", (req, res) => {
         pathname: 1,
       },
     },
-  ])
-    .sort(`${sort} -updated_date`)
+    ...operators,
+  ];
+
+  Item.aggregate(pipeline)
     .then((brands) => res.json(brands))
-    .catch((err) =>
+    .catch(
       res.status(404).json({ norecentfound: "No recent items found" })
     );
 });
@@ -98,18 +102,20 @@ router.get("/brands", (req, res) => {
 // @route api/items/brand/:brand
 // @read items by brand
 router.get("/brand/:brand", (req, res) => {
-  let sort = req.query.sort;
-  let query = caseInsensitiveQ(req.query);
+
+  let { sort, paginate, p, query } = util.getValues(req);
+
   Item.find(
     {
       brand: { $regex: `${req.params.brand}`, $options: `i` },
       ...query,
     },
-    //projection only returns necessary fields for faster loading
     "name category brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
     .sort(`${sort} name`)
+    .skip(p * pagesize)
+    .limit(paginate && pagesize)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });
@@ -127,15 +133,16 @@ router.get("/categories", (req, res) => {
 // @route api/items/category/:cat
 // @read items by category
 router.get("/category/:cat", (req, res) => {
-  let sort = req.query.sort;
-  let query = caseInsensitiveQ(req.query);
+  let { sort, paginate, p, query } = util.getValues(req);
+  console.log(sort,paginate,p,query)
   Item.find(
     { category: { $regex: `${req.params.cat}`, $options: `i` }, ...query },
-    //projection only returns necessary fields for faster loading
     "name category brand price gallery pathname"
   )
     //sort by requested field, then alphabetically within field
     .sort(`${sort} brand name`)
+    .skip(p * pagesize)
+    .limit(paginate && pagesize)
     .then((items) => res.json(items))
     .catch((err) => res.status(404).json({ noitemsfound: "No items found" }));
 });

@@ -58,22 +58,26 @@ export const fetchAllItems = (
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchBrand = (brandURI, { sort, brand, category } = {}) => (
-  dispatch
-) => {
+export const fetchBrand = (
+  brandURI,
+  { sort, brand, category, p = 1 } = {},
+  paginate = true
+) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/brand/" + brandURI, {
-      params: { sort, brand, category },
+      params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
 };
 
-export const fetchCategory = (cat, { sort, brand, category } = {}) => (
-  dispatch
-) => {
+export const fetchCategory = (
+  cat,
+  { sort, brand, category, p = 1 } = {},
+  paginate = true
+) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/category/" + cat, {
-      params: { sort, brand, category },
+      params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
 };
