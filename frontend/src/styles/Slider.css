@@ -1,0 +1,36 @@
+.Slider {
+    position: relative;
+    height: max-content;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.Slider::-webkit-scrollbar { 
+    display: none;
+}
+
+.Slider section {
+    position: absolute;
+    display: flex;
+    width: 10px;
+}
+
+.Slider article, .Slider img {
+    width: 100%;
+    scroll-snap-align: start;
+}
+
+.Slider button {
+    position: relative;
+    z-index: 1;
+}
+
+/* @media (any-hover: none) {
+    .Slider section {
+        transform: none !important;
+    }
+
+ } */
