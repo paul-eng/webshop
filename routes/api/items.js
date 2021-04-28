@@ -3,7 +3,7 @@ const router = express.Router();
 const Item = require("../../models/Item");
 const util = require("./route_util");
 
-const pagesize = 3;
+const pagesize = 6;
 
 let mongooseQuery = (req, res, pipeline) => {
   let { operators, filters } = util.getValues(req, pagesize);

@@ -6,13 +6,18 @@ import { withRouter } from "react-router-dom";
 
 const Page = (props) => {
   let query = queryStr(props);
-  const [page, updatePage] = useState(query.p);
-  let prevQuery = useRef({});
-  let didMount = useRef(false);
-  let pagesize = 3;
+  const [active, setActive] = useState(query.p);
+  const prevQuery = useRef({});
+  const didMount = useRef(false);
+  const pagesize = 6;
+  const pageCount = Math.ceil(props.count / pagesize);
 
   useEffect(() => {
-    // basically creating prevProps
+    setActive(query.p || 1);
+  }, [query.p]);
+
+  useEffect(() => {
+    //  create ref similar to prevProps
     prevQuery.current = query;
   }, [query]);
 
@@ -20,74 +25,66 @@ const Page = (props) => {
   let { p: p2, ...filters } = query;
 
   useEffect(() => {
-    // basically creating componenetDidUpdate
-    // if querystring changes for a reason besides page change (ex. select diff filters), reset to first page
+    // basically componenetDidUpdate
+    // if querystring changes for reason besides page change (ex. select diff filters), set to first page
     if (didMount.current) {
       if (JSON.stringify(prevFilters) !== JSON.stringify(filters)) {
         query.p = 1;
-        props.history.push({
-          search: queryString.stringify(query, { arrayFormat: "bracket" }),
-        });
+        updateQuery();
       }
     } else {
       didMount.current = true;
     }
   });
 
-  useEffect(() => {
-    updatePage(query.p);
-  }, [query.p]);
-
-  function setPage(i) {
-    if (query.p) {
-      query.p = parseInt(query.p) + i;
-    } else {
-      query.p = 1 + i;
-    }
+  let updateQuery = () => {
     props.history.push({
       search: queryString.stringify(query, { arrayFormat: "bracket" }),
     });
-  }
+  };
 
-  let disable;
-  let func;
+  let setPage = (i) => {
+    query.p = query.p ? parseInt(query.p) + i : 1 + i;
+    updateQuery();
+  };
 
-  if (!page || page <= "1") {
-    disable = "red";
-    func = () => setPage(0);
-  } else {
-    disable = "green";
-    func = () => setPage(-1);
-  }
-
-  let goToPage = (i) => {
+  let jumpToPage = (i) => {
     query.p = i;
-    props.history.push({
-      search: queryString.stringify(query, { arrayFormat: "bracket" }),
-    });
+    updateQuery();
   };
 
-  let pages = (itemCount) => {
-    let pageCount = Math.ceil(itemCount / pagesize);
-    let links = [];
-
+  let pageList = () => {
+    let pages = [];
     for (let i = 1; i <= pageCount; i++) {
-      links.push(<li onClick={() => goToPage(i)}>{i}</li>);
+      pages.push(
+        <li
+          key={`pg${i}`}
+          id={i === parseInt(active) ? "active" : ""}
+          onClick={() => jumpToPage(i)}
+        >
+          {i}
+        </li>
+      );
     }
-    return links;
+    return pages;
   };
-  let pageList = pages(props.count);
 
   return (
     <div className="Page">
       <ul>
-        <li style={{ color: disable }} onClick={func}>
-          PREV
+        <li
+          style={{ display: active <= 1 ? "none" : "block" }}
+          onClick={() => setPage(-1)}
+        >
+          PREVIOUS
         </li>
-
-        {pageList}
-
-        <li onClick={() => setPage(1)}>NEXT</li>
+        {pageCount === 1 ? "" : pageList()}
+        <li
+          style={{ display: active >= pageCount ? "none" : "block" }}
+          onClick={() => setPage(1)}
+        >
+          NEXT
+        </li>
       </ul>
     </div>
   );

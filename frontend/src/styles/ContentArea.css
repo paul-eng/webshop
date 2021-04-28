@@ -20,8 +20,7 @@
 .ContentArea .Page {
     grid-area: page;
     width: max-content;
-    margin-top: 4rem;
-    background-color: pink;
+    margin: 4rem 0;
     user-select: none;
 }
 
@@ -30,6 +29,16 @@
 }
 
 .Page li {
+    font-family: "authentic_bold";
     cursor: pointer;
-    margin-right: 3rem;
+    margin-right:1rem;
+}
+
+.Page li:hover {
+    color: #0c0;
+}
+
+.Page #active {
+    pointer-events: none;
+    color: #0c0;
 }
