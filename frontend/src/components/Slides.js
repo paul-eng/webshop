@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Slides = React.forwardRef((props, ref) => {
-  let slides = [
-    props.slides[props.slides.length - 1],
-    ...props.slides,
-    props.slides[0],
-  ];
+  let [slides, setSlides] = useState([]);
+
+  useEffect(() => {
+    if (props.slides) {
+      setSlides([
+        props.slides[props.slides.length - 1],
+        ...props.slides,
+        props.slides[0],
+      ]);
+    }
+  }, [props.slides]);
 
   let slideList = slides.map((slide, i) => (
     <article key={slide + i}>
-      <img src={slide} alt="temp" />
+      <img src={slide} alt="product" />
     </article>
   ));
 

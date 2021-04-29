@@ -12,10 +12,23 @@
     display: none;
 }
 
+/* math with fractions of percents can cause
+transitions to be off by 1 pixel depending on 
+resolution, if happening use this pseudo element to masks edges */
+/* .Slider::before {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: 1;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+} */
+
 .Slider section {
     position: absolute;
     display: flex;
-    width: 10px;
 }
 
 .Slider article, .Slider img {
@@ -23,9 +36,22 @@
     scroll-snap-align: start;
 }
 
+.Slider aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .Slider button {
     position: relative;
     z-index: 1;
+    border: 0;
+    border-radius: 50%;
+    height: .75rem;
+    width: .75rem;
+    margin: 1rem .5rem;
+    padding: 0;
+    cursor:pointer;
 }
 
 @media (any-hover: none) {

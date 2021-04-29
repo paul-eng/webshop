@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "../styles/ItemInfo.css";
-import Slider from "./Slider"
+import Slider from "./Slider";
 import ItemControls from "./ItemControls";
 
 const ItemInfo = (props) => {
@@ -9,7 +9,7 @@ const ItemInfo = (props) => {
 
   return (
     <div className="ItemInfo">
-      <Slider />
+      <Slider gallery={itemInfo.gallery} />
       <section>
         <h2>{`${itemInfo.brand} ${itemInfo.name}`.toUpperCase()}</h2>
         <h3>${itemInfo.price}</h3>
