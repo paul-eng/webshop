@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Slides from "./Slides";
+import Modal from "./Modal";
 import "../styles/Slider.css";
 
 class Slider extends Component {
@@ -12,7 +13,9 @@ class Slider extends Component {
     };
     this.scroller = React.createRef();
     this.slides = React.createRef();
+    this.modalImg = React.createRef();
     this.setSlide = this.setSlide.bind(this);
+    this.setModal = this.setModal.bind(this);
     this.checkSlides = this.checkSlides.bind(this);
     this.touchSlides = this.touchSlides.bind(this);
     this.buttonList = this.buttonList.bind(this);
@@ -23,6 +26,7 @@ class Slider extends Component {
       this.scroller.current.addEventListener("scroll", this.touchSlides);
     } else {
       this.slides.current.addEventListener("transitionend", this.checkSlides);
+      this.modalImg.current.addEventListener("click", this.setModal);
       this.slides.current.addEventListener("click", () =>
         this.setSlide(this.state.selected + 1)
       );
@@ -45,6 +49,13 @@ class Slider extends Component {
       );
       this.slides.current.removeEventListener("click", () => this.setSlide(1));
     }
+  }
+
+  setModal() {
+    let i = this.state.selected;
+    i === this.props.gallery.length - 1
+      ? this.setState({ selected: 0 })
+      : this.setState({ selected: i + 1 });
   }
 
   touchSlides() {
@@ -116,7 +127,7 @@ class Slider extends Component {
   render() {
     return (
       <div className="Slider">
-        <div ref={this.scroller}>
+        <div className="wrapper" ref={this.scroller}>
           <Slides
             ref={this.slides}
             slides={this.props.gallery}
@@ -130,6 +141,11 @@ class Slider extends Component {
           />
         </div>
         <aside id="buttonwrap">
+          <Modal
+            ref={this.modalImg}
+            slides={this.props.gallery}
+            selected={this.state.selected}
+          />
           {this.props.gallery ? this.buttonList() : ""}
         </aside>
       </div>

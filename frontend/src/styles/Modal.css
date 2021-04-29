@@ -1,0 +1,43 @@
+.Modal {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.Modal article {
+    width: 1.75rem;
+    cursor: pointer;
+}
+
+.Modal div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: white;
+    justify-content: center;
+}
+
+.Modal div .container {
+    position: relative;
+    width: auto;
+}
+
+.Modal div section {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    transform: translate(200%, 100%);
+}
+
+.Modal div section img {
+    transform: rotate(45deg);
+    width: 1.75rem;
+}
+
+.Modal div img {
+    width: auto;
+    height: 100%;
+}

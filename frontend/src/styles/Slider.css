@@ -1,4 +1,4 @@
-.Slider div {
+.Slider .wrapper {
     position: relative;
     height: max-content;
     overflow-y: hidden;
@@ -17,14 +17,17 @@
     display: flex;
 }
 
-.Slider article, .Slider img {
+.Slider img {
     width: 100%;
     scroll-snap-align: start;
 }
 
 .Slider aside {
-    width: max-content;
-    margin: 0 auto;
+    position: relative;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Slider button {
@@ -32,7 +35,7 @@
     border-radius: 50%;
     height: .75rem;
     width: .75rem;
-    margin: 1rem .5rem;
+    margin: 0rem .5rem;
     padding: 0;
     cursor:pointer;
 }
