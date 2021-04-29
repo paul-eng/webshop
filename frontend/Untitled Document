@@ -1,0 +1,6 @@
+Use mongoose aggregate $facet to get subset of collection and total count in a single query
+
+Infinite scroll done with transform of el in an overflow:hidden container, scrolling inside a container with overflow-x:scroll is possible, but scroll behavior smooth not consistent
+
+ON mobile dont want to press buttons to trigger transforms when scrolling is preferred native navigation techinque, so disable transform buttons and use scroll snap,
+trigger position reset w/ scrollleft after detecting reaching edges of container

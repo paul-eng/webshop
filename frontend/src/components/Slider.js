@@ -29,16 +29,29 @@ class Slider extends Component {
     this.slides.current.addEventListener("transitionend", this.checkSlides);
 
     if ("ontouchstart" in window) {
-      let slideWidth =
-        this.slides.current.offsetWidth / (this.state.slides.length + 2);
-      this.slider.current.scrollLeft = slideWidth;
-      this.slider.current.addEventListener("scroll", this.touchSlides.bind(this));
+      this.slider.current.scrollLeft = this.slider.current.offsetWidth;
+      this.slider.current.addEventListener(
+        "scroll",
+        this.touchSlides.bind(this)
+      );
     }
   }
 
   touchSlides() {
-    console.log('coogie')
+    let sliderWidth = Math.round(
+      this.slides.current.getBoundingClientRect().width
+    );
+    let slideWidth = Math.round(this.slider.current.offsetWidth);
+    let scrollPos = Math.round(this.slider.current.scrollLeft);
 
+    if (scrollPos + slideWidth === sliderWidth) {
+      // scrolled to end
+      this.slider.current.scrollLeft = slideWidth;
+    } else if (scrollPos === 0) {
+      // scrolled to start
+      console.log("breh")
+      this.slider.current.scrollLeft = sliderWidth - (slideWidth * 2);
+    }
   }
 
   componentWillUnmount() {

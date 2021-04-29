@@ -28,9 +28,12 @@
     z-index: 1;
 }
 
-/* @media (any-hover: none) {
+@media (any-hover: none) {
     .Slider section {
         transform: none !important;
     }
 
- } */
+    .Slider button {
+        display: none;
+    }
+ }
