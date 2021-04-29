@@ -10,7 +10,7 @@ class Slider extends Component {
       active: false,
       animate: false,
     };
-    this.slider = React.createRef();
+    this.scroller = React.createRef();
     this.slides = React.createRef();
     this.setSlide = this.setSlide.bind(this);
     this.checkSlides = this.checkSlides.bind(this);
@@ -19,39 +19,53 @@ class Slider extends Component {
   }
 
   componentDidMount() {
-    this.slides.current.addEventListener("transitionend", this.checkSlides);
-
     if ("ontouchstart" in window) {
-      this.slider.current.scrollLeft = this.slider.current.offsetWidth;
-      this.slider.current.addEventListener("scroll", this.touchSlides);
+      this.scroller.current.addEventListener("scroll", this.touchSlides);
     } else {
+      this.slides.current.addEventListener("transitionend", this.checkSlides);
       this.slides.current.addEventListener("click", () =>
         this.setSlide(this.state.selected + 1)
       );
     }
   }
 
-  touchSlides() {
-    let sliderWidth = Math.round(
-      this.slides.current.getBoundingClientRect().width
-    );
-    let slideWidth = this.slider.current.offsetWidth;
-    let scrollPos = this.slider.current.scrollLeft;
-    // scroll snapped to end
-    if (scrollPos + slideWidth === sliderWidth) {
-      this.slider.current.scrollLeft = slideWidth;
-      // scroll snapped to start
-    } else if (scrollPos === 0) {
-      this.slider.current.scrollLeft = sliderWidth - slideWidth * 2;
+  onLoad() {
+    if ("ontouchstart" in window) {
+      this.scroller.current.scrollLeft = this.scroller.current.offsetWidth;
     }
   }
 
   componentWillUnmount() {
-    this.slides.current.removeEventListener("transitionend", this.checkSlides);
     if ("ontouchstart" in window) {
-      this.slider.current.removeEventListener("scroll", this.touchSlides);
+      this.scroller.current.removeEventListener("scroll", this.touchSlides);
     } else {
+      this.slides.current.removeEventListener(
+        "transitionend",
+        this.checkSlides
+      );
       this.slides.current.removeEventListener("click", () => this.setSlide(1));
+    }
+  }
+
+  touchSlides() {
+    let scrollerWidth = this.slides.current.getBoundingClientRect().width;
+    let slideWidth = this.scroller.current.offsetWidth;
+    let slideCount = Math.round(scrollerWidth / slideWidth);
+    let edges = [...Array(slideCount).keys()].map((el) => el * slideWidth);
+    let scrollPos = this.scroller.current.scrollLeft;
+    if (edges.includes(scrollPos)) {
+      let slide = edges.indexOf(scrollPos);
+      if (slide === slideCount - 1) {
+        // reach scrollbar end, reset to front
+        this.scroller.current.scrollLeft = slideWidth;
+        this.setState({ selected: 0 });
+        // reach scrollbar beginning, reset to end
+      } else if (slide === 0) {
+        this.scroller.current.scrollLeft = scrollerWidth - slideWidth * 2;
+        this.setState({ selected: slideCount - 2 });
+      } else {
+        this.setState({ selected: slide - 1 });
+      }
     }
   }
 
@@ -85,6 +99,7 @@ class Slider extends Component {
     let selected = this.state.selected;
     return this.props.gallery.map((el, i) => (
       <button
+        key={el + i}
         style={{
           backgroundColor:
             i === selected
@@ -100,19 +115,22 @@ class Slider extends Component {
 
   render() {
     return (
-      <div className="Slider" ref={this.slider}>
-        <Slides
-          ref={this.slides}
-          slides={this.props.gallery}
-          selected={this.state.selected}
-          animate={this.state.animate}
-        />
-        <aside>
+      <div className="Slider">
+        <div ref={this.scroller}>
+          <Slides
+            ref={this.slides}
+            slides={this.props.gallery}
+            selected={this.state.selected}
+            animate={this.state.animate}
+          />
           <img
+            onLoad={this.onLoad.bind(this)}
             src={this.props.gallery ? this.props.gallery[0] : ""}
             alt="frame"
           />
-          <div>{this.props.gallery ? this.buttonList() : ""}</div>
+        </div>
+        <aside id="buttonwrap">
+          {this.props.gallery ? this.buttonList() : ""}
         </aside>
       </div>
     );

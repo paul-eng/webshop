@@ -1,4 +1,4 @@
-.Slider {
+.Slider div {
     position: relative;
     height: max-content;
     overflow-y: hidden;
@@ -8,23 +8,9 @@
     -ms-overflow-style: none;
 }
 
-.Slider::-webkit-scrollbar { 
+.Slider div::-webkit-scrollbar { 
     display: none;
 }
-
-/* math with fractions of percents can cause
-transitions to be off by 1 pixel depending on 
-resolution, if happening use this pseudo element to masks edges */
-/* .Slider::before {
-    box-sizing: border-box;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    content: "";
-    z-index: 1;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-} */
 
 .Slider section {
     position: absolute;
@@ -37,14 +23,11 @@ resolution, if happening use this pseudo element to masks edges */
 }
 
 .Slider aside {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: max-content;
+    margin: 0 auto;
 }
 
 .Slider button {
-    position: relative;
-    z-index: 1;
     border: 0;
     border-radius: 50%;
     height: .75rem;
@@ -58,8 +41,4 @@ resolution, if happening use this pseudo element to masks edges */
     .Slider section {
         transform: none !important;
     }
-
-    .Slider button {
-        display: none;
-    }
- }
+}

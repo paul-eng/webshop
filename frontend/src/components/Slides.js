@@ -24,6 +24,7 @@ const Slides = React.forwardRef((props, ref) => {
 
   let style = {
     width: `${slides.length * 100}%`,
+    // if touch device, css disables all transform so slider can use scroll instead
     transform: `translateX(${xPos}%)`,
     transition: props.animate ? ".5s" : "0s",
   };
