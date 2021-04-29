@@ -47,7 +47,10 @@ class Slider extends Component {
         "transitionend",
         this.checkSlides
       );
-      this.slides.current.removeEventListener("click", () => this.setSlide(1));
+      this.modalImg.current.addEventListener("click", this.setModal);
+      this.slides.current.removeEventListener("click", () =>
+        this.setSlide(this.state.selected + 1)
+      );
     }
   }
 
@@ -58,11 +61,17 @@ class Slider extends Component {
       : this.setState({ selected: i + 1 });
   }
 
-  touchSlides() {
+  getSize() {
     let scrollerWidth = this.slides.current.getBoundingClientRect().width;
     let slideWidth = this.scroller.current.offsetWidth;
     let slideCount = Math.round(scrollerWidth / slideWidth);
     let edges = [...Array(slideCount).keys()].map((el) => el * slideWidth);
+
+    return { scrollerWidth, slideWidth, slideCount, edges };
+  }
+
+  touchSlides() {
+    let { scrollerWidth, slideWidth, slideCount, edges } = this.getSize();
     let scrollPos = this.scroller.current.scrollLeft;
     if (edges.includes(scrollPos)) {
       let slide = edges.indexOf(scrollPos);
@@ -96,12 +105,18 @@ class Slider extends Component {
   }
 
   setSlide(i) {
-    if (this.state.active === false && i !== this.state.selected) {
-      this.setState({
-        selected: i,
-        active: true,
-        animate: true,
-      });
+    if ("ontouchstart" in window) {
+      let slideWidth = this.scroller.current.offsetWidth;
+      this.scroller.current.scrollLeft = slideWidth + slideWidth * i;
+      this.setState({ selected: i });
+    } else {
+      if (this.state.active === false && i !== this.state.selected) {
+        this.setState({
+          selected: i,
+          active: true,
+          animate: true,
+        });
+      }
     }
   }
 

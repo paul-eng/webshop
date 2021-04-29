@@ -44,4 +44,8 @@
     .Slider section {
         transform: none !important;
     }
+
+    .Modal {
+        display: none;
+    }
 }
