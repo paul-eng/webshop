@@ -81,10 +81,17 @@ class Slider extends Component {
   }
 
   buttonList() {
+    let length = this.props.gallery.length;
+    let selected = this.state.selected;
     return this.props.gallery.map((el, i) => (
       <button
         style={{
-          backgroundColor: i === this.state.selected ? "black" : "#aaa",
+          backgroundColor:
+            i === selected
+              ? "black"
+              : selected === length && i === 0
+              ? "black"
+              : "#aaa",
         }}
         onClick={() => this.setSlide(i)}
       />
