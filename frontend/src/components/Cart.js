@@ -35,8 +35,8 @@ const Cart = (props) => {
   function updateQty(form) {
     form.preventDefault();
     // don't need the last form value (submit button)
-    let updates = Object.values(form.target.elements).slice(0, -1);
-
+    let updates = Array.from(form.target.elements).slice(0, -1);
+    console.log(Array.from(form.target.elements).slice(0, -1))
     props.updateCart(updates);
   }
 

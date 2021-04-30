@@ -42,7 +42,7 @@
     margin: 0rem .5rem;
     padding: 0;
     cursor:pointer;
-}
+} 
 
 @media (any-hover: none) {
     .Slider section {

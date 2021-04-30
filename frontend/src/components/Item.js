@@ -18,8 +18,8 @@ class Item extends Component {
   render() {
     return (
       <div className="Item">
-        <Nav />
         <ItemInfo />
+        <Nav />
       </div>
     );
   }
