@@ -23,6 +23,7 @@
 .Modal div .container {
     position: relative;
     width: auto;
+    user-select: none;
 }
 
 .Modal div section {

@@ -8,6 +8,10 @@
     -ms-overflow-style: none;
 }
 
+#frame {
+    visibility: hidden;
+}
+
 .Slider div::-webkit-scrollbar { 
     display: none;
 }

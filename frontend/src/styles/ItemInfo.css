@@ -11,3 +11,10 @@
 .ItemInfo p {
     margin: 4rem 0;
 }
+
+@media (any-hover: none) {
+.ItemInfo {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+}

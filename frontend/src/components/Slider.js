@@ -150,6 +150,7 @@ class Slider extends Component {
             animate={this.state.animate}
           />
           <img
+            id="frame"
             onLoad={this.onLoad.bind(this)}
             src={this.props.gallery ? this.props.gallery[0] : ""}
             alt="frame"
