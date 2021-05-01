@@ -34,9 +34,8 @@ const Cart = (props) => {
 
   function updateQty(form) {
     form.preventDefault();
-    // don't need the last form value (submit button)
+    // don't need the last form value (submit button) so slice
     let updates = Array.from(form.target.elements).slice(0, -1);
-    console.log(Array.from(form.target.elements).slice(0, -1))
     props.updateCart(updates);
   }
 
@@ -45,7 +44,7 @@ const Cart = (props) => {
       <h3>CART</h3>
       <form onSubmit={updateQty}>
         <ul>{cartItems}</ul>
-        <input type="submit" value="UPDATE CART" />
+        <input type="submit" value="UPDATE CART"/>
       </form>
       <section>
         <aside>

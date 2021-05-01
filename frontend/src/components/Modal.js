@@ -15,7 +15,7 @@ const Modal = React.forwardRef((props, ref) => {
         <img src={plusSVG} alt="plus" />
       </article>
       <div ref={modal} style={{ display: "none" }}>
-        <div className="container">
+        <div>
           <section onClick={onClick}>
             <img src={plusSVG} alt="plus" />
           </section>

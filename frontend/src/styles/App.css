@@ -47,7 +47,8 @@ body,
 .New, 
 .Shop, 
 .Item,
-.NavList {
+.NavList,
+.Account {
   height: 100%;
   margin: 0;
 }

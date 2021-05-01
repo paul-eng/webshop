@@ -20,7 +20,7 @@
     justify-content: center;
 }
 
-.Modal div .container {
+.Modal div div {
     position: relative;
     width: auto;
     user-select: none;
