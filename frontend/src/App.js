@@ -11,6 +11,7 @@ import New from "./components/New";
 import Category from "./components/Category";
 import Item from "./components/Item";
 import Search from "./components/Search";
+import CreateAccount from "./components/CreateAccount";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/new-arrivals" component={New} />
           <Route exact path="/add-item" component={AddItem} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/account/create" component={CreateAccount} />          
           <Route path="/search" component={Search} />
           <Route path="/brand/:brand" component={Brand} />
           <Route path="/category/:cat" component={Category} />

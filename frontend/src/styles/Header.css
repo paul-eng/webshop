@@ -35,6 +35,9 @@ h1 {
 
 .SearchBar input {
     width: calc(100% - .5rem);
+    margin: 0;
+    font-weight: bold;
+    background-color: white;
 }
 
 .Header section{

@@ -61,6 +61,7 @@ class SearchBar extends Component {
           >
             <input
               ref={this.textbox}
+              placeholder="Search item(s)"
               type="text"
               value={this.state.search}
               onChange={this.onChange}

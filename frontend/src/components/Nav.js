@@ -23,7 +23,7 @@ const Nav = () => {
 
   function handleClick(e) {
     // skip first click of account h3 to open tab
-    if (count > 0 && (account.current && !account.current.contains(e.target))) {
+    if (count > 0 && account.current && !account.current.contains(e.target)) {
       setAcct(false);
       window.removeEventListener("click", handleClick);
       return (count = 0);
@@ -51,7 +51,10 @@ const Nav = () => {
 
   return (
     <nav className="Nav">
-      <div className={acct ? "NavWrapper masked" : "NavWrapper"} onMouseLeave={hide}>
+      <div
+        className={acct ? "NavWrapper masked" : "NavWrapper"}
+        onMouseLeave={hide}
+      >
         <h3 onMouseEnter={hide}>
           <Link to="/new-arrivals">NEW ARRIVALS</Link>
         </h3>
@@ -69,9 +72,11 @@ const Nav = () => {
       </div>
       <section>
         <Account active={acct} ref={account} />
-        <h3 className={acct ? "TopLevel" : ""} onClick={onClick}>
-          Account
-        </h3>
+        <span>
+          <h3 className={acct ? "TopLevel" : ""} onClick={onClick}>
+            Account
+          </h3>
+        </span>
       </section>
     </nav>
   );

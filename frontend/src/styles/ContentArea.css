@@ -13,10 +13,6 @@
         "nav page";
 }
 
-.ContentArea .Nav {
-    grid-area: nav;
-}
-
 .ContentArea .Page {
     grid-area: page;
     width: max-content;

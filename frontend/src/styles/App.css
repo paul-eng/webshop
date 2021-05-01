@@ -76,19 +76,20 @@ input, select {
   border: 0;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
   outline: none;
-  padding: 0;
+  padding: 1rem 1.25rem;
+  font-size: 1.17rem;
+  margin-bottom: 1rem;
 }
 
 input[type=number] {
   text-align: center;
-  /* box-sizing: border-box; */
   padding: .5rem .25rem ;
 }
 
 input[type=submit] {
-  font-family: "authentic_bold";
+  font-family: "authentic_bolder";
   flex-shrink: 0;
   background-color: black;
   border-radius: 2rem;

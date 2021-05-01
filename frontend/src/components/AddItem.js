@@ -65,7 +65,7 @@ class AddItem extends Component {
     return (
       <div className="AddItem">
         <Link to="/">Back Home</Link>
-        <form noValidate onSubmit={this.onSubmit}>
+        <form style={{display: "flex", flexDirection: "column", width: "75%", height: "60%"}} noValidate onSubmit={this.onSubmit}>
           <input
             type="text"
             placeholder="Name"
