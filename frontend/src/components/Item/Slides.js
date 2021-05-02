@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 const Slides = React.forwardRef((props, ref) => {
   let [slides, setSlides] = useState([]);
   let [loaded, setLoad] = useState([]);
-  window.loaded = loaded;
   useEffect(() => {
     if (props.slides) {
       setSlides([

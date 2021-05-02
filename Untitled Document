@@ -5,4 +5,8 @@ Infinite scroll done with transform of el in an overflow:hidden container, scrol
 ON mobile dont want to press buttons to trigger transforms when scrolling is preferred native navigation techinque, so disable transform buttons and use scroll snap,
 trigger position reset w/ scrollleft after detecting reaching edges of container
 
-later components use react hooks just to play around
+later components use react hooks to manage internal state w better separation of concerns and less re-renders for irrelevant prop/state updates 
+
+optional chaining, pseudoselectors pseudoelements
+
+at enterprise level, use firebase auth, magento backend, formik validation

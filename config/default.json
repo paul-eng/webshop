@@ -1,4 +1,6 @@
 {
   "mongoURI": 
-    "mongodb+srv://paul-eng:Tr!b3s11@yaboy@cluster0.cd8zj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongodb+srv://paul-eng:Tr!b3s11@yaboy@cluster0.cd8zj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "secret":
+    "I got JWTs for days"
 }
