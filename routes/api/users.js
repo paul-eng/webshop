@@ -38,9 +38,11 @@ router.post("/login", ({ body: user }, res) => {
         if (same) {
           const token = jwt.sign({ id: match._id }, config.get("secret"));
           res.json({
-            firstname: match.firstname,
-            lastname: match.lastname,
-            email: match.email,
+            user: {
+              firstname: match.firstname,
+              lastname: match.lastname,
+              email: match.email,
+            },
             token,
           });
         } else {

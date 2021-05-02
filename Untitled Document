@@ -10,3 +10,5 @@ later components use react hooks to manage internal state w better separation of
 optional chaining, pseudoselectors pseudoelements
 
 at enterprise level, use firebase auth, magento backend, formik validation
+
+localstorage not the best
