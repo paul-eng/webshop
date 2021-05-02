@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchNew } from "../actions/ItemActions";
-import { getFilters } from "../actions/FilterActions";
-import ContentArea from "./ContentArea";
-import { queryStr } from "../util/Util";
+import { fetchNew } from "../../actions/ItemActions";
+import { getFilters } from "../../actions/FilterActions";
+import ContentArea from "../Explore/ContentArea";
+import { queryStr } from "../../util/Util";
 
 class New extends Component {
   componentDidMount() {

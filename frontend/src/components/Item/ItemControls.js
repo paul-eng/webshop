@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../actions/CartActions";
-import { stockType, stockQty, matchStock, matchItem } from "../util/Util";
-import "../styles/ItemControls.css";
+import { addToCart } from "../../actions/CartActions";
+import { stockType, stockQty, matchStock, matchItem } from "../../util/Util";
+import "../../styles/ItemControls.css";
 
 class ItemControls extends Component {
   constructor(props) {

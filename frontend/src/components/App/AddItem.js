@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 class AddItem extends Component {
@@ -64,7 +63,6 @@ class AddItem extends Component {
   render() {
     return (
       <div className="AddItem">
-        <Link to="/">Back Home</Link>
         <form style={{display: "flex", flexDirection: "column", width: "75%", height: "60%"}} noValidate onSubmit={this.onSubmit}>
           <input
             type="text"

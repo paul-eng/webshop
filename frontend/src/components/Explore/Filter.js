@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import FilterOption from "./FilterOption";
-import "../styles/Filter.css";
+import "../../styles/Filter.css";
 
 class Filter extends Component {
   constructor(props) {

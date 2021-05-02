@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Filter from "./Filter";
-import { queryStr } from "../util/Util";
-import "../styles/ContentHeader.css"
+import { queryStr } from "../../util/Util";
+import "../../styles/ContentHeader.css"
 
 const ContentHeader = (props) => {
   let history = useHistory();

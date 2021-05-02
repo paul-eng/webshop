@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { clearAllItems } from "../actions/ItemActions";
+import { clearAllItems } from "../../actions/ItemActions";
 import ContentHeader from "./ContentHeader";
 import ShowProducts from "./ShowProducts";
-import Nav from "./Nav";
+import Nav from "../Nav/Nav";
 import Page from "./Page";
-import "../styles/ContentArea.css";
+import "../../styles/ContentArea.css";
 
 class ContentArea extends Component {
   componentWillUnmount() {

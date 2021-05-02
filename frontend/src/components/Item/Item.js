@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchItem, clearItem } from "../actions/ItemActions";
+import { fetchItem, clearItem } from "../../actions/ItemActions";
 import ItemInfo from "./ItemInfo";
-import Nav from "./Nav";
-import "../styles/Item.css";
+import Nav from "../Nav/Nav";
+import "../../styles/Item.css";
 
 class Item extends Component {
   componentDidMount() {

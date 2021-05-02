@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchAllItems } from "../actions/ItemActions";
-import { getFilters } from "../actions/FilterActions";
-import ContentArea from "./ContentArea";
-import { queryStr } from "../util/Util";
+import { fetchAllItems } from "../../actions/ItemActions";
+import { getFilters } from "../../actions/FilterActions";
+import ContentArea from "../Explore/ContentArea";
+import { queryStr } from "../../util/Util";
 
 class Shop extends Component {
   componentDidMount() {

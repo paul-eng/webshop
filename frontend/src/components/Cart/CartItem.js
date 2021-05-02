@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../styles/CartItem.css";
+import "../../styles/CartItem.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { removeFromCart } from "../actions/CartActions";
+import { removeFromCart } from "../../actions/CartActions";
 
 const CartItem = (props) => {
   const item = props.item;

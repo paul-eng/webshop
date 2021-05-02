@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchBrand } from "../actions/ItemActions";
-import { getFilters } from "../actions/FilterActions";
-import ContentArea from "./ContentArea";
-import { queryStr, paramStr } from "../util/Util";
+import { fetchCategory } from "../../actions/ItemActions";
+import { getFilters } from "../../actions/FilterActions";
+import ContentArea from "../Explore/ContentArea";
+import { queryStr, paramStr } from "../../util/Util";
 
-class Brand extends Component {
+class Category extends Component {
   componentDidMount() {
     let query = queryStr(this.props);
-    this.fetchBrand(undefined, false)
+    this.fetchCat(undefined, false)
       .then(this.props.getFilters)
-      .then(() => this.fetchBrand(query));
+      .then(() => this.fetchCat(query));
   }
 
   componentDidUpdate(prevProps) {
@@ -18,20 +18,20 @@ class Brand extends Component {
     // update filters if component has changed "pages" without unmounting ex. from /category/:a to /category/:b
     let query = queryStr(this.props);
     if (prevProps.match.url !== this.props.match.url) {
-      this.fetchBrand(query).then(this.props.getFilters);
+      this.fetchCat(query).then(this.props.getFilters);
     } else {
-      this.fetchBrand(query);
+      this.fetchCat(query);
     }
   }
 
-  fetchBrand(query, paginate) {
-    let parsedParam = paramStr(this).brand;
-    return this.props.fetchBrand(parsedParam, query, paginate);
+  fetchCat(query, paginate) {
+    let parsedParam = paramStr(this).cat;
+    return this.props.fetchCat(parsedParam, query, paginate);
   }
 
   render() {
     return (
-      <div className="Brand">
+      <div className="Category">
         <ContentArea />
       </div>
     );
@@ -40,10 +40,10 @@ class Brand extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchBrand: (brandURI, query, paginate) =>
-      dispatch(fetchBrand(brandURI, query, paginate)),
+    fetchCat: (cat, query, paginate) =>
+      dispatch(fetchCategory(cat, query, paginate)),
     getFilters: () => dispatch(getFilters()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Brand);
+export default connect(null, mapDispatchToProps)(Category);

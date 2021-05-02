@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import NavList from "./NavList";
 import Account from "./Account";
-import "../styles/Nav.css";
+import "../../styles/Nav.css";
 
 const Nav = () => {
   function show(path, e) {

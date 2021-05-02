@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import "../styles/ItemInfo.css";
+import "../../styles/ItemInfo.css";
 import Slider from "./Slider";
 import ItemControls from "./ItemControls";
 

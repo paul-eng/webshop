@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./styles/App.css";
+import "../../styles/App.css";
 
-import Header from "./components/Header";
-import AddItem from "./components/AddItem";
-import Cart from "./components/Cart";
-import Shop from "./components/Shop";
-import Brand from "./components/Brand";
-import New from "./components/New";
-import Category from "./components/Category";
-import Item from "./components/Item";
-import Search from "./components/Search";
-import CreateAccount from "./components/CreateAccount";
+import Header from "./Header";
+import AddItem from "./AddItem";
+import Cart from "../Cart/Cart";
+import Shop from "../Shop/Shop";
+import Brand from "../Shop/Brand";
+import New from "../Shop/New";
+import Category from "../Shop/Category";
+import Item from "../Item/Item";
+import Search from "../Shop/Search";
+import CreateAccount from "./CreateAccount";
 
 class App extends Component {
   render() {

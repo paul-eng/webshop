@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import "../styles/Product.css";
+import "../../styles/Product.css";
 
 const Product = (props) => {
   const item = props.item;

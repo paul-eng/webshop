@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import Product from "./Product";
-import "../styles/ShowProducts.css";
+import Product from "../Shop/Product";
+import "../../styles/ShowProducts.css";
 
 const ShowProducts = (props) => {
   let itemList = props.itemList;

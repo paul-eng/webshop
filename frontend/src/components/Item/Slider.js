@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slides from "./Slides";
 import Modal from "./Modal";
-import "../styles/Slider.css";
+import "../../styles/Slider.css";
 
 class Slider extends Component {
   constructor(props) {

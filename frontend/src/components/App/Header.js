@@ -2,8 +2,8 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import cartSVG from "../icons/cart.svg";
-import "../styles/Header.css";
+import cartSVG from "../../icons/cart.svg";
+import "../../styles/Header.css";
 
 const Header = (props) => {
   return (

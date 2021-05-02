@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import plusSVG from "../icons/plus.svg";
-import "../styles/Modal.css";
+import plusSVG from "../../icons/plus.svg";
+import "../../styles/Modal.css";
 
 const Modal = React.forwardRef((props, ref) => {
   const modal = useRef(null);

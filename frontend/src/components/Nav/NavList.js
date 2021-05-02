@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchBrands, fetchCategories } from "../actions/NavActions";
+import { fetchBrands, fetchCategories } from "../../actions/NavActions";
 
 class NavList extends Component {
   constructor(props) {

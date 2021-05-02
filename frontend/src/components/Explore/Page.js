@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { queryStr } from "../util/Util";
+import { queryStr } from "../../util/Util";
 import { withRouter } from "react-router-dom";
 
 const Page = (props) => {
