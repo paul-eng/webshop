@@ -18,17 +18,15 @@ const Nav = () => {
 
   function onClick() {
     setAcct(true);
-    window.addEventListener("click", handleClick);
+    window.addEventListener("mousedown", handleDown);
   }
 
-  function handleClick(e) {
+  function handleDown(e) {
     // skip first click of account h3 to open tab
-    if (count > 0 && account.current && !account.current.contains(e.target)) {
+    if (account.current && !account.current.contains(e.target)) {
       setAcct(false);
-      window.removeEventListener("click", handleClick);
-      return (count = 0);
+      window.removeEventListener("mousedown", handleDown);
     }
-    count++;
   }
 
   const [focus, setFocus] = useState({ className: "" });
@@ -37,7 +35,6 @@ const Nav = () => {
   const [acct, setAcct] = useState(false);
   const prevFocus = useRef({ className: "" });
   const account = useRef();
-  let count = 0;
 
   useEffect(() => {
     focus.className = "TopLevel";
