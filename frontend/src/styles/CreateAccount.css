@@ -18,13 +18,23 @@
     margin-bottom: 2rem;
 }
 
-.AccountForm {
+.CreateAccount form {
     display: flex;
     flex-direction: column;
 }
 
+.CreateAccount form article {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
+}
+
+.CreateAccount article h3:last-of-type{
+    color: red;
+}
+
 .AccountForm input[type=submit] {
+    align-self: flex-end;
     margin-top: 1rem;
     width: max-content;
-    align-self: flex-end;
 }

@@ -61,6 +61,7 @@
 
 .Account input[type=text], .Account input[type=password] {
     width: 70%;
+    margin-bottom: 1rem;
 }
 
 .Account input[type=submit] {

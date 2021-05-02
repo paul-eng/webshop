@@ -80,7 +80,6 @@ input[type=text], input[type=password] {
   outline: none;
   padding: 1rem 1.25rem;
   font-size: 1.17rem;
-  margin-bottom: 1rem;
 }
 
 input[type=number] {
