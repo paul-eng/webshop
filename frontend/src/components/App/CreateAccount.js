@@ -9,8 +9,8 @@ class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first: "",
-      last: "",
+      firstname: "",
+      lastname: "",
       email: "",
       pass: "",
       pass2: "",
@@ -34,13 +34,13 @@ class CreateAccount extends Component {
       validations.push(val);
     }
 
-    Promise.allSettled(validations).then(async () => {
+    Promise.allSettled(validations).then(() => {
       if (Object.keys(this.state.errors).length === 0) {
         this.setState(
           { email: validator.normalizeEmail(this.state.email) },
           () => {
             const { errors, pass2, ...user } = this.state;
-            this.props.addUser(user)
+            this.props.addUser(user);
           }
         );
       }
@@ -67,7 +67,7 @@ class CreateAccount extends Component {
     let value = this.state[field];
 
     if (
-      (field === "first" || field === "last") &&
+      (field === "firstname" || field === "lastname") &&
       !validator.isAlpha(value, "en-US", { ignore: "-" })
     ) {
       seterror("Please enter a valid name.");
@@ -81,7 +81,9 @@ class CreateAccount extends Component {
       field === "pass" &&
       !validator.isStrongPassword(value, { minLength: 6, minUppercase: 0 })
     ) {
-      seterror("Password needs to include at least one number and one symbol.");
+      seterror(
+        "Password needs to include at least one letter, number, and symbol."
+      );
     }
 
     if (field === "pass" && !validator.isLength(value, { min: 6 })) {
@@ -114,23 +116,23 @@ class CreateAccount extends Component {
               <h3>First name</h3>
               <input
                 onChange={this.onChange}
-                name="first"
+                name="firstname"
                 type="text"
-                value={this.state.first}
-                style={{ border: errors.first ? "1px solid red" : "" }}
+                value={this.state.firstname}
+                style={{ border: errors.firstname ? "1px solid red" : "" }}
               />
-              <h3>{errors.first}</h3>
+              <h3>{errors.firstname}</h3>
             </article>
             <article>
               <h3>Last name</h3>
               <input
                 onChange={this.onChange}
-                name="last"
+                name="lastname"
                 type="text"
-                value={this.state.last}
-                style={{ border: errors.last ? "1px solid red" : "" }}
+                value={this.state.lastname}
+                style={{ border: errors.lastname ? "1px solid red" : "" }}
               />
-              <h3>{errors.last}</h3>
+              <h3>{errors.lastname}</h3>
             </article>
             <article>
               <h3>Email</h3>

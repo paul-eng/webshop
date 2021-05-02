@@ -59,9 +59,16 @@
     width: 200%;
 }
 
+.Account article {
+    margin-bottom: 1rem;
+}
+
+.Account article  {
+    color: red;
+}
+
 .Account input[type=text], .Account input[type=password] {
     width: 70%;
-    margin-bottom: 1rem;
 }
 
 .Account input[type=submit] {
@@ -73,7 +80,11 @@
     margin-bottom: 2rem;
 }
 
-.Account > h3:hover {
-    color: black;
+.Account h3:hover {
+    color: inherit;
     cursor: default;
+}
+
+.Account span:hover {
+    color: #0c0
 }
