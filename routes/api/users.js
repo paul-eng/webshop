@@ -36,7 +36,10 @@ router.post("/login", ({ body: user }, res) => {
     if (match) {
       bcrypt.compare(user.pass, match.pass, function (err, same) {
         if (same) {
-          const token = jwt.sign({ id: match._id }, config.get("secret"));
+          const token = jwt.sign(
+            { sub: match._id, email: match.email },
+            config.get("secret")
+          );
           res.json({
             user: {
               firstname: match.firstname,
@@ -53,6 +56,29 @@ router.post("/login", ({ body: user }, res) => {
       res.status(400).json({
         error: "Could not find an account registered to that email address.",
       });
+    }
+  });
+});
+
+router.get("/verify", (req, res) => {
+  const token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(403).json({ error: "Unauthorized" });
+    } else {
+      User.findById(decoded.sub)
+        .then((user) => {
+          res.json({
+            user: {
+              firstname: user.firstname,
+              lastname: user.lastname,
+              email: user.email,
+            },
+          });
+        })
+        .catch((err) => {
+          res.status(404).json({ error: "Unknown access token conflict" });
+        });
     }
   });
 });

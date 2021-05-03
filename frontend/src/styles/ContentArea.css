@@ -1,5 +1,4 @@
 .ContentArea {
-    box-sizing: border-box;
     display: grid;
     grid-template-columns: 22% 1fr;
     /* prevents resizing due to scrollbar appear/disappear */

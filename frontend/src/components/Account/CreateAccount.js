@@ -41,6 +41,7 @@ class CreateAccount extends Component {
           () => {
             const { errors, pass2, ...user } = this.state;
             this.props.addUser(user);
+            this.props.history.push("/account")
           }
         );
       }

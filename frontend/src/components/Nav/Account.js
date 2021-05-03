@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { login } from "../../actions/UserActions";
 import validator from "validator";
 
 const Account = React.forwardRef((props, ref) => {
+  let history = useHistory();
   let email = useRef();
   let pass = useRef();
   let didMount = useRef(false);
@@ -37,11 +38,12 @@ const Account = React.forwardRef((props, ref) => {
       if (Object.keys(errors).length === 0) {
         const user = { email: email.value, pass: pass.value };
         dispatch(login(user));
+        history.push("/account");
       }
     } else {
       didMount.current = true;
     }
-  }, [errors, dispatch]);
+  }, [errors, dispatch, history]);
 
   return (
     <div

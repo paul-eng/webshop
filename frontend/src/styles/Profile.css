@@ -1,7 +1,7 @@
-.Item {
+.Profile {
     display: grid;
     grid-template-columns: 22% 1fr;
-    grid-template-areas: "nav item";
+    grid-template-areas: "nav form";
     /* prevents resizing when scrollbar appears/disappears */
     /* when vertical scrollbar appears, it creates horizontal scrollbar due to
     area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */
