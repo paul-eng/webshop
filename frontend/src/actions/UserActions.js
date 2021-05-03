@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const SET_USER = "SET_USER";
+export const CLEAR_USER = "CLEAR_USER";
 
 export const setUser = ({ user, token }) => {
   localStorage.setItem("session", token);
@@ -10,6 +11,10 @@ export const setUser = ({ user, token }) => {
   };
 };
 
+export const clearUser = () => {
+  return { type: CLEAR_USER };
+};
+
 export const login = (user) => (dispatch) => {
   return axios
     .post("http://localhost:8080/api/users/login", user)
@@ -17,6 +22,11 @@ export const login = (user) => (dispatch) => {
       dispatch(setUser(res.data));
     })
     .catch((err) => alert(err.response.data.error));
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("session");
+  dispatch(clearUser());
 };
 
 export const addUser = (user) => (dispatch) => {
@@ -36,6 +46,7 @@ export const getUser = (token) => (dispatch) => {
       dispatch(setUser(res.data));
     })
     .catch((err) => {
-      localStorage.removeItem("session")
-      alert(err.response.data.error)});
+      localStorage.removeItem("session");
+      alert(err.response.data.error);
+    });
 };

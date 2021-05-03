@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { login } from "../../actions/UserActions";
 import validator from "validator";
 
-const Account = React.forwardRef((props, ref) => {
+const Login = React.forwardRef((props, ref) => {
   let history = useHistory();
   let email = useRef();
   let pass = useRef();
@@ -49,7 +49,7 @@ const Account = React.forwardRef((props, ref) => {
     <div
       style={{ display: props.active ? "block" : "none" }}
       ref={ref}
-      className="Account"
+      className="Login"
     >
       <h3>LOG IN</h3>
       <form onSubmit={onSubmit}>
@@ -82,4 +82,4 @@ const Account = React.forwardRef((props, ref) => {
   );
 });
 
-export default Account;
+export default Login;

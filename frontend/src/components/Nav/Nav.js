@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import NavList from "./NavList";
-import Account from "./Account";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
+import { useSelector } from "react-redux";
 import "../../styles/Nav.css";
 
 const Nav = () => {
@@ -29,6 +31,7 @@ const Nav = () => {
     }
   }
 
+  const currentUser = useSelector((state) => state.user);
   const [focus, setFocus] = useState({ className: "" });
   const [path, setPath] = useState(null);
   const [list, setList] = useState(false);
@@ -68,7 +71,7 @@ const Nav = () => {
         <NavList active={list} path={path} />
       </div>
       <section>
-        <Account active={acct} ref={account} />
+        {currentUser ? <Dashboard active={acct} ref={account}/> : <Login active={acct} ref={account} />}
         <span>
           <h3 className={acct ? "TopLevel" : ""} onClick={onClick}>
             Account

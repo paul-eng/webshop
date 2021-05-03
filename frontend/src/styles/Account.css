@@ -1,4 +1,4 @@
-.Profile {
+.Account, .Logout {
     display: grid;
     grid-template-columns: 22% 1fr;
     grid-template-areas: "nav form";

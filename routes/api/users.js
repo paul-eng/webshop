@@ -74,6 +74,7 @@ router.get("/verify", (req, res) => {
               lastname: user.lastname,
               email: user.email,
             },
+            token: token,
           });
         })
         .catch((err) => {

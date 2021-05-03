@@ -13,13 +13,14 @@ import Category from "../Shop/Category";
 import Item from "../Item/Item";
 import Search from "../Shop/Search";
 import CreateAccount from "../Account/CreateAccount";
-import Profile from "../Account/Profile";
+import Account from "../Account/Account";
+import Logout from "../Account/Logout";
 
 class App extends Component {
   componentDidMount() {
-    let sessionToken = localStorage.session || null;
+    let sessionToken = localStorage.getItem("session");
     if (sessionToken) {
-      this.props.getUser("marni");
+      this.props.getUser(sessionToken);
     }
   }
 
@@ -33,7 +34,8 @@ class App extends Component {
           <Route exact path="/add-item" component={AddItem} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/account/create" component={CreateAccount} />
-          <Route path="/account" component={Profile} />
+          <Route exact path="/account/logout" component={Logout} />
+          <Route path="/account" component={Account} />
           <Route path="/search" component={Search} />
           <Route path="/brand/:brand" component={Brand} />
           <Route path="/category/:cat" component={Category} />

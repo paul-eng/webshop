@@ -48,7 +48,8 @@ body,
 .Shop, 
 .Item,
 .NavList,
-.Account {
+.Login,
+.Dashboard {
   height: 100%;
   margin: 0;
 }
