@@ -6,6 +6,7 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const SET_CART = "SET_CART";
 export const SET_ERROR = "SET_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
+export const CLEAR_CART = "CLEAR_CART";
 
 export const addToCart = (item, version) => {
   return {
@@ -41,6 +42,25 @@ export const clearError = () => {
   return {
     type: CLEAR_ERROR,
   };
+};
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+};
+
+export const saveCart = (token) => (dispatch, getState) => {
+  const headers = { "x-access-token": token };
+  const { error, ...cart } = getState().cart;
+  return axios
+    .post("http://localhost:8080/api/carts", cart, { headers })
+    .then((res) => {
+      dispatch(clearCart());
+    })
+    .catch((err) => {
+      alert(err.response.data.error);
+    });
 };
 
 export const updateCart = (updates) => (dispatch, getState) => {

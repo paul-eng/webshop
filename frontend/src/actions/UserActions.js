@@ -25,8 +25,10 @@ export const login = (user) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+  let token = localStorage.getItem("session");
   localStorage.removeItem("session");
   dispatch(clearUser());
+  return Promise.resolve(token);
 };
 
 export const addUser = (user) => (dispatch) => {

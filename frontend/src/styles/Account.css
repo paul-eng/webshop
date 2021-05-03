@@ -8,3 +8,37 @@
     /* width: 100vw;
     padding-right: 1vw; */
 }
+
+.Account section > article:first-of-type::after {
+    display: block;
+    content: "";
+    background-color: #aaa;
+    width: 100%;
+    height: .2rem;
+    margin: 2rem 0;
+}
+
+.Account > div {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-areas: 
+        "title ."
+        "col1 col2";
+}
+
+.Account > div h3:first-of-type, .Logout > div h3:first-of-type {
+    margin-bottom: 2rem;
+}
+
+.Account section:first-of-type {
+    grid-area: col1;
+}
+
+.Account section:last-of-type {
+    grid-area: col2;
+}
+
+.Account section input {
+    margin-top: 2rem;
+    width: 200px;
+}

@@ -4,6 +4,7 @@ import {
   SET_CART,
   SET_ERROR,
   CLEAR_ERROR,
+  CLEAR_CART,
 } from "../actions/CartActions";
 
 import { stockType, matchItem, matchStock } from "../util/Util";
@@ -70,6 +71,8 @@ const cartReducer = (state = initState, action) => {
         cartItem.stock = remaining;
         return { items: state.items, total: newTotal, count: newCount };
       }
+    case CLEAR_CART:
+      return initState;
     default:
       return state;
   }
