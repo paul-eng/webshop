@@ -4,7 +4,7 @@ import Nav from "../Nav/Nav";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../actions/UserActions";
-import { saveCart } from "../../actions/CartActions";
+import { clearCart } from "../../actions/CartActions";
 import "../../styles/Account.css";
 const Account = (props) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Account = (props) => {
 
   let logOut = (e) => {
     e.preventDefault();
-    dispatch(logout()).then((token) => dispatch(saveCart(token)));
+    dispatch(logout()).then(() => dispatch(clearCart()));
     history.push("/account/logout");
   };
 

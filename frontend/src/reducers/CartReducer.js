@@ -74,7 +74,12 @@ const cartReducer = (state = initState, action) => {
     case LOGIN_CART:
       return mergeCarts(state, action.cart);
     case CLEAR_CART:
-      return initState;
+      return {
+        items: [],
+        total: 0,
+        count: 0,
+        error: null,
+      };
     default:
       return state;
   }

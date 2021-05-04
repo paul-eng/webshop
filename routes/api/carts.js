@@ -28,6 +28,8 @@ router.post("/", (req, res) => {
   });
 });
 
+// @route api/carts/session
+// @read saved user cart or create new user cart
 router.get("/session", (req, res) => {
   let token = req.headers["x-access-token"];
   jwt.verify(token, config.get("secret"), (err, decoded) => {

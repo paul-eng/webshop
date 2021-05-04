@@ -64,7 +64,7 @@ export const saveCart = (token) => (dispatch, getState) => {
   return axios
     .post("http://localhost:8080/api/carts", cart, { headers })
     .then((res) => {
-      dispatch(clearCart());
+      return Promise.resolve(res.data);
     })
     .catch((err) => {
       alert(err.response.data.error);
@@ -77,16 +77,14 @@ export const fetchCart = (token) => (dispatch) => {
     .get("http://localhost:8080/api/carts/session", { headers })
     .then((res) => dispatch(loginCart(res.data)))
     .catch((err) => {
-      console.log(err)
-      alert(err.response.data.error);
+      console.log(err.response.data.error);
     });
 };
 
 export const updateCart = (updates) => (dispatch, getState) => {
   let proms = [];
-
   updates.forEach((update) => {
-    let [path, type, qty] = [update.id, update.name, update.value];
+    let [path, type, qty] = [update.id, update.name, parseInt(update.value)];
 
     let prom = axios
       .get("http://localhost:8080/api/items/" + path)
@@ -103,7 +101,11 @@ export const updateCart = (updates) => (dispatch, getState) => {
     getState().cart.error
       ? dispatch(clearError())
       : updates.forEach((update) => {
-          let [path, type, qty] = [update.id, update.name, update.value];
+          let [path, type, qty] = [
+            update.id,
+            update.name,
+            parseInt(update.value),
+          ];
           return dispatch(setCart(path, type, qty));
         });
   });

@@ -37,7 +37,7 @@ export const mergeCarts = (target, source) => {
   let total = target.total;
   let itemsA = source.items;
   let itemsB = target.items;
-
+  
   let findsum = (stock) => {
     return stock.reduce((acc, val) => acc + val.qty, 0);
   };
