@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import CartItem from "./CartItem";
 import { updateCart } from "../../actions/CartActions";
+import { Link } from "react-router-dom";
 import "../../styles/Cart.css";
 
 const Cart = (props) => {
@@ -19,7 +20,14 @@ const Cart = (props) => {
   }
 
   if (cartItems.length < 1) {
-    return "Your cart is empty";
+    return (
+      <span className="EmptyCart">
+        <h3>You have no items in your cart.</h3>
+        <h3>
+          <Link to="/new-arrivals">View Latest</Link>
+        </h3>
+      </span>
+    );
   } else {
     let separateItems = [...cartItems]
       .map((item) => versionSplitter(item))
@@ -44,7 +52,7 @@ const Cart = (props) => {
       <h3>CART</h3>
       <form onSubmit={updateQty}>
         <ul>{cartItems}</ul>
-        <input type="submit" value="UPDATE CART"/>
+        <input type="submit" value="UPDATE CART" />
       </form>
       <section>
         <aside>
@@ -78,7 +86,6 @@ const mapStateToProps = (state) => {
   return {
     items: state.cart.items,
     total: state.cart.total,
-    error: state.cart.error,
   };
 };
 

@@ -37,7 +37,10 @@ const Login = React.forwardRef((props, ref) => {
   useEffect(() => {
     if (didMount.current) {
       if (Object.keys(errors).length === 0) {
-        const user = { email: email.value, pass: pass.value };
+        const user = {
+          email: validator.normalizeEmail(email.value),
+          pass: pass.value,
+        };
         dispatch(login(user)).then((token) => dispatch(fetchCart(token)));
         history.push("/account");
       }

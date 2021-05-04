@@ -26,10 +26,9 @@ export const login = (user) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  let token = localStorage.getItem("session");
   localStorage.removeItem("session");
   dispatch(clearUser());
-  return Promise.resolve(token);
+  return Promise.resolve("Logout successful");
 };
 
 export const addUser = (user) => (dispatch) => {
@@ -51,6 +50,6 @@ export const getUser = (token) => (dispatch) => {
     })
     .catch((err) => {
       localStorage.removeItem("session");
-      alert(err.response.data.error);
+      console.log(err.response.data.error);
     });
 };

@@ -67,7 +67,7 @@ export const saveCart = (token) => (dispatch, getState) => {
       return Promise.resolve(res.data);
     })
     .catch((err) => {
-      alert(err.response.data.error);
+      console.log(err.response.data.error);
     });
 };
 

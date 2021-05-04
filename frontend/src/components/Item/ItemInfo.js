@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "../../styles/ItemInfo.css";
 import Slider from "./Slider";
 import ItemControls from "./ItemControls";
+import { useHistory } from "react-router-dom";
 
 const ItemInfo = (props) => {
+  let history = useHistory();
   const itemInfo = props.itemInfo;
 
-  return (
+  let page;
+
+  page = itemInfo ? (
     <div className="ItemInfo">
       <Slider gallery={itemInfo.gallery} />
       <section>
@@ -19,7 +23,13 @@ const ItemInfo = (props) => {
         <ItemControls />
       </section>
     </div>
-  );
+  ) : null;
+
+  useEffect(() => {
+    if (page === null) history.push("/");
+  }, [page, history]);
+
+  return page;
 };
 
 const mapStateToProps = (state) => {

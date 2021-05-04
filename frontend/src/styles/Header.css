@@ -28,9 +28,8 @@ h1 {
 }
 
 .SearchBar form {
-    width: 0;
+    width: 0px;
     transition: .1s;
-    text-align: right;
 }
 
 .SearchBar input {

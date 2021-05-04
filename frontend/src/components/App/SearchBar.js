@@ -54,9 +54,17 @@ class SearchBar extends Component {
     return (
       <div className="SearchBar">
         <div className="wrapper" ref={this.searchBar}>
-          <img onClick={this.visible} style={{cursor: this.state.visible ? "default" : "pointer"}} alt="search" src={searchSVG} />
+          <img
+            onClick={this.visible}
+            style={{ cursor: this.state.visible ? "default" : "pointer" }}
+            alt="search"
+            src={searchSVG}
+          />
           <form
-            style={{ width: this.state.visible ? "20vw" : 0 }}
+            style={{
+              width: this.state.visible ? "20vw" : 0,
+              pointerEvents: this.state.visible ? "auto" : "none",
+            }}
             onSubmit={this.onSubmit}
           >
             <input

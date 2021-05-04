@@ -35,7 +35,8 @@ export const clearAllItems = () => {
 export const fetchItem = (path) => (dispatch) => {
   return axios
     .get("http://localhost:8080/api/items/" + path)
-    .then((res) => dispatch(setItem(res.data)));
+    .then((res) => dispatch(setItem(res.data)))
+    .catch((err) => console.log(err.response));
 };
 
 export const fetchSearch = (
