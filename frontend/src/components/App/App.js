@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../actions/UserActions";
+import { fetchCart } from "../../actions/CartActions";
 import "../../styles/App.css";
 import Header from "./Header";
 import AddItem from "./AddItem";
@@ -20,7 +21,9 @@ class App extends Component {
   componentDidMount() {
     let sessionToken = localStorage.getItem("session");
     if (sessionToken) {
-      this.props.getUser(sessionToken);
+      this.props
+        .getUser(sessionToken)
+        .then((token) => this.props.fetchCart(token));
     }
   }
 
@@ -49,6 +52,7 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser: (token) => dispatch(getUser(token)),
+    fetchCart: (token) => dispatch(fetchCart(token)),
   };
 };
 

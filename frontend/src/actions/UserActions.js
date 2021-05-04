@@ -20,6 +20,7 @@ export const login = (user) => (dispatch) => {
     .post("http://localhost:8080/api/users/login", user)
     .then((res) => {
       dispatch(setUser(res.data));
+      return Promise.resolve(res.data.token);
     })
     .catch((err) => alert(err.response.data.error));
 };
@@ -46,6 +47,7 @@ export const getUser = (token) => (dispatch) => {
     .get("http://localhost:8080/api/users/verify", { headers })
     .then((res) => {
       dispatch(setUser(res.data));
+      return Promise.resolve(token);
     })
     .catch((err) => {
       localStorage.removeItem("session");

@@ -28,6 +28,32 @@ router.post("/", (req, res) => {
   });
 });
 
+router.get("/session", (req, res) => {
+  let token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res
+        .status(403)
+        .json({ error: "Cannot retrieve cart with invalid token" });
+    } else {
+      Cart.findOne({ user: decoded.sub }, function (err, doc) {
+        if (doc) {
+          res.json(doc.cart);
+        } else {
+          Cart.create({
+            user: decoded.sub,
+            cart: { items: [], total: 0, count: 0 },
+          })
+            .then((newDoc) => res.json(newDoc.cart))
+            .catch(() =>
+              res.status(400).json({ error: "Error creating cart for user" })
+            );
+        }
+      });
+    }
+  });
+});
+
 // @route api/carts
 // @description Get all carts
 router.get("/", (req, res) => {

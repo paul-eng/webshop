@@ -5,9 +5,10 @@ import {
   SET_ERROR,
   CLEAR_ERROR,
   CLEAR_CART,
+  LOGIN_CART,
 } from "../actions/CartActions";
 
-import { stockType, matchItem, matchStock } from "../util/Util";
+import { stockType, matchItem, matchStock, mergeCarts } from "../util/Util";
 
 const initState = {
   items: [],
@@ -54,7 +55,6 @@ const cartReducer = (state = initState, action) => {
       stock.qty = action.qty;
       newTotal = state.total + diff * cartItem.price;
       newCount = state.count + diff;
-
       return Object.assign({}, state, { count: newCount, total: newTotal });
     case REMOVE_FROM_CART:
       cartItem = matchItem(state.items, action.item._id);
@@ -71,6 +71,8 @@ const cartReducer = (state = initState, action) => {
         cartItem.stock = remaining;
         return { items: state.items, total: newTotal, count: newCount };
       }
+    case LOGIN_CART:
+      return mergeCarts(state, action.cart);
     case CLEAR_CART:
       return initState;
     default:

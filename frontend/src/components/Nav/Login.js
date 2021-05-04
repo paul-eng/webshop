@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { login } from "../../actions/UserActions";
+import { fetchCart } from "../../actions/CartActions";
 import validator from "validator";
 
 const Login = React.forwardRef((props, ref) => {
@@ -37,7 +38,7 @@ const Login = React.forwardRef((props, ref) => {
     if (didMount.current) {
       if (Object.keys(errors).length === 0) {
         const user = { email: email.value, pass: pass.value };
-        dispatch(login(user));
+        dispatch(login(user)).then((token) => dispatch(fetchCart(token)));
         history.push("/account");
       }
     } else {
