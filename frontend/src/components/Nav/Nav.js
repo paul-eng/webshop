@@ -23,9 +23,18 @@ const Nav = () => {
     window.addEventListener("mousedown", handleDown);
   }
 
+  let error = useRef();
+  const msg = useSelector((state) => state.nav.msg);
+  useEffect(() => {
+    error.current = msg;
+  }, [msg]);
+
   function handleDown(e) {
-    // skip first click of account h3 to open tab
-    if (account.current && !account.current.contains(e.target)) {
+    if (
+      !error.current &&
+      account.current &&
+      !account.current.contains(e.target)
+    ) {
       setAcct(false);
       window.removeEventListener("mousedown", handleDown);
     }
@@ -71,7 +80,11 @@ const Nav = () => {
         <NavList active={list} path={path} />
       </div>
       <section>
-        {currentUser ? <Dashboard active={acct} ref={account}/> : <Login active={acct} ref={account} />}
+        {currentUser ? (
+          <Dashboard active={acct} ref={account} />
+        ) : (
+          <Login active={acct} ref={account} />
+        )}
         <span>
           <h3 className={acct ? "TopLevel" : ""} onClick={onClick}>
             Account

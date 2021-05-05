@@ -36,6 +36,10 @@
     text-align: right;
 }
 
+.Cart section input {
+    display: none;
+}
+
 .EmptyCart {
     display: flex;
     flex-direction: column;

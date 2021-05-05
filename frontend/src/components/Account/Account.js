@@ -45,7 +45,7 @@ const Account = (props) => {
   );
 };
 
-export const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
   };

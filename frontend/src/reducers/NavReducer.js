@@ -1,8 +1,14 @@
-import { SET_BRANDS, SET_CATEGORIES } from "../actions/NavActions";
+import {
+  SET_BRANDS,
+  SET_CATEGORIES,
+  SET_MSG,
+  CLEAR_MSG,
+} from "../actions/NavActions";
 
 const initState = {
   brands: [],
   categories: [],
+  msg: null,
 };
 
 const navReducer = (state = initState, action) => {
@@ -18,6 +24,10 @@ const navReducer = (state = initState, action) => {
     case SET_CATEGORIES:
       let cats = stringify(action.cats);
       return Object.assign({}, state, { categories: cats });
+    case SET_MSG:
+      return Object.assign({}, state, { msg: action.msg });
+    case CLEAR_MSG:
+      return Object.assign({}, state, { msg: null });
     default:
       return state;
   }

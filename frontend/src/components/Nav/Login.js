@@ -15,7 +15,6 @@ const Login = React.forwardRef((props, ref) => {
   let onSubmit = (e) => {
     e.preventDefault();
     setErrors({});
-
     if (validator.isEmpty(email.value)) {
       setErrors((errors) => {
         return { email: "Required field.", ...errors };

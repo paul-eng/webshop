@@ -10,7 +10,7 @@ import {
   CLEAR_QTY,
 } from "../actions/CartActions";
 
-import { stockType, matchItem, matchStock, mergeCarts } from "../util/Util";
+import { stockTypes, matchItem, matchStock, mergeCarts } from "../util/Util";
 
 const initState = {
   items: [],
@@ -27,7 +27,7 @@ const cartReducer = (state = initState, action) => {
     case ADD_TO_CART:
       cartItem = matchItem(state.items, action.item._id);
       if (cartItem) {
-        stockType(cartItem.stock).includes(action.version)
+        stockTypes(cartItem.stock).includes(action.version)
           ? matchStock(cartItem.stock, action.version).qty++
           : cartItem.stock.push({ type: action.version, qty: 1 });
         return Object.assign({}, state, {

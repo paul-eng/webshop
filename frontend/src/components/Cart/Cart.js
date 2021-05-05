@@ -7,7 +7,6 @@ import "../../styles/Cart.css";
 
 const Cart = (props) => {
   let cartItems = props.items;
-  console.log(props.qtyError)
 
   function versionSplitter(item) {
     let versions = [];
@@ -73,7 +72,7 @@ const Cart = (props) => {
           applied.
         </p>
         <input
-          style={{ display:  props.qtyError.length ? "none" : "block" }}
+          style={{ display: props.qtyError.length ? "none" : "block" }}
           type="submit"
           value="CHECKOUT"
         />

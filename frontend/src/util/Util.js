@@ -32,11 +32,11 @@ export const paramStr = (component) => {
   return params;
 };
 
-export const stockType = (stock) => {
+export const stockTypes = (stock) => {
   return stock.map((opt) => opt.type);
 };
 
-export const stockQty = (stock) => {
+export const stockQtys = (stock) => {
   return stock.map((opt) => opt.qty);
 };
 

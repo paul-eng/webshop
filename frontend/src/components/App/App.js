@@ -17,6 +17,7 @@ import CreateAccount from "../Account/CreateAccount";
 import Account from "../Account/Account";
 import Logout from "../Account/Logout";
 import PrivateRoute from "./PrivateRoute";
+import Message from "./Message";
 
 class App extends Component {
   componentDidMount() {
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path="/category/:cat" component={Category} />
           <Route path="/:item" component={Item} />
         </Switch>
+        <Message />
       </Router>
     );
   }

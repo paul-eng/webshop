@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const SET_BRANDS = "SET_BRANDS";
 export const SET_CATEGORIES = "SET_CATEGORIES";
+export const SET_MSG = "SET_MSG";
+export const CLEAR_MSG = "CLEAR_MSG";
 
 export const setBrands = (brands) => {
   return {
@@ -14,6 +16,12 @@ export const setCategories = (cats) => {
   return {
     type: SET_CATEGORIES,
     cats,
+  };
+};
+
+export const clearMsg = () => {
+  return {
+    type: CLEAR_MSG,
   };
 };
 

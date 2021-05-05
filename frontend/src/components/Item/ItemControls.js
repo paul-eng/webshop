@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/CartActions";
-import { stockType, stockQty, matchStock, matchItem } from "../../util/Util";
+import { stockTypes, stockQtys, matchStock, matchItem } from "../../util/Util";
 import "../../styles/ItemControls.css";
 
 class ItemControls extends Component {
@@ -52,7 +52,7 @@ class ItemControls extends Component {
     let selected = this.state.selected;
     let inCart = matchItem(this.props.cart, item._id);
     if (inCart) {
-      if (stockType(inCart.stock).includes(selected)) {
+      if (stockTypes(inCart.stock).includes(selected)) {
 
         let [cartQty, stockQty] = [
           matchStock(inCart.stock, selected).qty,
@@ -69,7 +69,7 @@ class ItemControls extends Component {
     return true;
   }
 
-  allSold = () => stockQty(this.props.stock).every((count) => count === 0);
+  allSold = () => stockQtys(this.props.stock).every((count) => count === 0);
 
   msg = (qty) =>
     qty === 0
