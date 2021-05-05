@@ -43,7 +43,9 @@ const Login = React.forwardRef((props, ref) => {
         };
         dispatch(login(user))
           .then((token) => dispatch(fetchCart(token)))
-          .then(() => history.push("/account"));
+          .then((res) => {
+            if (res) history.push("/account");
+          });
       }
     } else {
       didMount.current = true;

@@ -8,8 +8,9 @@ const Dashboard = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   let history = useHistory();
   let onClick = () => {
-    dispatch(logout()).then(() => dispatch(clearCart()));
-    history.push("/account/logout");
+    dispatch(logout())
+      .then(() => dispatch(clearCart()))
+      .then(() => history.push("/account/logout"));
   };
   return (
     <div
