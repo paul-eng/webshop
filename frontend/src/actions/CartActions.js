@@ -7,7 +7,7 @@ export const SET_CART = "SET_CART";
 export const LOGIN_CART = "LOGIN_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const QTY_ERROR = "QTY_ERROR";
-export const CLEAR_QTY = "CLEAR_QTY";
+export const CLEAR_ERROR = "CLEAR_ERROR";
 export const SET_MSG = "SET_MSG";
 
 export const setMsg = (msg) => {
@@ -48,17 +48,17 @@ export const qtyError = (item) => {
   };
 };
 
+export const clearError = (item) => {
+  return {
+    type: CLEAR_ERROR,
+    item,
+  };
+};
+
 export const loginCart = (cart) => {
   return {
     type: LOGIN_CART,
     cart,
-  };
-};
-
-export const clearQty = (item) => {
-  return {
-    type: CLEAR_QTY,
-    item,
   };
 };
 
@@ -108,16 +108,15 @@ export const updateCart = (updates) => (dispatch, getState) => {
   });
 
   Promise.all(proms).then(() => {
-    return getState().nav.msg
-      ? Promise.resolve("Qty Error")
-      : updates.forEach((update) => {
-          let [path, type, qty] = [
-            update.id,
-            update.name,
-            parseInt(update.value),
-          ];
-          return dispatch(setCart(path, type, qty));
-        });
+    if (!getState().nav.msg)
+      updates.forEach((update) => {
+        let [path, type, qty] = [
+          update.id,
+          update.name,
+          parseInt(update.value),
+        ];
+        return dispatch(setCart(path, type, qty));
+      });
   });
 };
 

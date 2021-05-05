@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   checkQty,
   qtyError,
-  clearQty,
+  clearError,
   removeFromCart,
 } from "../../actions/CartActions";
 
@@ -17,7 +17,7 @@ const CartItem = (props) => {
   const prevQty = useRef(null);
 
   function removeItem() {
-    props.clearQty(item);
+    props.clearError(item);
     props.removeFromCart(item);
   }
 
@@ -35,7 +35,7 @@ const CartItem = (props) => {
         props.qtyError(item);
         setError("The requested qty is not available");
       } else {
-        props.clearQty(item);
+        props.clearError(item);
         setError(null);
       }
     });
@@ -81,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCart: (item) => dispatch(removeFromCart(item)),
     checkQty: (item) => dispatch(checkQty(item)),
     qtyError: (item) => dispatch(qtyError(item)),
-    clearQty: (item) => dispatch(clearQty(item)),
+    clearError: (item) => dispatch(clearError(item)),
   };
 };
 

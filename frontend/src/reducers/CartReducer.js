@@ -5,7 +5,7 @@ import {
   CLEAR_CART,
   LOGIN_CART,
   QTY_ERROR,
-  CLEAR_QTY,
+  CLEAR_ERROR,
 } from "../actions/CartActions";
 
 import { stockTypes, matchItem, matchStock, mergeCarts } from "../util/Util";
@@ -46,7 +46,7 @@ const cartReducer = (state = initState, action) => {
       errorCode = action.item.name + action.item.stock.type;
       if (!errors.includes(errorCode)) errors.push(errorCode);
       return Object.assign({}, state, { qtyError: errors });
-    case CLEAR_QTY:
+    case CLEAR_ERROR:
       errors = [...state.qtyError];
       errorCode = action.item.name + action.item.stock.type;
       if (errors.includes(errorCode)) {
