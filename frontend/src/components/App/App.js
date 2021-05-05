@@ -16,6 +16,7 @@ import Search from "../Shop/Search";
 import CreateAccount from "../Account/CreateAccount";
 import Account from "../Account/Account";
 import Logout from "../Account/Logout";
+import PrivateRoute from "./PrivateRoute";
 
 class App extends Component {
   componentDidMount() {
@@ -45,7 +46,8 @@ class App extends Component {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/account/create" component={CreateAccount} />
           <Route exact path="/account/logout" component={Logout} />
-          <Route path="/account" component={Account} />
+          {/* <Route path="/account" component={Account} /> */}
+          <PrivateRoute path="/account" component={Account} />
           <Route path="/search" component={Search} />
           <Route path="/brand/:brand" component={Brand} />
           <Route path="/category/:cat" component={Category} />

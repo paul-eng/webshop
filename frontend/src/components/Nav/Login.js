@@ -41,8 +41,9 @@ const Login = React.forwardRef((props, ref) => {
           email: validator.normalizeEmail(email.value),
           pass: pass.value,
         };
-        dispatch(login(user)).then((token) => dispatch(fetchCart(token)));
-        history.push("/account");
+        dispatch(login(user))
+          .then((token) => dispatch(fetchCart(token)))
+          .then(() => history.push("/account"));
       }
     } else {
       didMount.current = true;

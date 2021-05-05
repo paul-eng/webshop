@@ -41,9 +41,7 @@ const Account = (props) => {
             </article>
           </section>
         </div>
-      ) : (
-        <div></div>
-      )}
+      ) : <div>sigur ros</div>}
     </div>
   );
 };
