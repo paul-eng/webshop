@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../../styles/CartItem.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { checkQty, removeFromCart } from "../../actions/CartActions";
+import {
+  checkQty,
+  qtyError,
+  clearQty,
+  removeFromCart,
+} from "../../actions/CartActions";
 
 const CartItem = (props) => {
   const item = props.item;
   const { type, qty } = item.stock;
   const [amt, setAmt] = useState(qty);
   const [error, setError] = useState(null);
+  const prevQty = useRef(null);
 
   function removeItem() {
     props.removeFromCart(item);
@@ -19,10 +25,20 @@ const CartItem = (props) => {
   }, [qty, props.error]);
 
   useEffect(() => {
+    prevQty.current = qty;
+  });
+
+  if (prevQty.current !== qty) {
     props.checkQty(item).then((tooMany) => {
-      tooMany ? setError("The requested qty is not available") : setError(null);
+      if (tooMany) {
+        props.qtyError(item);
+        setError("The requested qty is not available");
+      } else {
+        props.clearQty(item);
+        setError(null);
+      }
     });
-  }, [item, props]);
+  }
 
   function getAmt(e) {
     setAmt(e.target.value);
@@ -48,7 +64,7 @@ const CartItem = (props) => {
         />
       </article>
       <aside onClick={removeItem}>X Remove</aside>
-      <div style={{color:"red"}}>{error}</div>
+      <div style={{ color: "red" }}>{error}</div>
     </li>
   );
 };
@@ -63,6 +79,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeFromCart: (item) => dispatch(removeFromCart(item)),
     checkQty: (item) => dispatch(checkQty(item)),
+    qtyError: (item) => dispatch(qtyError(item)),
+    clearQty: (item) => dispatch(clearQty(item)),
   };
 };
 

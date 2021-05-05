@@ -79,5 +79,10 @@ export const mergeCarts = (target, source) => {
       });
     }
   });
-  return { count, total, items: itemsB };
+  return {
+    count,
+    total,
+    items: itemsB,
+    qtyError: target.qtyError.concat(source.qtyError),
+  };
 };

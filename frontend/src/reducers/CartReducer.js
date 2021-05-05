@@ -6,6 +6,8 @@ import {
   CLEAR_ERROR,
   CLEAR_CART,
   LOGIN_CART,
+  QTY_ERROR,
+  CLEAR_QTY,
 } from "../actions/CartActions";
 
 import { stockType, matchItem, matchStock, mergeCarts } from "../util/Util";
@@ -15,10 +17,11 @@ const initState = {
   total: 0,
   count: 0,
   error: null,
+  qtyError: [],
 };
 const cartReducer = (state = initState, action) => {
   Object.freeze(state);
-  let cartItem, stock, newCount, newTotal;
+  let cartItem, stock, newCount, newTotal, errors, errorCode;
 
   switch (action.type) {
     case ADD_TO_CART:
@@ -48,6 +51,18 @@ const cartReducer = (state = initState, action) => {
     case CLEAR_ERROR:
       alert(state.error);
       return Object.assign({}, state, { error: null });
+    case QTY_ERROR:
+      errors = [...state.qtyError];
+      errorCode = action.item.name + action.item.stock.type;
+      if (!errors.includes(errorCode)) errors.push(errorCode);
+      return Object.assign({},state,{qtyError: errors});
+    case CLEAR_QTY:
+      errors = [...state.qtyError];
+      errorCode = action.item.name + action.item.stock.type;
+      if (errors.includes(errorCode)) {
+        errors = errors.filter((err) => err !== errorCode);
+      }
+      return Object.assign({}, state, { qtyError: errors });
     case SET_CART:
       cartItem = state.items.find((item) => item.pathname === action.path);
       stock = matchStock(cartItem.stock, action.version);
@@ -66,10 +81,18 @@ const cartReducer = (state = initState, action) => {
       );
       if (remaining.length === 0) {
         let newCart = state.items.filter((item) => item !== cartItem);
-        return { items: newCart, total: newTotal, count: newCount };
+        return Object.assign({}, state, {
+          items: newCart,
+          total: newTotal,
+          count: newCount,
+        });
       } else {
         cartItem.stock = remaining;
-        return { items: state.items, total: newTotal, count: newCount };
+        return Object.assign({}, state, {
+          items: state.items,
+          total: newTotal,
+          count: newCount,
+        });
       }
     case LOGIN_CART:
       return mergeCarts(state, action.cart);
@@ -79,6 +102,7 @@ const cartReducer = (state = initState, action) => {
         total: 0,
         count: 0,
         error: null,
+        qtyError: [],
       };
     default:
       return state;

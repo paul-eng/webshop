@@ -27,4 +27,10 @@
 
 .CartItem aside {
     cursor: pointer;
+    width: max-content;
+    height: max-content;
+}
+
+.CartItem aside:hover {
+    color: #0c0;
 }

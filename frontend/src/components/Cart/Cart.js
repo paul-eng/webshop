@@ -7,6 +7,7 @@ import "../../styles/Cart.css";
 
 const Cart = (props) => {
   let cartItems = props.items;
+  console.log(props.qtyError)
 
   function versionSplitter(item) {
     let versions = [];
@@ -71,6 +72,11 @@ const Cart = (props) => {
           Shipping will be calculated at checkout where vouchers also can be
           applied.
         </p>
+        <input
+          style={{ display:  props.qtyError.length ? "none" : "block" }}
+          type="submit"
+          value="CHECKOUT"
+        />
       </section>
     </div>
   );
@@ -86,6 +92,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.cart.items,
     total: state.cart.total,
+    qtyError: state.cart.qtyError,
   };
 };
 
