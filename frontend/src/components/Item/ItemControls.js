@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../../actions/CartActions";
+import { addToCart, setMsg } from "../../actions/CartActions";
 import { stockTypes, stockQtys, matchStock, matchItem } from "../../util/Util";
 import "../../styles/ItemControls.css";
 
@@ -53,17 +53,17 @@ class ItemControls extends Component {
     let inCart = matchItem(this.props.cart, item._id);
     if (inCart) {
       if (stockTypes(inCart.stock).includes(selected)) {
-
         let [cartQty, stockQty] = [
           matchStock(inCart.stock, selected).qty,
           matchStock(item.stock, selected).qty,
         ];
 
-        return cartQty >= stockQty
-          ? alert(
-              `${this.props.item.name} - ${this.state.selected} only has ${stockQty} in stock`
-            )
-          : true;
+        if (cartQty >= stockQty) {
+          this.props.setMsg(
+            `${this.props.item.name} - ${this.state.selected} only has ${stockQty} in stock`
+          );
+          return false;
+        }
       }
     }
     return true;
@@ -131,6 +131,7 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (item, version) => {
       dispatch(addToCart(item, version));
     },
+    setMsg: (msg) => dispatch(setMsg(msg)),
   };
 };
 

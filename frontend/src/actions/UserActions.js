@@ -43,9 +43,9 @@ export const addUser = (user) => (dispatch) => {
   return axios
     .post("http://localhost:8080/api/users", user)
     .then(() => {
-      dispatch(login(user));
+      return dispatch(login(user));
     })
-    .catch((err) => alert(err.response.data.error));
+    .catch((err) => dispatch(setMsg(err.response.data.error)));
 };
 
 export const getUser = (token) => (dispatch) => {

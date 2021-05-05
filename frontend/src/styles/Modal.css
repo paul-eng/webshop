@@ -1,7 +1,6 @@
 .Modal {
     position: absolute;
     left: 0;
-    z-index: 1;
 }
 
 .Modal article {
@@ -10,12 +9,12 @@
 }
 
 .Modal div {
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
     background-color: white;
     justify-content: center;
 }

@@ -17,12 +17,13 @@ const CartItem = (props) => {
   const prevQty = useRef(null);
 
   function removeItem() {
+    props.clearQty(item);
     props.removeFromCart(item);
   }
 
   useEffect(() => {
     setAmt(qty);
-  }, [qty, props.error]);
+  }, [qty, props.msg]);
 
   useEffect(() => {
     prevQty.current = qty;
@@ -71,7 +72,7 @@ const CartItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    error: state.cart.error,
+    msg: state.nav.msg,
   };
 };
 

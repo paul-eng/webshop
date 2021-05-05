@@ -12,10 +12,12 @@ const Message = (props) => {
   const msg = useSelector((state) => state.nav.msg);
   return (
     <div style={{display: msg ? "flex" : "none"}} className="Message">
-      <h3>{msg}</h3>
-      <aside onClick={onClick}>
-        <img src={pluswhiteSVG} alt="plus" />
-      </aside>
+      <section>
+        <h3>{msg}</h3>
+        <aside onClick={onClick}>
+          <img src={pluswhiteSVG} alt="plus" />
+        </aside>
+      </section>
     </div>
   );
 };

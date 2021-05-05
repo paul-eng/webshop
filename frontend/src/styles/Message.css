@@ -1,14 +1,23 @@
 .Message {
-    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
+    top:0;
+    left:0;
+    z-index: 10;
+}
+
+.Message section{
+    display: flex;
+    position: fixed;
+    top:40%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
     background-color: red;
     color: white;
     width: 350px;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%,-50%);
     padding: 2rem;
-    z-index: 10;
 }
 
 .Message h3 {

@@ -23,6 +23,7 @@ const Nav = () => {
     window.addEventListener("mousedown", handleDown);
   }
 
+  // listener points to ref, pointing directly to state would refer to stale state from time of listener creation
   let error = useRef();
   const msg = useSelector((state) => state.nav.msg);
   useEffect(() => {

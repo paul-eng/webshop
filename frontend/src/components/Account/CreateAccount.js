@@ -40,8 +40,10 @@ class CreateAccount extends Component {
           { email: validator.normalizeEmail(this.state.email) },
           () => {
             const { errors, pass2, ...user } = this.state;
-            this.props.addUser(user);
-            this.props.history.push("/account")
+            this.props.addUser(user).then((r) => {
+              // stay on page if response fails and doesnt return a jwt
+              if (typeof r === "string") this.props.history.push("/account");
+            });
           }
         );
       }

@@ -2,8 +2,6 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   SET_CART,
-  SET_ERROR,
-  CLEAR_ERROR,
   CLEAR_CART,
   LOGIN_CART,
   QTY_ERROR,
@@ -16,7 +14,6 @@ const initState = {
   items: [],
   total: 0,
   count: 0,
-  error: null,
   qtyError: [],
 };
 const cartReducer = (state = initState, action) => {
@@ -44,18 +41,11 @@ const cartReducer = (state = initState, action) => {
           count: state.count + 1,
         });
       }
-    case SET_ERROR:
-      return Object.assign({}, state, {
-        error: "The requested qty is not available",
-      });
-    case CLEAR_ERROR:
-      alert(state.error);
-      return Object.assign({}, state, { error: null });
     case QTY_ERROR:
       errors = [...state.qtyError];
       errorCode = action.item.name + action.item.stock.type;
       if (!errors.includes(errorCode)) errors.push(errorCode);
-      return Object.assign({},state,{qtyError: errors});
+      return Object.assign({}, state, { qtyError: errors });
     case CLEAR_QTY:
       errors = [...state.qtyError];
       errorCode = action.item.name + action.item.stock.type;
