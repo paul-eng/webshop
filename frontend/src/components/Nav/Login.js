@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { loginService } from "../../util/Util";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { login } from "../../actions/UserActions";
-import { fetchCart } from "../../actions/CartActions";
 import validator from "validator";
 
 const Login = React.forwardRef((props, ref) => {
@@ -41,11 +40,7 @@ const Login = React.forwardRef((props, ref) => {
           email: validator.normalizeEmail(email.value),
           pass: pass.value,
         };
-        dispatch(login(user))
-          .then((token) => dispatch(fetchCart(token)))
-          .then((res) => {
-            if (res) history.push("/account");
-          });
+        loginService(user, history, dispatch);
       }
     } else {
       didMount.current = true;

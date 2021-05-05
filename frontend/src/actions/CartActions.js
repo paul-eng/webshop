@@ -110,3 +110,14 @@ export const updateCart = (updates) => (dispatch, getState) => {
         });
   });
 };
+
+export const checkQty = ({ pathname, stock: { qty }, stock: { type } }) => (
+  dispatch
+) => {
+  return axios
+    .get("http://localhost:8080/api/items/" + pathname)
+    .then((res) => {
+      let storeQty = matchStock(res.data.stock, type).qty;
+      return qty > storeQty;
+    });
+};

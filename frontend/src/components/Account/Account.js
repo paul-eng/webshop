@@ -3,8 +3,7 @@ import React from "react";
 import Nav from "../Nav/Nav";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { logout } from "../../actions/UserActions";
-import { clearCart } from "../../actions/CartActions";
+import { logoutService } from "../../util/Util";
 import "../../styles/Account.css";
 const Account = (props) => {
   const dispatch = useDispatch();
@@ -12,10 +11,11 @@ const Account = (props) => {
 
   let logOut = (e) => {
     e.preventDefault();
-    dispatch(logout())
-      .then(() => dispatch(clearCart()))
-      .then(() => history.push("/account/logout"));
+    logoutService(history, dispatch);
   };
+
+  // the {} prevents crash between dispatch(logout) and history.push in logoutservice, where props.user is null w no properties
+  let { firstname, lastname, email } = props.user || {};
 
   return (
     <div className="Account">
@@ -25,8 +25,8 @@ const Account = (props) => {
         <section>
           <article>
             <h3>Contact details</h3>
-            <h3>{props.user.firstname + " " + props.user.lastname}</h3>
-            <h3>{props.user.email}</h3>
+            <h3>{firstname + " " + lastname}</h3>
+            <h3>{email}</h3>
           </article>
           <article>
             <h3>Address book</h3>

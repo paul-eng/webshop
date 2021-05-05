@@ -1,4 +1,20 @@
 import queryString from "query-string";
+import { login, logout } from "../actions/UserActions";
+import { fetchCart, clearCart } from "../actions/CartActions";
+
+export const logoutService = (history, dispatch) => {
+  dispatch(logout())
+    .then(() => dispatch(clearCart()))
+    .then(() => history.push("/account/logout"));
+};
+
+export const loginService = (user, history, dispatch) => {
+  dispatch(login(user))
+    .then((token) => dispatch(fetchCart(token)))
+    .then((res) => {
+      if (res) history.push("/account");
+    });
+};
 
 export const queryStr = (props) => {
   return queryString.parse(props.location.search, {
@@ -37,7 +53,7 @@ export const mergeCarts = (target, source) => {
   let total = target.total;
   let itemsA = source.items;
   let itemsB = target.items;
-  
+
   let findsum = (stock) => {
     return stock.reduce((acc, val) => acc + val.qty, 0);
   };

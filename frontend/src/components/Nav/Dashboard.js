@@ -1,16 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { logout } from "../../actions/UserActions";
-import { clearCart } from "../../actions/CartActions";
+import { logoutService } from "../../util/Util";
 
 const Dashboard = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   let history = useHistory();
   let onClick = () => {
-    dispatch(logout())
-      .then(() => dispatch(clearCart()))
-      .then(() => history.push("/account/logout"));
+    logoutService(history, dispatch);
   };
   return (
     <div
