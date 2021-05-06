@@ -50,7 +50,6 @@ router.get("/session", (req, res) => {
               total: 0,
               count: 0,
               qtyError: [],
-              loading: false,
             },
           })
             .then((newDoc) => res.json(newDoc.cart))

@@ -17,6 +17,7 @@ import CreateAccount from "../Account/CreateAccount";
 import Account from "../Account/Account";
 import Logout from "../Account/Logout";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 import Message from "./Message";
 
 class App extends Component {
@@ -43,7 +44,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Shop} />
           <Route exact path="/new-arrivals" component={New} />
-          <Route exact path="/add-item" component={AddItem} />
+          <AdminRoute exact path="/add-item" component={AddItem} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/account/create" component={CreateAccount} />
           <Route exact path="/account/logout" component={Logout} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearMsg } from "../../actions/NavActions";
 import "../../styles/Message.css";
@@ -8,18 +8,25 @@ const Message = (props) => {
   const msg = useSelector((state) => state.nav.msg);
   const popup = useRef();
   const dispatch = useDispatch();
+  const autoclose = useRef();
+
+  const closePopup = useCallback(() => {
+    popup.current.className = "Message";
+    setTimeout(() => dispatch(clearMsg()), 500);
+  }, [dispatch]);
 
   const onClick = () => {
-    popup.current.className = "Message";
-    setTimeout(() => dispatch(clearMsg()), 1000);
+    closePopup();
+    clearTimeout(autoclose.current);
   };
 
   useEffect(() => {
     if (msg) {
-      setTimeout(() => (popup.current.className = "Message"), 4000);
-      setTimeout(() => dispatch(clearMsg()), 5000);
+      autoclose.current = setTimeout(() => {
+        closePopup();
+      }, 3500);
     }
-  }, [msg, dispatch]);
+  }, [msg, closePopup]);
 
   return (
     <section ref={popup} className={msg ? "Message popup" : "Message"}>

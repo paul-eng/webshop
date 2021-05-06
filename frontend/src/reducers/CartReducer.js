@@ -16,7 +16,6 @@ const initState = {
   total: 0,
   count: 0,
   qtyError: [],
-  loading: false,
 };
 const cartReducer = (state = initState, action) => {
   Object.freeze(state);
@@ -95,7 +94,6 @@ const cartReducer = (state = initState, action) => {
         total: 0,
         count: 0,
         qtyError: [],
-        loading: false,
       };
     default:
       return state;

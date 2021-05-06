@@ -13,6 +13,9 @@ const UserSchema = new mongoose.Schema({
   pass: {
     type: String,
   },
+  role: {
+    type: String,
+  },
   updated_date: {
     type: Date,
     default: Date.now,

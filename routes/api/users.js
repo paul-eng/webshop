@@ -20,6 +20,7 @@ router.post("/", ({ body: user }, res) => {
           error: "An account already exists for that email address.",
         });
       } else {
+        user.role = "user";
         User.create(user)
           .then((user) => res.json({ user }))
           .catch((err) =>
@@ -38,7 +39,7 @@ router.post("/login", ({ body: user }, res) => {
       bcrypt.compare(user.pass, match.pass, function (err, same) {
         if (same) {
           const token = jwt.sign(
-            { sub: match._id, email: match.email },
+            { sub: match._id, email: match.email, role: match.role },
             config.get("secret")
           );
           res.json({
@@ -62,7 +63,7 @@ router.post("/login", ({ body: user }, res) => {
 });
 
 // @route api/users/verify
-// @description add/save users
+// @description get validated user
 router.get("/verify", (req, res) => {
   const token = req.headers["x-access-token"];
   jwt.verify(token, config.get("secret"), (err, decoded) => {
@@ -87,14 +88,25 @@ router.get("/verify", (req, res) => {
   });
 });
 
+// @route api/users/admin
+// @description Check if admin role in session token
+router.get("/admin", (req, res) => {
+  const token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(403).json({ error: "Token failed verification!" });
+    } else {
+      res.json(decoded.role === "admin");
+    }
+  });
+});
+
 // @route api/users
 // @description Get all users
 router.get("/", (req, res) => {
   User.find()
     .then((users) => res.json(users))
-    .catch((err) =>
-      res.status(404).json({ nousersfound: "No users found" })
-    );
+    .catch((err) => res.status(404).json({ nousersfound: "No users found" }));
 });
 
 module.exports = router;

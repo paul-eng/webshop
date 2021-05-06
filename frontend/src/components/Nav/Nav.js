@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NavList from "./NavList";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import Admin from "./Admin";
 import { useSelector } from "react-redux";
 import "../../styles/Nav.css";
 
@@ -61,6 +62,7 @@ const Nav = () => {
 
   return (
     <nav className="Nav">
+      <Admin />
       <div
         className={acct ? "NavWrapper masked" : "NavWrapper"}
         onMouseLeave={hide}
@@ -73,11 +75,6 @@ const Nav = () => {
 
         <h3 onMouseEnter={(e) => show("/category/", e)}>CATEGORIES</h3>
 
-        <button>
-          <Link to="/add-item" onMouseEnter={hide}>
-            Add A Camera
-          </Link>
-        </button>
         <NavList active={list} path={path} />
       </div>
       <section>

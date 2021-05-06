@@ -1,0 +1,17 @@
+.Admin {
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+    width: 80%;
+    margin-bottom: 2rem;
+    align-items: center;
+    color: white;
+}
+
+.Admin a {
+    padding: .75rem 0;
+    background-color: rgb(228, 228, 228);
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}

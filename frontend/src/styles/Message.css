@@ -4,7 +4,7 @@
     transition: 0s !important;
 }
 
-.Message {
+.Message, .ItemControls section {
     user-select: none;
     display: flex;
     justify-content: space-between;
@@ -20,20 +20,20 @@
     z-index: 10;
     visibility: hidden;
     opacity: 0;
-    transition: 1s;
+    transition: .5s;
 }
 
-.Message h3 {
+.Message h3, .ItemControls section h3 {
     margin: 0;
 }
 
-.Message aside {
+.Message aside, .ItemControls aside {
     cursor: pointer;
     width: min-content;
     margin-left: 1.5rem;
 }
 
-.Message img {
+.Message img, .ItemControls img {
     transform: rotate(45deg);
     width: 1.25rem;
 }

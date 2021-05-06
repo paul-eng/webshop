@@ -26,6 +26,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return {
     count: state.cart.count,
+    user: state.user,
   };
 };
 

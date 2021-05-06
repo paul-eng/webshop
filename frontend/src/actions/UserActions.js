@@ -61,3 +61,13 @@ export const getUser = (token) => (dispatch) => {
       console.log(err.response.data.error);
     });
 };
+
+export const getAdmin = (token) => (dispatch) => {
+  const headers = { "x-access-token": token };
+  return axios
+    .get("http://localhost:8080/api/users/admin", { headers })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log(err.response.data.error));
+};

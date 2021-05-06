@@ -85,6 +85,5 @@ export const mergeCarts = (target, source) => {
     total,
     items: itemsB,
     qtyError: target.qtyError.concat(source.qtyError),
-    loading: false,
   };
 };

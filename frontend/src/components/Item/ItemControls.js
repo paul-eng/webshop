@@ -50,7 +50,12 @@ class ItemControls extends Component {
       this.props.addToCart(this.props.item, this.state.selected);
     }
     this.setState({ add: true });
-    setTimeout(() => this.setState({ add: false }), 4000);
+    this.autoclose = setTimeout(() => this.setState({ add: false }), 3500);
+  }
+
+  onClick() {
+    this.setState({ add: false });
+    clearTimeout(this.autoclose);
   }
 
   inStock() {
@@ -100,12 +105,7 @@ class ItemControls extends Component {
     this.setState({ selected: e.target.value });
   }
 
-  onClick() {
-    this.setState({ add: false });
-  }
-
   render() {
-
     let stock = this.props.stock;
     let warning = <article>{this.state.warning}</article>;
     let content =
@@ -122,7 +122,7 @@ class ItemControls extends Component {
 
     return (
       <div className="ItemControls">
-        <section className={this.state.add && !this.props.msg ? "popup" : ""} >
+        <section className={this.state.add && !this.props.msg ? "popup" : ""}>
           <h3>
             You added {this.props.item.brand} {this.props.item.name} -{" "}
             {this.state.selected} to your shopping cart.
