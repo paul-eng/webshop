@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addToCart, setMsg } from "../../actions/CartActions";
 import { stockTypes, stockQtys, matchStock, matchItem } from "../../util/Util";
+import plusSVG from "../../icons/plus.svg";
 import "../../styles/ItemControls.css";
 
 class ItemControls extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: undefined, warning: "" };
+    this.state = { selected: undefined, warning: "", add: false };
     this.addToCart = this.addToCart.bind(this);
     this.changeActive = this.changeActive.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -23,6 +25,8 @@ class ItemControls extends Component {
       let warning = available.qty <= 5 ? `ONLY ${available.qty} REMAINING` : "";
       this.setState({ warning: warning });
     }
+
+    if (prevProps.msg !== this.props.msg) this.setState({ add: false });
   }
 
   firstInStock() {
@@ -45,6 +49,8 @@ class ItemControls extends Component {
     if (this.inStock()) {
       this.props.addToCart(this.props.item, this.state.selected);
     }
+    this.setState({ add: true });
+    setTimeout(() => this.setState({ add: false }), 4000);
   }
 
   inStock() {
@@ -94,9 +100,14 @@ class ItemControls extends Component {
     this.setState({ selected: e.target.value });
   }
 
+  onClick() {
+    this.setState({ add: false });
+  }
+
   render() {
+
     let stock = this.props.stock;
-    let warning = <aside>{this.state.warning}</aside>;
+    let warning = <article>{this.state.warning}</article>;
     let content =
       stock && !this.allSold() ? (
         <form onSubmit={this.addToCart}>
@@ -106,11 +117,20 @@ class ItemControls extends Component {
           <input type="submit" value="ADD TO CART" />
         </form>
       ) : (
-        <aside>SOLD OUT</aside>
+        <article>SOLD OUT</article>
       );
 
     return (
       <div className="ItemControls">
+        <section className={this.state.add && !this.props.msg ? "popup" : ""} >
+          <h3>
+            You added {this.props.item.brand} {this.props.item.name} -{" "}
+            {this.state.selected} to your shopping cart.
+          </h3>
+          <aside onClick={this.onClick}>
+            <img src={plusSVG} alt="plus" />
+          </aside>
+        </section>
         {content}
         {warning}
       </div>
@@ -123,6 +143,7 @@ const mapStateToProps = (state) => {
     stock: state.products.itemInfo.stock,
     item: state.products.itemInfo,
     cart: state.cart.items,
+    msg: state.nav.msg,
   };
 };
 

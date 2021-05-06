@@ -8,8 +8,39 @@
     margin-right: 5%;
 }
 
-.ItemControls aside {
+.ItemControls article {
     font-family: "authentic_bold";
     color: firebrick;
     font-size: 1rem;
+}
+
+.ItemControls section {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    background-color: #aaa;
+    width: 350px;
+    padding: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s;
+}
+
+.ItemControls section h3 {
+    margin: 0;
+}
+
+.ItemControls aside {
+    cursor: pointer;
+    width: min-content;
+    margin-left: 1.5rem;
+}
+
+.ItemControls img {
+    transform: rotate(45deg);
+    width: 1.25rem;
 }

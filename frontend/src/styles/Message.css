@@ -1,14 +1,13 @@
-.Message {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top:0;
-    left:0;
-    z-index: 10;
+.popup {
+    visibility: visible !important;
+    opacity: 100 !important;
+    transition: 0s !important;
 }
 
-.Message section{
+.Message {
+    user-select: none;
     display: flex;
+    justify-content: space-between;
     position: fixed;
     top:40%;
     left:50%;
@@ -18,6 +17,10 @@
     color: white;
     width: 350px;
     padding: 2rem;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s;
 }
 
 .Message h3 {

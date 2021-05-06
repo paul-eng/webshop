@@ -80,9 +80,11 @@ export const mergeCarts = (target, source) => {
     }
   });
   return {
+    // Find in files: SHAPEOFCARTSTATE. Won't necessarily break if a field is missing in one, but try to keep consistent for peace of mind
     count,
     total,
     items: itemsB,
     qtyError: target.qtyError.concat(source.qtyError),
+    loading: false,
   };
 };

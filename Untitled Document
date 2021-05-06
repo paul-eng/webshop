@@ -11,4 +11,4 @@ optional chaining, pseudoselectors pseudoelements
 
 at enterprise level, use firebase auth, magento backend, formik validation
 
-localstorage not the best
+localstorage not the best, but jwt stored in auth header should prevent csrf

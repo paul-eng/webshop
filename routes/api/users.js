@@ -17,19 +17,21 @@ router.post("/", ({ body: user }, res) => {
     User.findOne({ email: user.email }).then((match) => {
       if (match) {
         res.status(400).json({
-          error: "There is already an account with this email address.",
+          error: "An account already exists for that email address.",
         });
       } else {
         User.create(user)
           .then((user) => res.json({ user }))
           .catch((err) =>
-            res.status(400).json({ error: "Unable to add user", err })
+            res.status(400).json({ error: "Failed to add user", err })
           );
       }
     });
   });
 });
 
+// @route api/users/login
+// @description check password and return jwt
 router.post("/login", ({ body: user }, res) => {
   User.findOne({ email: user.email }).then((match) => {
     if (match) {
@@ -53,12 +55,14 @@ router.post("/login", ({ body: user }, res) => {
       });
     } else {
       res.status(400).json({
-        error: "Could not find an account registered to that email address.",
+        error: "No account found with that email address.",
       });
     }
   });
 });
 
+// @route api/users/verify
+// @description add/save users
 router.get("/verify", (req, res) => {
   const token = req.headers["x-access-token"];
   jwt.verify(token, config.get("secret"), (err, decoded) => {
@@ -89,7 +93,7 @@ router.get("/", (req, res) => {
   User.find()
     .then((users) => res.json(users))
     .catch((err) =>
-      res.status(404).json({ noproductsfound: "No users found" })
+      res.status(404).json({ nousersfound: "No users found" })
     );
 });
 

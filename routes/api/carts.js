@@ -44,7 +44,14 @@ router.get("/session", (req, res) => {
         } else {
           Cart.create({
             user: decoded.sub,
-            cart: { items: [], total: 0, count: 0 },
+            cart: {
+              // Find in files: SHAPEOFCARTSTATE. Won't necessarily break if a field is missing in one, but try to keep consistent for peace of mind
+              items: [],
+              total: 0,
+              count: 0,
+              qtyError: [],
+              loading: false,
+            },
           })
             .then((newDoc) => res.json(newDoc.cart))
             .catch(() =>

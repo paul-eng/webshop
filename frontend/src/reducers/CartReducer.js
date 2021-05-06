@@ -11,10 +11,12 @@ import {
 import { stockTypes, matchItem, matchStock, mergeCarts } from "../util/Util";
 
 const initState = {
+  // Find in files: SHAPEOFCARTSTATE. Won't necessarily break if a field is missing in one, but try to keep consistent for peace of mind
   items: [],
   total: 0,
   count: 0,
   qtyError: [],
+  loading: false,
 };
 const cartReducer = (state = initState, action) => {
   Object.freeze(state);
@@ -88,11 +90,12 @@ const cartReducer = (state = initState, action) => {
       return mergeCarts(state, action.cart);
     case CLEAR_CART:
       return {
+        // Find in files: SHAPEOFCARTSTATE. Won't necessarily break if a field is missing in one, but try to keep consistent for peace of mind
         items: [],
         total: 0,
         count: 0,
-        error: null,
         qtyError: [],
+        loading: false,
       };
     default:
       return state;
