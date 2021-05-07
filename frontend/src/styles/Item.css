@@ -1,10 +1,20 @@
 .Item {
     display: grid;
-    grid-template-columns: 22% 1fr;
-    grid-template-areas: "nav item";
-    /* prevents resizing when scrollbar appears/disappears */
-    /* when vertical scrollbar appears, it creates horizontal scrollbar due to
-    area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */
-    /* width: 100vw;
-    padding-right: 1vw; */
+    grid-template-columns: minmax(350px, 50%) 1fr;
+    column-gap: 2rem;
+}
+
+.Item h2 {
+    margin-top: 0;
+}
+
+.Item p {
+    margin: 4rem 0;
+}
+
+@media (any-hover: none) {
+.Item {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+}
 }

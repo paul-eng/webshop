@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Nav from "../Nav/Nav";
 import { useHistory } from "react-router-dom";
 import "../../styles/Account.css";
 
@@ -14,7 +13,6 @@ const Logout = (props) => {
 
   return (
     <div className="Logout">
-      <Nav />
       <div>
         <section>
           <h3>YOU ARE SIGNED OUT</h3>

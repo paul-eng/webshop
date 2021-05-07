@@ -73,19 +73,26 @@ class Slider extends Component {
   touchSlides() {
     let { scrollerWidth, slideWidth, slideCount, edges } = this.getSize();
     let scrollPos = this.scroller.current.scrollLeft;
-    if (edges.includes(scrollPos)) {
-      let slide = edges.indexOf(scrollPos);
-      if (slide === slideCount - 1) {
-        // reach scrollbar end, reset to front
-        this.scroller.current.scrollLeft = slideWidth;
-        this.setState({ selected: 0 });
-        // reach scrollbar beginning, reset to end
-      } else if (slide === 0) {
-        this.scroller.current.scrollLeft = scrollerWidth - slideWidth * 2;
-        this.setState({ selected: slideCount - 2 });
-      } else {
-        this.setState({ selected: slide - 1 });
-      }
+
+    if (scrollPos >= scrollerWidth - slideWidth) {
+      // reach scrollbar end, reset to front
+      this.scroller.current.scrollLeft = slideWidth;
+    } else if (scrollPos === 0) {
+      // reach scrollbar beginning, reset to end
+      this.scroller.current.scrollLeft = scrollerWidth - slideWidth * 2;
+    }
+
+    let distance = edges.map((el) => Math.abs(el - scrollPos));
+    let slide = distance.findIndex((el) => el === Math.min(...distance));
+
+    console.log(slide)
+    if (slide === slideCount - 1) {
+      this.setState({ selected: 0 });
+    } else if (slide === 0) {
+      console.log("im in here")
+      this.setState({ selected: slideCount - 3 });
+    } else {
+      this.setState({ selected: slide - 1 });
     }
   }
 

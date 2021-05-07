@@ -69,5 +69,8 @@ export const getAdmin = (token) => (dispatch) => {
     .then((res) => {
       return res.data;
     })
-    .catch((err) => console.log(err.response.data.error));
+    .catch((err) => {
+      localStorage.removeItem("session");
+      console.log(err.response.data.error);
+    });
 };

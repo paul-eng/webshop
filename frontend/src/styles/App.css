@@ -54,6 +54,12 @@ body,
   margin: 0;
 }
 
+.NavFrame {
+  display: grid;
+  grid-template-columns: 22% 1fr;
+  grid-template-areas: "nav body";
+}
+
 ul {
   padding: 0;
   margin: 0;

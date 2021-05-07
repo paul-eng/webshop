@@ -7,7 +7,7 @@ import Admin from "./Admin";
 import { useSelector } from "react-redux";
 import "../../styles/Nav.css";
 
-const Nav = () => {
+const Nav = (props) => {
   function show(path, e) {
     setPath(path);
     setList(true);
@@ -30,6 +30,8 @@ const Nav = () => {
   useEffect(() => {
     error.current = msg;
   }, [msg]);
+
+  useEffect(() => setAcct(false), [props.location]);
 
   function handleDown(e) {
     if (
@@ -70,11 +72,8 @@ const Nav = () => {
         <h3 onMouseEnter={hide}>
           <Link to="/new-arrivals">NEW ARRIVALS</Link>
         </h3>
-
         <h3 onMouseEnter={(e) => show("/brand/", e)}>BRANDS</h3>
-
         <h3 onMouseEnter={(e) => show("/category/", e)}>CATEGORIES</h3>
-
         <NavList active={list} path={path} />
       </div>
       <section>

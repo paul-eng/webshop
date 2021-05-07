@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Nav from "../Nav/Nav";
 import "../../styles/CreateAccount.css";
 import { addUser } from "../../actions/UserActions";
 import validator from "validator";
@@ -106,7 +105,6 @@ class CreateAccount extends Component {
     let errors = this.state.errors;
     return (
       <div className="CreateAccount">
-        <Nav />
         <section>
           <h3>CREATE AN ACCOUNT</h3>
           <h3>

@@ -19,6 +19,7 @@ import Logout from "../Account/Logout";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Message from "./Message";
+import Nav from "../Nav/Nav";
 
 class App extends Component {
   componentDidMount() {
@@ -42,17 +43,8 @@ class App extends Component {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/" component={Shop} />
-          <Route exact path="/new-arrivals" component={New} />
-          <AdminRoute exact path="/add-item" component={AddItem} />
           <Route exact path="/cart" component={Cart} />
-          <Route exact path="/account/create" component={CreateAccount} />
-          <Route exact path="/account/logout" component={Logout} />
-          <PrivateRoute path="/account" component={Account} />
-          <Route path="/search" component={Search} />
-          <Route path="/brand/:brand" component={Brand} />
-          <Route path="/category/:cat" component={Category} />
-          <Route path="/:item" component={Item} />
+          <Route path="/" component={NavFrame} />
         </Switch>
         <Message />
       </Router>
@@ -75,3 +67,23 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+const NavFrame = (props) => {
+  return (
+    <div className="NavFrame">
+      <Switch>
+        <Route exact path="/" component={Shop} />
+        <Route exact path="/new-arrivals" component={New} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/account/create" component={CreateAccount} />
+        <Route exact path="/account/logout" component={Logout} />
+        <PrivateRoute path="/account" component={Account} />
+        <AdminRoute exact path="/add-item" component={AddItem} />
+        <Route path="/brand/:brand" component={Brand} />
+        <Route path="/category/:cat" component={Category} />
+        <Route path="/:item" component={Item} />
+      </Switch>
+      <Nav location={props.location.pathname} />
+    </div>
+  );
+};

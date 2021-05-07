@@ -1,19 +1,9 @@
 .ContentArea {
     display: grid;
-    grid-template-columns: 22% 1fr;
-    /* prevents resizing due to scrollbar appear/disappear */
-    /* at 100vw, when vertical scrollbar appears, it also causes a horizontal scrollbar due to creation of
-    area that is now hidden behind vertical scrollbar, so overflow-x:hidden added to body */
-    /* width: 100%;
-    padding-right: 1vw; */
-    grid-template-areas: 
-        "nav title"
-        "nav items"
-        "nav page";
+    grid-template-rows: repeat(3,auto);
 }
 
 .ContentArea .Page {
-    grid-area: page;
     width: max-content;
     margin: 4rem 0;
     user-select: none;

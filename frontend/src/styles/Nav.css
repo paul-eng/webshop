@@ -3,13 +3,10 @@
     grid-area: nav;
 }
 
-.Nav section {
-    margin-top: 2rem;
-}
-
 .NavWrapper {
     display: flex;
     flex-direction: column;
+    padding-bottom: 2rem;
 }
 
 .TopLevel {

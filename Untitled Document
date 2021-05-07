@@ -1,5 +1,7 @@
 Use mongoose aggregate $facet to get subset of collection and total count in a single query
 
+search using mongodb $text
+
 grid and flex
 
 Infinite scroll done with transform of el in an overflow:hidden container, scrolling inside a container with overflow-x:scroll is possible, but scroll behavior smooth not consistent
@@ -14,6 +16,8 @@ optional chaining, pseudoselectors pseudoelements
 at enterprise level, use firebase auth, magento backend, formik validation
 
 localstorage not the best, but jwt stored in auth header should prevent csrf
+
+if refreshing a link with active filters in the query, remembers what was active and all the other avialable possible filters
 
 Infinite scrolling carousel solution for cursor and touch based navigation
 Role based access to admin and user areas protected by JWT authentication based private routing

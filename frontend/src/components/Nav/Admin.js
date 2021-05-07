@@ -5,20 +5,17 @@ import { getAdmin } from "../../actions/UserActions";
 import "../../styles/Admin.css";
 
 const Admin = () => {
-  const [mounted, setMounted] = useState(false);
   const [verified, setVerified] = useState(false);
   const dispatch = useDispatch();
+  const sessionToken = localStorage.getItem("session");
 
   useEffect(() => {
-    if (!mounted) {
-      const sessionToken = localStorage.getItem("session");
-      if (sessionToken)
-        dispatch(getAdmin(sessionToken)).then((admin) => {
-          if (admin) setVerified(true);
-        });
-      setMounted(true);
-    }
-  }, [mounted, dispatch]);
+    sessionToken
+      ? dispatch(getAdmin(sessionToken)).then((admin) => {
+          setVerified(admin);
+        })
+      : setVerified(false);
+  }, [sessionToken, dispatch]);
 
   return verified ? (
     <aside className="Admin">

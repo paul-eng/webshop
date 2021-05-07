@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { clearAllItems } from "../../actions/ItemActions";
 import ContentHeader from "./ContentHeader";
 import ShowProducts from "./ShowProducts";
-import Nav from "../Nav/Nav";
 import Page from "./Page";
 import "../../styles/ContentArea.css";
 
@@ -17,7 +16,6 @@ class ContentArea extends Component {
       <div className="ContentArea">
         <ContentHeader />
         <ShowProducts />
-        <Nav />
         <Page />
       </div>
     );

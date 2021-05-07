@@ -18,7 +18,7 @@ const Dashboard = React.forwardRef((props, ref) => {
       <h3>ACCOUNT</h3>
       <section>
         <h3>
-          <Link to="/account/">
+          <Link to="/account">
             <span>Account overview</span>
           </Link>
         </h3>

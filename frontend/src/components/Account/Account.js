@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import React from "react";
-import Nav from "../Nav/Nav";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logoutService } from "../../util/Util";
@@ -19,7 +18,6 @@ const Account = (props) => {
 
   return (
     <div className="Account">
-      <Nav />
       <div>
         <h3>ACCOUNT</h3>
         <section>

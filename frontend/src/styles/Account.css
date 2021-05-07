@@ -1,15 +1,4 @@
-.Account, .Logout {
-    display: grid;
-    grid-template-columns: 22% 1fr;
-    grid-template-areas: "nav form";
-    /* prevents resizing when scrollbar appears/disappears */
-    /* when vertical scrollbar appears, it creates horizontal scrollbar due to
-    area that is now hidden behind vertical scrollbar, so add overflow-x:hidden in body */
-    /* width: 100vw;
-    padding-right: 1vw; */
-}
-
-.Account section > article:first-of-type::after {
+.Account section:first-of-type > article:first-of-type::after {
     display: block;
     content: "";
     background-color: #aaa;
