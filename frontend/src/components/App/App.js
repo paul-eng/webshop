@@ -20,6 +20,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Message from "./Message";
 import Nav from "../Nav/Nav";
+import Address from "../Account/Address";
 
 class App extends Component {
   componentDidMount() {
@@ -77,6 +78,7 @@ const NavFrame = (props) => {
         <Route exact path="/search" component={Search} />
         <Route exact path="/account/create" component={CreateAccount} />
         <Route exact path="/account/logout" component={Logout} />
+        <PrivateRoute path="/account/address" component={Address} />
         <PrivateRoute path="/account" component={Account} />
         <AdminRoute exact path="/add-item" component={AddItem} />
         <Route path="/brand/:brand" component={Brand} />

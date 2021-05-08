@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../../styles/CreateAccount.css";
+import "../../styles/Form.css";
 import { addUser } from "../../actions/UserActions";
 import validator from "validator";
 
@@ -104,7 +104,7 @@ class CreateAccount extends Component {
   render() {
     let errors = this.state.errors;
     return (
-      <div className="CreateAccount">
+      <div className="CreateAccount Form">
         <section>
           <h3>CREATE AN ACCOUNT</h3>
           <h3>
@@ -112,7 +112,7 @@ class CreateAccount extends Component {
             your shipping and billing address, and view order history.
           </h3>
 
-          <form onSubmit={this.onSubmit} className="AccountForm">
+          <form onSubmit={this.onSubmit} >
             <article>
               <h3>First name</h3>
               <input

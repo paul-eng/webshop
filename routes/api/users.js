@@ -47,6 +47,7 @@ router.post("/login", ({ body: user }, res) => {
               firstname: match.firstname,
               lastname: match.lastname,
               email: match.email,
+              address: match.address,
             },
             token,
           });
@@ -77,6 +78,7 @@ router.get("/verify", (req, res) => {
               firstname: user.firstname,
               lastname: user.lastname,
               email: user.email,
+              address: user.address,
             },
             token: token,
           });

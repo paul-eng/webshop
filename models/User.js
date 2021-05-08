@@ -13,6 +13,11 @@ const UserSchema = new mongoose.Schema({
   pass: {
     type: String,
   },
+  address: {
+    default: {
+      type: String,
+    },
+  },
   role: {
     type: String,
   },

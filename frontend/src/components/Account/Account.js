@@ -1,7 +1,7 @@
-import { connect } from "react-redux";
 import React from "react";
+import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { logoutService } from "../../util/Util";
 import "../../styles/Account.css";
 const Account = (props) => {
@@ -29,7 +29,9 @@ const Account = (props) => {
           <article>
             <div>
             <h3>Address book </h3>
+            <Link to="/account/address">
             <span>EDIT</span>
+            </Link>
             </div>
             <h3>You have not set a default shipping address.</h3>
           </article>
