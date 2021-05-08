@@ -27,7 +27,10 @@ const Account = (props) => {
             <h3>{email}</h3>
           </article>
           <article>
-            <h3>Address book</h3>
+            <div>
+            <h3>Address book </h3>
+            <span>EDIT</span>
+            </div>
             <h3>You have not set a default shipping address.</h3>
           </article>
           <input onClick={logOut} type="submit" value="LOG OUT" />

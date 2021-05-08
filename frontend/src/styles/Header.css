@@ -32,6 +32,10 @@ h1 {
     transition: .1s;
 }
 
+.SearchBar input:focus {
+    outline: none
+}
+
 .SearchBar input {
     width: calc(100% - .5rem);
     font-weight: bold;

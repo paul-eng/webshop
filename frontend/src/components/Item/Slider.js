@@ -78,18 +78,17 @@ class Slider extends Component {
       // reach scrollbar end, reset to front
       this.scroller.current.scrollLeft = slideWidth;
     } else if (scrollPos === 0) {
-      // reach scrollbar beginning, reset to end
+      // reach scrollbar beginning, reset to back
       this.scroller.current.scrollLeft = scrollerWidth - slideWidth * 2;
     }
-
+    // find closest slide by calculating difference between scrollpos and slide's edge
     let distance = edges.map((el) => Math.abs(el - scrollPos));
     let slide = distance.findIndex((el) => el === Math.min(...distance));
-
-    console.log(slide)
+    // set selected to light up correct dot, accounting for extra slides on ends or wrapping around to front/back
     if (slide === slideCount - 1) {
       this.setState({ selected: 0 });
     } else if (slide === 0) {
-      console.log("im in here")
+      console.log("im in here");
       this.setState({ selected: slideCount - 3 });
     } else {
       this.setState({ selected: slide - 1 });

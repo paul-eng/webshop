@@ -1,10 +1,10 @@
 .Account section:first-of-type > article:first-of-type::after {
-    display: block;
     content: "";
+    display: block;
     background-color: #aaa;
     width: 100%;
     height: .2rem;
-    margin: 2rem 0;
+    margin-top: 2rem;
 }
 
 .Account > div {
@@ -15,9 +15,9 @@
         "col1 col2";
 }
 
-.Account > div h3:first-of-type, .Logout > div h3:first-of-type {
-    margin-bottom: 2rem;
-}
+ .Account *:first-child {
+     margin-bottom: 2rem;
+ }
 
 .Account section:first-of-type {
     grid-area: col1;
@@ -27,7 +27,23 @@
     grid-area: col2;
 }
 
-.Account section input {
+.Account input {
     margin-top: 2rem;
     width: 200px;
+}
+
+.Account article {
+    position: relative;
+}
+
+.Account span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: authentic_bold;
+    color: #828282;
+}
+
+.Logout h3 {
+    margin-bottom: 2rem;
 }

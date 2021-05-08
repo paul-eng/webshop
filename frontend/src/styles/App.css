@@ -83,6 +83,10 @@ input, select {
   border: 0;
 }
 
+input[type=text]:focus, input[type=password]:focus {
+  outline: .1rem solid #0c0;
+}
+
 input[type=text], input[type=password] {
   outline: none;
   padding: 1rem 1.25rem;
@@ -107,7 +111,6 @@ input[type=submit],input[type=submit]:active {
   cursor: pointer;
   padding: 1rem 1.75rem;
 }
-
 
 select {
   padding: .75rem 1.5rem .75rem .75rem;
