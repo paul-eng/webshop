@@ -6,7 +6,8 @@ import { fetchBrands, fetchCategories } from "../../actions/NavActions";
 class NavList extends Component {
   constructor(props) {
     super(props);
-    this.state = { links: [] };
+    this.state = { links: [], active: false };
+    this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
@@ -15,6 +16,9 @@ class NavList extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.active !== this.props.active)
+      this.setState({ active: this.props.active });
+
     if (prevProps.path !== this.props.path) {
       let links;
       switch (this.props.path) {
@@ -31,19 +35,25 @@ class NavList extends Component {
     }
   }
 
+  onClick() {
+    this.setState({ active: false });
+  }
+
   makeParam = (link) => link.toLowerCase().split(" ").join("-");
 
   list = (path, links) =>
     links.map((link) => (
       <li key={link}>
         <h3>
-          <Link to={path + this.makeParam(link)}>{link}</Link>
+          <Link onClick={this.onClick} to={path + this.makeParam(link)}>
+            {link}
+          </Link>
         </h3>
       </li>
     ));
 
   render() {
-    let active = this.props.active ? "block" : "none";
+    let active = this.state.active ? "block" : "none";
     let path = this.props.path;
     let links = this.state.links;
 

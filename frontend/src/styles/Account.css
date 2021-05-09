@@ -21,6 +21,7 @@
 
 .Account section:first-of-type {
     grid-area: col1;
+    margin-right: 4rem;
 }
 
 .Account section:last-of-type {
@@ -42,6 +43,10 @@
     right: 0;
     font-family: authentic_bold;
     color: #828282;
+}
+
+.Account aside > * {
+    margin: 0 0 0 0 !important;
 }
 
 .Logout h3 {

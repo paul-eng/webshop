@@ -1,6 +1,11 @@
 const Countries = (props) => {
   return (
-    <select onChange={props.onChange} id="country" name="country">
+    <select
+      onChange={props.onChange}
+      id="country"
+      name="country"
+      defaultValue={props.defaultValue}
+    >
       <option value="Afganistan">Afghanistan</option>
       <option value="Albania">Albania</option>
       <option value="Algeria">Algeria</option>
@@ -232,7 +237,7 @@ const Countries = (props) => {
       <option value="United Kingdom">United Kingdom</option>
       <option value="Ukraine">Ukraine</option>
       <option value="United Arab Erimates">United Arab Emirates</option>
-      <option value="United States of America">United States of America</option>
+      <option value="United States">United States of America</option>
       <option value="Uraguay">Uruguay</option>
       <option value="Uzbekistan">Uzbekistan</option>
       <option value="Vanuatu">Vanuatu</option>

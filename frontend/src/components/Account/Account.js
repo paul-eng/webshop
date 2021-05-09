@@ -13,8 +13,10 @@ const Account = (props) => {
     logoutService(history, dispatch);
   };
 
-  // the {} prevents crash between dispatch(logout) and history.push in logoutservice, where props.user is null w no properties
-  let { firstname, lastname, email } = props.user || {};
+  // props.user || {} prevents crash on refresh or between dispatch(logout) and history.push in logoutservice, where props.user is null w no properties
+  // ugly destructuring of address to access nested key 'default' without crashing if user is null
+  let { firstname, lastname, email, address: { default: address } = {} } =
+    props.user || {};
 
   return (
     <div className="Account">
@@ -28,12 +30,28 @@ const Account = (props) => {
           </article>
           <article>
             <div>
-            <h3>Address book </h3>
-            <Link to="/account/address">
-            <span>EDIT</span>
-            </Link>
+              <h3>Address book </h3>
+              <Link to="/account/address">
+                <span>EDIT</span>
+              </Link>
             </div>
-            <h3>You have not set a default shipping address.</h3>
+            {address ? (
+              <aside>
+                <h3>{address.firstname + " " + address.lastname}</h3>
+                <h3>{address.company}</h3>
+                <h3>{address.add1}</h3>
+                <h3>{address.add2}</h3>
+                <h3>
+                  {[address.city, address.state, address.postcode]
+                    .filter((x) => x !== "")
+                    .join(", ")}
+                </h3>
+                <h3>{address.country}</h3>
+                <h3>T: {address.phone}</h3>
+              </aside>
+            ) : (
+              <h3>You have not set a default shipping address.</h3>
+            )}
           </article>
           <input onClick={logOut} type="submit" value="LOG OUT" />
         </section>

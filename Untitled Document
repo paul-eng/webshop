@@ -4,6 +4,8 @@ search using mongodb $text
 
 grid and flex
 
+hooks and class comp
+
 Infinite scroll done with transform of el in an overflow:hidden container, scrolling inside a container with overflow-x:scroll is possible, but scroll behavior smooth not consistent
 
 ON mobile dont want to press buttons to trigger transforms when scrolling is preferred native navigation techinque, so disable transform buttons and use scroll snap,

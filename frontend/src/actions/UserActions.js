@@ -3,6 +3,7 @@ import axios from "axios";
 export const SET_USER = "SET_USER";
 export const CLEAR_USER = "CLEAR_USER";
 export const SET_MSG = "SET_MSG";
+export const SET_ADDRESS = "SET_ADDRESS";
 
 export const setUser = ({ user, token }) => {
   localStorage.setItem("session", token);
@@ -14,6 +15,10 @@ export const setUser = ({ user, token }) => {
 
 export const clearUser = () => {
   return { type: CLEAR_USER };
+};
+
+export const setAddress = (address) => {
+  return { type: SET_ADDRESS, address };
 };
 
 export const setMsg = (msg) => {
@@ -46,6 +51,22 @@ export const addUser = (user) => (dispatch) => {
       return dispatch(login(user));
     })
     .catch((err) => dispatch(setMsg(err.response.data.error)));
+};
+
+export const addAddress = (address, token) => (dispatch) => {
+  const headers = { "x-access-token": token };
+  return axios
+    .post("http://localhost:8080/api/users/address", address, { headers })
+    .then(
+      ({
+        data: {
+          user: { address },
+        },
+      }) => {
+        return dispatch(setAddress(address));
+      }
+    )
+    .catch((err) => console.log(err.response.data));
 };
 
 export const getUser = (token) => (dispatch) => {

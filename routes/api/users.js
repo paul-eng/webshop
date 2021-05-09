@@ -13,7 +13,6 @@ router.get("/test", (req, res) => res.send("user route testing!"));
 router.post("/", ({ body: user }, res) => {
   bcrypt.hash(user.pass, 8, function (err, hash) {
     user.pass = hash;
-
     User.findOne({ email: user.email }).then((match) => {
       if (match) {
         res.status(400).json({
@@ -59,6 +58,29 @@ router.post("/login", ({ body: user }, res) => {
       res.status(400).json({
         error: "No account found with that email address.",
       });
+    }
+  });
+});
+
+// @route api/users/address
+// @description Add/update address
+router.post("/address", (req, res) => {
+  const token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(403).json({ error: "Unauthorized" });
+    } else {
+      User.findByIdAndUpdate(
+        decoded.sub,
+        { address: { default: req.body } },
+        { new: true, upsert: true }
+      )
+        .then((user) => {
+          res.json({ user });
+        })
+        .catch((err) => {
+          res.status(400).json({ error: "Failed to update user address" });
+        });
     }
   });
 });

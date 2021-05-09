@@ -1,4 +1,4 @@
-import { SET_USER, CLEAR_USER } from "../actions/UserActions";
+import { SET_USER, CLEAR_USER, SET_ADDRESS } from "../actions/UserActions";
 
 const initState = null;
 
@@ -10,6 +10,8 @@ const userReducer = (state = initState, action) => {
       return action.user;
     case CLEAR_USER:
       return null;
+    case SET_ADDRESS:
+      return Object.assign({}, state, { address: action.address });
     default:
       return state;
   }
