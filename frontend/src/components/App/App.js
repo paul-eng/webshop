@@ -5,22 +5,10 @@ import { getUser } from "../../actions/UserActions";
 import { fetchCart, saveCart } from "../../actions/CartActions";
 import "../../styles/App.css";
 import Header from "./Header";
-import AddItem from "./AddItem";
 import Cart from "../Cart/Cart";
-import Shop from "../Shop/Shop";
-import Brand from "../Shop/Brand";
-import New from "../Shop/New";
-import Category from "../Shop/Category";
-import Item from "../Item/Item";
-import Search from "../Shop/Search";
-import CreateAccount from "../Account/CreateAccount";
-import Account from "../Account/Account";
-import Logout from "../Account/Logout";
-import PrivateRoute from "./PrivateRoute";
-import AdminRoute from "./AdminRoute";
+import NavFrame from "./NavFrame"
 import Message from "./Message";
-import Nav from "../Nav/Nav";
-import Address from "../Account/Address";
+
 
 class App extends Component {
   componentDidMount() {
@@ -68,24 +56,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-const NavFrame = (props) => {
-  return (
-    <div className="NavFrame">
-      <Switch>
-        <Route exact path="/" component={Shop} />
-        <Route exact path="/new-arrivals" component={New} />
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/account/create" component={CreateAccount} />
-        <Route exact path="/account/logout" component={Logout} />
-        <PrivateRoute path="/account/address" component={Address} />
-        <PrivateRoute path="/account" component={Account} />
-        <AdminRoute exact path="/add-item" component={AddItem} />
-        <Route path="/brand/:brand" component={Brand} />
-        <Route path="/category/:cat" component={Category} />
-        <Route path="/:item" component={Item} />
-      </Switch>
-      <Nav location={props.location.pathname} />
-    </div>
-  );
-};

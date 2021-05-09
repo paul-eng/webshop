@@ -9,6 +9,17 @@ import "../../styles/Nav.css";
 import MobileSearch from "./MobileSearch";
 
 const Nav = (props) => {
+  const currentUser = useSelector((state) => state.user);
+  const mobileDisplay = useSelector((state) => state.nav.display);
+  const [focus, setFocus] = useState({ className: "" });
+  const [path, setPath] = useState(null);
+  const [list, setList] = useState(false);
+  const [acct, setAcct] = useState(false);
+  const prevFocus = useRef({ className: "" });
+  const account = useRef();
+  const error = useRef();
+  const msg = useSelector((state) => state.nav.msg);
+
   function show(path, e) {
     setPath(path);
     setList(true);
@@ -25,16 +36,17 @@ const Nav = (props) => {
     window.addEventListener("mousedown", handleDown);
   }
 
-  // listener points to ref, pointing directly to state would refer to stale state from time of listener creation
-  let error = useRef();
-  const msg = useSelector((state) => state.nav.msg);
   useEffect(() => {
     error.current = msg;
   }, [msg]);
 
-  useEffect(() => setAcct(false), [props.location]);
+  useEffect(() => {
+    setAcct(false);
+    setList(false);
+  }, [props.location]);
 
   function handleDown(e) {
+    // listener points to error ref, pointing directly to error state would refer to stale state from time of listener creation
     if (
       !error.current &&
       account.current &&
@@ -44,15 +56,6 @@ const Nav = (props) => {
       window.removeEventListener("mousedown", handleDown);
     }
   }
-
-  const currentUser = useSelector((state) => state.user);
-  const mobileDisplay = useSelector((state) => state.nav.display);
-  const [focus, setFocus] = useState({ className: "" });
-  const [path, setPath] = useState(null);
-  const [list, setList] = useState(false);
-  const [acct, setAcct] = useState(false);
-  const prevFocus = useRef({ className: "" });
-  const account = useRef();
 
   useEffect(() => {
     focus.className = "TopLevel";
@@ -73,21 +76,23 @@ const Nav = (props) => {
         onMouseLeave={hide}
       >
         <h3 onMouseEnter={hide}>
-          <Link to="/new-arrivals">NEW ARRIVALS</Link>
+          <Link to="/new-arrivals">
+            NEW ARRIVALS
+          </Link>
         </h3>
         <h3
           onClick={mobileDisplay ? (e) => show("/brand/", e) : null}
-          onMouseEnter={(e) => show("/brand/", e)}
+          onMouseEnter={mobileDisplay ? null : (e) => show("/brand/", e)}
         >
           BRANDS
         </h3>
         <h3
           onClick={mobileDisplay ? (e) => show("/category/", e) : null}
-          onMouseEnter={(e) => show("/category/", e)}
+          onMouseEnter={mobileDisplay ? null : (e) => show("/category/", e)}
         >
           CATEGORIES
         </h3>
-        <NavList setList={setList} active={list} path={path} />
+        <NavList active={list} path={path} />
       </div>
       <section>
         {currentUser ? (

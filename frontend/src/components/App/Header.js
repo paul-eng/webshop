@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBar from "./SearchBar";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleNav } from "../../actions/NavActions";
 import cartSVG from "../../icons/cart.svg";
@@ -9,31 +9,25 @@ import plusSVG from "../../icons/plus.svg";
 import "../../styles/Header.css";
 
 const Header = (props) => {
-  const display = useSelector((state) => state.nav.display);
-
   const onClick = () => {
     props.toggleNav();
-  };
-
-  const close = () => {
-    if (props.mobileDisplay) props.toggleNav(false);
   };
 
   return (
     <div className="Header">
       <aside className="Menu" onClick={onClick}>
         <img
-          style={{ display: display ? "none" : "block" }}
+          style={{ display: props.mobileDisplay ? "none" : "block" }}
           src={menuSVG}
           alt="menu"
         />
         <img
-          style={{ display: display ? "block" : "none" }}
+          style={{ display: props.mobileDisplay ? "block" : "none" }}
           src={plusSVG}
           alt="menu"
         />
       </aside>
-      <Link onClick={close} className="Logo" to="/">
+      <Link className="Logo" to="/">
         <h1>RESTFUL GOODS</h1>
       </Link>
       <SearchBar />
