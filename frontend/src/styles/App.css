@@ -35,7 +35,7 @@
 body {
   overflow-x:hidden;
   font-family: "authentic";
-  font-size: 1.1rem;
+  font-size: .9rem;
 }
 
 html,
@@ -56,7 +56,7 @@ body,
 
 .NavFrame {
   display: grid;
-  grid-template-columns: 22% 1fr;
+  grid-template-columns: minmax(min-content,22%) 1fr;
   grid-template-areas: "nav body";
 }
 
@@ -137,4 +137,10 @@ img {
 
 svg {
   font-size: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 1.1rem;
+  }
 }

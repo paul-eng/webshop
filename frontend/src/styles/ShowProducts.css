@@ -1,8 +1,14 @@
 .ShowProducts {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33.3333333%);
     grid-template-rows: auto;
     column-gap: .5rem;
     row-gap: 2rem;
 
+}
+
+@media screen and (max-width: 639px) {
+    .ShowProducts {
+        grid-template-columns: repeat(2, 50%);
+    }
 }

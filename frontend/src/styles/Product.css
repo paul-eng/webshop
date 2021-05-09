@@ -3,7 +3,7 @@
     cursor: pointer;
 }
 
-.Product section {
-    width: max-content;
+.Product section h3 {
+    display: inline-block;
     cursor: pointer;
 }

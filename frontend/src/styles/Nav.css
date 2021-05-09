@@ -24,7 +24,6 @@
 
 .Nav h3 {
     cursor: pointer;
-    width: max-content;
 }
 
 .Nav a:hover, .Nav h3:hover {

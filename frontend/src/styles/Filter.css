@@ -1,3 +1,5 @@
+/* in the future, filter can prob be improved w/ grid auto fill / auto fit */
+
 .Filter {
     display: flex;
     flex-direction: column;
