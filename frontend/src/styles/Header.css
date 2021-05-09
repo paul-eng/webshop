@@ -20,7 +20,7 @@ h1 {
     font-family: "authentic_bolder";
 }
 
-.SearchBar .wrapper {
+.SearchBar {
     margin-left: auto;
     width: max-content;
     display: flex;
@@ -31,6 +31,7 @@ h1 {
 .SearchBar form {
     width: 0px;
     transition: .1s;
+    margin-bottom: 1rem;
 }
 
 .SearchBar input:focus {

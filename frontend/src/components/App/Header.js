@@ -1,31 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchBar from "./SearchBar";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { toggleNav } from "../../actions/NavActions"
+import { toggleNav } from "../../actions/NavActions";
 import cartSVG from "../../icons/cart.svg";
 import menuSVG from "../../icons/menu.svg";
 import plusSVG from "../../icons/plus.svg";
 import "../../styles/Header.css";
 
 const Header = (props) => {
-  const [menu, setMenu] = useState(false);
+  const display = useSelector((state) => state.nav.display);
 
   const onClick = () => {
-    props.toggleNav()
-    setMenu(!menu);
+    props.toggleNav();
   };
 
   return (
     <div className="Header">
       <aside className="Menu" onClick={onClick}>
         <img
-          style={{ display: menu ? "none" : "block" }}
+          style={{ display: display ? "none" : "block" }}
           src={menuSVG}
           alt="menu"
         />
         <img
-          style={{ display: menu ? "block" : "none" }}
+          style={{ display: display ? "block" : "none" }}
           src={plusSVG}
           alt="menu"
         />
@@ -54,8 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleNav: () => dispatch(toggleNav())
-  }
-}
+    toggleNav: () => dispatch(toggleNav()),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

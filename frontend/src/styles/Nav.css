@@ -86,10 +86,27 @@
     cursor: pointer;
 }
 
+.MobileSearch {
+    display: flex;
+    margin-bottom: 2rem;
+    margin-top: -2rem;
+}
+
+.MobileSearch form, input {
+    width: calc(100% - 4rem);
+    font-weight: bold;
+    background-color: white;
+    outline: none !important;
+}
+
+.MobileSearch img {
+    width: 1.75rem;
+}
+
 @media screen and (max-width: 768px) {
     .Nav {
         display: none;
-        position: fixed;
+        position: absolute;
         width: 100%;
         background-color: white;
     }

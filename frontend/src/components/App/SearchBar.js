@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import queryString from "query-string";
 import { withRouter } from "react-router-dom";
 import searchSVG from "../../icons/search.svg";
+import { makeQuery } from "../../util/Util";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -25,12 +25,8 @@ class SearchBar extends Component {
   onSubmit(form) {
     form.preventDefault();
     this.setState({ search: "", visible: false });
-    let terms = form.target[0].value.split(" ");
-    let query = { q: terms };
-    this.props.history.push({
-      pathname: "/search/",
-      search: queryString.stringify(query, { arrayFormat: "bracket" }),
-    });
+    this.textbox.current.blur();
+    makeQuery(form, this.props.history);
   }
 
   handleClick(e) {
@@ -52,30 +48,28 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="SearchBar">
-        <div className="wrapper" ref={this.searchBar}>
-          <img
-            onClick={this.visible}
-            style={{ cursor: this.state.visible ? "default" : "pointer" }}
-            alt="search"
-            src={searchSVG}
+      <div className="SearchBar" ref={this.searchBar}>
+        <img
+          onClick={this.visible}
+          style={{ cursor: this.state.visible ? "default" : "pointer" }}
+          alt="search"
+          src={searchSVG}
+        />
+        <form
+          style={{
+            width: this.state.visible ? "20vw" : 0,
+            pointerEvents: this.state.visible ? "auto" : "none",
+          }}
+          onSubmit={this.onSubmit}
+        >
+          <input
+            ref={this.textbox}
+            placeholder="Search item(s)"
+            type="text"
+            value={this.state.search}
+            onChange={this.onChange}
           />
-          <form
-            style={{
-              width: this.state.visible ? "20vw" : 0,
-              pointerEvents: this.state.visible ? "auto" : "none",
-            }}
-            onSubmit={this.onSubmit}
-          >
-            <input
-              ref={this.textbox}
-              placeholder="Search item(s)"
-              type="text"
-              value={this.state.search}
-              onChange={this.onChange}
-            />
-          </form>
-        </div>
+        </form>
       </div>
     );
   }

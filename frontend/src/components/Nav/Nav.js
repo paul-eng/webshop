@@ -6,6 +6,7 @@ import Login from "./Login";
 import Admin from "./Admin";
 import { useSelector } from "react-redux";
 import "../../styles/Nav.css";
+import MobileSearch from "./MobileSearch";
 
 const Nav = (props) => {
   function show(path, e) {
@@ -66,6 +67,7 @@ const Nav = (props) => {
   return (
     <nav className={mobileDisplay ? "Nav display" : "Nav"}>
       <Admin />
+      {mobileDisplay ? <MobileSearch /> : null}
       <div
         className={acct ? "NavWrapper masked" : "NavWrapper"}
         onMouseLeave={hide}

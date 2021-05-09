@@ -2,6 +2,15 @@ import queryString from "query-string";
 import { login, logout } from "../actions/UserActions";
 import { fetchCart, clearCart } from "../actions/CartActions";
 
+export const makeQuery = (form, history) => {
+  let terms = form.target[0].value.split(" ");
+  let query = { q: terms };
+  history.push({
+    pathname: "/search/",
+    search: queryString.stringify(query, { arrayFormat: "bracket" }),
+  });
+};
+
 export const logoutService = (history, dispatch) => {
   dispatch(logout())
     .then(() => dispatch(clearCart()))
