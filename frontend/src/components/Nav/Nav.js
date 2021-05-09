@@ -45,6 +45,7 @@ const Nav = (props) => {
   }
 
   const currentUser = useSelector((state) => state.user);
+  const mobileDisplay = useSelector((state)=>state.nav.display)
   const [focus, setFocus] = useState({ className: "" });
   const [path, setPath] = useState(null);
   const [list, setList] = useState(false);
@@ -63,7 +64,7 @@ const Nav = (props) => {
   }
 
   return (
-    <nav className="Nav">
+    <nav className={mobileDisplay ? "Nav display" : "Nav"}>
       <Admin />
       <div
         className={acct ? "NavWrapper masked" : "NavWrapper"}

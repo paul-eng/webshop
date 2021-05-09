@@ -4,6 +4,13 @@ export const SET_BRANDS = "SET_BRANDS";
 export const SET_CATEGORIES = "SET_CATEGORIES";
 export const SET_MSG = "SET_MSG";
 export const CLEAR_MSG = "CLEAR_MSG";
+export const TOGGLE_NAV = "TOGGLE_NAV";
+
+export const toggleNav = () => {
+  return {
+    type: TOGGLE_NAV,
+  };
+};
 
 export const setBrands = (brands) => {
   return {

@@ -1,6 +1,7 @@
 .Nav {
     position: relative;
     grid-area: nav;
+    padding-right: 1rem;
 }
 
 .NavWrapper {
@@ -15,11 +16,6 @@
 
 .TopLevel::after {
     content: " >";
-}
-
-.Nav button {
-    width: max-content;
-    max-width: 100%;
 }
 
 .Nav h3 {
@@ -89,3 +85,16 @@
     color: black;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .Nav {
+        display: none;
+        position: fixed;
+        width: 100%;
+        background-color: white;
+    }
+
+    .display { 
+        display: block;
+    }
+  }

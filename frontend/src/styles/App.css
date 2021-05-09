@@ -144,3 +144,13 @@ svg {
     font-size: 1.1rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  #root {
+    margin: 1.5rem;
+  }
+
+  .NavFrame {
+    grid-template-columns: 100% 100%;
+  }
+}

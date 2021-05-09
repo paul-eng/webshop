@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { toggleNav } from "../../actions/NavActions"
 import cartSVG from "../../icons/cart.svg";
+import menuSVG from "../../icons/menu.svg";
+import plusSVG from "../../icons/plus.svg";
 import "../../styles/Header.css";
 
 const Header = (props) => {
+  const [menu, setMenu] = useState(false);
+
+  const onClick = () => {
+    props.toggleNav()
+    setMenu(!menu);
+  };
+
   return (
     <div className="Header">
+      <aside className="Menu" onClick={onClick}>
+        <img
+          style={{ display: menu ? "none" : "block" }}
+          src={menuSVG}
+          alt="menu"
+        />
+        <img
+          style={{ display: menu ? "block" : "none" }}
+          src={plusSVG}
+          alt="menu"
+        />
+      </aside>
       <Link className="Logo" to="/">
         <h1>RESTFUL GOODS</h1>
       </Link>
@@ -30,4 +52,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleNav: () => dispatch(toggleNav())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

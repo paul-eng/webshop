@@ -12,6 +12,7 @@
 
 .Header img {
     width: 1.75rem;
+    margin-bottom: 1rem;
 }
 
 h1 {
@@ -58,4 +59,26 @@ h1 {
     top: 50%;
     right: 50%;
     font-family: "authentic_bold";
+}
+
+.Menu {
+    cursor: pointer;
+    display: none;
+}
+
+.Menu img:last-child {
+    transform: rotate(45deg);
+}
+
+@media screen and (max-width: 768px) {
+    .Header { 
+        grid-template-columns: min-content 1fr min-content;
+        justify-items: center;
+    }
+    .Menu {
+        display: block;
+    }
+    .SearchBar {
+        display: none;
+    }
 }

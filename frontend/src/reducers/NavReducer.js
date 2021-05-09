@@ -3,12 +3,14 @@ import {
   SET_CATEGORIES,
   SET_MSG,
   CLEAR_MSG,
+  TOGGLE_NAV,
 } from "../actions/NavActions";
 
 const initState = {
   brands: [],
   categories: [],
   msg: null,
+  display: false,
 };
 
 const navReducer = (state = initState, action) => {
@@ -28,6 +30,8 @@ const navReducer = (state = initState, action) => {
       return Object.assign({}, state, { msg: action.msg });
     case CLEAR_MSG:
       return Object.assign({}, state, { msg: null });
+    case TOGGLE_NAV:
+      return Object.assign({}, state, { display: !state.display });
     default:
       return state;
   }
