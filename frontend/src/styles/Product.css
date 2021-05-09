@@ -6,4 +6,15 @@
 .Product section h3 {
     display: inline-block;
     cursor: pointer;
+    margin-bottom: 0;
 }
+
+@media screen and (max-width: 768px) {
+    .Product section {
+        margin-top: .5rem;
+    }
+
+    .Product h3 {
+        margin: 0;
+    }
+  }

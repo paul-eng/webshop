@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { toggleNav } from "../../actions/NavActions";
 import { fetchBrands, fetchCategories } from "../../actions/NavActions";
 
 class NavList extends Component {
   constructor(props) {
     super(props);
-    this.state = { links: [], active: false };
+    this.state = { links: [] };
     this.onClick = this.onClick.bind(this);
   }
 
@@ -16,9 +17,6 @@ class NavList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.active !== this.props.active)
-      this.setState({ active: this.props.active });
-
     if (prevProps.path !== this.props.path) {
       let links;
       switch (this.props.path) {
@@ -36,7 +34,8 @@ class NavList extends Component {
   }
 
   onClick() {
-    this.setState({ active: false });
+    this.props.setList(false);
+    if (this.props.mobileDisplay) this.props.toggleNav(false);
   }
 
   makeParam = (link) => link.toLowerCase().split(" ").join("-");
@@ -53,7 +52,7 @@ class NavList extends Component {
     ));
 
   render() {
-    let active = this.state.active ? "block" : "none";
+    let active = this.props.active ? "block" : "none";
     let path = this.props.path;
     let links = this.state.links;
 
@@ -69,6 +68,7 @@ const mapStateToProps = (state) => {
   return {
     brands: state.nav.brands,
     categories: state.nav.categories,
+    mobileDisplay: state.nav.display,
   };
 };
 
@@ -80,6 +80,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchCategories: () => {
       dispatch(fetchCategories());
     },
+    toggleNav: (bool) => dispatch(toggleNav(bool)),
   };
 };
 

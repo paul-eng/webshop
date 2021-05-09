@@ -8,6 +8,7 @@
     margin-bottom: 2.5rem;
     position: relative;
     border-bottom: .2rem solid #aaa;
+    text-align: center;
 }
 
 .Header img {
@@ -74,7 +75,7 @@ h1 {
 @media screen and (max-width: 768px) {
     .Header { 
         grid-template-columns: min-content 1fr min-content;
-        justify-items: center;
+        margin-bottom: 1rem;
     }
     .Menu {
         display: block;

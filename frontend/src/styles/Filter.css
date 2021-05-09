@@ -6,8 +6,13 @@
     align-items: flex-end;
 }
 
-.Filter h3 {
+.Filter aside {
+    display: flex;
     cursor: pointer;
+}
+
+.Filter h3 {
+    margin-left: .5rem;
 }
 
 .Filter section {
@@ -27,7 +32,6 @@
 }
 
 #Sort {
-    justify-self: end;
     text-align: right;
 }
 
@@ -42,4 +46,27 @@
 
 .active {
     color: #0c0;
+}
+
+@media screen and (max-width: 768px) {
+    .Filter section {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    #Sort {
+        text-align: left;
+    }
+
+    #Sort ul {
+        align-items: flex-start;
+    }
+
+    .Filter ul {
+        flex-wrap: nowrap;
+        height: auto;
+    }
+
+    .Filter aside h3:last-of-type {
+        display: none;
+    }
 }

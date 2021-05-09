@@ -1,13 +1,12 @@
 .Nav {
     position: relative;
     grid-area: nav;
-    padding-right: 1rem;
 }
 
 .NavWrapper {
     display: flex;
     flex-direction: column;
-    padding-bottom: 2rem;
+    padding: 0 1rem 2rem 0;
 }
 
 .TopLevel {
@@ -89,7 +88,6 @@
 .MobileSearch {
     display: flex;
     margin-bottom: 2rem;
-    margin-top: -2rem;
 }
 
 .MobileSearch form, input {
@@ -109,6 +107,10 @@
         position: absolute;
         width: 100%;
         background-color: white;
+    }
+
+    .NavList, .Login, .Dashboard { 
+        left: 0;
     }
 
     .display { 

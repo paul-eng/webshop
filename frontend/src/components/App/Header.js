@@ -15,6 +15,10 @@ const Header = (props) => {
     props.toggleNav();
   };
 
+  const close = () => {
+    if (props.mobileDisplay) props.toggleNav(false);
+  };
+
   return (
     <div className="Header">
       <aside className="Menu" onClick={onClick}>
@@ -29,7 +33,7 @@ const Header = (props) => {
           alt="menu"
         />
       </aside>
-      <Link className="Logo" to="/">
+      <Link onClick={close} className="Logo" to="/">
         <h1>RESTFUL GOODS</h1>
       </Link>
       <SearchBar />
@@ -48,12 +52,13 @@ const mapStateToProps = (state) => {
   return {
     count: state.cart.count,
     user: state.user,
+    mobileDisplay: state.nav.display,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleNav: () => dispatch(toggleNav()),
+    toggleNav: (bool) => dispatch(toggleNav(bool)),
   };
 };
 

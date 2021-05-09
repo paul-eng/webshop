@@ -42,7 +42,10 @@ class Filter extends Component {
 
     return (
       <div className="Filter">
-        <h3 onClick={this.visible}>{this.state.visible ? "-" : "+"} FILTER</h3>
+        <aside onClick={this.visible}>
+          <h3>{this.state.visible ? "-" : "+"}</h3>
+          <h3>FILTER</h3>
+        </aside>
         <section style={{ display: this.state.visible ? "grid" : "none" }}>
           {filterList}
           <article id="Sort">

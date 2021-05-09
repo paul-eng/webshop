@@ -6,9 +6,10 @@ export const SET_MSG = "SET_MSG";
 export const CLEAR_MSG = "CLEAR_MSG";
 export const TOGGLE_NAV = "TOGGLE_NAV";
 
-export const toggleNav = () => {
+export const toggleNav = (bool) => {
   return {
     type: TOGGLE_NAV,
+    bool,
   };
 };
 

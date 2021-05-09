@@ -31,6 +31,8 @@ const navReducer = (state = initState, action) => {
     case CLEAR_MSG:
       return Object.assign({}, state, { msg: null });
     case TOGGLE_NAV:
+      if (action.bool !== undefined)
+        return Object.assign({}, state, { display: action.bool });
       return Object.assign({}, state, { display: !state.display });
     default:
       return state;

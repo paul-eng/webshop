@@ -12,7 +12,7 @@ const Nav = (props) => {
   function show(path, e) {
     setPath(path);
     setList(true);
-    setFocus(e.target);
+    if (!mobileDisplay) setFocus(e.target);
   }
 
   function hide() {
@@ -46,7 +46,7 @@ const Nav = (props) => {
   }
 
   const currentUser = useSelector((state) => state.user);
-  const mobileDisplay = useSelector((state)=>state.nav.display)
+  const mobileDisplay = useSelector((state) => state.nav.display);
   const [focus, setFocus] = useState({ className: "" });
   const [path, setPath] = useState(null);
   const [list, setList] = useState(false);
@@ -75,9 +75,19 @@ const Nav = (props) => {
         <h3 onMouseEnter={hide}>
           <Link to="/new-arrivals">NEW ARRIVALS</Link>
         </h3>
-        <h3 onMouseEnter={(e) => show("/brand/", e)}>BRANDS</h3>
-        <h3 onMouseEnter={(e) => show("/category/", e)}>CATEGORIES</h3>
-        <NavList active={list} path={path} />
+        <h3
+          onClick={mobileDisplay ? (e) => show("/brand/", e) : null}
+          onMouseEnter={(e) => show("/brand/", e)}
+        >
+          BRANDS
+        </h3>
+        <h3
+          onClick={mobileDisplay ? (e) => show("/category/", e) : null}
+          onMouseEnter={(e) => show("/category/", e)}
+        >
+          CATEGORIES
+        </h3>
+        <NavList setList={setList} active={list} path={path} />
       </div>
       <section>
         {currentUser ? (
