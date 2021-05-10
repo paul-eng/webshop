@@ -10,33 +10,43 @@ window.validator = validator;
 class Address extends Component {
   constructor(props) {
     super(props);
-    let user = this.props.user;
-    this.state = Object.assign(
-      {
-        firstname: "",
-        lastname: "",
-        company: "",
-        phone: "",
-        add1: "",
-        add2: "",
-        city: "",
-        state: "",
-        postcode: "",
-        country: "United States",
-        errors: {},
-      },
-      user?.address?.default
-    );
+    this.state = {
+      firstname: "",
+      lastname: "",
+      company: "",
+      phone: "",
+      add1: "",
+      add2: "",
+      city: "",
+      state: "",
+      postcode: "",
+      country: "United States",
+      errors: {},
+    };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.user) {
+      this.setAddress(this.props.user);
+    }
   }
 
   componentDidUpdate(prevProps) {
     // for if user refreshes and user needs to be fetched again
     if (!prevProps.user) {
-      let user = this.props.user;
-      this.setState(user.address.default);
+      this.setAddress(this.props.user);
     }
+  }
+
+  setAddress(user) {
+    user.address?.default
+      ? this.setState(user.address.default)
+      : this.setState({
+          firstname: user.firstname,
+          lastname: user.lastname,
+        });
   }
 
   onSubmit(e) {

@@ -35,7 +35,7 @@ class Slider extends Component {
 
   onLoad() {
     if ("ontouchstart" in window) {
-      console.log("heiho")
+      console.log("heiho");
       this.scroller.current.scrollLeft = this.scroller.current.offsetWidth;
     }
   }
@@ -148,7 +148,11 @@ class Slider extends Component {
   render() {
     return (
       <div className="Slider">
-        <div onLoad={this.onLoad.bind(this)}  className="wrapper" ref={this.scroller}>
+        <div
+          onLoad={this.onLoad.bind(this)}
+          className="wrapper"
+          ref={this.scroller}
+        >
           <Slides
             ref={this.slides}
             slides={this.props.gallery}

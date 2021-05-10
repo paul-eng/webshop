@@ -84,3 +84,9 @@ h1 {
         display: none;
     }
 }
+
+@media screen and (max-width: 414px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+}

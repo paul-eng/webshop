@@ -14,7 +14,7 @@ const Account = (props) => {
   };
 
   // props.user || {} prevents crash on refresh or between dispatch(logout) and history.push in logoutservice, where props.user is null w no properties
-  // ugly destructuring of address to access nested key 'default' without crashing if user is null
+  // set default value {} for address, otherwise crash when user is null while attempting to access nested key 'default'
   let { firstname, lastname, email, address: { default: address } = {} } =
     props.user || {};
 

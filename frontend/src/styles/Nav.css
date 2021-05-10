@@ -1,6 +1,7 @@
 .Nav {
     position: relative;
     grid-area: nav;
+    background-color: white;
 }
 
 .NavWrapper {
@@ -48,19 +49,19 @@
 
 .Login, .Dashboard {
     width: 200%;
+    padding-right: 15%;
 }
 
 .Login article {
     margin-bottom: 1rem;
-}
-
-.Login article  {
     color: red;
+    display: flex;
+    flex-direction: column;
 }
 
 .Login input[type=text], .Login input[type=password] {
+    box-sizing: border-box;
     max-width: 450px;
-    width: 70%;
 }
 
 .Login input[type=submit] {
@@ -110,11 +111,11 @@
     .Nav {
         position: absolute;
         width: 100%;
-        background-color: white;
     }
 
     .NavList, .Login, .Dashboard { 
         left: 0;
+        width: 100%;
     }
 
     .hidden { 
