@@ -2,7 +2,7 @@
     font-size: 1.17em;
     font-weight: bold;
     display: grid;
-    grid-template-columns: 160px max-content;
+    grid-template-columns: 160px 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
         "img info"

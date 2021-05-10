@@ -38,23 +38,13 @@ body {
   font-size: .9rem;
 }
 
-html,
-#root,
-body,
-.Nav,
-.Brand, 
-.Category, 
-.New, 
-.Shop, 
-.Item,
-.NavList,
-.Login,
-.Dashboard {
+.NavList, .Login, .Dashboard {
   height: 100%;
-  margin: 0;
 }
 
 .NavFrame {
+  /* position is to give absolutely positioned mobile nav its' height */
+  position: relative;
   display: grid;
   grid-template-columns: minmax(min-content,22%) 1fr;
   grid-template-areas: "nav body";
