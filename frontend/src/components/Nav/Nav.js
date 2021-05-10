@@ -68,14 +68,17 @@ const Nav = (props) => {
   }
 
   return (
-    <nav className={mobileDisplay ? "Nav display" : "Nav"}>
+    <nav
+    style={{display: props.hidenav && !mobileDisplay? "none" : "block"}}
+    className={mobileDisplay ? "Nav" : "Nav hidden"}
+    >
       <Admin />
       {mobileDisplay ? <MobileSearch /> : null}
       <div
         className={acct ? "NavWrapper masked" : "NavWrapper"}
-        onMouseLeave={hide}
+        onMouseLeave={mobileDisplay? null : hide}
       >
-        <h3 onMouseEnter={hide}>
+        <h3 onMouseEnter={mobileDisplay? null : hide}>
           <Link to="/new-arrivals">NEW ARRIVALS</Link>
         </h3>
         <h3

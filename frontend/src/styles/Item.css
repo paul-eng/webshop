@@ -9,10 +9,10 @@
 }
 
 .Item p {
-    margin: 4rem 0;
+    margin: 2rem 0;
 }
 
-@media (any-hover: none) {
+@media screen and (max-width: 639px) {
 .Item {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;

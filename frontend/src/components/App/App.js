@@ -5,7 +5,6 @@ import { getUser } from "../../actions/UserActions";
 import { fetchCart, saveCart } from "../../actions/CartActions";
 import "../../styles/App.css";
 import Header from "./Header";
-import Cart from "../Cart/Cart";
 import NavFrame from "./NavFrame"
 import Message from "./Message";
 
@@ -32,7 +31,6 @@ class App extends Component {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/cart" component={Cart} />
           <Route path="/" component={NavFrame} />
         </Switch>
         <Message />

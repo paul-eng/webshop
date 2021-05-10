@@ -1,4 +1,5 @@
 .Cart {
+    grid-area: body;
     display: grid;
     grid-template-columns: 60% 1fr;
     grid-template-rows: min-content 1fr;

@@ -44,12 +44,18 @@
     cursor:pointer;
 } 
 
+@media screen and (max-width: 639px) {
+    .Slider {
+        margin-bottom: 2rem;
+    }
+    
+    .Modal {
+        display: none;
+    }
+}
+
 @media (any-hover: none) {
     .Slider section {
         transform: none !important;
-    }
-
-    .Modal {
-        display: none;
     }
 }

@@ -27,7 +27,7 @@ class Item extends Component {
         <Slider gallery={itemInfo.gallery} />
         <section>
           <h2>{`${itemInfo.brand} ${itemInfo.name}`.toUpperCase()}</h2>
-          <h3>${itemInfo.price}</h3>
+          <h2>${itemInfo.price}</h2>
           <h3>
             <p>{itemInfo.description}</p>
           </h3>
