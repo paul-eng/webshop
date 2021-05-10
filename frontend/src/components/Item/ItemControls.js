@@ -14,11 +14,14 @@ class ItemControls extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    let selected = this.state.selected;
-    if (selected === undefined && !this.allSold()) {
+  componentDidMount() {
+    if (this.state.selected === undefined && !this.allSold()) {
       this.firstInStock();
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let selected = this.state.selected;
 
     if (prevState.selected !== selected) {
       let available = matchStock(this.props.stock, selected);
@@ -53,8 +56,14 @@ class ItemControls extends Component {
     if (this.inStock()) {
       this.props.addToCart(this.props.item, this.state.selected);
     }
-    this.setState({ add: true });
-    this.autoclose = setTimeout(() => this.setState({ add: false }), 3500);
+
+    if (!this.state.add) {
+      // if you dont check if add is already true, spamming Add To Cart creates many setTimeouts,
+      // and clearTimeout on unmount will only clear the one most recently assigned to this.autoclose.
+      // rest will cause memory leak error if leave page before they all expire
+      this.setState({ add: true });
+      this.autoclose = setTimeout(() => this.setState({ add: false }), 3500);
+    }
   }
 
   onClick() {

@@ -126,9 +126,6 @@ export const checkQty = ({ pathname, stock: { qty }, stock: { type } }) => (
   return axios
     .get("http://localhost:8080/api/items/" + pathname)
     .then((res) => {
-      console.log(res)
-      //this caused a cart crash when add two AE-1s and go to cart
-      // Unhandled Rejection (TypeError): Object(...)(...) is undefined
       let storeQty = matchStock(res.data.stock, type).qty;
       return qty > storeQty;
     });

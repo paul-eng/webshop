@@ -50,7 +50,6 @@ export const stockQtys = (stock) => {
 };
 
 export const matchStock = (stock, type) => {
-  console.log("i get in ehre")
   return stock.find((v) => v.type === type);
 };
 
