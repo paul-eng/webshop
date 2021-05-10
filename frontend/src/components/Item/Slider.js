@@ -88,7 +88,6 @@ class Slider extends Component {
     if (slide === slideCount - 1) {
       this.setState({ selected: 0 });
     } else if (slide === 0) {
-      console.log("im in here");
       this.setState({ selected: slideCount - 3 });
     } else {
       this.setState({ selected: slide - 1 });
@@ -147,7 +146,7 @@ class Slider extends Component {
 
   render() {
     return (
-      <div className="Slider">
+      <div onLoad={this.onLoad.bind(this)}  className="Slider">
         <div className="wrapper" ref={this.scroller}>
           <Slides
             ref={this.slides}
@@ -157,7 +156,6 @@ class Slider extends Component {
           />
           <img
             id="frame"
-            onLoad={this.onLoad.bind(this)}
             src={this.props.gallery ? this.props.gallery[0] : ""}
             alt="frame"
           />
