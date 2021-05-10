@@ -29,6 +29,10 @@ class NavList extends Component {
       }
       this.setState({ links: links });
     }
+
+    if (prevProps.mobileDisplay !== this.props.mobileDisplay) {
+      if (!this.props.mobileDisplay) this.props.setList(false);
+    }
   }
 
   makeParam = (link) => link.toLowerCase().split(" ").join("-");
@@ -37,9 +41,7 @@ class NavList extends Component {
     links.map((link) => (
       <li key={link}>
         <h3>
-          <Link to={path + this.makeParam(link)}>
-            {link}
-          </Link>
+          <Link to={path + this.makeParam(link)}>{link}</Link>
         </h3>
       </li>
     ));
@@ -51,6 +53,8 @@ class NavList extends Component {
 
     return (
       <ul style={{ display: active }} className="NavList">
+        <h3 onClick={()=>this.props.setList(false)} style={{display: "none"}}>
+          {"<"}</h3>
         {this.list(path, links)}
       </ul>
     );
@@ -61,6 +65,7 @@ const mapStateToProps = (state) => {
   return {
     brands: state.nav.brands,
     categories: state.nav.categories,
+    mobileDisplay: state.nav.display,
   };
 };
 

@@ -59,6 +59,7 @@
 }
 
 .Login input[type=text], .Login input[type=password] {
+    max-width: 450px;
     width: 70%;
 }
 
@@ -87,7 +88,7 @@
 
 .MobileSearch {
     display: flex;
-    margin-bottom: 2rem;
+    margin: .5rem 0 2rem 0;
 }
 
 .MobileSearch form, .MobileSearch input {
@@ -97,8 +98,12 @@
     outline: none !important;
 }
 
+.MobileSearch input {
+    padding: 0 0 0 1rem;
+}
+
 .MobileSearch img {
-    width: 1.75rem;
+    width: 1.2rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -115,5 +120,11 @@
 
     .display { 
         display: block;
+    }
+
+    .NavList > h3 {
+        display: block !important;
+        font-family: authentic_bold;
+        margin-bottom: 2rem;
     }
   }

@@ -76,9 +76,7 @@ const Nav = (props) => {
         onMouseLeave={hide}
       >
         <h3 onMouseEnter={hide}>
-          <Link to="/new-arrivals">
-            NEW ARRIVALS
-          </Link>
+          <Link to="/new-arrivals">NEW ARRIVALS</Link>
         </h3>
         <h3
           onClick={mobileDisplay ? (e) => show("/brand/", e) : null}
@@ -92,7 +90,7 @@ const Nav = (props) => {
         >
           CATEGORIES
         </h3>
-        <NavList active={list} path={path} />
+        <NavList active={list} path={path} setList={setList} />
       </div>
       <section>
         {currentUser ? (

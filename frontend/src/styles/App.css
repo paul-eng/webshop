@@ -90,7 +90,7 @@ input[type=text]:focus, input[type=password]:focus {
 input[type=text], input[type=password] {
   outline: none;
   padding: 1rem 1.25rem;
-  font-size: 1.17rem;
+  font-size: 1.17em;
 }
 
 input[type=number] {

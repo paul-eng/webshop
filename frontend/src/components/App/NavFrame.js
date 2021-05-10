@@ -23,7 +23,7 @@ class NavFrame extends Component {
     if (this.props.mobileDisplay && prevProps.location !== this.props.location)
       this.props.toggleNav(false);
   }
-  
+
   render() {
     return (
       <div className="NavFrame">
@@ -40,7 +40,7 @@ class NavFrame extends Component {
           <Route path="/category/:cat" component={Category} />
           <Route path="/:item" component={Item} />
         </Switch>
-        <Nav location={this.props.location.pathname} />
+        <Nav location={this.props.location} />
       </div>
     );
   }
