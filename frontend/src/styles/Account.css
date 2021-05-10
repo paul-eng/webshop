@@ -21,7 +21,7 @@
 
 .Account section:first-of-type {
     grid-area: col1;
-    margin-right: 4rem;
+    margin-right: 2rem;
 }
 
 .Account section:last-of-type {
@@ -51,4 +51,25 @@
 
 .Logout h3 {
     margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 639px) {
+    .Account > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Account section {
+        margin: 0 !important;
+    }
+
+    .Account section:last-of-type::before {
+        content: "";
+        display: block;
+        background-color: #aaa;
+        width: 100%;
+        height: .2rem;
+        margin: 2rem 0;
+    }
+    
 }
