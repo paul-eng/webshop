@@ -38,7 +38,7 @@ body {
   font-size: .9rem;
 }
 
-.NavList, .Login, .Dashboard {
+.Nav, .NavList, .Login, .Dashboard {
   height: 100%;
 }
 

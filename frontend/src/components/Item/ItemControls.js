@@ -29,6 +29,10 @@ class ItemControls extends Component {
     if (prevProps.msg !== this.props.msg) this.setState({ add: false });
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.autoclose);
+  }
+
   firstInStock() {
     let i = 0;
     let stock = this.props.stock;

@@ -110,7 +110,7 @@
     .Nav {
         position: absolute;
         width: 100%;
-        background-color: pink;
+        background-color: white;
     }
 
     .NavList, .Login, .Dashboard { 
