@@ -120,13 +120,24 @@ export const updateCart = (updates) => (dispatch, getState) => {
   });
 };
 
-export const checkQty = ({ pathname, stock: { qty }, stock: { type } }) => (
-  dispatch
-) => {
-  return axios
-    .get("http://localhost:8080/api/items/" + pathname)
-    .then((res) => {
-      let storeQty = matchStock(res.data.stock, type).qty;
-      return qty > storeQty;
-    });
-};
+export const checkQty =
+  ({ pathname, stock: { qty }, stock: { type } }) =>
+  (dispatch) => {
+    return axios
+      .get("http://localhost:8080/api/items/" + pathname)
+      .then((res) => {
+        let storeQty = matchStock(res.data.stock, type).qty;
+        return qty > storeQty;
+      });
+  };
+
+export const fetchStripe =
+  (purchase = { test: 100 }) =>
+  (dispatch) => {
+    return axios
+      .post("http://localhost:8080/api/checkout", purchase)
+      .then((res) => {
+        return Promise.resolve(res.data.clientSecret);
+      })
+      .catch((err) => console.log(err));
+  };
