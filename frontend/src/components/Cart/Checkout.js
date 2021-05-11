@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStripe } from "../../actions/CartActions";
 import {
@@ -14,16 +14,7 @@ const Checkout = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
-  const clientSecret = useRef();
-  const didMount = useRef(false);
   const total = useSelector((state) => state.cart.total);
-
-  useEffect(() => {
-    if (!didMount.current) {
-      dispatch(fetchStripe()).then((res) => (clientSecret.current = res));
-      didMount.current = true;
-    }
-  });
 
   const [errors, setErrors] = useState({});
   const [empty, setEmpty] = useState({});
@@ -44,27 +35,37 @@ const Checkout = (props) => {
     });
   };
 
+  const [ship, setShip] = useState();
+
+  const onChange = (e) => {
+    setShip(parseInt(e.target.value));
+  };
+
+  let notEmpty =
+    Object.values(empty).length === 3 && !Object.values(empty).includes(true);
+  let noErrors =
+    Object.values(errors).findIndex((el) => el !== undefined) === -1;
+  let allOK = noErrors && notEmpty && ship;
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    let notEmpty =
-      Object.values(empty).length === 3 && !Object.values(empty).includes(true);
-    let noErrors =
-      Object.values(errors).findIndex((el) => el !== undefined) === -1;
-    
-    if (notEmpty && noErrors) console.log("U R GOOD")
 
     if (!stripe || !elements) return;
 
-    // const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //   type: "card",
-    //   card: elements.getElement(CardNumberElement),
-    // });
+    if (allOK) {
+      const clientSecret = await dispatch(fetchStripe(total + ship));
 
-    // if (error) {
-    //   console.log("[error]", error);
-    // } else {
-    //   console.log("[PaymentMethod]", paymentMethod);
-    // }
+      const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: "Faruq Yusuff",
+          },
+        },
+      });
+
+      console.log(paymentResult)
+    }
   };
 
   return (
@@ -81,33 +82,69 @@ const Checkout = (props) => {
           </article>
           <article>
             <h3>Expiration date</h3>
-            <div>
-              <CardExpiryElement onChange={handleErrors} />
-            </div>
+            <span>
+              <div>
+                <CardExpiryElement onChange={handleErrors} />
+              </div>
+            </span>
             <h3>{errors.cardExpiry}</h3>
           </article>
           <article>
             <h3>Security Code</h3>
-            <div>
-              <CardCvcElement onChange={handleErrors} />
-            </div>
+            <span>
+              <div>
+                <CardCvcElement onChange={handleErrors} />
+              </div>
+            </span>
             <h3>{errors.cardCvc}</h3>
           </article>
-          <input type="submit" value="PLACE ORDER" />
+          <input
+            style={{
+              pointerEvents: allOK ? "auto" : "none",
+              opacity: allOK ? "100%" : "50%",
+            }}
+            type="submit"
+            value="PLACE ORDER"
+          />
         </form>
+      </section>
+      <section>
+        <h3>Shipment Method</h3>
+        <aside>
+          <ul onChange={onChange}>
+            <label>
+              <input type="radio" value="5" name="shipmethod" />
+              USPS First Class
+            </label>
+
+            <br />
+            <label>
+              <input type="radio" value="10" name="shipmethod" />
+              USPS Priority
+            </label>
+            <br />
+            <label>
+              <input type="radio" value="20" name="shipmethod" />
+              USPS Express
+            </label>
+            <br />
+          </ul>
+        </aside>
       </section>
       <section>
         <h3>Order summary</h3>
         <aside>
           <ul>
             <li>Subtotal:</li>
-            <li>Tax:</li>
+            <li>Shipping: </li>
             <li>Total:</li>
           </ul>
           <ul>
             <li>${total.toFixed(2)}</li>
-            <li>${(total * 0.08875).toFixed(2)}</li>
-            <li>${(total * 1.08875).toFixed(2)}</li>
+            <li>{ship ? "$" + ship.toFixed(2) : "Not yet calculated"}</li>
+            <li>
+              {ship ? `$${(total + ship).toFixed(2)}` : "Not yet calculated"}
+            </li>
           </ul>
         </aside>
       </section>

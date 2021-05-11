@@ -58,18 +58,13 @@ const Cart = (props) => {
         <aside>
           <ul>
             <li>Subtotal:</li>
-            <li>Tax:</li>
-            <li>Total:</li>
           </ul>
           <ul>
             <li>${props.total.toFixed(2)}</li>
-            <li>${(props.total * 0.08875).toFixed(2)}</li>
-            <li>${(props.total * 1.08875).toFixed(2)}</li>
           </ul>
         </aside>
         <p>
-          Shipping will be calculated at checkout where vouchers also can be
-          applied.
+          Shipping will be calculated at checkout.
         </p>
         <Link to="/checkout">
           <input

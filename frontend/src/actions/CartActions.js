@@ -131,13 +131,11 @@ export const checkQty =
       });
   };
 
-export const fetchStripe =
-  (purchase = { test: 100 }) =>
-  (dispatch) => {
-    return axios
-      .post("http://localhost:8080/api/checkout", purchase)
-      .then((res) => {
-        return Promise.resolve(res.data.clientSecret);
-      })
-      .catch((err) => console.log(err));
-  };
+export const fetchStripe = (amt) => (dispatch) => {
+  return axios
+    .post("http://localhost:8080/api/checkout", {amt})
+    .then((res) => {
+      return Promise.resolve(res.data.clientSecret);
+    })
+    .catch((err) => console.log(err));
+};
