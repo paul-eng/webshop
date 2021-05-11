@@ -25,10 +25,8 @@ const Checkout = (props) => {
     }
   });
 
-  const [cardErr, setCard] = useState();
-  const [expErr, setExp] = useState();
-  const [cvcErr, setCvc] = useState();
   const [errors, setErrors] = useState({});
+  const [empty, setEmpty] = useState({});
 
   const handleErrors = (e) => {
     if (e?.error?.message) {
@@ -40,25 +38,33 @@ const Checkout = (props) => {
         return { ...prev, [e.elementType]: undefined };
       });
     }
+
+    setEmpty((prev) => {
+      return { ...prev, [e.elementType]: e.empty };
+    });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    if (cardErr || expErr || cvcErr) return;
+    let notEmpty =
+      Object.values(empty).length === 3 && !Object.values(empty).includes(true);
+    let noErrors =
+      Object.values(errors).findIndex((el) => el !== undefined) === -1;
+    
+    if (notEmpty && noErrors) console.log("U R GOOD")
 
     if (!stripe || !elements) return;
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardNumberElement),
-    });
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: "card",
+    //   card: elements.getElement(CardNumberElement),
+    // });
 
-    if (error) {
-      console.log("[error]", error);
-    } else {
-      console.log("[PaymentMethod]", paymentMethod);
-    }
+    // if (error) {
+    //   console.log("[error]", error);
+    // } else {
+    //   console.log("[PaymentMethod]", paymentMethod);
+    // }
   };
 
   return (
