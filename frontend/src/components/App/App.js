@@ -8,7 +8,6 @@ import Header from "./Header";
 import NavFrame from "./NavFrame"
 import Message from "./Message";
 
-
 class App extends Component {
   componentDidMount() {
     let sessionToken = localStorage.getItem("session");

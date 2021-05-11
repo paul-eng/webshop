@@ -71,11 +71,13 @@ const Cart = (props) => {
           Shipping will be calculated at checkout where vouchers also can be
           applied.
         </p>
-        <input
-          style={{ display: props.qtyError.length ? "none" : "block" }}
-          type="submit"
-          value="CHECKOUT"
-        />
+        <Link to="/checkout">
+          <input
+            style={{ display: props.qtyError.length ? "none" : "block" }}
+            type="submit"
+            value="CHECKOUT"
+          />
+        </Link>
       </section>
     </div>
   );

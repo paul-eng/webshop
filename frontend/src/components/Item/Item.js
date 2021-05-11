@@ -22,7 +22,7 @@ class Item extends Component {
 
   render() {
     const itemInfo = this.props.itemInfo;
-    return itemInfo.name ? (
+    return itemInfo && itemInfo.name ? (
       <div className="Item">
         <Slider gallery={itemInfo.gallery} />
         <section>

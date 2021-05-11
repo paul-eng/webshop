@@ -6,18 +6,25 @@ import reportWebVitals from "./reportWebVitals";
 import rootReducer from "./reducers/RootReducer";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
-import thunk from 'redux-thunk';
+import thunk from "redux-thunk";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe(
+  "pk_test_51IpjCXLDGBjqGrZi8GOJ6DzAuqzv1JyDiQAo9DUl7i2m9XC3c79PHnAw1jwsOh0oMlOkNiBYUsx2Dm2BkJ2FZCws00dDWucF5k"
+);
 const store = createStore(rootReducer, applyMiddleware(thunk));
-// for dev
+// for dev build only
 window.store = store;
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <Elements stripe={stripePromise}>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </Elements>,
   document.getElementById("root")
 );
 

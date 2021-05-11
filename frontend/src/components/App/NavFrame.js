@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Nav from "../Nav/Nav";
 import Cart from "../Cart/Cart";
+import Checkout from "../Cart/Checkout"
 import { toggleNav } from "../../actions/NavActions";
 
 class NavFrame extends Component {
@@ -25,14 +26,15 @@ class NavFrame extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location.pathname === "/cart")
+    let location = this.props.location.pathname;
+    if (location === "/cart" || location === "/checkout")
       this.setState({ hidenav: true });
   }
 
   componentDidUpdate(prevProps) {
     let location = this.props.location.pathname;
     if (prevProps.location.pathname !== location) {
-      location === "/cart"
+      location === "/cart" || location === "/checkout"
         ? this.setState({ hidenav: true })
         : this.setState({ hidenav: false });
     }
@@ -47,6 +49,7 @@ class NavFrame extends Component {
       <div className={hidenav ? "NavFrame hidenav" : "NavFrame"}>
         <Switch>
           <Route exact path="/cart" component={Cart} />
+          <Route exact path ="/checkout" component={Checkout} />
           <Route exact path="/" component={Shop} />
           <Route exact path="/new-arrivals" component={New} />
           <Route exact path="/search" component={Search} />
