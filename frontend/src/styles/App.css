@@ -50,10 +50,6 @@ body {
   grid-template-areas: "nav body";
 }
 
-.hidenav {
-  grid-template-columns: 1fr;
-}
-
 ul {
   padding: 0;
   margin: 0;

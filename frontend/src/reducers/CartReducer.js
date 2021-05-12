@@ -86,7 +86,8 @@ const cartReducer = (state = initState, action) => {
         });
       }
     case LOGIN_CART:
-      return mergeCarts(state, action.cart);
+      let merge = mergeCarts(state, action.cart)
+      return merge;
     case CLEAR_CART:
       return {
         // Find in files: SHAPEOFCARTSTATE. Won't necessarily break if a field is missing in one, but try to keep consistent for peace of mind

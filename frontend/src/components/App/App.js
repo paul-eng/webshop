@@ -12,6 +12,8 @@ import "../../styles/App.css";
 import Header from "./Header";
 import NavFrame from "./NavFrame";
 import Message from "./Message";
+import Cart from "../Cart/Cart";
+import Checkout from "../Cart/Checkout"
 
 class App extends Component {
   componentDidMount() {
@@ -48,6 +50,8 @@ class App extends Component {
       <Router>
         <Header />
         <Switch>
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path ="/checkout" component={Checkout} />
           <Route path="/" component={NavFrame} />
         </Switch>
         <Message />

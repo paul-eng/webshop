@@ -47,6 +47,8 @@ const Cart = (props) => {
     props.updateCart(updates);
   }
 
+  let errors = props.qtyError.length;
+
   return (
     <div className="Cart">
       <h3>CART</h3>
@@ -63,12 +65,13 @@ const Cart = (props) => {
             <li>${props.total.toFixed(2)}</li>
           </ul>
         </aside>
-        <p>
-          Shipping will be calculated at checkout.
-        </p>
+        <p>Shipping will be calculated at checkout.</p>
         <Link to="/checkout">
           <input
-            style={{ display: props.qtyError.length ? "none" : "block" }}
+            style={{
+              pointerEvents: errors ? "none" : "auto",
+              opacity: errors ? "50%" : "100%",
+            }}
             type="submit"
             value="CHECKOUT"
           />

@@ -5,8 +5,6 @@ import validator from "validator";
 import Countries from "../../util/Countries.js";
 import { addAddress } from "../../actions/UserActions";
 
-window.validator = validator;
-
 class Address extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +32,7 @@ class Address extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // for if user refreshes and user needs to be fetched again
+    // for if page refreshes and user needs to be fetched again
     if (!prevProps.user) {
       this.setAddress(this.props.user);
     }
@@ -216,13 +214,13 @@ class Address extends Component {
   }
 }
 
-export const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
   };
 };
 
-export const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addAddress: (address, token) => dispatch(addAddress(address, token)),
   };

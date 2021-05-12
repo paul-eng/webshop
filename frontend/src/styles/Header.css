@@ -63,13 +63,20 @@ h1 {
     font-family: "authentic_bold";
 }
 
-.Menu {
+.Header aside {
     cursor: pointer;
     display: none;
 }
 
-.Menu img:last-child {
+.Header aside img:last-child {
     transform: rotate(45deg);
+}
+
+.Header span {
+    display: block;
+    font-family: authentic_bold;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -77,7 +84,7 @@ h1 {
         grid-template-columns: min-content 1fr min-content;
         margin-bottom: 1rem;
     }
-    .Menu {
+    .Header aside {
         display: block;
     }
     .SearchBar {
