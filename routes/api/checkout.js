@@ -13,14 +13,14 @@ router.get("/test", (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 200,
+      amount: req.body.amt * 100,
       currency: "usd",
     });
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 });
 

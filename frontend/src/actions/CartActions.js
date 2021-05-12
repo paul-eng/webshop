@@ -70,7 +70,7 @@ export const clearCart = () => {
 
 export const saveCart = (token) => (dispatch, getState) => {
   const headers = { "x-access-token": token };
-  const { error, ...cart } = getState().cart;
+  const { qtyError, ...cart } = getState().cart;
   return axios
     .post("http://localhost:8080/api/carts", cart, { headers })
     .then((res) => {
@@ -133,9 +133,36 @@ export const checkQty =
 
 export const fetchStripe = (amt) => (dispatch) => {
   return axios
-    .post("http://localhost:8080/api/checkout", {amt})
+    .post("http://localhost:8080/api/checkout", { amt })
     .then((res) => {
       return Promise.resolve(res.data.clientSecret);
     })
     .catch((err) => console.log(err));
+};
+
+export const saveGuest = () => (dispatch, getState) => {
+  return axios
+    .post("http://localhost:8080/api/carts/guest", { cart: getState().cart })
+    .then((res) => {
+      localStorage.setItem("guestCart", res.data);
+      return res.data;
+    })
+    .catch((err) => console.log(err));
+};
+
+export const fetchGuest = (cartToken) => (dispatch) => {
+  const headers = { "x-access-token": cartToken };
+  return axios
+    .get("http://localhost:8080/api/carts/guest", { headers })
+    .then(({ data }) => {
+      localStorage.setItem("guestCart", data.newToken);
+      dispatch(loginCart(data.cart));
+      return data.cart;
+    })
+    .catch((err) => {
+      // whether token is invalid or expired, remove and issue a new empty one
+      localStorage.removeItem("guestCart");
+      dispatch(saveGuest());
+      return err.response.data.message;
+    });
 };

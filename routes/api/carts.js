@@ -70,4 +70,33 @@ router.get("/", (req, res) => {
     .catch((err) => res.status(404).json({ nocartsfound: "No carts found" }));
 });
 
+// @route api/carts/guest
+// @description Create guest cart jwt
+router.post("/guest", (req, res) => {
+  let newGuest = jwt.sign({ cart: req.body.cart }, config.get("secret"), {
+    expiresIn: "1d",
+  });
+  res.json(newGuest);
+});
+
+// @route api/carts/guest
+// @description Verify and retrieve guest cart jwt
+router.get("/guest", (req, res) => {
+  let token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      let refreshGuest = jwt.sign(
+        { cart: decoded.cart },
+        config.get("secret"),
+        {
+          expiresIn: "1d",
+        }
+      );
+      res.json({ newToken: refreshGuest, cart: decoded.cart });
+    }
+  });
+});
+
 module.exports = router;

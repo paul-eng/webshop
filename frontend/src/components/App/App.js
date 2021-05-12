@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUser } from "../../actions/UserActions";
-import { fetchCart, saveCart } from "../../actions/CartActions";
+import {
+  fetchCart,
+  saveCart,
+  saveGuest,
+  fetchGuest,
+} from "../../actions/CartActions";
 import "../../styles/App.css";
 import Header from "./Header";
-import NavFrame from "./NavFrame"
+import NavFrame from "./NavFrame";
 import Message from "./Message";
 
 class App extends Component {
@@ -15,13 +20,26 @@ class App extends Component {
       this.props
         .getUser(sessionToken)
         .then((token) => this.props.fetchCart(token));
+    } else {
+      let guestCart = localStorage.getItem("guestCart");
+      if (guestCart) {
+        this.props.fetchGuest(guestCart);
+      } else {
+        this.props.saveGuest();
+      }
     }
   }
 
   componentDidUpdate(prevProps) {
     let sessionToken = localStorage.getItem("session");
-    if (sessionToken) {
-      if (prevProps.cart !== this.props.cart) this.props.saveCart(sessionToken);
+    let guestCart = localStorage.getItem("guestCart");
+
+    if (prevProps.cart !== this.props.cart) {
+      if (sessionToken) {
+        this.props.saveCart(sessionToken);
+      } else if (guestCart) {
+        this.props.saveGuest();
+      }
     }
   }
 
@@ -49,6 +67,8 @@ const mapDispatchToProps = (dispatch) => {
     getUser: (token) => dispatch(getUser(token)),
     fetchCart: (token) => dispatch(fetchCart(token)),
     saveCart: (token) => dispatch(saveCart(token)),
+    fetchGuest: (cartToken) => dispatch(fetchGuest(cartToken)),
+    saveGuest: () => dispatch(saveGuest()),
   };
 };
 

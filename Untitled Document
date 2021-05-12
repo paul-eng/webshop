@@ -25,3 +25,7 @@ Infinite scrolling carousel solution for cursor and touch based navigation
 Role based access to admin and user areas protected by JWT authentication based private routing
 Dynamically populated nav and filtration options automatically accomodate additions to MongoDB document
 Mongoose aggregation $facets optimize amount of queries to server
+
+user state integrated with Stripe API confirmcardpayment endpoint for receeipt confirmed payment
+
+persist guest cart with expiration date and merge w user cart on login
