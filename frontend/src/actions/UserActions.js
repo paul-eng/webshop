@@ -86,8 +86,24 @@ export const deleteAddress = (key) => (dispatch) => {
         return dispatch(setAddress(address));
       }
     )
-    .catch((err) => "");
+    .catch((err) => console.log(err.response.data));
 };
+
+export const setDefault = (key) => (dispatch) => {
+  const headers = { "x-access-token": localStorage.getItem("session") };
+  return axios
+  .post("http://localhost:8080/api/users/address/" + key, null,{ headers })
+  .then(
+    ({
+      data: {
+        user: { address },
+      },
+    }) => {
+      return dispatch(setAddress(address));
+    }
+  )
+  .catch((err) => console.log(err.response.data));
+}
 
 export const getUser = (token) => (dispatch) => {
   const headers = { "x-access-token": token };

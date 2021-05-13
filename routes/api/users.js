@@ -109,7 +109,35 @@ router.post("/address", (req, res) => {
   });
 });
 
-// @route ap/users/address/delete
+// @route api/users/address/:key
+// @description Set key as new default address
+router.post("/address/:key", (req, res) => {
+  const token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(403).json({ error: "Unauthorized" });
+    } else {
+      const key = req.params.key;
+      User.findById(decoded.sub)
+        .lean()
+        .then(({ address }) => {
+          let { default: currentDef, [key]: currentKey } = address;
+          let nestedfield = "address." + key;
+          User.findByIdAndUpdate(
+            decoded.sub,
+            { "address.default": currentKey, [nestedfield]: currentDef },
+            { new: "true" }
+          )
+            .then((user) => res.json({ user }))
+            .catch((err) =>
+              res.status(400).json({ error: "Failed to delete address" })
+            );
+        });
+    }
+  });
+});
+
+// @route api/users/address/:key
 // @description Delete saved address
 router.delete("/address/:key", (req, res) => {
   const token = req.headers["x-access-token"];

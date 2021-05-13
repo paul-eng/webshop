@@ -17,8 +17,8 @@
     margin-top: 2rem;
 }
 
-.Address a {
-    margin-right: 1rem;
+.Address div > h3 {
+    margin-left: 1.25rem;
 }
 
 .Address a, .Address div h3 {
