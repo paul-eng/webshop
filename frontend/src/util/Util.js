@@ -98,3 +98,21 @@ export const mergeCarts = (target, source) => {
       : target.qtyError,
   };
 };
+
+export const renderAdd = (address) => {
+  return(
+    <div>
+    <h3>{address.firstname + " " + address.lastname}</h3>
+    <h3>{address.company}</h3>
+    <h3>{address.add1}</h3>
+    <h3>{address.add2}</h3>
+    <h3>
+      {[address.city, address.state, address.postcode]
+        .filter((x) => x !== "")
+        .join(", ")}
+    </h3>
+    <h3>{address.country}</h3>
+    <h3>T: {address.phone}</h3>
+  </div>
+  )
+}

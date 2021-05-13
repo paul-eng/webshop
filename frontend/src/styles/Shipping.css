@@ -5,6 +5,14 @@
     grid-area: body;
 }
 
+.Shipping input[type=text] {
+    padding: .5rem .75rem;
+}
+
+.Shipping .Form select {
+    padding: .5rem .75rem
+}
+
 .Shipping input[type=radio] {
     cursor: pointer;
     margin: 0 .5rem 1rem 0;

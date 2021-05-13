@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { logoutService } from "../../util/Util";
+import { renderAdd } from "../../util/Util";
 import "../../styles/Account.css";
 const Account = (props) => {
   const dispatch = useDispatch();
@@ -35,21 +36,7 @@ const Account = (props) => {
                 <span>EDIT</span>
               </Link>
             </div>
-            {address ? (
-              <aside>
-                <h3>{address.firstname + " " + address.lastname}</h3>
-                <h3>{address.company}</h3>
-                <h3>{address.add1}</h3>
-                <h3>{address.add2}</h3>
-                <h3>
-                  {[address.city, address.state, address.postcode]
-                    .filter((x) => x !== "")
-                    .join(", ")}
-                </h3>
-                <h3>{address.country}</h3>
-                <h3>T: {address.phone}</h3>
-              </aside>
-            ) : (
+            {address ? renderAdd(address) : (
               <h3>You have not set a default shipping address.</h3>
             )}
           </article>

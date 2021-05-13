@@ -20,7 +20,7 @@ class Shipping extends Component {
       country: "United States",
       errors: {},
       key: undefined,
-      ship: undefined,
+      method: undefined,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -28,6 +28,7 @@ class Shipping extends Component {
   }
 
   onSubmit(e) {
+    e.preventDefault()
     let { errors, key, ...fields } = this.state;
     this.setState({ errors: {} });
     let validations = [];
@@ -38,11 +39,11 @@ class Shipping extends Component {
       validations.push(val);
     }
     Promise.allSettled(validations).then(() => {
-        if (Object.keys(this.state.errors).length === 0) {
-            let {key, errors, ...info} = this.state
-            this.props.getshipinfo(info)
-        }
-      });
+      if (Object.keys(this.state.errors).length === 0) {
+        let { key, errors, ...info } = this.state;
+        this.props.getshipinfo(info);
+      }
+    });
   }
 
   validate(field) {
@@ -57,17 +58,18 @@ class Shipping extends Component {
         };
       });
     };
+    if (field === "email" && !validator.isEmail(this.state.email))
+      seterror("Invalid email address");
     if (
       field !== "state" &&
       field !== "company" &&
       field !== "add2" &&
-      field !== "ship" &&
+      field !== "method" &&
       validator.isEmpty(this.state[field])
     ) {
       seterror("Required field.");
     }
-
-    if (field === "ship" && !this.state[field])
+    if (field === "method" && !this.state.method)
       seterror("Please select a shipping method.");
   }
 
@@ -76,7 +78,7 @@ class Shipping extends Component {
   }
 
   getCost(e) {
-    this.setState({ ship: e.target.id });
+    this.setState({ method: e.target.id });
     this.props.getshipcost(e);
   }
 
@@ -85,7 +87,7 @@ class Shipping extends Component {
     return (
       <div className="Shipping">
         <section className="Form">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <input
               onChange={this.onChange}
               name="email"
@@ -170,6 +172,8 @@ class Shipping extends Component {
               defaultValue={this.state.country}
               onChange={this.onChange}
             />
+            {/* hidden button to allow submitting by pressing enter, since NEXT input cant trigger from outside of form element */}
+            <button style={{display: "none"}} type="submit"/>
           </form>
         </section>
 
@@ -180,7 +184,7 @@ class Shipping extends Component {
               <label>
                 <input
                   type="radio"
-                  id="firstclass"
+                  id="USPS First Class"
                   value="5"
                   name="shipmethod"
                 />
@@ -190,7 +194,7 @@ class Shipping extends Component {
               <label>
                 <input
                   type="radio"
-                  id="priority"
+                  id="USPS Priority"
                   value="10"
                   name="shipmethod"
                 />
@@ -198,10 +202,15 @@ class Shipping extends Component {
               </label>
               <br />
               <label>
-                <input type="radio" id="express" value="20" name="shipmethod" />
+                <input
+                  type="radio"
+                  id="USPS Express"
+                  value="20"
+                  name="shipmethod"
+                />
                 USPS Express
               </label>
-              <p style={{ color: "red" }}>{errors.ship}</p>
+              <p style={{ color: "red" }}>{errors.method}</p>
             </ul>
           </aside>
           <input onClick={this.onSubmit} type="submit" value="NEXT" />
