@@ -31,11 +31,11 @@ const Header = (props) => {
   );
 
   const back = (
-    <Link to="/">
-      <aside>
+    <aside>
+      <Link to="/">
         <span>{"<"}</span>
-      </aside>
-    </Link>
+      </Link>
+    </aside>
   );
   return (
     <div className="Header">

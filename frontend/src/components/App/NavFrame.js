@@ -12,6 +12,7 @@ import CreateAccount from "../Account/CreateAccount";
 import Account from "../Account/Account";
 import Logout from "../Account/Logout";
 import Address from "../Account/Address";
+import AddressForm from "../Account/AddressForm"
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Nav from "../Nav/Nav";
@@ -34,6 +35,7 @@ class NavFrame extends Component {
           <Route exact path="/search" component={Search} />
           <Route exact path="/account/create" component={CreateAccount} />
           <Route exact path="/account/logout" component={Logout} />
+          <PrivateRoute exact path="/account/address/form" component={AddressForm} />
           <PrivateRoute path="/account/address" component={Address} />
           <PrivateRoute path="/account" component={Account} />
           <AdminRoute exact path="/add-item" component={AddItem} />

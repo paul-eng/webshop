@@ -14,9 +14,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   address: {
-    default: {
-      type: Map,
-    },
+    type: Map,
   },
   role: {
     type: String,

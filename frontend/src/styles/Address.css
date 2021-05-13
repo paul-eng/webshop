@@ -1,0 +1,36 @@
+.Address section {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.Address aside {
+    margin-bottom: 2rem;
+}
+
+/* this is to align the "Default address" w the navbar text since the span doesnt have its' own margins*/
+ .Address aside:last-of-type {
+    margin-top: .5rem;
+}
+
+.Address aside div {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.Address a {
+    margin-right: 1rem;
+}
+
+.Address a, .Address div h3 {
+    color: #828282;
+    cursor: pointer;
+}
+
+.Address a:hover, .Address div h3:hover {
+    color: #0c0;
+}
+
+.Address span {
+    font-size: 1em;
+    font-family: authentic_bolder;
+}

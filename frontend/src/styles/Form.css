@@ -11,6 +11,9 @@
 }
 
 .Form form {
+    /* 1px margin to prevent accessiblity :focus outlines 
+    from getting clipped under the navbar*/
+    margin-left: 1px;
     display: flex;
     flex-direction: column;
 }
@@ -37,7 +40,7 @@
 
 .Form select {
     background-color: white;
-    border: 1px solid #c2c2c2;
+    outline: 1px solid #c2c2c2;
     padding: 1rem 1.25rem;
     font-size: 1.17rem;
 }

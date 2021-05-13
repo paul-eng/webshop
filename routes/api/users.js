@@ -70,17 +70,63 @@ router.post("/address", (req, res) => {
     if (err) {
       res.status(403).json({ error: "Unauthorized" });
     } else {
+      const addKey = req.body.key;
+      const newAdd = req.body.address;
+      let sendUpdate = (update) => {
+        User.findByIdAndUpdate(decoded.sub, update, { new: true, upsert: true })
+          .then((user) => {
+            res.json({ user });
+          })
+          .catch((err) => {
+            res.status(400).json({ error: "Failed to update user address" });
+          });
+      };
+
+      if (addKey) {
+        const nestedfield = `address.${addKey}`;
+        sendUpdate({ [nestedfield]: newAdd });
+      } else {
+        User.findById(decoded.sub)
+          .lean()
+          .then((user) => {
+            if (!user.address.default) {
+              sendUpdate({ "address.default": newAdd });
+            } else {
+              let nonDefaultAdds = Object.keys(user.address).filter((el) =>
+                parseInt(el)
+              );
+              let sortedAdds = nonDefaultAdds
+                .map((n) => parseInt(n))
+                .sort((a, b) => a - b);
+              let latestAdd = sortedAdds.pop();
+              let next = latestAdd ? latestAdd + 1 : 1;
+              let nestedfield = `address.${next}`;
+              sendUpdate({ [nestedfield]: newAdd });
+            }
+          });
+      }
+    }
+  });
+});
+
+// @route ap/users/address/delete
+// @description Delete saved address
+router.delete("/address/:key", (req, res) => {
+  const token = req.headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(403).json({ error: "Unauthorized" });
+    } else {
+      let nestedfield = "address." + req.params.key;
       User.findByIdAndUpdate(
         decoded.sub,
-        { address: { default: req.body } },
-        { new: true, upsert: true }
+        { $unset: { [nestedfield]: "" } },
+        { new: "true" }
       )
-        .then((user) => {
-          res.json({ user });
-        })
-        .catch((err) => {
-          res.status(400).json({ error: "Failed to update user address" });
-        });
+        .then((user) => res.json({ user }))
+        .catch((err) =>
+          res.status(400).json({ error: "Failed to delete address" })
+        );
     }
   });
 });

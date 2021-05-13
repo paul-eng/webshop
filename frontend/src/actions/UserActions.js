@@ -53,10 +53,14 @@ export const addUser = (user) => (dispatch) => {
     .catch((err) => dispatch(setMsg(err.response.data.error)));
 };
 
-export const addAddress = (address, token) => (dispatch) => {
-  const headers = { "x-access-token": token };
+export const addAddress = (address, key) => (dispatch) => {
+  const headers = { "x-access-token": localStorage.getItem("session") };
   return axios
-    .post("http://localhost:8080/api/users/address", address, { headers })
+    .post(
+      "http://localhost:8080/api/users/address",
+      { address, key },
+      { headers }
+    )
     .then(
       ({
         data: {
@@ -67,6 +71,22 @@ export const addAddress = (address, token) => (dispatch) => {
       }
     )
     .catch((err) => console.log(err.response.data));
+};
+
+export const deleteAddress = (key) => (dispatch) => {
+  const headers = { "x-access-token": localStorage.getItem("session") };
+  return axios
+    .delete("http://localhost:8080/api/users/address/" + key, { headers })
+    .then(
+      ({
+        data: {
+          user: { address },
+        },
+      }) => {
+        return dispatch(setAddress(address));
+      }
+    )
+    .catch((err) => "");
 };
 
 export const getUser = (token) => (dispatch) => {
