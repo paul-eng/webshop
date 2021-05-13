@@ -1,6 +1,6 @@
 .Shipping {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 4rem;
     grid-area: body;
 }
@@ -45,7 +45,7 @@
         display: flex;
         flex-direction: column;
     }
-
+    
     .Shipping input[type=text], .Shipping .Form select  {
         padding: 1rem 1.25rem;
     }

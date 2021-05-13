@@ -42,6 +42,7 @@ class Checkout extends Component {
           </h3>
         </span>
         <Shipping
+          user={this.props.user}
           getshipcost={this.getshipcost}
           getshipinfo={this.getshipinfo}
         />
@@ -82,6 +83,7 @@ class Checkout extends Component {
 const mapStateToProps = (state) => {
   return {
     total: state.cart.total,
+    user: state.user
   };
 };
 

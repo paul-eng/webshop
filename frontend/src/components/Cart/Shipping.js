@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../../styles/Shipping.css";
 import validator from "validator";
 import ShippingForm from "./ShippingForm";
+import ShippingAdds from "./ShippingAdds";
 
 class Shipping extends Component {
   constructor(props) {
@@ -19,17 +20,17 @@ class Shipping extends Component {
       postcode: "",
       country: "United States",
       errors: {},
-      key: undefined,
       method: undefined,
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.getCost = this.getCost.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
-    let { errors, key, ...fields } = this.state;
+    let { errors, ...fields } = this.state;
     this.setState({ errors: {} });
     let validations = [];
     for (let field in fields) {
@@ -40,7 +41,7 @@ class Shipping extends Component {
     }
     Promise.allSettled(validations).then(() => {
       if (Object.keys(this.state.errors).length === 0) {
-        let { key, errors, ...info } = this.state;
+        let { errors, ...info } = this.state;
         this.props.getshipinfo(info);
       }
     });
@@ -77,21 +78,31 @@ class Shipping extends Component {
     this.setState({ [e.target.name]: validator.ltrim(e.target.value) });
   }
 
+  onSelect(key) {
+    const user = this.props.user
+    const newState =  {email: user.email, ...user.address[key]}
+    this.setState(newState)
+  }
+
   getCost(e) {
     this.setState({ method: e.target.id });
     this.props.getshipcost(e);
   }
 
   render() {
+    let userAdd = this.props.user?.address?.default;
     let errors = this.state.errors;
     return (
       <div className="Shipping">
-        <ShippingForm
-          onChange={this.onChange}
-          state={this.state}
-          onSubmit={this.onSubmit}
-        />
-
+        {userAdd ? (
+          <ShippingAdds onSelect={this.onSelect} addbook={this.props.user.address} />
+        ) : (
+          <ShippingForm
+            onChange={this.onChange}
+            state={this.state}
+            onSubmit={this.onSubmit}
+          />
+        )}
         <section>
           <h3>Shipping method</h3>
           <aside>

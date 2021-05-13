@@ -112,7 +112,7 @@ export const renderAdd = (address) => {
         .join(", ")}
     </h3>
     <h3>{address.country}</h3>
-    <h3>T: {address.phone}</h3>
+    <h3>{address.phone}</h3>
   </div>
   )
 }

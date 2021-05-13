@@ -1,0 +1,87 @@
+.ShippingAdds form > div {
+    display: flex;
+    align-items: flex-start;
+}
+
+.ShippingAdds form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    row-gap: 1.5rem;
+}
+
+.ShippingAdds form h3 {
+    margin: 0 !important;
+    color: inherit;
+    font-size: .9em;
+}
+
+.ShippingModal {
+    /* gets display property from toggle in js */
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    width: 100vw;
+    height: 100vh;
+}
+
+.ShippingModal div {
+    box-sizing: border-box;
+    background: white;
+    padding: 2rem;
+    max-height: 85%;
+    overflow-y: auto;
+}
+
+.ShippingModal form {
+    display: flex !important;
+    row-gap: .5rem;
+}
+
+.ShippingModal form input:first-of-type, .ShippingModal form h3:first-of-type {
+    display: none;
+}
+
+.ShippingModal input[type=submit] {
+    width: 200px;
+    margin: 0 1rem 2rem 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .ShippingAdds form {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ShippingAdds {
+        margin-bottom: 1rem;
+    }
+
+    .ShippingAdds form {
+        display: grid;
+    }
+
+    .ShippingModal section {
+        border: none !important;
+        padding: 0 !important;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .ShippingModal div {
+        max-height: 100%;
+    }
+
+    .ShippingModal span{
+        display: flex;
+        align-items: end;
+        margin-right: -1rem;
+        flex-direction: column-reverse;
+    }
+    
+}
