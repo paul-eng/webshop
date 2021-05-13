@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../styles/Shipping.css";
-import Countries from "../../util/Countries.js";
 import validator from "validator";
+import ShippingForm from "./ShippingForm";
 
 class Shipping extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Shipping extends Component {
   }
 
   onSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     let { errors, key, ...fields } = this.state;
     this.setState({ errors: {} });
     let validations = [];
@@ -86,96 +86,11 @@ class Shipping extends Component {
     let errors = this.state.errors;
     return (
       <div className="Shipping">
-        <section className="Form">
-          <form onSubmit={this.onSubmit}>
-            <input
-              onChange={this.onChange}
-              name="email"
-              type="text"
-              value={this.state.email}
-              placeholder="Email address"
-            />
-            <h3>{errors.email}</h3>
-            <input
-              onChange={this.onChange}
-              name="firstname"
-              type="text"
-              value={this.state.firstname}
-              placeholder="First name"
-            />
-            <h3>{errors.firstname}</h3>
-            <input
-              onChange={this.onChange}
-              name="lastname"
-              type="text"
-              value={this.state.lastname}
-              placeholder="Last name"
-            />
-            <h3>{errors.lastname}</h3>
-            <input
-              onChange={this.onChange}
-              name="company"
-              type="text"
-              value={this.state.company}
-              placeholder="Company"
-            />
-            <h3>{errors.company}</h3>
-            <input
-              onChange={this.onChange}
-              name="phone"
-              type="text"
-              value={this.state.phone}
-              placeholder="Phone"
-            />
-            <h3>{errors.phone}</h3>
-            <input
-              onChange={this.onChange}
-              name="add1"
-              type="text"
-              value={this.state.add1}
-              placeholder="Street address 1"
-            />
-            <h3>{errors.add1}</h3>
-            <input
-              onChange={this.onChange}
-              name="add2"
-              type="text"
-              value={this.state.add2}
-              placeholder="Street address 2"
-            />
-            <h3>{errors.add2}</h3>
-            <input
-              onChange={this.onChange}
-              name="city"
-              type="text"
-              value={this.state.city}
-              placeholder="City"
-            />
-            <h3>{errors.city}</h3>
-            <input
-              onChange={this.onChange}
-              name="state"
-              type="text"
-              value={this.state.state}
-              placeholder="State / Province"
-            />
-            <h3>{errors.state}</h3>
-            <input
-              onChange={this.onChange}
-              name="postcode"
-              type="text"
-              value={this.state.postcode}
-              placeholder="Postal code"
-            />
-            <h3>{errors.postcode}</h3>
-            <Countries
-              defaultValue={this.state.country}
-              onChange={this.onChange}
-            />
-            {/* hidden button to allow submitting by pressing enter, since NEXT input cant trigger from outside of form element */}
-            <button style={{display: "none"}} type="submit"/>
-          </form>
-        </section>
+        <ShippingForm
+          onChange={this.onChange}
+          state={this.state}
+          onSubmit={this.onSubmit}
+        />
 
         <section>
           <h3>Shipping method</h3>

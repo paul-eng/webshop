@@ -26,7 +26,6 @@
     border-top: .2rem solid #aaa;
     margin-top: 1rem;
     padding-top: 1rem;
-
 }
 
 .Checkout2 section > h3 {
@@ -48,4 +47,35 @@
 .Checkout2 li {
     width: max-content;
     margin-bottom: .5rem;
+}
+
+.ViewItems article {
+    width: max-content;
+    display: flex;
+    cursor: pointer;
+}
+
+.ViewItems article h3:first-of-type { 
+    margin-right: .5rem;
+}
+
+.ViewItems li {
+    margin-top: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .Checkout2 {
+        column-gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Checkout2  {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Checkout2 > section:last-of-type {
+        margin-top: 2rem;
+    }
 }

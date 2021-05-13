@@ -5,12 +5,10 @@
     grid-area: body;
 }
 
-.Shipping input[type=text] {
+.Shipping input[type=text], .Shipping .Form select  {
     padding: .5rem .75rem;
-}
-
-.Shipping .Form select {
-    padding: .5rem .75rem
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .Shipping input[type=radio] {
@@ -30,4 +28,40 @@
     width: 200px;
     float: right;
     margin-top: 2rem;
+}
+
+.Shipping form {
+    max-width: 450px;
+}
+
+@media screen and (max-width: 1024px) {
+    .Shipping {
+        column-gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Shipping  {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Shipping input[type=text], .Shipping .Form select  {
+        padding: 1rem 1.25rem;
+    }
+
+    .Shipping .Form {
+        margin-bottom: 2rem;
+    }
+
+    .Shipping section:last-of-type {
+        border-top: .2rem solid #aaa;
+        padding-top: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .Shipping form h3 {
+        margin: 1rem 0;
+    }
 }

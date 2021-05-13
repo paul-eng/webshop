@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Shipping from "./Shipping.js";
+import ViewItems from "./ViewItems.js"
 import { renderAdd } from "../../util/Util";
 import "../../styles/_Checkout.css";
 
@@ -13,6 +14,7 @@ class Checkout extends Component {
     };
     this.getshipcost = this.getshipcost.bind(this);
     this.getshipinfo = this.getshipinfo.bind(this);
+    this.goBack = this.goBack.bind(this)
   }
 
   getshipcost(e) {
@@ -23,6 +25,10 @@ class Checkout extends Component {
     this.setState({ shipinfo: info });
   }
 
+  goBack() {
+    this.setState({shipinfo: undefined})
+  }
+
   render() {
     let shipcost = this.state.shipcost;
     let shipinfo = this.state.shipinfo;
@@ -30,7 +36,7 @@ class Checkout extends Component {
     return (
       <div className="Checkout2">
         <span>
-          <h3 style={{ color: shipinfo ? "#aaa" : "black" }}>1. SHIPPING</h3>
+          <h3 onClick={this.goBack} style={{ color: shipinfo ? "#aaa" : "black" }}>1. SHIPPING</h3>
           <h3 style={{ color: shipinfo ? "black" : "#aaa" }}>
             2. REVIEW & PAYMENT
           </h3>
@@ -59,6 +65,7 @@ class Checkout extends Component {
               </li>
             </ul>
           </aside>
+          <ViewItems />
           {shipinfo ? renderAdd(shipinfo) : null}
           {shipinfo ? (
             <div>
