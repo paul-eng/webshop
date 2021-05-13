@@ -1,0 +1,44 @@
+.Checkout2 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: max-content 1fr;
+    column-gap: 4rem;
+    grid-template-areas: 
+    "title ."
+    "body summary"
+}
+
+.Checkout2 span {
+    grid-area: title;
+    display: flex;
+}
+
+.Checkout2 span h3 {
+    margin: .5rem 1rem 2rem 0;
+    cursor: pointer;
+}
+
+.Checkout2 > section {
+    grid-area: summary;
+}
+
+.Checkout2 section > h3 {
+    margin: 0 0 2rem 0;
+}
+
+.Checkout2 aside {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.17em;
+}
+
+.Checkout2 ul:nth-of-type(2) li {
+    margin-left: auto;
+    padding-left: .5rem;
+}
+
+.Checkout2 li {
+    width: max-content;
+    margin-bottom: .5rem;
+}

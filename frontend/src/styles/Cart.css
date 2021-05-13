@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 60% 1fr;
     grid-template-rows: min-content 1fr;
+    column-gap: 4rem;
     grid-template-areas: 
     "title title"
     "items total";
@@ -18,6 +19,13 @@
 
 .Cart input[type=submit] {
    float: right;
+}
+
+.Cart p {
+    margin: 2rem 0;
+}
+.Cart section input {
+    margin: 0;
 }
 
 .Cart section {
@@ -69,12 +77,5 @@
 
     .Cart form, .Cart section {
         margin: 0;
-    }
-
-    .Cart p {
-        margin: 2rem 0;
-    }
-    .Cart section input {
-        margin: 2rem 0;
     }
 }

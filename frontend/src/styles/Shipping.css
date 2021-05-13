@@ -1,0 +1,25 @@
+.Shipping {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+    grid-area: body;
+}
+
+.Shipping input[type=radio] {
+    cursor: pointer;
+    margin: 0 .5rem 1rem 0;
+}
+
+.Shipping form h3 {
+    color: red;
+}
+
+.Shipping aside {
+   flex-direction: column;
+}
+
+.Shipping input[type=submit] {
+    width: 200px;
+    float: right;
+    margin-top: 2rem;
+}

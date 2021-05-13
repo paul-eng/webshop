@@ -189,7 +189,7 @@ class AddressForm extends Component {
               <h3>{errors.state}</h3>
             </article>
             <article>
-              <h3>Postal Code</h3>
+              <h3>Postal code</h3>
               <input
                 onChange={this.onChange}
                 name="postcode"

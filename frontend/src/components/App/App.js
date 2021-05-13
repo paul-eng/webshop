@@ -13,7 +13,8 @@ import Header from "./Header";
 import NavFrame from "./NavFrame";
 import Message from "./Message";
 import Cart from "../Cart/Cart";
-import Checkout from "../Cart/Checkout"
+import Checkout from "../Cart/Checkout";
+import Checkout2 from "../Cart/_Checkout";
 
 class App extends Component {
   componentDidMount() {
@@ -51,7 +52,8 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/cart" component={Cart} />
-          <Route exact path ="/checkout" component={Checkout} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/checkout2" component={Checkout2} />
           <Route path="/" component={NavFrame} />
         </Switch>
         <Message />
