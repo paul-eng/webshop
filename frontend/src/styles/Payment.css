@@ -1,3 +1,49 @@
 .Payment {
-    grid-area: body
+    grid-area: body;
+}
+
+.Payment article h3:last-of-type{
+    color: red;
+    margin-bottom: 1.5rem;
+}
+
+.Payment form {
+    width: 50%;
+}
+
+.Payment form > div {
+    width: max-content;
+}
+
+.Payment form article > span {
+    max-width: 110px;
+    display: block;
+}
+
+.Payment input {
+    margin-top: 1rem;
+    float: right;
+}
+
+.StripeElement {
+    background-color: #ddd;
+    padding: .5rem .625rem;
+}
+
+.StripeElement--focus {
+    outline: 1px solid #0c0;
+}
+
+.StripeElement--invalid {
+    outline: 1px solid red;
+}
+
+@media screen and (max-width: 768px) {
+    .Payment form {
+        width: 100%;
+    }
+
+    .Payment article {
+        width: 60%;
+    }
 }

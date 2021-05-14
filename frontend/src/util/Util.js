@@ -100,19 +100,35 @@ export const mergeCarts = (target, source) => {
 };
 
 export const renderAdd = (address) => {
-  return(
+  return (
     <div>
-    <h3>{address.firstname + " " + address.lastname}</h3>
-    <h3>{address.company}</h3>
-    <h3>{address.add1}</h3>
-    <h3>{address.add2}</h3>
-    <h3>
-      {[address.city, address.state, address.postcode]
-        .filter((x) => x !== "")
-        .join(", ")}
-    </h3>
-    <h3>{address.country}</h3>
-    <h3>{address.phone}</h3>
-  </div>
-  )
+      <h3>{address.firstname + " " + address.lastname}</h3>
+      <h3>{address.company}</h3>
+      <h3>{address.add1}</h3>
+      <h3>{address.add2}</h3>
+      <h3>
+        {[address.city, address.state, address.postcode]
+          .filter((x) => x !== "")
+          .join(", ")}
+      </h3>
+      <h3>{address.country}</h3>
+      <h3>{address.phone}</h3>
+    </div>
+  );
+};
+
+export const getLineItems = (items) => {
+  let itemList = items.map((item) => {
+    return item.stock.map(
+      (version) =>
+        `${version.qty}x ${item.brand + " " + item.name} - ${version.type}`
+    );
+  });
+  return itemList.flat().join(", ");
+};
+
+export const genOrderNum = (total) => {
+  const seed =   parseInt(Date.now().toString().split("").reverse().join(""))
+  const random = window.crypto.getRandomValues(new Uint32Array(1))[0]
+  return seed + total - random
 }

@@ -12,7 +12,7 @@ const ViewItems = () => {
         <h3>{item.brand + " " + item.name}</h3>
         <h3>{version.type}</h3>
         <h3>Qty {version.qty}</h3>
-        <h3>{item.price}</h3>
+        <h3>${item.price}</h3>
       </li>
     ));
   });
@@ -21,7 +21,7 @@ const ViewItems = () => {
     <div className="ViewItems">
       <article onClick={() => setExpand(!expand)}>
         <h3>{expand ? "-" : "+"}</h3>
-        <h3>View Items</h3>
+        <h3>View items</h3>
       </article>
       <ul style={{display: expand ? "block" : "none"}}>{itemList}</ul>
     </div>

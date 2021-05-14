@@ -1,0 +1,33 @@
+.Summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Summary h2 {
+    font-family: authentic_bold;
+}
+
+.Summary h4{
+    margin: 1rem 0;
+}
+
+.Summary span {
+    font-family: authentic_bold;
+}
+
+.Summary > img {
+    width: 5rem;
+    margin-bottom: 2rem;
+}
+
+.Summary section {
+    margin-top:2rem;
+    padding-top: 2rem;
+    border-top: .2rem solid #aaa;
+}
+
+.Summary section > h3 {
+    font-family: authentic_bold;
+    margin-bottom: 2rem;
+}

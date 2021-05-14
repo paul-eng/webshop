@@ -1,5 +1,5 @@
 import axios from "axios";
-import { matchStock } from "../util/Util";
+import { matchStock, getLineItems } from "../util/Util";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
@@ -131,15 +131,6 @@ export const checkQty =
       });
   };
 
-export const fetchStripe = (amt) => (dispatch) => {
-  return axios
-    .post("http://localhost:8080/api/checkout", { amt })
-    .then((res) => {
-      return Promise.resolve(res.data.clientSecret);
-    })
-    .catch((err) => console.log(err));
-};
-
 export const saveGuest = () => (dispatch, getState) => {
   return axios
     .post("http://localhost:8080/api/carts/guest", { cart: getState().cart })
@@ -165,4 +156,22 @@ export const fetchGuest = (cartToken) => (dispatch) => {
       dispatch(saveGuest());
       return err.response.data.message;
     });
+};
+
+export const fetchStripe = (amt) => (dispatch, getState) => {
+  const items = getState().cart.items;
+  const lineitems = getLineItems(items);
+  return axios
+    .post("http://localhost:8080/api/checkout", { amt, lineitems })
+    .then((res) => {
+      return Promise.resolve(res.data.clientSecret);
+    })
+    .catch((err) => console.log(err));
+};
+
+export const fetchCard = (paymethod) => (dispatch) => {
+  return axios
+    .get("http://localhost:8080/api/checkout/" + paymethod)
+    .then((res) => Promise.resolve(res.data.card))
+    .catch((err) => console.log(err));
 };

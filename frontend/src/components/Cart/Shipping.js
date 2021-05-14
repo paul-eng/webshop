@@ -117,7 +117,7 @@ class Shipping extends Component {
 
   getCost(e) {
     this.setState({ method: e.target.id });
-    this.props.getshipcost(e);
+    this.props.getshipfee(e);
   }
 
   render() {
@@ -148,7 +148,7 @@ class Shipping extends Component {
                   value="5"
                   name="shipmethod"
                 />
-                USPS First Class
+                USPS First class
               </label>
               <br />
               <label>

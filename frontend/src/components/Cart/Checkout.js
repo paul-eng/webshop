@@ -1,155 +1,108 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchStripe } from "../../actions/CartActions";
-import {
-  CardNumberElement,
-  CardExpiryElement,
-  CardCvcElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Shipping from "./Shipping.js";
+import Payment from "./Payment.js";
+import ViewItems from "./ViewItems.js";
+import { renderAdd } from "../../util/Util";
 import "../../styles/Checkout.css";
 
-const Checkout = (props) => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const dispatch = useDispatch();
-  const total = useSelector((state) => state.cart.total);
+class Checkout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shipfee: undefined,
+      shipinfo: undefined,
+      showpay: false,
+    };
+    this.getshipfee = this.getshipfee.bind(this);
+    this.getshipinfo = this.getshipinfo.bind(this);
+    this.goBack = this.goBack.bind(this);
+  }
 
-  const [errors, setErrors] = useState({});
-  const [empty, setEmpty] = useState({});
+  getshipfee(e) {
+    this.setState({ shipfee: parseInt(e.target.value) });
+  }
 
-  const handleErrors = (e) => {
-    if (e?.error?.message) {
-      setErrors((prev) => {
-        return { ...prev, [e.elementType]: e.error.message };
-      });
-    } else {
-      setErrors((prev) => {
-        return { ...prev, [e.elementType]: undefined };
-      });
-    }
+  getshipinfo(info) {
+    this.setState({ shipinfo: info, showpay: true });
+  }
 
-    setEmpty((prev) => {
-      return { ...prev, [e.elementType]: e.empty };
-    });
-  };
+  goBack() {
+    this.setState({ showpay: false });
+  }
 
-  const [ship, setShip] = useState();
-
-  const onChange = (e) => {
-    setShip(parseInt(e.target.value));
-  };
-
-  let notEmpty =
-    Object.values(empty).length === 3 && !Object.values(empty).includes(true);
-  let noErrors =
-    Object.values(errors).findIndex((el) => el !== undefined) === -1;
-  let allOK = noErrors && notEmpty && ship;
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!stripe || !elements) return;
-
-    if (allOK) {
-      const clientSecret = await dispatch(fetchStripe(total + ship));
-
-      const paymentResult = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-          billing_details: {
-            name: "Faruq Yusuff",
-          },
-        },
-      });
-
-      console.log(paymentResult)
-    }
-  };
-
-  return (
-    <div className="Checkout">
-      <section>
-        <h3>Payment Method</h3>
-        <form onSubmit={onSubmit}>
-          <article>
-            <h3>Card number</h3>
-            <div>
-              <CardNumberElement onChange={handleErrors} />
-            </div>
-            <h3>{errors.cardNumber}</h3>
-          </article>
-          <article>
-            <h3>Expiration date</h3>
-            <span>
-              <div>
-                <CardExpiryElement onChange={handleErrors} />
-              </div>
-            </span>
-            <h3>{errors.cardExpiry}</h3>
-          </article>
-          <article>
-            <h3>Security Code</h3>
-            <span>
-              <div>
-                <CardCvcElement onChange={handleErrors} />
-              </div>
-            </span>
-            <h3>{errors.cardCvc}</h3>
-          </article>
-          <input
-            style={{
-              pointerEvents: allOK ? "auto" : "none",
-              opacity: allOK ? "100%" : "50%",
-            }}
-            type="submit"
-            value="PLACE ORDER"
+  render() {
+    let shipfee = this.state.shipfee;
+    let shipinfo = this.state.shipinfo;
+    let showpay = this.state.showpay;
+    let total = this.props.total;
+    return (
+      <div className="Checkout">
+        <span>
+          <h3
+            onClick={this.goBack}
+            style={{ color: showpay ? "#aaa" : "black" }}
+          >
+            1. SHIPPING
+          </h3>
+          <h3 style={{ color: showpay ? "black" : "#aaa" }}>
+            2. REVIEW & PAYMENT
+          </h3>
+        </span>
+        {this.state.showpay ? (
+          <Payment shipfee={shipfee} shipinfo={shipinfo} />
+        ) : (
+          <Shipping
+            user={this.props.user}
+            getshipfee={this.getshipfee}
+            getshipinfo={this.getshipinfo}
+            oldstate={shipinfo}
           />
-        </form>
-      </section>
-      <section>
-        <h3>Shipment Method</h3>
-        <aside>
-          <ul onChange={onChange}>
-            <label>
-              <input type="radio" value="5" name="shipmethod" />
-              USPS First Class
-            </label>
+        )}
 
-            <br />
-            <label>
-              <input type="radio" value="10" name="shipmethod" />
-              USPS Priority
-            </label>
-            <br />
-            <label>
-              <input type="radio" value="20" name="shipmethod" />
-              USPS Express
-            </label>
-            <br />
-          </ul>
-        </aside>
-      </section>
-      <section>
-        <h3>Order summary</h3>
-        <aside>
-          <ul>
-            <li>Subtotal:</li>
-            <li>Shipping: </li>
-            <li>Total:</li>
-          </ul>
-          <ul>
-            <li>${total.toFixed(2)}</li>
-            <li>{ship ? "$" + ship.toFixed(2) : "Not yet calculated"}</li>
-            <li>
-              {ship ? `$${(total + ship).toFixed(2)}` : "Not yet calculated"}
-            </li>
-          </ul>
-        </aside>
-      </section>
-    </div>
-  );
+        <section>
+          <h3>Order summary</h3>
+          <aside>
+            <ul>
+              <li>Subtotal:</li>
+              <li>Shipping: </li>
+              <li>Total:</li>
+            </ul>
+            <ul>
+              <li>${total.toFixed(2)}</li>
+              <li>
+                {shipfee ? "$" + shipfee.toFixed(2) : "Not yet calculated"}
+              </li>
+              <li>
+                {shipfee
+                  ? `$${(total + shipfee).toFixed(2)}`
+                  : "Not yet calculated"}
+              </li>
+            </ul>
+          </aside>
+          <ViewItems />
+          {shipinfo ? renderAdd(shipinfo) : null}
+          {shipinfo ? (
+            <div>
+              <h3>Shipping method</h3>
+              <h3>{shipinfo.method}</h3>
+            </div>
+          ) : null}
+        </section>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    total: state.cart.total,
+    user: state.user,
+  };
 };
 
-export default Checkout;
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
