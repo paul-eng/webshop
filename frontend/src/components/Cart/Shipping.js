@@ -47,6 +47,10 @@ class Shipping extends Component {
         lastname: user.lastname,
       });
     }
+
+    if (this.props.oldstate) {
+      this.setState(this.props.oldstate);
+    }
   }
 
   onSubmit(e) {

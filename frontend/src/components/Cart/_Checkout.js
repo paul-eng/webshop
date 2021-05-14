@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Shipping from "./Shipping.js";
-import ViewItems from "./ViewItems.js"
+import Payment from "./Payment.js";
+import ViewItems from "./ViewItems.js";
 import { renderAdd } from "../../util/Util";
 import "../../styles/_Checkout.css";
 
@@ -11,10 +12,11 @@ class Checkout extends Component {
     this.state = {
       shipcost: undefined,
       shipinfo: undefined,
+      showpay: false,
     };
     this.getshipcost = this.getshipcost.bind(this);
     this.getshipinfo = this.getshipinfo.bind(this);
-    this.goBack = this.goBack.bind(this)
+    this.goBack = this.goBack.bind(this);
   }
 
   getshipcost(e) {
@@ -22,30 +24,40 @@ class Checkout extends Component {
   }
 
   getshipinfo(info) {
-    this.setState({ shipinfo: info });
+    this.setState({ shipinfo: info, showpay: true });
   }
 
   goBack() {
-    this.setState({shipinfo: undefined})
+    this.setState({ showpay: false });
+
   }
 
   render() {
     let shipcost = this.state.shipcost;
     let shipinfo = this.state.shipinfo;
+    let showpay = this.state.showpay;
     let total = this.props.total;
     return (
       <div className="Checkout2">
         <span>
-          <h3 onClick={this.goBack} style={{ color: shipinfo ? "#aaa" : "black" }}>1. SHIPPING</h3>
-          <h3 style={{ color: shipinfo ? "black" : "#aaa" }}>
+          <h3
+            onClick={this.goBack}
+            style={{ color: showpay ? "#aaa" : "black" }}
+          >
+            1. SHIPPING
+          </h3>
+          <h3 style={{ color: showpay ? "black" : "#aaa" }}>
             2. REVIEW & PAYMENT
           </h3>
         </span>
-        <Shipping
+        {this.state.showpay ? <Payment /> :  <Shipping
           user={this.props.user}
           getshipcost={this.getshipcost}
           getshipinfo={this.getshipinfo}
-        />
+          oldstate={shipinfo}
+        /> }
+       
+       
         <section>
           <h3>Order summary</h3>
           <aside>
@@ -83,7 +95,7 @@ class Checkout extends Component {
 const mapStateToProps = (state) => {
   return {
     total: state.cart.total,
-    user: state.user
+    user: state.user,
   };
 };
 
