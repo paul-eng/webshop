@@ -28,6 +28,27 @@ class Shipping extends Component {
     this.getCost = this.getCost.bind(this);
   }
 
+  componentDidMount() {
+    this.loadUser();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.user !== this.props.user) {
+      this.loadUser();
+    }
+  }
+
+  loadUser() {
+    const user = this.props.user;
+    if (user) {
+      this.setState({
+        email: user.email,
+        firstname: user.firstname,
+        lastname: user.lastname,
+      });
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
     let { errors, ...fields } = this.state;
@@ -39,8 +60,9 @@ class Shipping extends Component {
       });
       validations.push(val);
     }
-    Promise.allSettled(validations).then(() => {
-      if (Object.keys(this.state.errors).length === 0) {
+    Promise.allSettled(validations).then((res) => {
+      const err = res.map((prom) => prom.value).includes("ERR");
+      if (!err) {
         let { errors, ...info } = this.state;
         this.props.getshipinfo(info);
       }
@@ -59,8 +81,10 @@ class Shipping extends Component {
         };
       });
     };
-    if (field === "email" && !validator.isEmail(this.state.email))
-      seterror("Invalid email address");
+    if (field === "email" && !validator.isEmail(this.state.email)) {
+      seterror("Invalid email address.");
+      return "ERR";
+    }
     if (
       field !== "state" &&
       field !== "company" &&
@@ -69,9 +93,12 @@ class Shipping extends Component {
       validator.isEmpty(this.state[field])
     ) {
       seterror("Required field.");
+      return "ERR";
     }
-    if (field === "method" && !this.state.method)
+    if (field === "method" && !this.state.method) {
       seterror("Please select a shipping method.");
+      return "ERR";
+    }
   }
 
   onChange(e) {
@@ -79,9 +106,9 @@ class Shipping extends Component {
   }
 
   onSelect(key) {
-    const user = this.props.user
-    const newState =  {email: user.email, ...user.address[key]}
-    this.setState(newState)
+    const user = this.props.user;
+    const newState = { email: user.email, ...user.address[key] };
+    this.setState(newState);
   }
 
   getCost(e) {
@@ -95,7 +122,10 @@ class Shipping extends Component {
     return (
       <div className="Shipping">
         {userAdd ? (
-          <ShippingAdds onSelect={this.onSelect} addbook={this.props.user.address} />
+          <ShippingAdds
+            onSelect={this.onSelect}
+            addbook={this.props.user.address}
+          />
         ) : (
           <ShippingForm
             onChange={this.onChange}

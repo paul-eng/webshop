@@ -67,11 +67,13 @@ class AddressForm extends Component {
       validations.push(val);
     }
 
-    Promise.allSettled(validations).then(() => {
-      if (Object.keys(this.state.errors).length === 0) {
+    Promise.allSettled(validations).then((res) => {
+      const err = res.map((prom) => prom.value).includes("ERR");
+      if (!err) {
         const { errors, key, ...address } = this.state;
         this.props.addAddress(address, key).then((r) => {
-          if (r?.type === "SET_ADDRESS") this.props.history.push("/account/address");
+          if (r?.type === "SET_ADDRESS")
+            this.props.history.push("/account/address");
         });
       }
     });
@@ -101,6 +103,7 @@ class AddressForm extends Component {
       validator.isEmpty(this.state[field])
     ) {
       seterror("This is a required field.");
+      return "ERR";
     }
   }
 

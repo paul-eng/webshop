@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShippingForm from "./ShippingForm";
 import { addAddress } from "../../actions/UserActions";
 import { renderAdd } from "../../util/Util";
@@ -8,9 +8,10 @@ import "../../styles/ShippingAdds.css";
 
 const ShippingAdds = (props) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [select, setSelect] = useState();
   const [modal, setModal] = useState(false);
-  const blank = {
+  let blank = {
     firstname: "",
     lastname: "",
     company: "",
@@ -23,6 +24,10 @@ const ShippingAdds = (props) => {
     country: "United States",
     errors: {},
   };
+
+  if (user.firstname) {
+    blank = { ...blank, firstname: user.firstname, lastname: user.lastname };
+  }
   const [formstate, setState] = useState(blank);
   const highlight = (key) => {
     return select === key ? "#0c0" : "#828282";
@@ -64,7 +69,7 @@ const ShippingAdds = (props) => {
       validations.push(val);
     }
     Promise.allSettled(validations).then((res) => {
-      const err = res.map((obj) => obj.value).includes("ERR");
+      const err = res.map((prom) => prom.value).includes("ERR");
       if (!err) {
         let { errors, ...info } = formstate;
         dispatch(addAddress(info));

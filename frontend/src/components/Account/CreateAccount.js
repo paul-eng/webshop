@@ -33,8 +33,9 @@ class CreateAccount extends Component {
       validations.push(val);
     }
 
-    Promise.allSettled(validations).then(() => {
-      if (Object.keys(this.state.errors).length === 0) {
+    Promise.allSettled(validations).then((res) => {
+      const err = res.map((prom) => prom.value).includes("ERR");
+      if (!err) {
         this.setState(
           { email: validator.normalizeEmail(this.state.email) },
           () => {
@@ -73,10 +74,12 @@ class CreateAccount extends Component {
       !validator.isAlpha(value, "en-US", { ignore: "-" })
     ) {
       seterror("Please enter a valid name.");
+      return "ERR";
     }
 
     if (field === "email" && !validator.isEmail(value)) {
       seterror("Please enter a valid email address (Ex: johndoe@domain.com).");
+      return "ERR";
     }
 
     if (
@@ -86,18 +89,22 @@ class CreateAccount extends Component {
       seterror(
         "Password needs to include at least one letter, number, and symbol."
       );
+      return "ERR";
     }
 
     if (field === "pass" && !validator.isLength(value, { min: 6 })) {
       seterror("Password must be at least 6 characters.");
+      return "ERR";
     }
 
     if (field === "pass2" && !validator.equals(value, this.state.pass)) {
       seterror("Please enter the same value again.");
+      return "ERR";
     }
 
     if (validator.isEmpty(value)) {
       seterror("This is a required field.");
+      return "ERR";
     }
   }
 
@@ -112,7 +119,7 @@ class CreateAccount extends Component {
             your shipping and billing address, and view order history.
           </h3>
 
-          <form onSubmit={this.onSubmit} >
+          <form onSubmit={this.onSubmit}>
             <article>
               <h3>First name</h3>
               <input
