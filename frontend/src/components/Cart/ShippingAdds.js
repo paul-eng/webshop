@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import ShippingForm from "./ShippingForm";
+import { addAddress } from "../../actions/UserActions";
 import { renderAdd } from "../../util/Util";
 import validator from "validator";
 import "../../styles/ShippingAdds.css";
 
 const ShippingAdds = (props) => {
+  const dispatch = useDispatch();
   const [select, setSelect] = useState();
   const [modal, setModal] = useState(false);
-  const [formstate, setState] = useState({
+  const blank = {
     firstname: "",
     lastname: "",
     company: "",
@@ -19,7 +22,8 @@ const ShippingAdds = (props) => {
     postcode: "",
     country: "United States",
     errors: {},
-  });
+  };
+  const [formstate, setState] = useState(blank);
   const highlight = (key) => {
     return select === key ? "#0c0" : "#828282";
   };
@@ -46,7 +50,52 @@ const ShippingAdds = (props) => {
       ...formstate,
       [e.target.name]: validator.ltrim(e.target.value),
     });
-    console.log(formstate);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let { errors, ...fields } = formstate;
+    setState({ ...formstate, errors: {} });
+    let validations = [];
+    for (let field in fields) {
+      let val = new Promise((resolve) => {
+        resolve(validate(field));
+      });
+      validations.push(val);
+    }
+    Promise.allSettled(validations).then((res) => {
+      const err = res.map((obj) => obj.value).includes("ERR");
+      if (!err) {
+        let { errors, ...info } = formstate;
+        dispatch(addAddress(info));
+        toggleModal();
+        setState(blank);
+      }
+    });
+  };
+
+  const validate = (field) => {
+    let seterror = (msg) => {
+      setState((formstate) => {
+        return {
+          ...formstate,
+          errors: Object.assign({}, formstate.errors, {
+            [field]: msg,
+          }),
+        };
+      });
+    };
+
+    if (
+      field !== "state" &&
+      field !== "company" &&
+      field !== "add2" &&
+      field !== "method" &&
+      validator.isEmpty(formstate[field])
+    ) {
+      seterror("Required field.");
+      return "ERR";
+    }
   };
 
   return (
@@ -56,13 +105,19 @@ const ShippingAdds = (props) => {
       <input onClick={toggleModal} type="submit" value="ADD ADDRESS" />
       <div
         className="ShippingModal"
-        style={{ display: modal ? "flex" : "none" }}
+        style={{ visibility: modal ? "visible" : "hidden" }}
       >
-        <div>
-          <ShippingForm onChange={modalChange} state={formstate} />
+        <div
+          style={{ transform: modal ? "translateY(0)" : "translateY(-120%)" }}
+        >
+          <ShippingForm
+            onSubmit={onSubmit}
+            onChange={modalChange}
+            state={formstate}
+          />
           <span>
             <input onClick={toggleModal} type="submit" value="CANCEL" />
-            <input type="submit" value="SAVE ADDRESS" />
+            <input onClick={onSubmit} type="submit" value="SAVE ADDRESS" />
           </span>
         </div>
       </div>
