@@ -20,13 +20,19 @@ app.use("/api/carts", carts);
 app.use("/api/orders", orders);
 app.use("/api/checkout", checkout);
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-    const path = require('path');
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-  }
+
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build'))
+})
+
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("client/build"));
+//     const path = require('path');
+//     app.get('*', (req, res) => {
+//       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//     });
+//   }
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Server running on port ${port}`));
