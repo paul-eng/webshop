@@ -72,7 +72,7 @@ class AddItem extends Component {
 
     console.log(data);
     axios
-      .post("http://localhost:8080/api/items", data)
+      .post("https://restful-goods.herokuapp.com/api/items", data)
       .then((res) => {
         alert("Success");
         this.setState({

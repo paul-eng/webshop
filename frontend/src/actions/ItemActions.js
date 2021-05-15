@@ -34,7 +34,7 @@ export const clearAllItems = () => {
 
 export const fetchItem = (path) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/" + path)
+    .get("https://restful-goods.herokuapp.com/api/items/" + path)
     .then((res) => dispatch(setItem(res.data)))
     .catch((err) => console.log(err.response));
 };
@@ -45,7 +45,7 @@ export const fetchSearch = (
   paginate = true
 ) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/search", {
+    .get("https://restful-goods.herokuapp.com/api/items/search", {
       params: { searchTerms, sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
@@ -56,7 +56,7 @@ export const fetchAllItems = (
   paginate = true
 ) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items", {
+    .get("https://restful-goods.herokuapp.com/api/items", {
       params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
@@ -68,7 +68,7 @@ export const fetchBrand = (
   paginate = true
 ) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/brand/" + brandURI, {
+    .get("https://restful-goods.herokuapp.com/api/items/brand/" + brandURI, {
       params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)))
@@ -80,7 +80,7 @@ export const fetchCategory = (
   paginate = true
 ) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/category/" + cat, {
+    .get("https://restful-goods.herokuapp.com/api/items/category/" + cat, {
       params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));
@@ -91,7 +91,7 @@ export const fetchNew = (
   paginate = true
 ) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/new", {
+    .get("https://restful-goods.herokuapp.com/api/items/new", {
       params: { sort, brand, category, p, paginate },
     })
     .then((res) => dispatch(setItems(res.data)));

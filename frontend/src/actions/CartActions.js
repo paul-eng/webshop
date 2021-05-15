@@ -72,7 +72,7 @@ export const saveCart = (token) => (dispatch, getState) => {
   const headers = { "x-access-token": token };
   const { qtyError, ...cart } = getState().cart;
   return axios
-    .post("http://localhost:8080/api/carts", cart, { headers })
+    .post("https://restful-goods.herokuapp.com/api/carts", cart, { headers })
     .then((res) => {
       return Promise.resolve(res.data);
     })
@@ -84,7 +84,7 @@ export const saveCart = (token) => (dispatch, getState) => {
 export const fetchCart = (token) => (dispatch) => {
   const headers = { "x-access-token": token };
   return axios
-    .get("http://localhost:8080/api/carts/session", { headers })
+    .get("https://restful-goods.herokuapp.com/api/carts/session", { headers })
     .then((res) => dispatch(loginCart(res.data)))
     .catch((err) => {
       console.log(err.response.data.error);
@@ -97,7 +97,7 @@ export const updateCart = (updates) => (dispatch, getState) => {
     let [path, type, qty] = [update.id, update.name, parseInt(update.value)];
 
     let prom = axios
-      .get("http://localhost:8080/api/items/" + path)
+      .get("https://restful-goods.herokuapp.com/api/items/" + path)
       .then((res) => {
         let storeQty = matchStock(res.data.stock, type).qty;
         if (qty > storeQty) {
@@ -124,7 +124,7 @@ export const checkQty =
   ({ pathname, stock: { qty }, stock: { type } }) =>
   (dispatch) => {
     return axios
-      .get("http://localhost:8080/api/items/" + pathname)
+      .get("https://restful-goods.herokuapp.com/api/items/" + pathname)
       .then((res) => {
         let storeQty = matchStock(res.data.stock, type).qty;
         return qty > storeQty;
@@ -133,7 +133,7 @@ export const checkQty =
 
 export const saveGuest = () => (dispatch, getState) => {
   return axios
-    .post("http://localhost:8080/api/carts/guest", { cart: getState().cart })
+    .post("https://restful-goods.herokuapp.com/api/carts/guest", { cart: getState().cart })
     .then((res) => {
       localStorage.setItem("guestCart", res.data);
       return res.data;
@@ -144,7 +144,7 @@ export const saveGuest = () => (dispatch, getState) => {
 export const fetchGuest = (cartToken) => (dispatch) => {
   const headers = { "x-access-token": cartToken };
   return axios
-    .get("http://localhost:8080/api/carts/guest", { headers })
+    .get("https://restful-goods.herokuapp.com/api/carts/guest", { headers })
     .then(({ data }) => {
       localStorage.setItem("guestCart", data.newToken);
       dispatch(loginCart(data.cart));
@@ -162,7 +162,7 @@ export const fetchStripe = (amt) => (dispatch, getState) => {
   const items = getState().cart.items;
   const lineitems = getLineItems(items);
   return axios
-    .post("http://localhost:8080/api/checkout", { amt, lineitems })
+    .post("https://restful-goods.herokuapp.com/api/checkout", { amt, lineitems })
     .then((res) => {
       return Promise.resolve(res.data.clientSecret);
     })
@@ -171,7 +171,7 @@ export const fetchStripe = (amt) => (dispatch, getState) => {
 
 export const fetchCard = (paymethod) => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/checkout/" + paymethod)
+    .get("https://restful-goods.herokuapp.com/api/checkout/" + paymethod)
     .then((res) => Promise.resolve(res.data.card))
     .catch((err) => console.log(err));
 };

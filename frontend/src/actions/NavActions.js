@@ -35,12 +35,12 @@ export const clearMsg = () => {
 
 export const fetchBrands = () => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/brands")
+    .get("https://restful-goods.herokuapp.com/api/items/brands")
     .then((res) => dispatch(setBrands(res.data)));
 };
 
 export const fetchCategories = () => (dispatch) => {
   return axios
-    .get("http://localhost:8080/api/items/categories")
+    .get("https://restful-goods.herokuapp.com/api/items/categories")
     .then((res) => dispatch(setCategories(res.data)));
 };

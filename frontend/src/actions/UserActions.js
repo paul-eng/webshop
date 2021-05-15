@@ -30,7 +30,7 @@ export const setMsg = (msg) => {
 
 export const login = (user) => (dispatch) => {
   return axios
-    .post("http://localhost:8080/api/users/login", user)
+    .post("https://restful-goods.herokuapp.com/api/users/login", user)
     .then((res) => {
       dispatch(setUser(res.data));
       return Promise.resolve(res.data.token);
@@ -46,7 +46,7 @@ export const logout = () => (dispatch) => {
 
 export const addUser = (user) => (dispatch) => {
   return axios
-    .post("http://localhost:8080/api/users", user)
+    .post("https://restful-goods.herokuapp.com/api/users", user)
     .then(() => {
       return dispatch(login(user));
     })
@@ -57,7 +57,7 @@ export const addAddress = (address, key) => (dispatch) => {
   const headers = { "x-access-token": localStorage.getItem("session") };
   return axios
     .post(
-      "http://localhost:8080/api/users/address",
+      "https://restful-goods.herokuapp.com/api/users/address",
       { address, key },
       { headers }
     )
@@ -76,7 +76,7 @@ export const addAddress = (address, key) => (dispatch) => {
 export const deleteAddress = (key) => (dispatch) => {
   const headers = { "x-access-token": localStorage.getItem("session") };
   return axios
-    .delete("http://localhost:8080/api/users/address/" + key, { headers })
+    .delete("https://restful-goods.herokuapp.com/api/users/address/" + key, { headers })
     .then(
       ({
         data: {
@@ -92,7 +92,7 @@ export const deleteAddress = (key) => (dispatch) => {
 export const setDefault = (key) => (dispatch) => {
   const headers = { "x-access-token": localStorage.getItem("session") };
   return axios
-    .post("http://localhost:8080/api/users/address/" + key, null, { headers })
+    .post("https://restful-goods.herokuapp.com/api/users/address/" + key, null, { headers })
     .then(
       ({
         data: {
@@ -108,7 +108,7 @@ export const setDefault = (key) => (dispatch) => {
 export const getUser = (token) => (dispatch) => {
   const headers = { "x-access-token": token };
   return axios
-    .get("http://localhost:8080/api/users/verify", { headers })
+    .get("https://restful-goods.herokuapp.com/api/users/verify", { headers })
     .then((res) => {
       dispatch(setUser(res.data));
       return Promise.resolve(token);
@@ -122,7 +122,7 @@ export const getUser = (token) => (dispatch) => {
 export const getAdmin = (token) => (dispatch) => {
   const headers = { "x-access-token": token };
   return axios
-    .get("http://localhost:8080/api/users/admin", { headers })
+    .get("https://restful-goods.herokuapp.com/api/users/admin", { headers })
     .then((res) => {
       return res.data;
     })
@@ -135,7 +135,7 @@ export const getAdmin = (token) => (dispatch) => {
 export const addOrder = (token, summary) => (dispatch) => {
   const headers = { "x-access-token": token };
   return axios
-    .post("http://localhost:8080/api/orders/", { summary }, { headers })
+    .post("https://restful-goods.herokuapp.com/api/orders/", { summary }, { headers })
     .then(({ data: { orders } }) => {
       return orders;
     })
@@ -147,7 +147,7 @@ export const addOrder = (token, summary) => (dispatch) => {
 export const getOrders = () => (dispatch) => {
   const headers = { "x-access-token": localStorage.getItem("session") };
   return axios
-    .get("http://localhost:8080/api/orders/", { headers })
+    .get("https://restful-goods.herokuapp.com/api/orders/", { headers })
     .then(({ data }) => {
       if (data?.orders) return data.orders;
     })
