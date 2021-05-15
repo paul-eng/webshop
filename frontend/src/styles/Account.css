@@ -9,8 +9,8 @@
 
 .Account > div {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    column-gap: 4rem;
+    grid-template-columns: auto 1fr;
+    column-gap: 2rem;
     grid-template-areas: 
         "title ."
         "col1 col2";
@@ -57,7 +57,7 @@
     margin-bottom: 2rem;
 }
 
-@media screen and (max-width: 639px) {
+@media screen and (max-width: 640px) {
     .Account > div {
         display: flex;
         flex-direction: column;

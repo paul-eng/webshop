@@ -8,7 +8,7 @@ const OrderHistory = (props) => {
   const orderList = orders.map((order) => (
    <Dropdown key={order[0]} order={order}/>
   ));
-  return <div className="Orders">{orderList}</div>;
+  return <div className="OrderHistory">{orderList}</div>;
 };
 
 export default OrderHistory;

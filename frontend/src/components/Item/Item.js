@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "./Slider";
+import Swipe from "./Swipe";
 import ItemControls from "./ItemControls";
 import { fetchItem, clearItem } from "../../actions/ItemActions";
 import "../../styles/Item.css";
@@ -24,7 +25,8 @@ class Item extends Component {
     const itemInfo = this.props.itemInfo;
     return itemInfo && itemInfo.name ? (
       <div className="Item">
-        <Slider gallery={itemInfo.gallery} />
+        <Swipe slides={itemInfo.gallery} />
+        {/* <Slider gallery={itemInfo.gallery} /> */}
         <section>
           <h2>{`${itemInfo.brand} ${itemInfo.name}`.toUpperCase()}</h2>
           <h2>${itemInfo.price}</h2>
