@@ -14,8 +14,6 @@ const stripePromise = loadStripe(
   "pk_test_51IpjCXLDGBjqGrZi8GOJ6DzAuqzv1JyDiQAo9DUl7i2m9XC3c79PHnAw1jwsOh0oMlOkNiBYUsx2Dm2BkJ2FZCws00dDWucF5k"
 );
 const store = createStore(rootReducer, applyMiddleware(thunk));
-// for dev build only
-window.store = store;
 
 ReactDOM.render(
   <Elements stripe={stripePromise}>
