@@ -63,9 +63,11 @@ h1 {
     font-family: "authentic_bold";
 }
 
+/* aside takes same width as SVGs, so header doesnt shake when using the cart page back carat < */
 .Header aside {
     cursor: pointer;
     display: none;
+    width: 1.75rem;
 }
 
 .Header aside img:last-child {
