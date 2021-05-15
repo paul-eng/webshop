@@ -7,8 +7,9 @@ import "../../styles/ContentHeader.css"
 
 const ContentHeader = (props) => {
   let history = useHistory();
-  let params = history.location.pathname.match(/(?<=\/)[^/]+/g) || "no params";
-
+  let params = history.location.pathname.split("/").filter((el)=>el!=="")
+  // .match(/(?<=\/)[^/]+/g) || "no params"; is this really what breaks safari? lookbehinds???!
+  console.log(history.location.pathname, params)
   let title =
     params.length === 2
       ? params[1]
