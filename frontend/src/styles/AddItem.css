@@ -1,10 +1,18 @@
-.AddItem input {
-    margin-bottom: 2rem;
+.AddItem {
+    width: 80%;
 }
 
-.AddItem section {
-    display: flex;
+.AddItem input {
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+   width: 100%;
 }
-.AddItem section input {
+
+.AddItem form section {
+    display: flex;
+    max-width: none;
+}
+
+.AddItem section input[type=text]:first-of-type {
     margin-right: 2rem;
 }

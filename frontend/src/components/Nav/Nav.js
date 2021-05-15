@@ -92,17 +92,17 @@ const Nav = (props) => {
         </h3>
         <NavList active={list} path={path} setList={setList} />
       </div>
+        <span>
+          <h3 className={acct ? "TopLevel" : ""} onClick={onClick}>
+            Account
+          </h3>
+        </span>
       <section>
         {currentUser ? (
           <Dashboard active={acct} ref={account} />
         ) : (
           <Login active={acct} ref={account} />
         )}
-        <span>
-          <h3 className={acct ? "TopLevel" : ""} onClick={onClick}>
-            Account
-          </h3>
-        </span>
       </section>
     </nav>
   );

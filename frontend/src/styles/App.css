@@ -38,7 +38,14 @@ body {
   font-size: .9rem;
 }
 
-.Nav, .NavList, .Login, .Dashboard {
+html,
+body,
+#root,
+.NavFrame,
+.Nav,
+.NavList,
+.Login,
+.Dashboard {
   height: 100%;
 }
 

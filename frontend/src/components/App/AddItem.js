@@ -71,37 +71,31 @@ class AddItem extends Component {
     };
 
     console.log(data);
-    // axios
-    //   .post("http://localhost:8080/api/items", data)
-    //   .then((res) => {
-    //     alert("Success");
-    //     this.setState({
-    //       name: "",
-    //       category: "",
-    //       brand: "",
-    //       description: "",
-    //       price: "",
-    //       quantity: "",
-    //     });
-    //     this.props.history.push("/");
-    //   })
-    //   .catch((err) => {
-    //     alert(err);
-    //     console.log(err);
-    //   });
+    axios
+      .post("http://localhost:8080/api/items", data)
+      .then((res) => {
+        alert("Success");
+        this.setState({
+          name: "",
+          category: "",
+          brand: "",
+          description: "",
+          price: "",
+          quantity: "",
+        });
+        this.props.history.push("/");
+      })
+      .catch((err) => {
+        alert(err);
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <div className="AddItem Form">
         <form
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "75%",
-            height: "60%",
-          }}
-          noValidate
+
           onSubmit={this.onSubmit}
         >
           <input
