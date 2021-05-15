@@ -1,6 +1,7 @@
 {
   "name": "webshop",
   "version": "1.0.0",
+  "homepage": "https://restful-goods.herokuapp.com/",
   "description": "",
   "main": "app.js",
   "engines": {
