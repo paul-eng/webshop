@@ -13,13 +13,13 @@ connectDB();
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Hello world!"));
 app.use("/api/items", items);
 app.use("/api/users", users);
 app.use("/api/carts", carts);
 app.use("/api/orders", orders);
 app.use("/api/checkout", checkout);
 
+// app.get("/", (req, res) => res.send("Hello world!"));
 
 // app.use(express.static(path.join(__dirname, '../build')))
 // app.get('*', (req, res) => {
