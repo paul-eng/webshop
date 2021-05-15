@@ -35,7 +35,6 @@ class Slider extends Component {
 
   onLoad() {
     if ("ontouchstart" in window) {
-      console.log("heiho");
       this.scroller.current.scrollLeft = this.scroller.current.offsetWidth;
     }
   }
@@ -74,8 +73,9 @@ class Slider extends Component {
   touchSlides() {
     let { scrollerWidth, slideWidth, slideCount, edges } = this.getSize();
     let scrollPos = this.scroller.current.scrollLeft;
-
-    if (scrollPos >= scrollerWidth - slideWidth) {
+    console.log("scrollpos",scrollPos)
+    console.log(scrollerWidth,slideWidth)
+    if (scrollPos >= scrollerWidth - slideWidth - 10) {
       // reach scrollbar end, reset to front
       this.scroller.current.scrollLeft = slideWidth;
     } else if (scrollPos === 0) {
