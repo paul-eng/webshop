@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage":"https://restful-goods.herokuapp.com",
   "private": true,
   "dependencies": {
     "@stripe/react-stripe-js": "^1.4.0",
