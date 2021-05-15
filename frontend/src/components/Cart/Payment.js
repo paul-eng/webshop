@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchStripe, setMsg, clearCart } from "../../actions/CartActions";
+import { addOrder } from "../../actions/UserActions";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -15,7 +16,7 @@ import discover from "../../icons/discover.png";
 import jcb from "../../icons/jcb.png";
 import master from "../../icons/master.png";
 import union from "../../icons/union.png";
-import visa from "../../icons/visa.png"
+import visa from "../../icons/visa.png";
 import { fetchCard } from "../../actions/CartActions";
 import { genOrderNum } from "../../util/Util";
 
@@ -94,7 +95,6 @@ const Payment = (props) => {
         const { payment_method: paymethod, id: order } =
           paymentResult.paymentIntent;
         const card = await dispatch(fetchCard(paymethod));
-
         const summary = {
           order: genOrderNum(total),
           subtotal: cart.total,
@@ -105,7 +105,8 @@ const Payment = (props) => {
           date: new Date().toLocaleDateString(),
           stripe: { paymethod, order, card },
         };
-
+        const sessionToken = localStorage.getItem("session");
+        if (sessionToken) dispatch(addOrder(sessionToken, summary));
         dispatch(clearCart());
         history.push({
           pathname: "/checkout/summary",

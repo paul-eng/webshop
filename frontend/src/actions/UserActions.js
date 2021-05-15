@@ -92,18 +92,18 @@ export const deleteAddress = (key) => (dispatch) => {
 export const setDefault = (key) => (dispatch) => {
   const headers = { "x-access-token": localStorage.getItem("session") };
   return axios
-  .post("http://localhost:8080/api/users/address/" + key, null,{ headers })
-  .then(
-    ({
-      data: {
-        user: { address },
-      },
-    }) => {
-      return dispatch(setAddress(address));
-    }
-  )
-  .catch((err) => console.log(err.response.data));
-}
+    .post("http://localhost:8080/api/users/address/" + key, null, { headers })
+    .then(
+      ({
+        data: {
+          user: { address },
+        },
+      }) => {
+        return dispatch(setAddress(address));
+      }
+    )
+    .catch((err) => console.log(err.response.data));
+};
 
 export const getUser = (token) => (dispatch) => {
   const headers = { "x-access-token": token };
@@ -131,3 +131,17 @@ export const getAdmin = (token) => (dispatch) => {
       console.log(err.response.data.error);
     });
 };
+
+export const addOrder = (token, summary) => (dispatch) => {
+  const headers = { "x-access-token": token };
+  return axios
+    .post("http://localhost:8080/api/orders/", { summary }, { headers })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// 4242 4242 4242 4242

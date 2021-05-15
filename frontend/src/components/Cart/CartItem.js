@@ -63,6 +63,8 @@ const CartItem = (props) => {
           id={item.pathname}
           onChange={getAmt}
         />
+        {/* this hidden div is shown on order summary/history via css */}
+        <div id="hidden" style={{display:"none"}}><br/>Qty {amt}</div>
       </article>
       <aside onClick={removeItem}>X Remove</aside>
       <div style={{ color: "red" }}>{error}</div>

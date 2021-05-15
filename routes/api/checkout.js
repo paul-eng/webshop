@@ -8,6 +8,8 @@ router.get("/test", (req, res) => {
   res.json("This is a test");
 });
 
+// @route api/users/checkout/:payment_method_id
+// @description retrieve data about payment method (card brand, last 4 digits etc)
 router.get("/:paymethod", async (req,res) => {
   try {
     const paymentMethod = await stripe.paymentMethods.retrieve(
@@ -20,7 +22,7 @@ router.get("/:paymethod", async (req,res) => {
 })
 
 // @route api/users/checkout
-// @integration with stripe API
+// @description integration with stripe API
 router.post("/", async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({

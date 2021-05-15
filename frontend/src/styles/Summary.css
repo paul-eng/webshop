@@ -68,28 +68,13 @@
     display: none;
 }
 
-.Summary .CartItem input {
-    background: white;
-    padding: 0;
-    width: 2ch;
-    text-align: left;
-    font-weight: bold;
-    pointer-events: none;
-}
-
-.Summary .CartItem article::after {
-    content: "x";
-    margin-left: -.75ch;
-}
-
-.Summary input::-webkit-outer-spin-button,
-.Summary input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/* Hide the cart item's qty input and show the normally hidden string version */
+.Summary #hidden {
+    display: block !important;
 }
 
 .Summary input[type=number] {
-  -moz-appearance: textfield;
+    display:none;
 }
 
 .Summary input[type=submit] {
