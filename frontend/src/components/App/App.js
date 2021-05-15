@@ -53,7 +53,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/summary" component={Summary} />
+          <Route exact path="/checkout/summary" component={Summary} />
           <Route path="/" component={NavFrame} />
         </Switch>
         <Message />

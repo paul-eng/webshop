@@ -1,6 +1,7 @@
 import queryString from "query-string";
 import { login, logout } from "../actions/UserActions";
 import { fetchCart, clearCart } from "../actions/CartActions";
+import CartItem from "../components/Cart/CartItem";
 
 export const makeQuery = (form, history) => {
   let terms = form.target[0].value.split(" ");
@@ -128,7 +129,25 @@ export const getLineItems = (items) => {
 };
 
 export const genOrderNum = (total) => {
-  const seed =   parseInt(Date.now().toString().split("").reverse().join(""))
-  const random = window.crypto.getRandomValues(new Uint32Array(1))[0]
-  return seed + total - random
-}
+  const seed = parseInt(Date.now().toString().split("").reverse().join(""));
+  const random = window.crypto.getRandomValues(new Uint32Array(1))[0];
+  return seed + total - random;
+};
+
+export const cartList = (items) => {
+  function versionSplitter(item) {
+    let versions = [];
+    item.stock.forEach((version) => {
+      let separate = Object.assign({}, item, {
+        stock: { type: version.type, qty: version.qty },
+      });
+      versions.push(separate);
+    });
+    return versions;
+  }
+  let separateItems = [...items].map((item) => versionSplitter(item)).flat();
+  // reverse so recently added items are at top of cart
+  return separateItems
+    .reverse()
+    .map((item) => <CartItem item={item} key={item.name + item.stock.type} />);
+};

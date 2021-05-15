@@ -31,3 +31,71 @@
     font-family: authentic_bold;
     margin-bottom: 2rem;
 }
+
+.Summary section:first-of-type article:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 4rem;
+}
+
+.Summary article span h3 {
+    margin-bottom: 2rem;
+}
+
+.Summary aside {
+    display: flex;
+    align-items: center;
+}
+
+.Summary aside span {
+    margin-left: .5rem;
+}
+
+.Summary section:last-child article:last-child {
+    float: right;
+    display: flex;
+}
+
+.Summary ul {
+    margin-left: 4rem;
+}
+
+.Summary ul:last-of-type {
+    text-align: right;
+}
+
+.Summary .CartItem {
+    grid-template-columns: 100px 1fr;
+}
+
+.Summary .CartItem aside {
+    display: none;
+}
+
+.Summary .CartItem input {
+    background: white;
+    padding: 0;
+    width: 2ch;
+    text-align: left;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.Summary .CartItem article::after {
+    content: "x";
+    margin-left: -.75ch;
+}
+
+.Summary input::-webkit-outer-spin-button,
+.Summary input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.Summary input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.Summary input[type=submit] {
+    margin: 4rem;
+}

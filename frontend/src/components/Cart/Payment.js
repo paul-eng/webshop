@@ -15,6 +15,7 @@ import discover from "../../icons/discover.png";
 import jcb from "../../icons/jcb.png";
 import master from "../../icons/master.png";
 import union from "../../icons/union.png";
+import visa from "../../icons/visa.png"
 import { fetchCard } from "../../actions/CartActions";
 import { genOrderNum } from "../../util/Util";
 
@@ -93,22 +94,21 @@ const Payment = (props) => {
         const { payment_method: paymethod, id: order } =
           paymentResult.paymentIntent;
         const card = await dispatch(fetchCard(paymethod));
-        const summary = Object.assign(
-          {},
-          {
-            order: genOrderNum(total),
-            subtotal: cart.total,
-            items: cart.items,
-            shipping: props.shipinfo,
-            shipfee: props.shipfee,
-            total,
-            date: new Date().toLocaleDateString(),
-            stripe: { paymethod, order, card },
-          }
-        );
+
+        const summary = {
+          order: genOrderNum(total),
+          subtotal: cart.total,
+          items: cart.items,
+          shipping: props.shipinfo,
+          shipfee: props.shipfee,
+          total,
+          date: new Date().toLocaleDateString(),
+          stripe: { paymethod, order, card },
+        };
+
         dispatch(clearCart());
         history.push({
-          pathname: "/summary",
+          pathname: "/checkout/summary",
           state: summary,
         });
       }
@@ -128,6 +128,7 @@ const Payment = (props) => {
             <img src={discover} alt="Discover" />
             <img src={jcb} alt="Japan Credit Bureau" />
             <img src={master} alt="Mastercard" />
+            <img src={visa} alt="Visa" />
           </div>
           <article>
             <h3>Card number</h3>

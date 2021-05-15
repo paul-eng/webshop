@@ -1,23 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import CartItem from "./CartItem";
 import { updateCart } from "../../actions/CartActions";
+import { cartList } from "../../util/Util";
 import { Link } from "react-router-dom";
 import "../../styles/Cart.css";
 
 const Cart = (props) => {
   let cartItems = props.items;
-
-  function versionSplitter(item) {
-    let versions = [];
-    item.stock.forEach((version) => {
-      let separate = Object.assign({}, item, {
-        stock: { type: version.type, qty: version.qty },
-      });
-      versions.push(separate);
-    });
-    return versions;
-  }
 
   if (cartItems.length < 1) {
     return (
@@ -29,15 +18,7 @@ const Cart = (props) => {
       </span>
     );
   } else {
-    let separateItems = [...cartItems]
-      .map((item) => versionSplitter(item))
-      .flat();
-    // reverse so recently added items are at top of cart
-    cartItems = separateItems
-      .reverse()
-      .map((item) => (
-        <CartItem item={item} key={item.name + item.stock.type} />
-      ));
+    cartItems = cartList(cartItems);
   }
 
   function updateQty(form) {
