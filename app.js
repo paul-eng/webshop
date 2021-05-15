@@ -5,6 +5,7 @@ const users = require("./routes/api/users");
 const carts = require("./routes/api/carts");
 const orders = require("./routes/api/orders");
 const checkout = require("./routes/api/checkout");
+const path = require('path')
 const cors = require("cors");
 const app = express();
 
