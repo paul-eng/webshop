@@ -66,7 +66,6 @@ router.post("/login", ({ body: user }, res) => {
 // @description Add/update address
 router.post("/address", (req, res) => {
   const token = req.headers["x-access-token"];
-  console.log("we get this far")
   jwt.verify(token, config.get("secret"), (err, decoded) => {
     if (err) {
       res.status(403).json({ error: "Unauthorized" });
@@ -90,7 +89,7 @@ router.post("/address", (req, res) => {
         User.findById(decoded.sub)
           .lean()
           .then((user) => {
-            if (!user.address.default) {
+            if (!user.address?.default) {
               sendUpdate({ "address.default": newAdd });
             } else {
               let nonDefaultAdds = Object.keys(user.address).filter((el) =>
