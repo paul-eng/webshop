@@ -1,0 +1,10 @@
+.AddItem input {
+    margin-bottom: 2rem;
+}
+
+.AddItem section {
+    display: flex;
+}
+.AddItem section input {
+    margin-right: 2rem;
+}
