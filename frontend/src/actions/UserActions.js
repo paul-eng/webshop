@@ -70,7 +70,7 @@ export const addAddress = (address, key) => (dispatch) => {
         return dispatch(setAddress(address));
       }
     )
-    .catch((err) => console.log(err.response.data));
+    .catch((err) => console.log(err));
 };
 
 export const deleteAddress = (key) => (dispatch) => {
