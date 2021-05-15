@@ -75,7 +75,7 @@ class Slider extends Component {
     let scrollPos = this.scroller.current.scrollLeft;
     console.log("scrollpos",scrollPos)
     console.log(scrollerWidth,slideWidth)
-    if (scrollPos >= scrollerWidth - slideWidth - 3) {
+    if (scrollPos >= scrollerWidth - slideWidth - 1) {
       // reach scrollbar end, reset to front (plus a few pixels extra padding since on some phones it doesnt seem to hit the true edge)
       this.scroller.current.scrollLeft = slideWidth;
     } else if (scrollPos === 0) {
