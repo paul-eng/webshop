@@ -16,10 +16,6 @@
     text-align: right;
 }
 
-.OrderHistory article:hover {
-    color: #0c0
-}
-
 .OrderHistory ul {
     font-size: .8em;
     margin: 1rem 0rem 2rem 0 !important;
@@ -49,3 +45,9 @@
      margin-left: auto;
      width: 96%;
  }
+
+@media (hover: hover) {
+    .OrderHistory article:hover {
+        color: #0c0
+    }    
+}
