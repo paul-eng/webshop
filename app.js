@@ -20,18 +20,10 @@ app.use("/api/carts", carts);
 app.use("/api/orders", orders);
 app.use("/api/checkout", checkout);
 
-// app.use(express.static(path.join(__dirname, 'frontend/build')))
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'frontend/build'))
-// })
 
-
-app.use(express.static(path.join(__dirname, "frontend", "build")))
-
-// ...
-// Right before your app.listen(), add this:
+app.use(express.static(path.join("frontend/build")))
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
 const port = process.env.PORT || 8080;
