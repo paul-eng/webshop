@@ -10,6 +10,10 @@
     padding: 0 1rem 2rem 0;
 }
 
+.NavWrapper > h3:first-of-type {
+    width: max-content;
+}
+
 .TopLevel {
     color: #0c0;
 }

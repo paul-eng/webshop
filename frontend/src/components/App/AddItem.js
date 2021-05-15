@@ -79,11 +79,25 @@ class AddItem extends Component {
           name: "",
           category: "",
           brand: "",
-          description: "",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
           price: "",
-          quantity: "",
+          img1: "",
+          img2: "",
+          img3: "",
+          img4: "",
+          type1: "",
+          type2: "",
+          type3: "",
+          type4: "",
+          type5: "",
+          qty1: "",
+          qty2: "",
+          qty3: "",
+          qty4: "",
+          qty5: "",
         });
-        this.props.history.push("/");
+        // this.props.history.push("/");
       })
       .catch((err) => {
         alert(err);
@@ -94,10 +108,15 @@ class AddItem extends Component {
   render() {
     return (
       <div className="AddItem Form">
-        <form
-
-          onSubmit={this.onSubmit}
-        >
+        <form onSubmit={this.onSubmit}>
+          <input
+            type="text"
+            placeholder="Brand"
+            name="brand"
+            className="formInput"
+            value={this.state.brand}
+            onChange={this.onChange}
+          />
           <input
             type="text"
             placeholder="Name"
@@ -112,22 +131,6 @@ class AddItem extends Component {
             name="category"
             className="formInput"
             value={this.state.category}
-            onChange={this.onChange}
-          />
-          <input
-            type="text"
-            placeholder="Brand"
-            name="brand"
-            className="formInput"
-            value={this.state.brand}
-            onChange={this.onChange}
-          />
-          <input
-            type="text"
-            placeholder="Description"
-            name="description"
-            className="formInput"
-            value={this.state.description}
             onChange={this.onChange}
           />
           <input
@@ -261,6 +264,14 @@ class AddItem extends Component {
               onChange={this.onChange}
             />
           </section>
+            <input
+              type="text"
+              placeholder="Description"
+              name="description"
+              className="formInput"
+              value={this.state.description}
+              onChange={this.onChange}
+            />
 
           <input type="submit" className="formSubmit" />
         </form>
