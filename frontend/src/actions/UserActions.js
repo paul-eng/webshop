@@ -136,12 +136,22 @@ export const addOrder = (token, summary) => (dispatch) => {
   const headers = { "x-access-token": token };
   return axios
     .post("http://localhost:8080/api/orders/", { summary }, { headers })
-    .then((res) => {
-      console.log(res);
+    .then(({ data: { orders } }) => {
+      return orders;
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-// 4242 4242 4242 4242
+export const getOrders = () => (dispatch) => {
+  const headers = { "x-access-token": localStorage.getItem("session") };
+  return axios
+    .get("http://localhost:8080/api/orders/", { headers })
+    .then(({ data }) => {
+      if (data?.orders) return data.orders;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

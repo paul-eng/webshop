@@ -10,6 +10,7 @@
 .Account > div {
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    column-gap: 4rem;
     grid-template-areas: 
         "title ."
         "col1 col2";
@@ -19,9 +20,12 @@
      margin-bottom: 2rem;
  }
 
+ .Account section:first-of-type article:last-of-type div:last-of-type h3:first-child {
+     margin-bottom: .5rem;
+ }
+
 .Account section:first-of-type {
     grid-area: col1;
-    margin-right: 2rem;
 }
 
 .Account section:last-of-type {

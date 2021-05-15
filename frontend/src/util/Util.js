@@ -151,3 +151,16 @@ export const cartList = (items) => {
     .reverse()
     .map((item) => <CartItem item={item} key={item.name + item.stock.type} />);
 };
+
+export const itemDetails = (items) => {
+  return items.map((item) => 
+     item.stock.map((version) => (
+      <li key={item.name + version.type}>
+        <h3>{item.brand + " " + item.name}</h3>
+        <h3>{version.type}</h3>
+        <h3>Qty {version.qty}</h3>
+        <h3>${item.price}</h3>
+      </li>
+    ))
+  );
+};

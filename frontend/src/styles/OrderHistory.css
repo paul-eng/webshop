@@ -1,0 +1,50 @@
+/* reset some global stuff from .Account lol*/
+.Orders h3 {
+    margin: 0 0 1rem 0 !important;
+}
+
+.Orders article {
+    display: grid;
+    grid-template-columns: auto auto 27%;
+    cursor: pointer;
+    margin: 0rem !important;
+}
+
+.Orders article h3:not(:first-child), 
+.Orders li h3:not(:first-child)  {
+    text-align: right;
+}
+
+.Orders article:hover {
+    color: #0c0
+}
+
+.Orders ul {
+    font-size: .8em;
+    margin: 1rem 0rem 2rem 0 !important;
+}
+
+.Orders li {
+    display: grid;
+    grid-template-columns: auto auto 17% 17%;
+    margin: 0rem !important;
+}
+
+.Orders ul > a {
+    cursor: pointer;
+    color: #828282;
+    width: max-content;
+}
+
+.Orders ul > a:hover {
+    color: #0c0
+ }
+
+ .Dropdown {
+     margin: 0 !important;
+ }
+
+ .Dropdown > div{
+     margin-left: auto;
+     width: 96%;
+ }

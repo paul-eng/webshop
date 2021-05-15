@@ -1,0 +1,103 @@
+.Summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Summary h2 {
+    font-family: authentic_bold;
+}
+
+.Summary span {
+    font-family: authentic_bold;
+}
+
+.Summary > img {
+    width: 5rem;
+    margin-bottom: 1.5rem;
+}
+
+.Summary section {
+    margin-top:2rem;
+    padding-top: 2rem;
+    border-top: .2rem solid #aaa;
+}
+
+.Summary section > h3 {
+    font-family: authentic_bold;
+    margin-bottom: 2rem;
+}
+
+.Summary section:first-of-type article:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 5rem;
+}
+
+.Summary article span h3 {
+    margin-bottom: 2rem;
+}
+
+.Summary aside {
+    display: flex;
+    align-items: center;
+}
+
+.Summary aside span {
+    margin-left: .5rem;
+}
+
+.Summary section:last-child article:last-child {
+    float: right;
+    display: flex;
+}
+
+.Summary ul {
+    margin-left: 4rem;
+}
+
+.Summary ul:last-of-type {
+    text-align: right;
+}
+
+.Summary .CartItem {
+    grid-template-columns: 100px 1fr;
+}
+
+.Summary .CartItem aside {
+    display: none;
+}
+
+/* Hide the cart item's qty input and show the normally hidden string version */
+.Summary #hidden {
+    display: block !important;
+}
+
+.Summary input[type=number] {
+    display:none;
+}
+
+.Summary input[type=submit] {
+    margin: 4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .Summary > div {
+        width: 100%;
+    }
+
+    .Summary > img {
+        margin-top: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .Summary section:first-of-type article:first-of-type {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Summary section:first-of-type article:first-of-type > div:not(:last-of-type) {
+        margin-bottom: 2rem;
+    }
+}

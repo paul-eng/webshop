@@ -1,0 +1,92 @@
+.Order {
+    max-width: 90%;
+}
+
+.Order section:last-of-type {
+    margin-top:2rem;
+    padding-top: 2rem;
+    border-top: .2rem solid #aaa;
+}
+
+.Order section > h3, .Order span h3 {
+    font-family: authentic_bold;
+    margin-bottom: 2rem;
+}
+
+.Order section:first-of-type > div {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 5rem;
+}
+
+.Order span {
+    font-family: authentic_bold;
+}
+
+.Order aside {
+    display: flex;
+    align-items: center;
+}
+
+.Order aside span {
+    margin-left: .5rem;
+}
+
+.Order section:last-child article:last-child {
+    float: right;
+    display: flex;
+}
+
+.Order ul {
+    margin-left: 4rem;
+}
+
+.Order ul:last-of-type {
+    text-align: right;
+}
+
+.Order .CartItem {
+    grid-template-columns: 100px 1fr;
+}
+
+.Order .CartItem article {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+}
+
+.Order .CartItem div:not(:first-of-type) {
+    text-align: right;
+}
+
+.Order .CartItem aside {
+    display: none;
+}
+
+/* Hide the cart item's qty input and show the normally hidden string version */
+.Order #hidden {
+    display: block !important;
+}
+
+.Order input[type=number] {
+    display:none;
+}
+
+@media screen and (max-width: 639px) {
+    .Order section:first-of-type > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Order section:first-of-type > div div:not(:last-of-type) {
+        margin-bottom: 2rem;
+    }
+
+    .Order .CartItem article {
+        display: block;
+    }
+
+    .Order .CartItem div {
+        text-align: left !important;
+    }
+    
+}

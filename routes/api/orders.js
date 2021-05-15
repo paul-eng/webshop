@@ -5,15 +5,22 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 
 router.get("/test", (req, res) => {
-  res.json("We're testin' baby");
+  Order.find()
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(404).json({ noordersfound: "No orders found" }));
 });
 
 // @route api/orders
 // @description Get all orders
-router.get("/", (req, res) => {
-  Order.find()
-    .then((orders) => res.json(orders))
-    .catch((err) => res.status(404).json({ noordersfound: "No orders found" }));
+router.get("/", ({ headers }, res) => {
+  let token = headers["x-access-token"];
+  jwt.verify(token, config.get("secret"), (err, decoded) => {
+    if (err) {
+      res.status(400).json({ error: "Could not find order record" });
+    } else {
+      Order.findOne({ user: decoded.sub }).then((orders) => res.json(orders));
+    }
+  });
 });
 
 // @route api/orders

@@ -54,6 +54,8 @@ const CartItem = (props) => {
       <article>
         <div>{`${item.brand} ${item.name}`}</div>
         <div>{type}</div>
+        {/* this hidden div is shown on order summary/history via css */}
+        <div id="hidden" style={{display:"none"}}>Qty {amt}</div>
         <div>{"$" + item.price}</div>
         <input
           type="number"
@@ -63,8 +65,6 @@ const CartItem = (props) => {
           id={item.pathname}
           onChange={getAmt}
         />
-        {/* this hidden div is shown on order summary/history via css */}
-        <div id="hidden" style={{display:"none"}}><br/>Qty {amt}</div>
       </article>
       <aside onClick={removeItem}>X Remove</aside>
       <div style={{ color: "red" }}>{error}</div>

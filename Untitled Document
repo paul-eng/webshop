@@ -31,3 +31,5 @@ user state integrated with Stripe API confirmcardpayment endpoint for receeipt c
 persist guest cart with expiration date and merge w user cart on login
 
 full CRUD addressbook with option to set default for prefilling forms
+
+one to one relation: cart<->user / one to many: user->orders + cart -> items
