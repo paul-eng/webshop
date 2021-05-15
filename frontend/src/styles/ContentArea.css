@@ -19,9 +19,11 @@
     margin-right:1rem;
 }
 
-.Page li:hover {
-    color: #0c0;
-}
+@media (hover: hover) {
+    .Page li:hover {
+        color: #0c0;
+    }
+  }
 
 .Page #active {
     pointer-events: none;
