@@ -5,5 +5,7 @@
 
 .ContentHeader > h3 {
     position: absolute;
+    /* max width to prevent long Searchbar result from blocking the filter +/- toggle on narrow phone screens */
+    max-width: 95%;
     top: 0;
 }
