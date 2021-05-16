@@ -9,7 +9,6 @@
 
 .Account > div {
     display: grid;
-    grid-template-columns: auto 1fr;
     column-gap: 2rem;
     grid-template-areas: 
         "title ."
