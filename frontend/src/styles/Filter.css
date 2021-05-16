@@ -18,6 +18,7 @@
 .Filter section {
     /* gets the value of "display:" from Filter.js visibility toggle */
     grid-template-columns: 1fr 1fr auto;
+    column-gap: 1rem;
     width: 100%;
     font-family: "authentic_bold";
 }
@@ -28,7 +29,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-start;
-    height: 20em;
+    max-height: 20em;
 }
 
 #Sort {
@@ -64,7 +65,7 @@
 
     .Filter ul {
         flex-wrap: nowrap;
-        height: auto;
+        max-height: none;
     }
 
     .Filter aside h3:last-of-type {

@@ -28,7 +28,6 @@
 }
 
 .swiper-button-next {  
-    display: none;
     opacity: 0;
     left: 0;
     top: 1.5rem;
@@ -48,6 +47,7 @@
     top: 5%;
     right: 5%;
     transform: rotate(45deg);
+    z-index: 2;
 }
 
 @media (any-hover: none) {
@@ -57,21 +57,11 @@
 }
 
 .Modal {
-    display: none;
     position: fixed;
-    top: 0;
     left: 0;
-    z-index: 1 !important;
-    background: green;
-    height: 100vh;
-}
-
-.Modal .swiper-container {
-    background-color: pink;
+    top: 0;
     width: 100vw;
-}
-
-.Modal .swiper-slide img {
     height: 100vh;
-    width: auto;
+    z-index: 1;
+    background-color: pink;
 }

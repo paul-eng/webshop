@@ -30,6 +30,7 @@ class NavFrame extends Component {
   render() {
     return (
       <div className="NavFrame">
+        <Nav location={this.props.location} />
         <Switch>
           <Route exact path="/" component={Shop} />
           <Route exact path="/new-arrivals" component={New} />
@@ -45,7 +46,6 @@ class NavFrame extends Component {
           <Route path="/category/:cat" component={Category} />
           <Route path="/:item" component={Item} />
         </Switch>
-        <Nav location={this.props.location} />
       </div>
     );
   }

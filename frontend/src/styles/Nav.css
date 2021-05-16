@@ -2,6 +2,7 @@
     position: relative;
     grid-area: nav;
     background-color: white;
+    z-index: 1;
 }
 
 .NavWrapper {
