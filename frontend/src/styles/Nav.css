@@ -10,10 +10,6 @@
     padding: 0 1rem 2rem 0;
 }
 
-.NavWrapper > h3:first-of-type {
-    width: max-content;
-}
-
 .TopLevel {
     color: #0c0;
 }
@@ -23,6 +19,7 @@
 }
 
 .Nav h3 {
+    width: max-content;
     cursor: pointer;
 }
 
@@ -43,7 +40,7 @@
 }
 
 .NavList li {
-    margin-bottom: .75rem;
+    margin-bottom: 1rem;
 }
 
 .masked::before {
