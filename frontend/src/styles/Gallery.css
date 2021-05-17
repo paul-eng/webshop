@@ -43,7 +43,7 @@
 }
 
 @media (any-hover: none) {
-    .swiper-container aside {
+    .swiper-button-next, .swiper-container aside {
         display: none;
     }
 }
