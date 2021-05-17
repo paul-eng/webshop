@@ -4,7 +4,6 @@
 }
 
 .ContentArea .Page {
-    width: max-content;
     margin: 4rem 0;
     user-select: none;
 }
@@ -17,7 +16,12 @@
     font-weight: bold;
     font-size: 1.17em;
     cursor: pointer;
-    margin-right:1rem;
+    margin-right: 1rem;
+}
+
+.Page #active {
+    pointer-events: none;
+    color: #0c0;
 }
 
 @media (hover: hover) {
@@ -25,8 +29,3 @@
         color: #0c0;
     }
   }
-
-.Page #active {
-    pointer-events: none;
-    color: #0c0;
-}

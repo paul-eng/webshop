@@ -54,17 +54,27 @@ const Page = (props) => {
   };
 
   let pageList = () => {
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-      pages.push(
+    const addPage = (i, arr) => {
+      arr.push(
         <li
           key={`pg${i}`}
-          id={i === parseInt(active) ? "active" : ""}
+          id={i === activeNum ? "active" : ""}
           onClick={() => jumpToPage(i)}
         >
           {i}
         </li>
       );
+    };
+    let pages = [];
+    let activeNum = parseInt(active);
+    if (activeNum < 4) {
+      for (let i = 1; i <= pageCount && i <= 5; i++) {
+        addPage(i, pages);
+      }
+    } else {
+      for (let i = activeNum - 2; i <= pageCount && i <= activeNum + 2; i++) {
+        addPage(i, pages);
+      }
     }
     return pages;
   };
