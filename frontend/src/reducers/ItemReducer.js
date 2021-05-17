@@ -3,12 +3,15 @@ import {
   SET_ITEM,
   CLEAR_ITEM,
   CLEAR_ALL_ITEMS,
+  SET_MODAL,
+  CLEAR_MODAL
 } from "../actions/ItemActions";
 
 const initState = {
   itemList: [],
   itemInfo: {},
   count: 0,
+  modal: null,
 };
 const itemReducer = (state = initState, action) => {
   Object.freeze(state);
@@ -23,6 +26,10 @@ const itemReducer = (state = initState, action) => {
       return Object.assign({}, state, { itemInfo: {} });
     case CLEAR_ALL_ITEMS:
       return Object.assign({}, state, { itemList: [] });
+    case SET_MODAL:
+      return Object.assign({}, state, { modal: action.idx });
+    case CLEAR_MODAL:
+      return Object.assign({}, state, { modal: null });
     default:
       return state;
   }

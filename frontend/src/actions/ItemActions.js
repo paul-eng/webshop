@@ -4,7 +4,21 @@ export const SET_ITEMS = "SET_ITEMS";
 export const SET_ITEM = "SET_ITEM";
 export const CLEAR_ITEM = "CLEAR_ITEM";
 export const CLEAR_ALL_ITEMS = "CLEAR_ALL_ITEMS";
+export const SET_MODAL = "SET_MODAL"
+export const CLEAR_MODAL = "CLEAR_MODAL"
 
+export const setModal = (idx) => {
+  return {
+    type: SET_MODAL,
+    idx
+  }
+}
+
+export const clearModal = () => {
+  return {
+    type: CLEAR_MODAL
+  }
+}
 export const setItems = ({ items, results }) => {
   return {
     type: SET_ITEMS,

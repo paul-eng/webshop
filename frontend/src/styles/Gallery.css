@@ -4,7 +4,7 @@
 }
 
 .swiper-container, .swiper-pagination {
-    z-index: 0 !important;
+    z-index: 0;
 }
 
 .swiper-slide img {
@@ -42,26 +42,8 @@
     cursor: pointer;
 }
 
-.modal {
-    position: fixed !important;
-    top: 5%;
-    right: 5%;
-    transform: rotate(45deg);
-    z-index: 2;
-}
-
 @media (any-hover: none) {
     .swiper-container aside {
         display: none;
     }
-}
-
-.Modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    background-color: pink;
 }

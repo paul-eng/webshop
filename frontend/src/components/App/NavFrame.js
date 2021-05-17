@@ -17,6 +17,7 @@ import Order from "../Account/Order"
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Nav from "../Nav/Nav";
+import Modal from "./Modal"
 
 import { toggleNav } from "../../actions/NavActions";
 
@@ -30,7 +31,6 @@ class NavFrame extends Component {
   render() {
     return (
       <div className="NavFrame">
-        <Nav location={this.props.location} />
         <Switch>
           <Route exact path="/" component={Shop} />
           <Route exact path="/new-arrivals" component={New} />
@@ -46,6 +46,8 @@ class NavFrame extends Component {
           <Route path="/category/:cat" component={Category} />
           <Route path="/:item" component={Item} />
         </Switch>
+        <Nav location={this.props.location} />
+        <Modal />
       </div>
     );
   }
