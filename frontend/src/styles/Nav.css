@@ -42,6 +42,10 @@
     background-color: white;
 }
 
+.NavList li {
+    margin-bottom: 1rem;
+}
+
 .masked::before {
     position: fixed;
     content: "";
@@ -52,8 +56,8 @@
 }
 
 .Login, .Dashboard {
-    width: 200%;
     padding-right: 15%;
+    width: 200%;
 }
 
 .Login article {
