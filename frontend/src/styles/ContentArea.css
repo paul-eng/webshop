@@ -14,7 +14,8 @@
 }
 
 .Page li {
-    font-family: "authentic_bold";
+    font-weight: bold;
+    font-size: 1.17em;
     cursor: pointer;
     margin-right:1rem;
 }
