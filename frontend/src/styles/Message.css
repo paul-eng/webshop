@@ -5,7 +5,6 @@
 }
 
 .Message, .ItemControls section {
-    user-select: none;
     display: flex;
     justify-content: space-between;
     position: fixed;
