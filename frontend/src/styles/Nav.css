@@ -43,7 +43,7 @@
 }
 
 .NavList li {
-    margin-bottom: 1rem;
+    margin-bottom: .75rem;
 }
 
 .masked::before {

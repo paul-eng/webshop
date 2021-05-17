@@ -43,7 +43,7 @@
 
 .Filter li {
     cursor: pointer;
-    margin-bottom: 1rem;
+    margin-bottom: .75rem;
 }
 
 .active {
