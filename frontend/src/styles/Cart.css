@@ -34,7 +34,7 @@
     grid-area: total;
 }
 
-.Cart p, .Cart aside {
+.Cart p, .Cart section aside {
     font-size: 1.17em;
     font-weight: bold
 }
