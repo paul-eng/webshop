@@ -13,7 +13,6 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
-
 app.use("/api/items", items);
 app.use("/api/users", users);
 app.use("/api/carts", carts);
