@@ -8,7 +8,6 @@ const checkout = require("./routes/api/checkout");
 const path = require("path");
 const cors = require("cors");
 const app = express();
-const { wakeDyno } = require("heroku-keep-awake");
 
 connectDB();
 
@@ -35,15 +34,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
 });
 
-
-const DYNO_URL = "https://restful-goods.herokuapp.com/";
-
-// const opts = {
-//   logging: false,
-//   stopTimes: { start: "08:30", end: "19:15" },
-// };
-
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  wakeDyno(DYNO_URL);
   console.log(`Server running on port ${port}`)});
