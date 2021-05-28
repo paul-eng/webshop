@@ -8,6 +8,7 @@ const checkout = require("./routes/api/checkout");
 const path = require("path");
 const cors = require("cors");
 const app = express();
+const ping = require("./ping");
 
 connectDB();
 
@@ -35,5 +36,7 @@ app.get("*", (req, res) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
+  ping("https://getflix-react.herokuapp.com/");
+  ping("https://globebay.herokuapp.com/");
   console.log(`Server running on port ${port}`);
 });
