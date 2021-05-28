@@ -8,6 +8,8 @@ const checkout = require("./routes/api/checkout");
 const path = require("path");
 const cors = require("cors");
 const app = express();
+const pingCustom = require("./ping-custom");
+const url = "https://restful-goods.herokuapp.com/";
 
 connectDB();
 
@@ -20,13 +22,12 @@ app.use("/api/orders", orders);
 app.use("/api/checkout", checkout);
 
 // Heroku specific HTTPS redirect solution c/o Jake Trent
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
-    if (req.header('x-forwarded-proto') !== 'https')
-      res.redirect(`https://${req.header('host')}${req.url}`)
-    else
-      next()
-  })
+    if (req.header("x-forwarded-proto") !== "https")
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    else next();
+  });
 }
 
 app.use(express.static(path.join("frontend/build")));
@@ -36,4 +37,6 @@ app.get("*", (req, res) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`)});
+  pingCustom(url);
+  console.log(`Server running on port ${port}`);
+});
