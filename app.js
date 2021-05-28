@@ -7,8 +7,8 @@ const orders = require("./routes/api/orders");
 const checkout = require("./routes/api/checkout");
 const path = require("path");
 const cors = require("cors");
-const app = express();
 const ping = require("./ping");
+const app = express();
 
 connectDB();
 
