@@ -19,7 +19,7 @@ app.use("/api/carts", carts);
 app.use("/api/orders", orders);
 app.use("/api/checkout", checkout);
 
-// Heroku specific HTTPS redirect solution c/o Jake Trent (Note: Forcing SSL redirect does not work w/ custom domains at free tier)
+// Heroku specific force HTTPS redirect solution c/o Jake Trent (Cannot be used w custom domains at free tier)
 // if (process.env.NODE_ENV === "production") {
 //   app.use((req, res, next) => {
 //     if (req.header("x-forwarded-proto") !== "https")
