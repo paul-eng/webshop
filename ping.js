@@ -8,7 +8,7 @@ module.exports = function wakeUp(url, interval, callback) {
   setTimeout(function () {
     try {
       const time = new Date().getHours();
-      if (time >= 6 && time <= 21) {
+      if (time >= 2 && time <= 17) {
         node_fetch_1.default(url);
       }
     } catch (err) {
