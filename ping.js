@@ -8,8 +8,12 @@ module.exports = function wakeUp(url, interval, callback) {
   setTimeout(function () {
     try {
       const time = new Date().getHours();
-      if (time >= 2 && time <= 17) {
+      if (time >= 9) {
+        // time >= 9 (and going to 24) is UTC military time equivalent of EDT (5am-8pm)
+        console.log(`UTC Time is ${time}, waking up`) 
         node_fetch_1.default(url);
+      } else {
+        console.log(`UTC Time is ${time}, staying asleep`) 
       }
     } catch (err) {
     } finally {
