@@ -1,8 +1,8 @@
 # Restful Goods
 
-![home]
+[Restful Goods][restful] is a MERN-stack e-commerce app using JWT authentication to persist sessions and secure CRUD operations. In addition to user and inventory data, its REST API serves third-party results from securely processing credit card transactions with the Stripe API. The UI was implemented with a mobile-first approach, and avoids excessive CSS flourishes to ensure a snappy and intuitive experience no all devices.
 
-[Restful Goods][restful] is a MERN-stack e-commerce app using JWT authentication to persist sessions and secure CRUD operations. In addition to user and inventory data, its REST API serves third-party results from securely processing credit card transactions with the Stripe API.
+![home]
 
 ## Summary
 
@@ -21,6 +21,27 @@
 To be updated
 
 #### MongoDB Aggregation Pipeline Facet
+```
+let mongooseQuery = (req, res, pipeline) => {
+  let { operators, filters } = util.getValues(req, pagesize);
+  let match = pipeline.find((field) =>
+    Object.keys(field).includes("$match")
+  );
+  match["$match"] = { ...match["$match"], ...filters };
+
+  return Item.aggregate([
+    ...pipeline,
+    {
+      $facet: {
+        results: [{ $count: "count" }],
+        items: [...operators],
+      },
+    },
+  ])
+    .then((data) => res.json(data[0]))
+    .catch((err) => res.status(404).json({ error: `mongoError ${err.code}` }));
+};
+```
 
 #### Stripe API Integration
 
